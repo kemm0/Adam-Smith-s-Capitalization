@@ -16,7 +16,7 @@ MapWindow::MapWindow(QWidget *parent,
 
     Course::SimpleGameScene* sgs_rawptr = m_simplescene.get();
 
-    m_ui->graphicsView->setScene(dynamic_cast<QGraphicsScene*>(sgs_rawptr));
+    //m_ui->graphicsView->setScene(dynamic_cast<QGraphicsScene*>(sgs_rawptr));
 }
 
 MapWindow::~MapWindow()
