@@ -5,13 +5,13 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QMouseEvent>
+#include <QResizeEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
-
-#include <map>
-
-#include "interfaces/igameeventhandler.h"
-#include "graphics/simplegamescene.h"
+#include <QMediaPlayer>
+#include <math.h>
+#include "map.h"
+#include "startdialog.h"
 
 namespace Ui {
 class MapWindow;
@@ -22,26 +22,23 @@ class MapWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MapWindow(QWidget *parent = 0,
-                       std::shared_ptr<Course::iGameEventHandler> GEHandler = {}
-                       );
+    explicit MapWindow(QWidget *parent = 0);
     ~MapWindow();
+    void resizeEvent(QResizeEvent* event) override;
+    void showEvent(QShowEvent* event) override;
+    int tileSize;
+    int mapWidth;
+    int mapHeight;
+    Map* gameMap;
 
-    void setGEHandler(std::shared_ptr<Course::iGameEventHandler> nHandler);
+private slots:
+    void on_quitButton_clicked();
 
-    void setSize(int width, int height);
-    void setScale(int scale);
-    void resize();
-
-    void drawItem( std::shared_ptr<Course::GameObject> obj);
-    void removeItem( std::shared_ptr<Course::GameObject> obj);
-    void updateItem( std::shared_ptr<Course::GameObject> obj);
-
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MapWindow* m_ui;
-    std::shared_ptr<Course::iGameEventHandler> m_GEHandler = nullptr;
-    std::shared_ptr<Course::SimpleGameScene> m_simplescene = nullptr;
+    startDialog* startingDialog;
 
 };
 
