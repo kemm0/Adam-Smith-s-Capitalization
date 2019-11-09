@@ -11,14 +11,12 @@
 #include <iostream>
 #include <QGraphicsSceneMouseEvent>
 #include "../Course/CourseLib/tiles/forest.h"
-#include "objectmanager.h"
 
 class Map : public QGraphicsScene
 {
     Q_OBJECT
 public:
     explicit Map(QGraphicsScene *parent = nullptr);
-    void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 private:
     int tileSize;

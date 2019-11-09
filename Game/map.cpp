@@ -43,26 +43,24 @@ void Map::drawMap()
             int tileCode = vMap.at(j).at(i);
             QGraphicsPixmapItem* tile;
             if(tileCode == 0){
-                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/grasstile2.png"));
+                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
             }
             else if(tileCode == 1){
-                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/water.png"));
+                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/water.png"));
             }
 
             else if(tileCode == 3){
-                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/forest.png"));
+                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/forest.png"));
             }
             tile->setPos(i*tileSize,j*tileSize);
             sprites.push_back(tile);
         }
     }
-    QGraphicsPixmapItem* adamSmith = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/adamsmith.png"));
+    QGraphicsPixmapItem* adamSmith = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/adamsmith.png"));
     adamSmith->setPos(50,50);
     adamSmith->setScale(0.1);
     player = adamSmith;
     sprites.push_back(adamSmith);
-}
-void Map::keyPressEvent(QKeyEvent *event){
 }
 
 void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
