@@ -12,6 +12,8 @@
 #include <math.h>
 #include "map.h"
 #include "startdialog.h"
+#include "../CourseLib/interfaces/igameeventhandler.h"
+#include "gameobjectmanager.h"
 
 namespace Ui {
 class MapWindow;
