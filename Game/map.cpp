@@ -1,12 +1,18 @@
 #include "map.h"
 
-Map::Map(QGraphicsScene *parent) : QGraphicsScene(parent)
+Map::Map(QObject *parent,
+         std::shared_ptr<GameObjectManager> objectsManager,
+         std::shared_ptr<GameEventHandler> eventsHandler)
+    : QGraphicsScene(parent),
+      objectManager_(objectsManager),
+      eventHandler_(eventsHandler)
 {
     sprites = {};
     tileSize = 50;
     mapWidth = 20;
     mapHeight = 20;
     setSceneRect(0,0,tileSize*mapWidth-4,tileSize*mapHeight-4);
+
     vMap = {
         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0},
         {3,3,3,3,3,3,3,0,0,0,3,3,3,3,3,0,0,0,0,0},
@@ -43,7 +49,11 @@ void Map::drawMap()
             int tileCode = vMap.at(j).at(i);
             QGraphicsPixmapItem* tile;
             if(tileCode == 0){
-                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
+                GrassTile* x = new GrassTile(Course::Coordinate(j,i),eventHandler_,objectManager_);
+                tile = addPixmap(*(x->sprite));
+                //tile = addPixmap(*(x->GrassSprite));
+                //addItem(x->sprite);
+
             }
             else if(tileCode == 1){
                 tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/water.png"));
@@ -53,7 +63,7 @@ void Map::drawMap()
                 tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/forest.png"));
             }
             tile->setPos(i*tileSize,j*tileSize);
-            sprites.push_back(tile);
+            //sprites.push_back(tile);
         }
     }
     QGraphicsPixmapItem* adamSmith = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/adamsmith.png"));

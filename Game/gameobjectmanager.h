@@ -22,7 +22,7 @@ public:
     std::shared_ptr<Course::TileBase> getTile(const Course::ObjectId& id);
 
     std::vector<std::shared_ptr<Course::TileBase>> getTiles(
-            const std::vector<Course::Coordinate>& coordinates) = 0;
+            const std::vector<Course::Coordinate>& coordinates);
     void loadFromMap(std::vector<std::vector<int>>& objectMap);
 
 private:

@@ -13,7 +13,8 @@ SOURCES += \
     map.cpp \
     gameobjectmanager.cpp \
     gameeventhandler.cpp \
-    player.cpp
+    player.cpp \
+    grasstile.cpp
 
 HEADERS += \
     mapwindow.hh \
@@ -21,7 +22,8 @@ HEADERS += \
     map.h \
     gameobjectmanager.h \
     gameeventhandler.h \
-    player.h
+    player.h \
+    grasstile.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib

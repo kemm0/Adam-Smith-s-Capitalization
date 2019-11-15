@@ -14,6 +14,7 @@
 #include "startdialog.h"
 #include "../CourseLib/interfaces/igameeventhandler.h"
 #include "gameobjectmanager.h"
+#include "gameeventhandler.h"
 
 namespace Ui {
 class MapWindow;
@@ -32,6 +33,9 @@ public:
     int mapWidth;
     int mapHeight;
     Map* gameMap;
+    GameObjectManager* a = new GameObjectManager();
+    std::shared_ptr<GameObjectManager> objManager;
+    std::shared_ptr<GameEventHandler> eventHandler;
 
 private slots:
     void on_quitButton_clicked();

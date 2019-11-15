@@ -14,7 +14,9 @@ MapWindow::MapWindow(QWidget *parent):
     //mapHeight = 20;
     m_ui->setupUi(this);
     this->setWindowState(Qt::WindowFullScreen);
-    gameMap = new Map();
+    objManager = std::make_shared<GameObjectManager>();
+    eventHandler = std::make_shared<GameEventHandler>();
+    gameMap = new Map(nullptr,objManager,eventHandler);
     m_ui->gameMapView->setScene(gameMap);
     m_ui->gameMapView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 }
