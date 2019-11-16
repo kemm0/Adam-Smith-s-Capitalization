@@ -19,7 +19,9 @@ SOURCES += \
     foresttile.cpp \
     watertile.cpp \
     towntile.cpp \
-    farmbuilding.cpp
+    farmbuilding.cpp \
+    loggingbuilding.cpp \
+    fishingbuilding.cpp
 
 HEADERS += \
     mapwindow.hh \
@@ -33,7 +35,9 @@ HEADERS += \
     foresttile.h \
     watertile.h \
     towntile.h \
-    farmbuilding.h
+    farmbuilding.h \
+    loggingbuilding.h \
+    fishingbuilding.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib

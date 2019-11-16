@@ -1,9 +1,9 @@
-#include "farmbuilding.h"
+#include "fishingbuilding.h"
 
 namespace Game {
 
 
-FarmBuilding::FarmBuilding(const std::shared_ptr<GameEventHandler>& eventhandler,
+FishingBuilding::FishingBuilding(const std::shared_ptr<GameEventHandler>& eventhandler,
            const std::shared_ptr<GameObjectManager>& objectmanager,
            const std::shared_ptr<Game::Player>& owner,
            const int& tilespaces,
@@ -17,7 +17,7 @@ FarmBuilding::FarmBuilding(const std::shared_ptr<GameEventHandler>& eventhandler
                            buildcost,
                            production)
 {
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/fishinghut.png"));
+    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/farm.png"));
 
 
 }
