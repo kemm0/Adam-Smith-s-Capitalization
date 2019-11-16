@@ -8,14 +8,14 @@ LoggingBuilding::LoggingBuilding(const std::shared_ptr<GameEventHandler>& eventh
            const std::shared_ptr<Game::Player>& owner,
            const int& tilespaces,
            const Course::ResourceMap& buildcost,
-           const Course::ResourceMap& production)
+           const Course::ResourceMap& production):
 
-    : Course::BuildingBase(eventhandler,
-                           objectmanager,
-                           owner,
-                           tilespaces,
-                           buildcost,
-                           production)
+    Course::BuildingBase(eventhandler,
+                         objectmanager,
+                         owner,
+                         tilespaces,
+                         buildcost,
+                         production)
 {
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/loggingcabin.png"));
 
