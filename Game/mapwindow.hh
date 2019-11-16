@@ -32,10 +32,9 @@ public:
     int tileSize;
     int mapWidth;
     int mapHeight;
-    Map* gameMap;
-    GameObjectManager* a = new GameObjectManager();
-    std::shared_ptr<GameObjectManager> objManager;
-    std::shared_ptr<GameEventHandler> eventHandler;
+    Game::Map* gameMap;
+    std::shared_ptr<Game::GameObjectManager> objManager;
+    std::shared_ptr<Game::GameEventHandler> eventHandler;
 
 private slots:
     void on_quitButton_clicked();

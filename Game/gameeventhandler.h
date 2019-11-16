@@ -3,6 +3,8 @@
 
 #include "../CourseLib/interfaces/igameeventhandler.h"
 
+namespace Game{
+
 class GameEventHandler : public Course::iGameEventHandler
 {
 public:
@@ -15,5 +17,6 @@ public:
                                  Course::ResourceMap resources);
 
 };
+}
 
 #endif // GAMEEVENTHANDLER_H

@@ -1,4 +1,5 @@
 #include "map.h"
+namespace Game{
 
 Map::Map(QObject *parent,
          std::shared_ptr<GameObjectManager> objectsManager,
@@ -50,35 +51,24 @@ void Map::drawMap()
             QGraphicsPixmapItem* tile;
             if(tileCode == 0){
                 GrassTile* x = new GrassTile(Course::Coordinate(j,i),eventHandler_,objectManager_);
-                tile = addPixmap(*(x->sprite));
-                //tile = addPixmap(*(x->GrassSprite));
-                //addItem(x->sprite);
-
+                x->sprite->setPos(i*tileSize,j*tileSize);
+                addItem(x->sprite);
             }
-            else if(tileCode == 1){
-                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/water.png"));
-            }
-
-            else if(tileCode == 3){
-                tile = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/forest.png"));
-            }
-            tile->setPos(i*tileSize,j*tileSize);
-            //sprites.push_back(tile);
         }
     }
-    QGraphicsPixmapItem* adamSmith = addPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/adamsmith.png"));
-    adamSmith->setPos(50,50);
-    adamSmith->setScale(0.1);
-    player = adamSmith;
-    sprites.push_back(adamSmith);
+    player_ = std::make_shared<Player>("Adam Smith");
+    player_->sprite->setPos(50,50);
+    player_->sprite->setScale(0.1);
+    addItem(player_->sprite);
+    //std::cout<<player_->getName()<<std::endl;
+
 }
 
 void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     if(mouseEvent->button() == Qt::LeftButton){
-        std::cout<<mouseEvent->scenePos().x()<<std::endl;
-        std::cout<<mouseEvent->scenePos().y()<<std::endl;
-        player->setPos(mouseEvent->scenePos().x()-tileSize/2,mouseEvent->scenePos().y()-tileSize/2);
+        player_->sprite->setPos(mouseEvent->scenePos().x()-tileSize/2,mouseEvent->scenePos().y()-tileSize/2);
         update();
     }
+}
 }

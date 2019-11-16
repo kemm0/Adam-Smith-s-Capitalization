@@ -7,9 +7,9 @@
 //#include "../CourseLib/core/coordinate.h"
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
+namespace Game{
 
-
-class GrassTile : public Course::TileBase
+class GrassTile : public Course::TileBase//, public QGraphicsPixmapItem
 {
 public:
     GrassTile(const Course::Coordinate& location,
@@ -18,9 +18,10 @@ public:
               const unsigned int& max_build = 3,
               const unsigned int& max_work = 3,
               const Course::ResourceMap& production = Course::ConstResourceMaps::GRASSLAND_BP);
-    QPixmap* sprite;
+    QGraphicsPixmapItem* sprite;
 private:
 
 };
+}
 
 #endif // GRASSTILE_H

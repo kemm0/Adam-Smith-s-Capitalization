@@ -12,35 +12,37 @@
 #include <QGraphicsSceneMouseEvent>
 #include "../Course/CourseLib/tiles/forest.h"
 #include "grasstile.h"
-
+#include "player.h"
+namespace Game{
 
 class Map : public QGraphicsScene
 {
-    Q_OBJECT
+        Q_OBJECT
 
-public:
-    Map(QObject *parent = nullptr,
-                 std::shared_ptr<GameObjectManager> objectsManager = nullptr,
-                 std::shared_ptr<GameEventHandler> eventsHandler = nullptr);
+    public:
+        Map(QObject *parent = nullptr,
+                     std::shared_ptr<GameObjectManager> objectsManager = nullptr,
+                     std::shared_ptr<GameEventHandler> eventsHandler = nullptr);
 
-    void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
+        void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 
-private:
-    int tileSize;
-    int mapWidth;
-    int mapHeight;
-    std::vector<std::vector<int>> vMap;
-    void drawMap();
-    std::vector<QGraphicsPixmapItem*> sprites;
-    std::vector<Course::GameObject> gameObjects;
-    QGraphicsPixmapItem* player;
-    std::shared_ptr<GameObjectManager> objectManager_;
-    std::shared_ptr<GameEventHandler> eventHandler_;
+    private:
+        int tileSize;
+        int mapWidth;
+        int mapHeight;
+        std::vector<std::vector<int>> vMap;
+        void drawMap();
+        std::vector<QGraphicsPixmapItem*> sprites;
+        std::vector<Course::GameObject> gameObjects;
+        std::shared_ptr<Player> player_;
+        std::shared_ptr<GameObjectManager> objectManager_;
+        std::shared_ptr<GameEventHandler> eventHandler_;
 
-signals:
+    signals:
 
-public slots:
-    //void zoom();
-};
+    public slots:
+        //void zoom();
+    };
+}
 
 #endif // MAP_H

@@ -6,7 +6,7 @@
 #include "../CourseLib/core/coordinate.h"
 #include "player.h"
 
-
+namespace Game{
 
 class GameObjectManager: public Course::iObjectManager
 {
@@ -15,6 +15,7 @@ public:
     ~GameObjectManager();
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
+    void addTile(std::shared_ptr<Course::TileBase> tile);
 
     std::shared_ptr<Course::TileBase> getTile(
             const Course::Coordinate& coordinate);
@@ -26,8 +27,12 @@ public:
     void loadFromMap(std::vector<std::vector<int>>& objectMap);
 
 private:
-    std::vector<Course::GameObject> gameObjects;
+    std::vector<Course::GameObject> gameObjects_;
+    std::vector<Course::TileBase> mapTiles_;
+    std::shared_ptr<Game::Player> player_;
     //Player* player1;
 };
+
+}
 
 #endif // GAMEOBJECTMANAGER_H

@@ -1,5 +1,7 @@
 #include "gameeventhandler.h"
 
+namespace Game{
+
 GameEventHandler::GameEventHandler()
 {
 
@@ -18,4 +20,5 @@ bool GameEventHandler::modifyResource(std::shared_ptr<Course::PlayerBase> player
 bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> player, Course::ResourceMap resources)
 {
 
+}
 }

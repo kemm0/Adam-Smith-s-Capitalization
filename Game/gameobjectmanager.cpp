@@ -1,4 +1,5 @@
 #include "gameobjectmanager.h"
+namespace Game{
 GameObjectManager::GameObjectManager(){
     //const std::string& name,    const std::vector<std::shared_ptr<Course::GameObject> > objects
     //player1 = new Player("Adam Smith",{});
@@ -30,4 +31,5 @@ std::shared_ptr<Course::TileBase> GameObjectManager::getTile(const Course::Objec
 std::vector<std::shared_ptr<Course::TileBase> > GameObjectManager::getTiles(const std::vector<Course::Coordinate> &coordinates)
 {
 
+}
 }
