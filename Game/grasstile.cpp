@@ -15,7 +15,7 @@ GrassTile::GrassTile(const Course::Coordinate& location,
                        production)
 {
 
-    sprite = new QGraphicsPixmapItem(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
+    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png"));
     //setPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
 }
 }
