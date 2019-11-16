@@ -15,7 +15,9 @@ SOURCES += \
     gameeventhandler.cpp \
     player.cpp \
     grasstile.cpp \
-    gamemapgenerator.cpp
+    gamemapgenerator.cpp \
+    foresttile.cpp \
+    watertile.cpp
 
 HEADERS += \
     mapwindow.hh \
@@ -25,7 +27,9 @@ HEADERS += \
     gameeventhandler.h \
     player.h \
     grasstile.h \
-    gamemapgenerator.h
+    gamemapgenerator.h \
+    foresttile.h \
+    watertile.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
