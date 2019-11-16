@@ -17,7 +17,9 @@ SOURCES += \
     grasstile.cpp \
     gamemapgenerator.cpp \
     foresttile.cpp \
-    watertile.cpp
+    watertile.cpp \
+    towntile.cpp \
+    farmbuilding.cpp
 
 HEADERS += \
     mapwindow.hh \
@@ -29,7 +31,9 @@ HEADERS += \
     grasstile.h \
     gamemapgenerator.h \
     foresttile.h \
-    watertile.h
+    watertile.h \
+    towntile.h \
+    farmbuilding.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
