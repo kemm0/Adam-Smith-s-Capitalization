@@ -9,16 +9,22 @@ MapWindow::MapWindow(QWidget *parent):
 {
     startingDialog = new startDialog();
     startingDialog->exec();
-    //tileSize = 50;
-    //mapWidth = 20;
-    //mapHeight = 20;
     m_ui->setupUi(this);
     this->setWindowState(Qt::WindowFullScreen);
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>();
-    gameMap = new Game::Map(nullptr,objManager,eventHandler);
+
+    mapCreator = std::make_shared<Game::GameMapGenerator>();
+    mapCreator->createMapObjects(objManager,eventHandler);
+
+    //objManager->initMap(eventHandler);
+    gameMap = new Game::Map(nullptr,eventHandler,objManager);
+    gameMap->drawMap();
     m_ui->gameMapView->setScene(gameMap);
+    m_ui->gameMapView->setMouseTracking(true);
     m_ui->gameMapView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    //std::cout<<objManager->size<<std::endl;
+    //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
 }
 
 MapWindow::~MapWindow()
@@ -34,6 +40,13 @@ void MapWindow::resizeEvent(QResizeEvent *event)
 void MapWindow::showEvent(QShowEvent *event)
 {
     m_ui->gameMapView->ensureVisible(gameMap->sceneRect(),0,0);
+}
+
+void MapWindow::initMap()
+{
+    /*Course::WorldGenerator* x = &Course::WorldGenerator::getInstance();
+    x->addConstructor<Game::GrassTile>(10);
+    x->generateMap(20,20,10,objManager,eventHandler);*/
 }
 
 

@@ -1,14 +1,21 @@
 #ifndef GAMEMAPGENERATOR_H
 #define GAMEMAPGENERATOR_H
+
+#include "../CourseLib/core/worldgenerator.h"
+#include "gameobjectmanager.h"
+#include "gameeventhandler.h"
+#include "grasstile.h"
+
 namespace Game{
 
-//Tää tekee mapin tilet ja välittää ne objectmanagerille. Map piirtää sitten kaikki objectmanagerin tilet
-class GameMapGenerator
-{
+class GameMapGenerator{
 public:
     GameMapGenerator();
-private:
+    ~GameMapGenerator();
+    void createMapObjects(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
+    std::vector<std::vector<int>> mapTemplate;
 
+private:
 };
 }
 

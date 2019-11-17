@@ -7,7 +7,7 @@ GrassTile::GrassTile(const Course::Coordinate& location,
                      const unsigned int& max_build,
                      const unsigned int& max_work,
                      const Course::ResourceMap& production)
-    : Course::TileBase(location,
+    : Game::GameTileBase(location,
                        eventhandler,
                        objectmanager,
                        max_build,
@@ -16,6 +16,16 @@ GrassTile::GrassTile(const Course::Coordinate& location,
 {
 
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png"));
-    //setPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
 }
+
+std::string GrassTile::getType() const
+{
+    return "Grassland";
+}
+
+QGraphicsPixmapItem* GrassTile::getSprite()
+{
+    return sprite;
+}
+
 }

@@ -1,27 +1,30 @@
-#ifndef GRASSTILE_H
-#define GRASSTILE_H
+#ifndef GAMETILEBASE_H
+#define GAMETILEBASE_H
 
-#include "gametilebase.h"
+#include "../CourseLib/tiles/tilebase.h"
+#include "../CourseLib/tiles/grassland.h"
 #include "QGraphicsPixmapItem"
+#include "../CourseLib/core/coordinate.h"
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
 namespace Game{
 
-class GrassTile : public Game::GameTileBase//, public QGraphicsPixmapItem
+class GameTileBase : public Course::TileBase
 {
 public:
-    GrassTile(const Course::Coordinate& location,
+    GameTileBase(const Course::Coordinate& location,
               const std::shared_ptr<GameEventHandler>& eventhandler,
               const std::shared_ptr<GameObjectManager>& objectmanager,
               const unsigned int& max_build = 3,
               const unsigned int& max_work = 3,
               const Course::ResourceMap& production = Course::ConstResourceMaps::GRASSLAND_BP);
-              virtual std::string getType() const override;
-    virtual QGraphicsPixmapItem* getSprite() final;
-        QGraphicsPixmapItem* sprite;
+    virtual QGraphicsPixmapItem* getSprite();
+    virtual void setSprite();
+    virtual std::string getType() const override;
+     QGraphicsPixmapItem* sprite;
+
 private:
 
 };
 }
-
-#endif // GRASSTILE_H
+#endif // GAMETILEBASE_H

@@ -13,30 +13,30 @@
 #include "../Course/CourseLib/tiles/forest.h"
 #include "grasstile.h"
 #include "player.h"
-namespace Game{
+#include "QGraphicsColorizeEffect"
 
+namespace Game{
 class Map : public QGraphicsScene
 {
         Q_OBJECT
 
     public:
-        Map(QObject *parent = nullptr,
-                     std::shared_ptr<GameObjectManager> objectsManager = nullptr,
-                     std::shared_ptr<GameEventHandler> eventsHandler = nullptr);
-
+        Map(QObject *parent = nullptr,std::shared_ptr<Game::GameEventHandler> eventHandler = nullptr,std::shared_ptr<Game::GameObjectManager> objManager = nullptr);
+        void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
         void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
+        void drawMap();
 
     private:
         int tileSize;
         int mapWidth;
         int mapHeight;
         std::vector<std::vector<int>> vMap;
-        void drawMap();
-        std::vector<QGraphicsPixmapItem*> sprites;
+        std::map<std::string,QPixmap> sprites;
         std::vector<Course::GameObject> gameObjects;
-        std::shared_ptr<Player> player_;
-        std::shared_ptr<GameObjectManager> objectManager_;
-        std::shared_ptr<GameEventHandler> eventHandler_;
+        std::shared_ptr<Game::Player> player_;
+        QGraphicsItem* selectedTile;
+        std::shared_ptr<Game::GameEventHandler> eventHandler_;
+        std::shared_ptr<Game::GameObjectManager> objManager_;
 
     signals:
 
