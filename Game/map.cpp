@@ -48,8 +48,10 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     if(targetTile != nullptr){
         QGraphicsColorizeEffect* x = new QGraphicsColorizeEffect;
         qreal x_distance = objManager_->getPlayer()->sprite->pos().x() - targetTile->pos().x();
+        qreal y_distance = objManager_->getPlayer()->sprite->pos().y() - targetTile->pos().y();
         std::cout<<x_distance<<std::endl;
-        if(x_distance > 50 || x_distance < -50){  //check if player is too far away
+        int scenedistance = eventHandler_->getDiceValue() * 50;
+        if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
             x->setColor(QColor(Qt::red)); //if too far away, show red tile
             x->setStrength(0.3);
         }
@@ -92,15 +94,18 @@ void Map::drawMap()
 
 void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
-    if(mouseEvent->button() == Qt::LeftButton){
-        auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
-        //player_->sprite->setPos(mouseEvent->scenePos().x()-tileSize/2,mouseEvent->scenePos().y()-tileSize/2);
-        if(targetTile != nullptr){
-            objManager_->getPlayer()->sprite->setPos(targetTile->pos().x(),targetTile->pos().y());
+    if(eventHandler_->threw){
+        if(mouseEvent->button() == Qt::LeftButton){
+            auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
+            //player_->sprite->setPos(mouseEvent->scenePos().x()-tileSize/2,mouseEvent->scenePos().y()-tileSize/2);
+            if(targetTile != nullptr){
+                objManager_->getPlayer()->sprite->setPos(targetTile->pos().x(),targetTile->pos().y());
 
-            //std::cout<<targetTile->pos().y()<<std::endl;
+                //std::cout<<targetTile->pos().y()<<std::endl;
+            }
+            update();
         }
-        update();
+
     }
 }
 }

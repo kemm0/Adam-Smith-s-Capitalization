@@ -36,14 +36,22 @@ public:
     int mapWidth;
     int mapHeight;
     Game::Map* gameMap;
+    std::string username;
     std::shared_ptr<Game::GameObjectManager> objManager;
     std::shared_ptr<Game::GameEventHandler> eventHandler;
     std::shared_ptr<Game::GameMapGenerator> mapCreator;
+    void showGameMessage(std::string message);
+    std::string getUsername();
 
 private slots:
     void on_quitButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_diceButton_clicked();
+
+    void on_endTurnButton_clicked();
+    void setUsername(std::string username);
 
 private:
     Ui::MapWindow* m_ui;

@@ -20,7 +20,7 @@ private slots:
     void on_buttonBox_accepted();
 
 signals:
-    void nameConfirmed(QString name);
+    void nameConfirmed(std::string name);
 
 private:
 

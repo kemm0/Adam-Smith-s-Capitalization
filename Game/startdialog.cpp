@@ -16,5 +16,5 @@ startDialog::~startDialog()
 
 void startDialog::on_buttonBox_accepted()
 {
-    emit nameConfirmed(ui->nameEdit->text());
+    emit nameConfirmed(ui->nameEdit->text().toStdString());
 }
