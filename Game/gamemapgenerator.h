@@ -13,9 +13,10 @@ public:
     GameMapGenerator();
     ~GameMapGenerator();
     void createMapObjects(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
-    std::vector<std::vector<int>> mapTemplate;
+
 
 private:
+    std::vector<std::vector<int>> mapTemplate;
 };
 }
 

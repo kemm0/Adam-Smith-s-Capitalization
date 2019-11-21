@@ -8,6 +8,8 @@ GameEventHandler::GameEventHandler()
     srand(time(NULL));
     turn = 1;
     threw = false;
+    moved = false;
+    moving = false;
 }
 
 GameEventHandler::~GameEventHandler()
@@ -29,6 +31,7 @@ void GameEventHandler::endTurn()
 {
     turn += 1;
     threw = false;
+    moved = false;
 }
 
 int GameEventHandler::throwDice()
@@ -47,4 +50,40 @@ int GameEventHandler::getTurn()
 {
     return turn;
 }
+
+bool GameEventHandler::getThrown()
+{
+    return threw;
+}
+
+bool GameEventHandler::getPlayerMoved()
+{
+    return moved;
+}
+
+bool GameEventHandler::isMoving()
+{
+    return moving;
+}
+
+void GameEventHandler::setThrown(bool x)
+{
+    threw = x;
+}
+
+void GameEventHandler::setPlayerMoved(bool x)
+{
+    moved = x;
+}
+
+void GameEventHandler::setMoving(bool x)
+{
+    moving = x;
+}
+
+void GameEventHandler::nextTurn()
+{
+    turn += 1;
+}
+
 }

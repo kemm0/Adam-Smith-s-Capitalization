@@ -50,7 +50,7 @@ void GameMapGenerator::createMapObjects(std::shared_ptr<GameObjectManager> objMa
             }
         }
     }
-    std::shared_ptr<Game::Player> player = std::make_shared<Game::Player>(Course::Coordinate(50,50));
+    std::shared_ptr<Game::Player> player = std::make_shared<Game::Player>(Course::Coordinate(150,150));
     objManager->setPlayer(player);
 }
 

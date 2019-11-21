@@ -11,6 +11,7 @@ Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,st
     setSceneRect(0,0,tileSize*mapWidth-4,tileSize*mapHeight-4);
     eventHandler_ = eventHandler;
     objManager_ = objManager;
+    //setBackgroundBrush(Qt::black);
 
     vMap = {
         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0},
@@ -42,14 +43,41 @@ Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,st
 void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     for(auto item : items()){
-        item->setGraphicsEffect(0);
+        if(item->graphicsEffect() != nullptr){
+            delete item->graphicsEffect();
+            item->setGraphicsEffect(0);
+        }
     }
-    QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
+    if(eventHandler_->isMoving()== true && eventHandler_->getPlayerMoved() == false){
+        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
+        showTileMovableEffect(targetTile);
+    }
+    else{
+        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
+        showTileHighlightEffect(targetTile);
+    }
+    update();
+}
+
+void Map::drawMap()
+{
+    for(unsigned int i = 0; i < objManager_->getGameObjects().size();i++){
+        auto x = objManager_->getGameObjects().at(i);
+        if(objManager_->getGameObjects().at(i)->getType()=="Grassland"){
+            QGraphicsPixmapItem* tmp = new QGraphicsPixmapItem(sprites.at("Grassland"));
+            tmp->setPos(x->getCoordinate().x(),x->getCoordinate().y());
+            addItem(tmp);
+        }
+    }
+    addItem(objManager_->getPlayer()->sprite);
+}
+
+void Map::showTileMovableEffect(QGraphicsItem* targetTile)
+{
     if(targetTile != nullptr){
         QGraphicsColorizeEffect* x = new QGraphicsColorizeEffect;
         qreal x_distance = objManager_->getPlayer()->sprite->pos().x() - targetTile->pos().x();
         qreal y_distance = objManager_->getPlayer()->sprite->pos().y() - targetTile->pos().y();
-        std::cout<<x_distance<<std::endl;
         int scenedistance = eventHandler_->getDiceValue() * 50;
         if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
             x->setColor(QColor(Qt::red)); //if too far away, show red tile
@@ -60,52 +88,42 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             x->setStrength(0.3);
         }
         targetTile->setGraphicsEffect(x);
-        //auto grid = new QGraphicsRectItem(QRectF(targetTile->pos(),QSize(50,50)));
-        //addItem(new QGraphicsRectItem(QRectF(targetTile->pos(),QSize(50,50))));
     }
-    update();
+
 }
 
-void Map::drawMap()
+void Map::showTileHighlightEffect(QGraphicsItem* targetTile)
 {
-    QPen pen;
-    /*for(unsigned int i = 0; i < vMap.size(); i++){
-        for(unsigned int j = 0; j < vMap.at(i).size();j++){
-            int tileCode = vMap.at(j).at(i);
-            if(tileCode == 0){
-                GrassTile* x = new GrassTile(Course::Coordinate(j,i),eventHandler,objManager);
-                x->sprite->setPos(i*tileSize,j*tileSize);
-                addItem(x->sprite);
-            }
-        }
-    }*/
-    for(unsigned int i = 0; i < objManager_->getGameObjects().size();i++){
-        auto x = objManager_->getGameObjects().at(i);
-        if(objManager_->getGameObjects().at(i)->getType()=="Grassland"){
-            QGraphicsPixmapItem* tmp = new QGraphicsPixmapItem(sprites.at("Grassland"));
-            tmp->setPos(x->getCoordinate().x(),x->getCoordinate().y());
-            addItem(tmp);
-        }
+    if(targetTile != nullptr){
+        QGraphicsColorizeEffect* x = new QGraphicsColorizeEffect;
+        x->setColor(QColor(Qt::white));
+        x->setStrength(0.1);
+        targetTile->setGraphicsEffect(x);
     }
-    addItem(objManager_->getPlayer()->sprite);
-    //std::cout<<player_->getName()<<std::endl;
-
 }
 
 void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
-    if(eventHandler_->threw){
+    if(eventHandler_->getThrown() && eventHandler_->getPlayerMoved() == false && eventHandler_->isMoving() == true){
         if(mouseEvent->button() == Qt::LeftButton){
             auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
-            //player_->sprite->setPos(mouseEvent->scenePos().x()-tileSize/2,mouseEvent->scenePos().y()-tileSize/2);
             if(targetTile != nullptr){
                 objManager_->getPlayer()->sprite->setPos(targetTile->pos().x(),targetTile->pos().y());
-
-                //std::cout<<targetTile->pos().y()<<std::endl;
             }
+            eventHandler_->setPlayerMoved(true);
             update();
         }
 
+    }
+}
+
+void Map::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)
+{
+    if(wheelEvent->delta() > 0){
+        emit scrollIn();
+    }
+    else if (wheelEvent->delta()){
+        emit scrollOut();
     }
 }
 }

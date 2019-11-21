@@ -16,14 +16,18 @@
 #include "QGraphicsColorizeEffect"
 
 namespace Game{
+
 class Map : public QGraphicsScene
 {
         Q_OBJECT
 
     public:
-        Map(QObject *parent = nullptr,std::shared_ptr<Game::GameEventHandler> eventHandler = nullptr,std::shared_ptr<Game::GameObjectManager> objManager = nullptr);
+        Map(QObject *parent = nullptr,
+            std::shared_ptr<Game::GameEventHandler> eventHandler = nullptr,
+            std::shared_ptr<Game::GameObjectManager> objManager = nullptr);
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
         void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
+        void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) override;
         void drawMap();
 
     private:
@@ -37,9 +41,11 @@ class Map : public QGraphicsScene
         QGraphicsItem* selectedTile;
         std::shared_ptr<Game::GameEventHandler> eventHandler_;
         std::shared_ptr<Game::GameObjectManager> objManager_;
-
+        void showTileMovableEffect(QGraphicsItem* targetTile);
+        void showTileHighlightEffect(QGraphicsItem* targetTile);
     signals:
-
+        void scrollOut();
+        void scrollIn();
     public slots:
         //void zoom();
     };

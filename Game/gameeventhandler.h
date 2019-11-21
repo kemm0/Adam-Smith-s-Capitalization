@@ -18,13 +18,29 @@ public:
                                  Course::ResourceMap resources);
     void endTurn();
     int throwDice();
+    void nextTurn();
+
+    //getters
     int getDiceValue();
     int getTurn();
+    bool getThrown();
+    bool getPlayerMoved();
+    bool isMoving();
+
+    //setters
+    void setThrown(bool x);
+    void setPlayerMoved(bool x);
+    void setMoving(bool x);
+
+private:
     bool threw;
     bool moved;
-private:
+    bool moving;
     int diceValue;
     int turn;
+    bool building;
+    bool built;
+    bool searchedArea;
 };
 }
 

@@ -18,10 +18,12 @@
 #include "gameeventhandler.h"
 #include "gamemapgenerator.h"
 
+
 namespace Ui {
 class MapWindow;
 }
 
+namespace Game{
 class MapWindow : public QMainWindow
 {
     Q_OBJECT
@@ -42,22 +44,27 @@ public:
     std::shared_ptr<Game::GameMapGenerator> mapCreator;
     void showGameMessage(std::string message);
     std::string getUsername();
+    void keyPressEvent(QKeyEvent *event);
 
 private slots:
     void on_quitButton_clicked();
-
-    void on_pushButton_2_clicked();
 
     void on_diceButton_clicked();
 
     void on_endTurnButton_clicked();
     void setUsername(std::string username);
 
+    void on_moveButton_toggled(bool checked);
+
+    void zoomIn();
+    void zoomOut();
+
 private:
     Ui::MapWindow* m_ui;
     startDialog* startingDialog;
 
 };
+}
 
 #endif // MapWINDOW_HH
 
