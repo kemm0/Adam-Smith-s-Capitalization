@@ -8,20 +8,22 @@
 #include "gameeventhandler.h"
 #include "../CourseLib/buildings/buildingbase.h"
 #include "../CourseLib/core/resourcemaps.h"
+#include "gamebuildingbase.h"
+
 
 namespace Game {
 
 
 
-class FarmBuilding: public Course::BuildingBase
+class FarmBuilding: public Game::GameBuildingBase
 {
 public:
     FarmBuilding(const std::shared_ptr<GameEventHandler>& eventhandler,
                 const std::shared_ptr<GameObjectManager>& objectmanager,
                 const std::shared_ptr<Game::Player>& owner,
                 const int& tilespaces = 1,
-                const Course::ResourceMap& buildcost = Course::ConstResourceMaps::FARM_BUILD_COST,
-                const Course::ResourceMap& production = Course::ConstResourceMaps::FARM_PRODUCTION);
+                const Course::ResourceMap& buildcost = Game::ConstGameResourceMap::FARM_BUILD_COST,
+                const Course::ResourceMap& production = Game::ConstGameResourceMap::FARM_PRODUCTION);
     QGraphicsPixmapItem* sprite;
 };
 }

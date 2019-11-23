@@ -41,8 +41,8 @@ void GameMapGenerator::createMapObjects(std::shared_ptr<GameObjectManager> objMa
             int tileCode = mapTemplate.at(j).at(i);
             if(tileCode == 0){
                 std::shared_ptr<GrassTile> x = std::make_shared<GrassTile>(Course::Coordinate(j,i),eventHandler,objManager);
-                int spriteWidth = x->sprite->pixmap().width();
-                int spriteHeight = x->sprite->pixmap().height();
+                int spriteWidth = x->getSprite()->pixmap().width();
+                int spriteHeight = x->getSprite()->pixmap().height();
                 //x->sprite->setPos(i*spriteHeight,j*spriteWidth);
                 x->setCoordinate(Course::Coordinate(i*spriteHeight,j*spriteWidth));
                 objManager->addTile(x);

@@ -25,7 +25,8 @@ SOURCES += \
     Buildings/fishingbuilding.cpp \
     Workers/noviceworker.cpp \
     Workers/appenticeworker.cpp \
-    Workers/masterworker.cpp
+    Workers/masterworker.cpp \
+    gamebuildingbase.cpp
 
 HEADERS += \
     mapwindow.hh \
@@ -46,7 +47,8 @@ HEADERS += \
     Workers/noviceworker.h \
     Workers/appenticeworker.h \
     Workers/masterworker.h \
-    gameresourcemap.h
+    gameresourcemap.h \
+    gamebuildingbase.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib

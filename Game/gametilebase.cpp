@@ -43,8 +43,4 @@ bool GameTileBase::setTreasure(bool x)
     hasTreasure = x;
 }
 
-void GameTileBase::setSprite(QPixmap image)
-{
-    sprite = new QGraphicsPixmapItem(image);
-}
 }

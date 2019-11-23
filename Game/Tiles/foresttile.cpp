@@ -8,7 +8,7 @@ Foresttile::Foresttile(const Course::Coordinate& location,
                      const unsigned int& max_build,
                      const unsigned int& max_work,
                      const Course::ResourceMap& production)
-    : Course::TileBase(location,
+    : Game::GameTileBase(location,
                        eventhandler,
                        objectmanager,
                        max_build,
@@ -18,5 +18,15 @@ Foresttile::Foresttile(const Course::Coordinate& location,
 
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/forest.png"));
     //setPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
+}
+
+std::string Foresttile::getType() const
+{
+    return "Forest";
+}
+
+QGraphicsPixmapItem *Foresttile::getSprite()
+{
+    return sprite;
 }
 }

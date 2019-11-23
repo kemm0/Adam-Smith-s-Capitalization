@@ -7,6 +7,8 @@
 #include "../CourseLib/core/coordinate.h"
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
+#include "gameresourcemap.h"
+
 namespace Game{
 
 class GameTileBase : public Course::TileBase
@@ -17,9 +19,8 @@ public:
               const std::shared_ptr<GameObjectManager>& objectmanager,
               const unsigned int& max_build = 3,
               const unsigned int& max_work = 3,
-              const Course::ResourceMap& production = Course::ConstResourceMaps::GRASSLAND_BP);
+              const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
     virtual QGraphicsPixmapItem* getSprite();
-    virtual void setSprite(QPixmap image);
     bool getRobber();
     bool getTreasure();
 

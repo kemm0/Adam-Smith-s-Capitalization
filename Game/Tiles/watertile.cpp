@@ -8,7 +8,7 @@ WaterTile::WaterTile(const Course::Coordinate& location,
                      const unsigned int& max_build,
                      const unsigned int& max_work,
                      const Course::ResourceMap& production)
-    : Course::TileBase(location,
+    : Game::GameTileBase(location,
                        eventhandler,
                        objectmanager,
                        max_build,
@@ -17,6 +17,16 @@ WaterTile::WaterTile(const Course::Coordinate& location,
 {
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/water.png"));
     //setPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
+}
+
+std::string WaterTile::getType() const
+{
+    return "Water";
+}
+
+QGraphicsPixmapItem *WaterTile::getSprite()
+{
+    return sprite;
 }
 }
 

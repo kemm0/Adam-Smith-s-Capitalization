@@ -19,9 +19,9 @@ public:
                 const std::shared_ptr<Player>& owner,
                 const int& tilespaces = 1,
                 const Course::ResourceMap& cost =
-                    Course::ConstGameResourceMap::MW_RECRUITMENT_COST,
+                    Game::ConstGameResourceMap::MW_RECRUITMENT_COST,
                 const Course::ResourceMapDouble& efficiency =
-                    Course::ConstGameResourceMap::MW_WORKER_EFFICIENCY
+                    Game::ConstGameResourceMap::MW_WORKER_EFFICIENCY
                 );
 };
 }

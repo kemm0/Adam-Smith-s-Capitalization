@@ -7,11 +7,12 @@
 //#include "../CourseLib/core/coordinate.h"
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
+#include "gametilebase.h"
 
 namespace Game{
 
 
-class WaterTile: public Course::TileBase//, public QGraphicsPixmapItem
+class WaterTile: public Game::GameTileBase//, public QGraphicsPixmapItem
 {
 public:
     WaterTile(const Course::Coordinate& location,
@@ -19,7 +20,10 @@ public:
               const std::shared_ptr<GameObjectManager>& objectmanager,
               const unsigned int& max_build = 3,
               const unsigned int& max_work = 3,
-              const Course::ResourceMap& production = Course::ConstResourceMaps::GRASSLAND_BP);
+              const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
+    virtual std::string getType() const override;
+    virtual QGraphicsPixmapItem* getSprite() final;
+private:
     QGraphicsPixmapItem* sprite;
 };
 }

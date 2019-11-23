@@ -8,7 +8,7 @@ TownTile::TownTile(const Course::Coordinate& location,
                      const unsigned int& max_build,
                      const unsigned int& max_work,
                      const Course::ResourceMap& production)
-    : Course::TileBase(location,
+    : Game::GameTileBase(location,
                        eventhandler,
                        objectmanager,
                        max_build,
@@ -18,6 +18,16 @@ TownTile::TownTile(const Course::Coordinate& location,
 
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/town.png"));
     //setPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
+}
+
+std::string TownTile::getType() const
+{
+    return "Town";
+}
+
+QGraphicsPixmapItem *TownTile::getSprite()
+{
+    return sprite;
 }
 }
 

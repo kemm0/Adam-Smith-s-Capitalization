@@ -10,7 +10,7 @@ LoggingBuilding::LoggingBuilding(const std::shared_ptr<GameEventHandler>& eventh
            const Course::ResourceMap& buildcost,
            const Course::ResourceMap& production):
 
-    Course::BuildingBase(eventhandler,
+    Game::GameBuildingBase(eventhandler,
                          objectmanager,
                          owner,
                          tilespaces,
