@@ -16,7 +16,7 @@ SOURCES += \
     player.cpp \
     grasstile.cpp \
     gamemapgenerator.cpp \
-    gametilebase.cpp
+    gametilebase.cpp \
 
 HEADERS += \
     mapwindow.hh \
@@ -27,7 +27,7 @@ HEADERS += \
     player.h \
     grasstile.h \
     gamemapgenerator.h \
-    gametilebase.h
+    gametilebase.h \
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib

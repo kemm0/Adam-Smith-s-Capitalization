@@ -29,6 +29,7 @@ MapWindow::MapWindow(QWidget *parent):
                     );
     m_ui->endTurnButton->setDisabled(true);
     m_ui->moveButton->setCheckable(true);
+    m_ui->buildButton->setCheckable(true);
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
     //connect(gameMap,&Game::Map::scrollIn,this,&MapWindow::zoomIn);
@@ -109,6 +110,14 @@ void MapWindow::setUsername(std::string name)
 
 void MapWindow::on_moveButton_toggled(bool checked)
 {
+    if(checked==true){
+        m_ui->buildButton->setDisabled(true);
+        m_ui->searchAreaButton->setDisabled(true);
+    }
+    else{
+        m_ui->buildButton->setDisabled(false);
+        m_ui->searchAreaButton->setDisabled(false);
+    }
     if(checked==true && eventHandler->getPlayerMoved() == false){
         if(eventHandler->getThrown() == true){
             eventHandler->setMoving(true);
@@ -133,4 +142,25 @@ void MapWindow::zoomOut()
 {
     m_ui->gameMapView->scale(0.9,0.9);
 }
+}
+
+void Game::MapWindow::on_buildButton_toggled(bool checked)
+{
+    if(checked==true){
+        m_ui->moveButton->setDisabled(true);
+        m_ui->searchAreaButton->setDisabled(true);
+        showGameMessage("Bulding. First select a building and then click a tile to build to.");
+    }
+    else{
+        m_ui->moveButton->setDisabled(false);
+        m_ui->searchAreaButton->setDisabled(false);
+        showGameMessage("Stopped building. Select an action.");
+    }
+
+
+
+}
+
+void Game::MapWindow::on_searchAreaButton_clicked()
+{
 }

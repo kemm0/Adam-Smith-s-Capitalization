@@ -6,6 +6,8 @@
 
 namespace Game{
 
+class GameTileBase;
+
 class GameEventHandler : public Course::iGameEventHandler
 {
 public:
@@ -19,6 +21,7 @@ public:
     void endTurn();
     int throwDice();
     void nextTurn();
+    int searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area);
 
     //getters
     int getDiceValue();
@@ -26,11 +29,13 @@ public:
     bool getThrown();
     bool getPlayerMoved();
     bool isMoving();
+    bool isBuilding();
 
     //setters
     void setThrown(bool x);
     void setPlayerMoved(bool x);
     void setMoving(bool x);
+    void setBuildingState(bool x);
 
 private:
     bool threw;

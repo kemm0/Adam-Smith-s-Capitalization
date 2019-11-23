@@ -1,4 +1,5 @@
 #include "gameeventhandler.h"
+#include "gametilebase.h"
 
 namespace Game{
 
@@ -10,6 +11,8 @@ GameEventHandler::GameEventHandler()
     threw = false;
     moved = false;
     moving = false;
+    building = false;
+    built = false;
 }
 
 GameEventHandler::~GameEventHandler()
@@ -26,6 +29,8 @@ bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> playe
 {
 
 }
+
+
 
 void GameEventHandler::endTurn()
 {
@@ -66,6 +71,11 @@ bool GameEventHandler::isMoving()
     return moving;
 }
 
+bool GameEventHandler::isBuilding()
+{
+    return building;
+}
+
 void GameEventHandler::setThrown(bool x)
 {
     threw = x;
@@ -81,9 +91,20 @@ void GameEventHandler::setMoving(bool x)
     moving = x;
 }
 
+void GameEventHandler::setBuildingState(bool x)
+{
+    building = x;
+}
+
 void GameEventHandler::nextTurn()
 {
     turn += 1;
 }
+
+int GameEventHandler::searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area)
+{
+
+}
+
 
 }

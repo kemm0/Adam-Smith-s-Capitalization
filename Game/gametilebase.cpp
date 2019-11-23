@@ -13,21 +13,38 @@ GameTileBase::GameTileBase(const Course::Coordinate &location,
                        max_work,
                        production)
 {
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/water.png"));
+    sprite = nullptr;
+    hasTreasure = false;
+    hasRobber = false;
 }
 
 QGraphicsPixmapItem *GameTileBase::getSprite()
 {
-
+    return sprite;
 }
 
-void GameTileBase::setSprite()
+bool GameTileBase::getRobber()
 {
-
+    return hasRobber;
 }
 
-std::string GameTileBase::getType() const
+bool GameTileBase::getTreasure()
 {
+    return hasTreasure;
+}
 
+bool GameTileBase::setRobber(bool x)
+{
+    hasRobber = x;
+}
+
+bool GameTileBase::setTreasure(bool x)
+{
+    hasTreasure = x;
+}
+
+void GameTileBase::setSprite(QPixmap image)
+{
+    sprite = new QGraphicsPixmapItem(image);
 }
 }

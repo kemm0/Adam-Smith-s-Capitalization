@@ -19,12 +19,17 @@ public:
               const unsigned int& max_work = 3,
               const Course::ResourceMap& production = Course::ConstResourceMaps::GRASSLAND_BP);
     virtual QGraphicsPixmapItem* getSprite();
-    virtual void setSprite();
-    virtual std::string getType() const override;
-     QGraphicsPixmapItem* sprite;
+    virtual void setSprite(QPixmap image);
+    bool getRobber();
+    bool getTreasure();
 
+    bool setRobber(bool x);
+    bool setTreasure(bool x);
 private:
-
+    QGraphicsPixmapItem* sprite;
+    bool hasRobber;
+    bool hasTreasure;
+    int treasure;
 };
 }
 #endif // GAMETILEBASE_H

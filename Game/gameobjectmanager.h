@@ -21,6 +21,7 @@ public:
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
     void addTile(std::shared_ptr<Course::TileBase> tile);
+    void addBuilding(std::shared_ptr<Course::BuildingBase> building, std::shared_ptr<Game::Player> player);
 
     std::shared_ptr<Course::TileBase> getTile(
             const Course::Coordinate& coordinate);

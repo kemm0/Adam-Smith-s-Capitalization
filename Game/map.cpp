@@ -113,7 +113,6 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             eventHandler_->setPlayerMoved(true);
             update();
         }
-
     }
 }
 

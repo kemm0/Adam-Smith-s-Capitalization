@@ -18,7 +18,13 @@ void GameObjectManager::addTiles(const std::vector<std::shared_ptr<Course::TileB
 
 void GameObjectManager::addTile(std::shared_ptr<Course::TileBase> tile)
 {
- gameObjects_.push_back(tile);
+    gameObjects_.push_back(tile);
+}
+
+void GameObjectManager::addBuilding(std::shared_ptr<Course::BuildingBase> building , std::shared_ptr<Game::Player> player)
+{
+    gameObjects_.push_back(building);
+    player->addObject(building);
 }
 
 std::shared_ptr<Course::TileBase> GameObjectManager::getTile(const Course::Coordinate &coordinate)

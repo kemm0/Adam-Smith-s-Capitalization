@@ -59,6 +59,10 @@ private slots:
     void zoomIn();
     void zoomOut();
 
+    void on_buildButton_toggled(bool checked);
+
+    void on_searchAreaButton_clicked();
+
 private:
     Ui::MapWindow* m_ui;
     startDialog* startingDialog;
