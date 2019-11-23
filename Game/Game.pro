@@ -17,6 +17,15 @@ SOURCES += \
     grasstile.cpp \
     gamemapgenerator.cpp \
     gametilebase.cpp \
+    Tiles/foresttile.cpp \
+    Tiles/watertile.cpp \
+    Tiles/towntile.cpp \
+    Buildings/farmbuilding.cpp \
+    Buildings/loggingbuilding.cpp \
+    Buildings/fishingbuilding.cpp \
+    Workers/noviceworker.cpp \
+    Workers/appenticeworker.cpp \
+    Workers/masterworker.cpp
 
 HEADERS += \
     mapwindow.hh \
@@ -28,6 +37,16 @@ HEADERS += \
     grasstile.h \
     gamemapgenerator.h \
     gametilebase.h \
+    Tiles/foresttile.h \
+    Tiles/watertile.h \
+    Tiles/towntile.h \
+    Buildings/farmbuilding.h \
+    Buildings/loggingbuilding.h \
+    Buildings/fishingbuilding.h \
+    Workers/noviceworker.h \
+    Workers/appenticeworker.h \
+    Workers/masterworker.h \
+    gameresourcemap.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
