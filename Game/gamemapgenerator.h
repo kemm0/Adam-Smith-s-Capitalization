@@ -4,7 +4,7 @@
 #include "../CourseLib/core/worldgenerator.h"
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
-#include "grasstile.h"
+#include "Tiles/grasstile.h"
 
 namespace Game{
 

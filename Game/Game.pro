@@ -14,7 +14,7 @@ SOURCES += \
     gameobjectmanager.cpp \
     gameeventhandler.cpp \
     player.cpp \
-    grasstile.cpp \
+    Tiles/grasstile.cpp \
     gamemapgenerator.cpp \
     gametilebase.cpp \
     Tiles/foresttile.cpp \
@@ -34,7 +34,7 @@ HEADERS += \
     gameobjectmanager.h \
     gameeventhandler.h \
     player.h \
-    grasstile.h \
+    Tiles/grasstile.h \
     gamemapgenerator.h \
     gametilebase.h \
     Tiles/foresttile.h \
