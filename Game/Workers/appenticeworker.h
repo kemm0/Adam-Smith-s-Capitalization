@@ -7,7 +7,7 @@
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
 #include "../CourseLib/workers/workerbase.h"
-#include "../CourseLib/core/resourcemaps.h"
+#include "gameresourcemap.h"
 
 namespace Game {
 
@@ -19,9 +19,9 @@ public:
                 const std::shared_ptr<Player>& owner,
                 const int& tilespaces = 1,
                 const Course::ResourceMap& cost =
-                    Course::ConstResourceMaps::BW_RECRUITMENT_COST,
+                    Course::ConstGameResourceMap::AW_RECRUITMENT_COST,
                 const Course::ResourceMapDouble& efficiency =
-                    Course::ConstResourceMaps::BW_WORKER_EFFICIENCY
+                    Course::ConstGameResourceMap::AW_WORKER_EFFICIENCY
                 );
 };
 }

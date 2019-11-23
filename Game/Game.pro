@@ -43,7 +43,8 @@ HEADERS += \
     Buildings/fishingbuilding.h \
     Workers/noviceworker.h \
     Workers/appenticeworker.h \
-    Workers/masterworker.h
+    Workers/masterworker.h \
+    gameresourcemap.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
