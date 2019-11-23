@@ -17,6 +17,7 @@ Foresttile::Foresttile(const Course::Coordinate& location,
 {
 
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/forest.png"));
+    //sprite->setPos(qreal(location.x()),qreal(location.y()));
     //setPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
 }
 

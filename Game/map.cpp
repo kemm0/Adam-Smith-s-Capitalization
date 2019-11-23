@@ -4,7 +4,7 @@ namespace Game{
 Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,std::shared_ptr<Game::GameObjectManager> objManager)
     : QGraphicsScene(parent)
 {
-    sprites = {{"Grassland",QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png")}};
+    sprites = {{"Grassland",QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png")},{"Forest",QPixmap("../../juho-ja-leo/Game/Sprites/forest.png")}};
     tileSize = 50;
     mapWidth = 20;
     mapHeight = 20;
@@ -61,13 +61,9 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void Map::drawMap()
 {
-    for(unsigned int i = 0; i < objManager_->getGameObjects().size();i++){
-        auto x = objManager_->getGameObjects().at(i);
-        if(objManager_->getGameObjects().at(i)->getType()=="Grassland"){
-            QGraphicsPixmapItem* tmp = new QGraphicsPixmapItem(sprites.at("Grassland"));
-            tmp->setPos(x->getCoordinate().x(),x->getCoordinate().y());
-            addItem(tmp);
-        }
+    for(unsigned int i = 0; i < objManager_->getGameTiles().size();i++){
+        auto x = objManager_->getGameTiles().at(i);
+        addItem(x->getSprite());
     }
     addItem(objManager_->getPlayer()->sprite);
 }

@@ -30,6 +30,10 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->endTurnButton->setDisabled(true);
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
+    showGameMessage(std::to_string(objManager->getGameTiles().size()));
+    if(objManager->getGameTiles().at(0)->getSprite() == nullptr){
+        showGameMessage("rur");
+    }
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
     //connect(gameMap,&Game::Map::scrollIn,this,&MapWindow::zoomIn);

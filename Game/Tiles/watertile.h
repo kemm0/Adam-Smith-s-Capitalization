@@ -22,7 +22,7 @@ public:
               const unsigned int& max_work = 3,
               const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
     virtual std::string getType() const override;
-    virtual QGraphicsPixmapItem* getSprite() final;
+    virtual QGraphicsPixmapItem* getSprite() override;
 private:
     QGraphicsPixmapItem* sprite;
 };

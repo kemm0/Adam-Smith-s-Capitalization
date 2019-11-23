@@ -20,7 +20,7 @@ public:
     ~GameObjectManager();
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
-    void addTile(std::shared_ptr<Course::TileBase> tile);
+    void addTile(std::shared_ptr<Game::GameTileBase> tile);
     void addBuilding(std::shared_ptr<Course::BuildingBase> building, std::shared_ptr<Game::Player> player);
 
     std::shared_ptr<Course::TileBase> getTile(
@@ -31,6 +31,7 @@ public:
 
     std::vector<std::shared_ptr<Course::TileBase>> getTiles(
             const std::vector<Course::Coordinate>& coordinates);
+    std::vector<std::shared_ptr<Game::GameTileBase>> getGameTiles();
     void loadFromMap();
     void initMap(std::shared_ptr<GameEventHandler> handler);
     int size;
@@ -39,6 +40,7 @@ public:
 
 private:
     std::vector<std::shared_ptr<Course::GameObject>> gameObjects_;
+    std::vector<std::shared_ptr<Game::GameTileBase>> gameTiles;
     std::shared_ptr<Game::Player> player_;
     //Player* player1;
 };
