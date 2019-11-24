@@ -2,8 +2,10 @@
 
 namespace Game{
 
-GameMapGenerator::GameMapGenerator()
+GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler)
 {
+    objManager_ = objManager;
+    eventHandler_ = eventHandler;
     mapTemplate = {
         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0},
         {3,3,3,3,3,3,3,0,0,0,3,3,3,3,3,0,0,0,0,0},
@@ -31,6 +33,19 @@ GameMapGenerator::GameMapGenerator()
 GameMapGenerator::~GameMapGenerator()
 {
 
+}
+void GameMapGenerator::createBuilding(Course::Coordinate location)
+{
+    std::shared_ptr<GameTileBase> targetTile = objManager_->getGameTile(location);
+    if(targetTile->getType()=="Grassland"){
+        std::shared_ptr<FarmBuilding> newFarm = std::make_shared<FarmBuilding>(eventHandler_,
+                                                                               objManager_,
+                                                                               objManager_->getPlayer(),
+                                                                               1,
+                                                                               Game::ConstGameResourceMap::FARM_BUILD_COST,
+                                                                               Game::ConstGameResourceMap::FARM_PRODUCTION);
+        targetTile->addGameBuilding(newFarm);
+    }
 }
 
 void GameMapGenerator::createMapObjects(std::shared_ptr<GameObjectManager> objManager,std::shared_ptr<GameEventHandler> eventHandler)

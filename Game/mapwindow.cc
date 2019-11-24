@@ -13,13 +13,13 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->setupUi(this);
     this->setWindowState(Qt::WindowFullScreen);
     objManager = std::make_shared<Game::GameObjectManager>();
-    eventHandler = std::make_shared<Game::GameEventHandler>();
+    eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
 
-    mapCreator = std::make_shared<Game::GameMapGenerator>();
+    mapCreator = std::make_shared<Game::GameMapGenerator>(objManager,eventHandler);
     mapCreator->createMapObjects(objManager,eventHandler);
 
     //objManager->initMap(eventHandler);
-    gameMap = new Game::Map(nullptr,eventHandler,objManager);
+    gameMap = new Game::Map(nullptr,eventHandler,objManager,mapCreator);
     gameMap->drawMap();
     m_ui->gameMapView->setScene(gameMap);
     m_ui->gameMapView->setMouseTracking(true);
@@ -49,7 +49,7 @@ MapWindow::~MapWindow()
 
 void MapWindow::resizeEvent(QResizeEvent *event)
 {
-    m_ui->gameMapView->fitInView(gameMap->sceneRect(),Qt::IgnoreAspectRatio);
+    //m_ui->gameMapView->fitInView(gameMap->sceneRect(),Qt::IgnoreAspectRatio);
 }
 
 void MapWindow::showEvent(QShowEvent *event)
@@ -160,6 +160,7 @@ void Game::MapWindow::on_buildButton_toggled(bool checked)
     else{
         m_ui->moveButton->setDisabled(false);
         m_ui->searchAreaButton->setDisabled(false);
+        eventHandler->setBuildingState(false);
         showGameMessage("Stopped building. Select an action.");
     }
 

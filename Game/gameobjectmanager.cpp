@@ -1,3 +1,4 @@
+#include <iostream>
 #include "gameobjectmanager.h"
 #include "gametilebase.h"
 #include "Buildings/farmbuilding.h"
@@ -23,12 +24,6 @@ void GameObjectManager::addTile(std::shared_ptr<Game::GameTileBase> tile)
     gameTiles.push_back(tile);
 }
 
-void GameObjectManager::addBuilding(std::shared_ptr<GameBuildingBase> building, Course::Coordinate location, std::shared_ptr<Player> owner)
-{
-    getTile(location)->addBuilding(building);
-    owner->addObject(building);
-}
-
 std::shared_ptr<Course::TileBase> GameObjectManager::getTile(const Course::Coordinate &coordinate)
 {
 
@@ -46,6 +41,7 @@ std::shared_ptr<Game::GameTileBase> GameObjectManager::getGameTile(const Course:
         bool isWithinTileY = (coordinate.y() >= targetTiley && coordinate.y() <= (targetTiley + tile->getHeight()));
 
         if(isWithingTileX && isWithinTileY){
+            std::cout<<"asd"<<std::endl;
             return tile;
         }
     }

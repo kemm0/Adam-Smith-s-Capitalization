@@ -3,16 +3,19 @@
 
 #include <random>
 #include "../CourseLib/interfaces/igameeventhandler.h"
+#include "gameobjectmanager.h"
+#include "gameresourcemap.h"
 
 namespace Game{
 
 class GameTileBase;
 class GameBuildingBase;
+class FarmBuilding;
 
 class GameEventHandler : public Course::iGameEventHandler
 {
 public:
-    GameEventHandler();
+    GameEventHandler(std::shared_ptr<GameObjectManager> manager);
     ~GameEventHandler();
     virtual bool modifyResource(std::shared_ptr<Course::PlayerBase> player,
                                 Course::BasicResource resource,
@@ -51,6 +54,7 @@ private:
     bool built;
     bool searchedArea;
     std::string selectedBuildingType;
+    std::shared_ptr<GameObjectManager> objManager;
 };
 }
 

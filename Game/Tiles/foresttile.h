@@ -7,6 +7,7 @@
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
 #include "gametilebase.h"
+#include "gamebuildingbase.h"
 
 namespace Game{
 
@@ -22,6 +23,7 @@ public:
               const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
     virtual std::string getType() const override;
     virtual QGraphicsPixmapItem* getSprite() override;
+    virtual void addGameBuilding(const std::shared_ptr<Game::GameBuildingBase>& building);
 
 private:
     QGraphicsPixmapItem* sprite;

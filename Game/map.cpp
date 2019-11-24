@@ -1,7 +1,7 @@
 #include "map.h"
 
 namespace Game{
-Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,std::shared_ptr<Game::GameObjectManager> objManager)
+Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,std::shared_ptr<Game::GameObjectManager> objManager, std::shared_ptr<Game::GameMapGenerator> mapGenerator)
     : QGraphicsScene(parent)
 {
     tileSize = 50;
@@ -10,6 +10,7 @@ Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,st
     setSceneRect(0,0,tileSize*mapWidth-4,tileSize*mapHeight-4);
     eventHandler_ = eventHandler;
     objManager_ = objManager;
+    mapGenerator_ = mapGenerator;
     //setBackgroundBrush(Qt::black);
 
 }
@@ -89,12 +90,14 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         if(mouseEvent->button() == Qt::LeftButton){
             auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
             if(targetTile != nullptr){
-                eventHandler_->createBuilding(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()));
+                mapGenerator_->createBuilding(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()));
+                //std::cout<<objManager_->getGameTile(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()))->getType()<<std::endl;
+                //drawMap();
+                //addItem(objManager_->getGameTile(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()))->getSprite());
             }
             update();
         }
     }
-
 }
 
 void Map::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)

@@ -8,18 +8,22 @@
 #include "Tiles/foresttile.h"
 #include "Tiles/towntile.h"
 #include "Tiles/watertile.h"
+#include "Buildings/farmbuilding.h"
 
 namespace Game{
 
 class GameMapGenerator{
 public:
-    GameMapGenerator();
+    GameMapGenerator(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
     ~GameMapGenerator();
     void createMapObjects(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
+    void createBuilding(Course::Coordinate location);
 
 
 private:
     std::vector<std::vector<int>> mapTemplate;
+    std::shared_ptr<GameObjectManager> objManager_;
+    std::shared_ptr<GameEventHandler> eventHandler_;
 };
 }
 

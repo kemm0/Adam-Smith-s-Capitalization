@@ -7,7 +7,7 @@
 #include "../CourseLib/core/coordinate.h"
 #include "player.h"
 #include "../CourseLib/core/worldgenerator.h"
-#include "gameeventhandler.h"
+//#include "gameeventhandler.h"
 
 namespace Game{
 
@@ -25,7 +25,6 @@ public:
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
     void addTile(std::shared_ptr<Game::GameTileBase> tile);
-    void addBuilding(std::shared_ptr<Game::GameBuildingBase> building, Course::Coordinate location, std::shared_ptr<Game::Player> owner);
 
     std::shared_ptr<Course::TileBase> getTile(
             const Course::Coordinate& coordinate);

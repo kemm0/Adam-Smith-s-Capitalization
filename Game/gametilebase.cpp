@@ -23,6 +23,13 @@ QGraphicsPixmapItem *GameTileBase::getSprite()
     return sprite;
 }
 
+void GameTileBase::addGameBuilding(const std::shared_ptr<GameBuildingBase> &building)
+{
+    getBuildings().push_back(building);
+    sprite = building->getSprite();
+}
+
+
 bool GameTileBase::getRobber()
 {
     return hasRobber;

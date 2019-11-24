@@ -1,10 +1,12 @@
 #include "gameeventhandler.h"
 #include "gametilebase.h"
 #include "gamebuildingbase.h"
+#include "Buildings/farmbuilding.h"
 namespace Game{
 
-GameEventHandler::GameEventHandler()
+GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager)
 {
+    objManager = manager;
     diceValue = 0;
     srand(time(NULL));
     turn = 1;
@@ -113,11 +115,6 @@ void GameEventHandler::nextTurn()
 }
 
 int GameEventHandler::searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area)
-{
-
-}
-
-void GameEventHandler::createBuilding(Course::Coordinate location)
 {
 
 }

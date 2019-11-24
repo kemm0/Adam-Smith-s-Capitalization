@@ -30,4 +30,11 @@ QGraphicsPixmapItem *Foresttile::getSprite()
 {
     return sprite;
 }
+
+void Foresttile::addGameBuilding(const std::shared_ptr<Game::GameBuildingBase> &building)
+{
+    getBuildings().push_back(building);
+    sprite = building->getSprite();
+}
+
 }
