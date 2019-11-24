@@ -16,7 +16,8 @@ WaterTile::WaterTile(const Course::Coordinate& location,
                        production)
 {
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/water.png"));
-    //setPixmap(QPixmap("/home/ketotokj/Desktop/Ohjelmointi/Ohjelmointi3/Pirkanmaan_valloitus/juho-ja-leo/Game/Sprites/grasstile2.png"));
+    width = sprite->pixmap().width();
+    height = sprite->pixmap().height();
 }
 
 std::string WaterTile::getType() const

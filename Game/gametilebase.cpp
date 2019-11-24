@@ -33,6 +33,17 @@ bool GameTileBase::getTreasure()
     return hasTreasure;
 }
 
+int GameTileBase::getHeight()
+{
+    return height;
+}
+
+int GameTileBase::getWidth()
+{
+    return width;
+}
+
+
 bool GameTileBase::setRobber(bool x)
 {
     hasRobber = x;

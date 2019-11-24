@@ -21,8 +21,14 @@ public:
                      const Course::ResourceMap& buildcost = {},
                      const Course::ResourceMap& production = {});
     virtual QGraphicsPixmapItem* getSprite();
+    int getWidth();
+    int getHeight();
 private:
+
+protected:
     QGraphicsPixmapItem* sprite;
+    int width;
+    int height;
 };
 }
 

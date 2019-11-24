@@ -17,8 +17,15 @@ FarmBuilding::FarmBuilding(const std::shared_ptr<GameEventHandler>& eventhandler
                            buildcost,
                            production)
 {
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/fishinghut.png"));
+    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/farmhouse.png"));
+    width = sprite->pixmap().width();
+    height = sprite->pixmap().height();
 
+}
+
+std::string FarmBuilding::getType() const
+{
+    return "Farmhouse";
 
 }
 }

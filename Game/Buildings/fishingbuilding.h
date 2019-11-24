@@ -24,6 +24,7 @@ public:
                 const Course::ResourceMap& buildcost = Game::ConstGameResourceMap::FISHING_BUILD_COST,
                 const Course::ResourceMap& production = Game::ConstGameResourceMap::FISHING_PRODUCTION);
     QGraphicsPixmapItem* sprite;
+    virtual std::string getType() const override;
 };
 }
 #endif // FISHINGBUILDING_H

@@ -46,7 +46,6 @@ void GameMapGenerator::createMapObjects(std::shared_ptr<GameObjectManager> objMa
                 x->getSprite()->setPos(i*spriteHeight,j*spriteWidth);
                 x->setCoordinate(Course::Coordinate(i*spriteHeight,j*spriteWidth));
                 objManager->addTile(x);
-                objManager->size += 1;
             }
             else if(tileCode == 3){
                 std::shared_ptr<Foresttile> x = std::make_shared<Foresttile>(Course::Coordinate(j,i),eventHandler,objManager);
@@ -55,7 +54,14 @@ void GameMapGenerator::createMapObjects(std::shared_ptr<GameObjectManager> objMa
                 x->getSprite()->setPos(i*spriteHeight,j*spriteWidth);
                 x->setCoordinate(Course::Coordinate(i*spriteHeight,j*spriteWidth));
                 objManager->addTile(x);
-                objManager->size += 1;
+        }
+            else if(tileCode == 1){
+                std::shared_ptr<WaterTile> x = std::make_shared<WaterTile>(Course::Coordinate(j,i),eventHandler,objManager);
+                int spriteWidth = x->getSprite()->pixmap().width();
+                int spriteHeight = x->getSprite()->pixmap().height();
+                x->getSprite()->setPos(i*spriteHeight,j*spriteWidth);
+                x->setCoordinate(Course::Coordinate(i*spriteHeight,j*spriteWidth));
+                objManager->addTile(x);
         }
     }
     std::shared_ptr<Game::Player> player = std::make_shared<Game::Player>(Course::Coordinate(150,150));

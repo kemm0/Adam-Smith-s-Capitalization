@@ -25,6 +25,7 @@ public:
                 const Course::ResourceMap& buildcost = Game::ConstGameResourceMap::FARM_BUILD_COST,
                 const Course::ResourceMap& production = Game::ConstGameResourceMap::FARM_PRODUCTION);
     QGraphicsPixmapItem* sprite;
+    virtual std::string getType() const override;
 };
 }
 

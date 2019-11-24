@@ -1,9 +1,11 @@
 #include "gameobjectmanager.h"
 #include "gametilebase.h"
+#include "Buildings/farmbuilding.h"
+#include "Buildings/fishingbuilding.h"
+#include "Buildings/loggingbuilding.h"
 
 namespace Game{
 GameObjectManager::GameObjectManager(){
-    size = 0;
 }
 
 GameObjectManager::~GameObjectManager()
@@ -21,15 +23,33 @@ void GameObjectManager::addTile(std::shared_ptr<Game::GameTileBase> tile)
     gameTiles.push_back(tile);
 }
 
-void GameObjectManager::addBuilding(std::shared_ptr<Course::BuildingBase> building , std::shared_ptr<Game::Player> player)
+void GameObjectManager::addBuilding(std::shared_ptr<GameBuildingBase> building, Course::Coordinate location, std::shared_ptr<Player> owner)
 {
-    gameObjects_.push_back(building);
-    player->addObject(building);
+    getTile(location)->addBuilding(building);
+    owner->addObject(building);
 }
 
 std::shared_ptr<Course::TileBase> GameObjectManager::getTile(const Course::Coordinate &coordinate)
 {
 
+}
+
+
+
+std::shared_ptr<Game::GameTileBase> GameObjectManager::getGameTile(const Course::Coordinate &coordinate)
+{
+    for(std::shared_ptr<Game::GameTileBase> tile: gameTiles){
+
+        int targetTilex = tile->getCoordinate().x();
+        int targetTiley = tile->getCoordinate().y();
+        bool isWithingTileX = (coordinate.x() >= targetTilex && coordinate.x() <= (targetTilex + tile->getWidth()));
+        bool isWithinTileY = (coordinate.y() >= targetTiley && coordinate.y() <= (targetTiley + tile->getHeight()));
+
+        if(isWithingTileX && isWithinTileY){
+            return tile;
+        }
+    }
+    return nullptr;
 }
 
 std::vector<std::shared_ptr<Course::GameObject> > GameObjectManager::getGameObjects()
@@ -54,10 +74,6 @@ std::vector<std::shared_ptr<GameTileBase> > GameObjectManager::getGameTiles()
 }
 
 void GameObjectManager::loadFromMap()
-{
-}
-
-void GameObjectManager::initMap(std::shared_ptr<Game::GameEventHandler> handler)
 {
 }
 

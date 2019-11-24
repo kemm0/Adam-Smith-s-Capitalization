@@ -34,10 +34,6 @@ class Map : public QGraphicsScene
         int tileSize;
         int mapWidth;
         int mapHeight;
-        std::vector<std::vector<int>> vMap;
-        std::map<std::string,QPixmap> sprites;
-        std::vector<Course::GameObject> gameObjects;
-        std::shared_ptr<Game::Player> player_;
         QGraphicsItem* selectedTile;
         std::shared_ptr<Game::GameEventHandler> eventHandler_;
         std::shared_ptr<Game::GameObjectManager> objManager_;

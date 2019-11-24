@@ -1,6 +1,6 @@
 #include "gameeventhandler.h"
 #include "gametilebase.h"
-
+#include "gamebuildingbase.h"
 namespace Game{
 
 GameEventHandler::GameEventHandler()
@@ -13,6 +13,7 @@ GameEventHandler::GameEventHandler()
     moving = false;
     building = false;
     built = false;
+    selectedBuildingType = "";
 }
 
 GameEventHandler::~GameEventHandler()
@@ -76,6 +77,11 @@ bool GameEventHandler::isBuilding()
     return building;
 }
 
+std::string GameEventHandler::getSelectedBuildingType()
+{
+    return selectedBuildingType;
+}
+
 void GameEventHandler::setThrown(bool x)
 {
     threw = x;
@@ -96,12 +102,22 @@ void GameEventHandler::setBuildingState(bool x)
     building = x;
 }
 
+void GameEventHandler::setSelectedBuildingType(std::string buildingType)
+{
+    selectedBuildingType =buildingType;
+}
+
 void GameEventHandler::nextTurn()
 {
     turn += 1;
 }
 
 int GameEventHandler::searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area)
+{
+
+}
+
+void GameEventHandler::createBuilding(Course::Coordinate location)
 {
 
 }

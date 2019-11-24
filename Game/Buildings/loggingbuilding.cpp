@@ -17,8 +17,16 @@ LoggingBuilding::LoggingBuilding(const std::shared_ptr<GameEventHandler>& eventh
                          buildcost,
                          production)
 {
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/loggingcabin.png"));
+    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/logcabin.png"));
+    width = sprite->pixmap().width();
+    height = sprite->pixmap().height();
 
 
 }
+
+std::string LoggingBuilding::getType() const
+{
+ return "Logging cabin";
+}
+
 }

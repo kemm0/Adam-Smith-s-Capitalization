@@ -4,7 +4,6 @@ namespace Game{
 Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,std::shared_ptr<Game::GameObjectManager> objManager)
     : QGraphicsScene(parent)
 {
-    sprites = {{"Grassland",QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png")},{"Forest",QPixmap("../../juho-ja-leo/Game/Sprites/forest.png")}};
     tileSize = 50;
     mapWidth = 20;
     mapHeight = 20;
@@ -12,31 +11,6 @@ Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,st
     eventHandler_ = eventHandler;
     objManager_ = objManager;
     //setBackgroundBrush(Qt::black);
-
-    vMap = {
-        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0},
-        {3,3,3,3,3,3,3,0,0,0,3,3,3,3,3,0,0,0,0,0},
-        {3,3,3,3,3,3,3,0,0,0,0,3,3,3,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
-        {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,0},
-        {1,1,1,1,3,3,3,1,1,1,1,1,1,1,3,3,3,3,0,0},
-        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-        {0,0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,3,3,3},
-        {3,3,0,3,3,3,3,3,0,0,3,3,3,0,0,0,0,3,3,3},
-        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,3,3,3},
-
-
-    };
 
 }
 
@@ -110,6 +84,17 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             update();
         }
     }
+
+    if(eventHandler_->isBuilding()){
+        if(mouseEvent->button() == Qt::LeftButton){
+            auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
+            if(targetTile != nullptr){
+                eventHandler_->createBuilding(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()));
+            }
+            update();
+        }
+    }
+
 }
 
 void Map::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)

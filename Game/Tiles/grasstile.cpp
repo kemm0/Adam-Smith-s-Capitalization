@@ -16,6 +16,8 @@ GrassTile::GrassTile(const Course::Coordinate& location,
 {
 
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png"));
+    width = sprite->pixmap().width();
+    height = sprite->pixmap().height();
 }
 
 std::string GrassTile::getType() const

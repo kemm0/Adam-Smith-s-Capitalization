@@ -18,7 +18,14 @@ FishingBuilding::FishingBuilding(const std::shared_ptr<GameEventHandler>& eventh
                            production)
 {
     sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/farm.png"));
+    width = sprite->pixmap().width();
+    height = sprite->pixmap().height();
 
 
+}
+
+std::string FishingBuilding::getType() const
+{
+    return "Fishing hut";
 }
 }

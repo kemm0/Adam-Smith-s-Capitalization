@@ -23,6 +23,7 @@ public:
                 const Course::ResourceMap& buildcost = Game::ConstGameResourceMap::LOGGING_BUILD_COST,
                 const Course::ResourceMap& production = Game::ConstGameResourceMap::LOGGING_PRODUCTION);
     QGraphicsPixmapItem* sprite;
+    virtual std::string getType() const override;
 };
 }
 #endif // LOGGINGBUILDING_H

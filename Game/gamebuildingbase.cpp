@@ -21,4 +21,14 @@ QGraphicsPixmapItem *Game::GameBuildingBase::getSprite()
     return sprite;
 }
 
+int Game::GameBuildingBase::getWidth()
+{
+    return width;
+}
+
+int Game::GameBuildingBase::getHeight()
+{
+    return height;
+}
+
 

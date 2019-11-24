@@ -23,14 +23,18 @@ public:
     virtual QGraphicsPixmapItem* getSprite();
     bool getRobber();
     bool getTreasure();
+    int getHeight();
+    int getWidth();
 
     bool setRobber(bool x);
     bool setTreasure(bool x);
-private:
+protected:
     QGraphicsPixmapItem* sprite;
     bool hasRobber;
     bool hasTreasure;
     int treasure;
+    int width;
+    int height;
 };
 }
 #endif // GAMETILEBASE_H

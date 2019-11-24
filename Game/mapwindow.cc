@@ -153,7 +153,9 @@ void Game::MapWindow::on_buildButton_toggled(bool checked)
     if(checked==true){
         m_ui->moveButton->setDisabled(true);
         m_ui->searchAreaButton->setDisabled(true);
-        showGameMessage("Bulding. First select a building and then click a tile to build to.");
+        eventHandler->setBuildingState(true);
+        eventHandler->setSelectedBuildingType(m_ui->buildingsList->currentText().toStdString());
+        showGameMessage("Bulding a " + eventHandler->getSelectedBuildingType()+  ". First select a building and then click a tile to build to.");
     }
     else{
         m_ui->moveButton->setDisabled(false);

@@ -12,6 +12,10 @@
 namespace Game{
 
 class GameTileBase;
+class FarmBuilding;
+class FishingBuilding;
+class LoggingBuilding;
+
 
 class GameObjectManager: public Course::iObjectManager
 {
@@ -21,7 +25,7 @@ public:
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
     void addTile(std::shared_ptr<Game::GameTileBase> tile);
-    void addBuilding(std::shared_ptr<Course::BuildingBase> building, std::shared_ptr<Game::Player> player);
+    void addBuilding(std::shared_ptr<Game::GameBuildingBase> building, Course::Coordinate location, std::shared_ptr<Game::Player> owner);
 
     std::shared_ptr<Course::TileBase> getTile(
             const Course::Coordinate& coordinate);
@@ -32,9 +36,8 @@ public:
     std::vector<std::shared_ptr<Course::TileBase>> getTiles(
             const std::vector<Course::Coordinate>& coordinates);
     std::vector<std::shared_ptr<Game::GameTileBase>> getGameTiles();
+    std::shared_ptr<Game::GameTileBase> getGameTile(const Course::Coordinate& coordinate);
     void loadFromMap();
-    void initMap(std::shared_ptr<GameEventHandler> handler);
-    int size;
     void setPlayer(std::shared_ptr<Game::Player> player);
     std::shared_ptr<Game::Player> getPlayer();
 
