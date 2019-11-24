@@ -1,3 +1,4 @@
+#include <iostream>
 #include "gamemapgenerator.h"
 
 namespace Game{
@@ -7,11 +8,11 @@ GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager
     objManager_ = objManager;
     eventHandler_ = eventHandler;
     mapTemplate = {
-        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0},
-        {3,3,3,3,3,3,3,0,0,0,3,3,3,3,3,0,0,0,0,0},
-        {3,3,3,3,3,3,3,0,0,0,0,3,3,3,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0}, // -------> j = x
+        {3,3,3,3,3,3,3,0,0,0,3,3,3,3,3,0,0,0,0,0}, // |
+        {3,3,3,3,3,3,3,0,0,0,0,3,3,3,0,0,0,0,0,0}, // |
+        {0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0}, // |
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, // i = y
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -38,6 +39,7 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
 {
     std::shared_ptr<GameTileBase> targetTile = objManager_->getGameTile(location);
     if(targetTile->getType()=="Grassland"){
+        std::cout<<"oikea tile"<<std::endl;
         std::shared_ptr<FarmBuilding> newFarm = std::make_shared<FarmBuilding>(eventHandler_,
                                                                                objManager_,
                                                                                objManager_->getPlayer(),
@@ -45,37 +47,41 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
                                                                                Game::ConstGameResourceMap::FARM_BUILD_COST,
                                                                                Game::ConstGameResourceMap::FARM_PRODUCTION);
         targetTile->addGameBuilding(newFarm);
+        std::cout<<""<<std::endl;
     }
 }
 
 void GameMapGenerator::createMapObjects(std::shared_ptr<GameObjectManager> objManager,std::shared_ptr<GameEventHandler> eventHandler)
 {
-
+    std::cout<<"Game objects: " <<std::endl;
     for(unsigned int i = 0; i < mapTemplate.size(); i++){
         for(unsigned int j = 0; j < mapTemplate.at(i).size();j++){
-            int tileCode = mapTemplate.at(j).at(i);
+            int tileCode = mapTemplate.at(i).at(j);
             if(tileCode == 0){
                 std::shared_ptr<GrassTile> x = std::make_shared<GrassTile>(Course::Coordinate(j,i),eventHandler,objManager);
                 int spriteWidth = x->getSprite()->pixmap().width();
                 int spriteHeight = x->getSprite()->pixmap().height();
-                x->getSprite()->setPos(i*spriteHeight,j*spriteWidth);
-                x->setCoordinate(Course::Coordinate(i*spriteHeight,j*spriteWidth));
+                x->getSprite()->setPos(j*spriteHeight,i*spriteWidth);
+                x->setCoordinate(Course::Coordinate(j*spriteHeight,i*spriteWidth));
+                std::cout<<"x: " + std::to_string(j*spriteHeight) + " y: " + std::to_string(i*spriteWidth) + "type: " + x->getType()<<std::endl;
                 objManager->addTile(x);
             }
             else if(tileCode == 3){
                 std::shared_ptr<Foresttile> x = std::make_shared<Foresttile>(Course::Coordinate(j,i),eventHandler,objManager);
                 int spriteWidth = x->getSprite()->pixmap().width();
                 int spriteHeight = x->getSprite()->pixmap().height();
-                x->getSprite()->setPos(i*spriteHeight,j*spriteWidth);
-                x->setCoordinate(Course::Coordinate(i*spriteHeight,j*spriteWidth));
+                x->getSprite()->setPos(j*spriteHeight,i*spriteWidth);
+                x->setCoordinate(Course::Coordinate(j*spriteHeight,i*spriteWidth));
+                std::cout<<"x: " + std::to_string(j*spriteHeight) + " y: " + std::to_string(i*spriteWidth) + "type: " + x->getType()<<std::endl;
                 objManager->addTile(x);
         }
             else if(tileCode == 1){
                 std::shared_ptr<WaterTile> x = std::make_shared<WaterTile>(Course::Coordinate(j,i),eventHandler,objManager);
                 int spriteWidth = x->getSprite()->pixmap().width();
                 int spriteHeight = x->getSprite()->pixmap().height();
-                x->getSprite()->setPos(i*spriteHeight,j*spriteWidth);
-                x->setCoordinate(Course::Coordinate(i*spriteHeight,j*spriteWidth));
+                x->getSprite()->setPos(j*spriteHeight,i*spriteWidth);
+                x->setCoordinate(Course::Coordinate(j*spriteHeight,i*spriteWidth));
+                std::cout<<"x: " + std::to_string(j*spriteHeight) + " y: " + std::to_string(i*spriteWidth) + "type: " + x->getType()<<std::endl;
                 objManager->addTile(x);
         }
     }

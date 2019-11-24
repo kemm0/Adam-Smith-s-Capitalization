@@ -75,6 +75,8 @@ void Map::showTileHighlightEffect(QGraphicsItem* targetTile)
 
 void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
+    auto tTile = itemAt(mouseEvent->scenePos(),QTransform());
+    //std::cout<<"x: " + std::to_string(int(tTile->pos().x()))+ " y: " + std::to_string(int(tTile->pos().y()))<<std::endl;
     if(eventHandler_->getThrown() && eventHandler_->getPlayerMoved() == false && eventHandler_->isMoving() == true){
         if(mouseEvent->button() == Qt::LeftButton){
             auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
@@ -90,10 +92,14 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         if(mouseEvent->button() == Qt::LeftButton){
             auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
             if(targetTile != nullptr){
-                mapGenerator_->createBuilding(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()));
+                mapGenerator_->createBuilding(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
                 //std::cout<<objManager_->getGameTile(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()))->getType()<<std::endl;
                 //drawMap();
                 //addItem(objManager_->getGameTile(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()))->getSprite());
+                //QGraphicsPixmapItem* tileWithBuilding = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/fishinghut.png"));
+                //tileWithBuilding->setPos(targetTile->pos());
+                //removeItem(targetTile);
+                //addItem(tileWithBuilding);
             }
             update();
         }

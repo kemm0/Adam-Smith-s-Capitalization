@@ -1,3 +1,4 @@
+#include <iostream>
 #include "gametilebase.h"
 namespace Game{
 
@@ -25,8 +26,12 @@ QGraphicsPixmapItem *GameTileBase::getSprite()
 
 void GameTileBase::addGameBuilding(const std::shared_ptr<GameBuildingBase> &building)
 {
-    getBuildings().push_back(building);
+    buildingsOnTile.push_back(building);
+    std::cout<<"size of buildings on this tile after adding: " + std::to_string(buildingsOnTile.size())<<std::endl;
     sprite = building->getSprite();
+    //QPixmap pm = building->getSprite()->pixmap();
+    //sprite->setPixmap(pm);
+    //std::cout<<"tried to modify sprite"<<std::endl;
 }
 
 

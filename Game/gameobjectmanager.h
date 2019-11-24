@@ -19,6 +19,7 @@ class LoggingBuilding;
 
 class GameObjectManager: public Course::iObjectManager
 {
+
 public:
     GameObjectManager();
     ~GameObjectManager();

@@ -11,7 +11,7 @@ MapWindow::MapWindow(QWidget *parent):
     connect(startingDialog,&startDialog::nameConfirmed,this,&MapWindow::setUsername);
     startingDialog->exec();
     m_ui->setupUi(this);
-    this->setWindowState(Qt::WindowFullScreen);
+    //this->setWindowState(Qt::WindowFullScreen);
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
 
@@ -31,7 +31,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     showGameMessage(std::to_string(objManager->getGameTiles().size()));
-    if(objManager->getGameTiles().at(0)->getSprite() == nullptr){
+    if(objManager->getGameTiles().at(0)->getSprite() != nullptr){
         showGameMessage("rur");
     }
     //std::cout<<objManager->size<<std::endl;
@@ -40,6 +40,8 @@ MapWindow::MapWindow(QWidget *parent):
     //connect(gameMap,&Game::Map::scrollOut,this,&MapWindow::zoomOut);
     //m_ui->gameMapView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     //m_ui->gameMapView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    gameMap->setBackgroundBrush(Qt::black);
+    m_ui->gameMapView->scale(0.9,0.9);
 }
 
 MapWindow::~MapWindow()
@@ -150,7 +152,7 @@ void MapWindow::zoomOut()
 
 void Game::MapWindow::on_buildButton_toggled(bool checked)
 {
-    if(checked==true){
+    if(checked==true && eventHandler->isBuilding() == false){
         m_ui->moveButton->setDisabled(true);
         m_ui->searchAreaButton->setDisabled(true);
         eventHandler->setBuildingState(true);

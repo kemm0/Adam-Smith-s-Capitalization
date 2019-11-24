@@ -23,6 +23,7 @@ public:
     virtual QGraphicsPixmapItem* getSprite();
     int getWidth();
     int getHeight();
+
 private:
 
 protected:

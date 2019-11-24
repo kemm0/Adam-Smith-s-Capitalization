@@ -46,6 +46,7 @@ public:
     bool getTreasure();
     int getHeight();
     int getWidth();
+    std::vector<std::shared_ptr<GameBuildingBase>> buildingsOnTile;
 
     bool setRobber(bool x);
     bool setTreasure(bool x);

@@ -6,7 +6,8 @@
 #include "Buildings/loggingbuilding.h"
 
 namespace Game{
-GameObjectManager::GameObjectManager(){
+GameObjectManager::GameObjectManager()
+{
 }
 
 GameObjectManager::~GameObjectManager()
@@ -34,14 +35,8 @@ std::shared_ptr<Course::TileBase> GameObjectManager::getTile(const Course::Coord
 std::shared_ptr<Game::GameTileBase> GameObjectManager::getGameTile(const Course::Coordinate &coordinate)
 {
     for(std::shared_ptr<Game::GameTileBase> tile: gameTiles){
-
-        int targetTilex = tile->getCoordinate().x();
-        int targetTiley = tile->getCoordinate().y();
-        bool isWithingTileX = (coordinate.x() >= targetTilex && coordinate.x() <= (targetTilex + tile->getWidth()));
-        bool isWithinTileY = (coordinate.y() >= targetTiley && coordinate.y() <= (targetTiley + tile->getHeight()));
-
-        if(isWithingTileX && isWithinTileY){
-            std::cout<<"asd"<<std::endl;
+        if(tile->getCoordinate() == coordinate){
+            std::cout<<"exact same tile found! x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y())<<std::endl;
             return tile;
         }
     }
