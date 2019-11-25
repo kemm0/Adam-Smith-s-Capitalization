@@ -42,6 +42,8 @@ public:
     std::shared_ptr<Game::GameObjectManager> objManager;
     std::shared_ptr<Game::GameEventHandler> eventHandler;
     std::shared_ptr<Game::GameMapGenerator> mapCreator;
+    QMediaPlayer* musicplayer;
+    QMediaPlaylist* musicPlaylist;
     void showGameMessage(std::string message);
     std::string getUsername();
     void keyPressEvent(QKeyEvent *event);

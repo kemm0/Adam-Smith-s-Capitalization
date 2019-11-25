@@ -1,6 +1,7 @@
 #include "mapwindow.hh"
 #include "ui_mapwindow.h"
 #include <iostream>
+#include "QMediaPlaylist"
 
 namespace Game{
 MapWindow::MapWindow(QWidget *parent):
@@ -30,7 +31,16 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->endTurnButton->setDisabled(true);
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
-    showGameMessage(std::to_string(objManager->getGameTiles().size()));
+    showGameMessage(std::to_string(objManager->getGameTiles().size()));   
+
+    //MUSIC
+    musicplayer = new QMediaPlayer;
+    musicPlaylist = new QMediaPlaylist();
+    musicPlaylist->addMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/gamemusic.wav"));
+    musicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);
+    musicplayer->setPlaylist(musicPlaylist);
+    musicplayer->play();
+
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
     //connect(gameMap,&Game::Map::scrollIn,this,&MapWindow::zoomIn);
@@ -48,14 +58,14 @@ MapWindow::~MapWindow()
 
 void MapWindow::resizeEvent(QResizeEvent *event)
 {
-    //m_ui->gameMapView->fitInView(gameMap->sceneRect(),Qt::IgnoreAspectRatio);
+    m_ui->gameMapView->fitInView(gameMap->sceneRect(),Qt::KeepAspectRatio);
 }
 
 void MapWindow::showEvent(QShowEvent *event)
 {
     //m_ui->gameMapView->ensureVisible(gameMap->sceneRect(),0,0);
     m_ui->gameMapView->fitInView(gameMap->sceneRect(),Qt::KeepAspectRatio);
-    m_ui->gameMapView->centerOn(0,0);
+    //m_ui->gameMapView->centerOn(0,0);
 }
 
 void MapWindow::initMap()
