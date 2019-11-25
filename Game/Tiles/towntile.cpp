@@ -16,9 +16,9 @@ TownTile::TownTile(const Course::Coordinate& location,
                        production)
 {
 
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/town.png"));
-    width = sprite->pixmap().width();
-    height = sprite->pixmap().height();
+    sprite = QPixmap("../../juho-ja-leo/Game/Sprites/town.png");
+    width = sprite.width();
+    height = sprite.height();
 }
 
 std::string TownTile::getType() const
@@ -26,9 +26,5 @@ std::string TownTile::getType() const
     return "Town";
 }
 
-QGraphicsPixmapItem *TownTile::getSprite()
-{
-    return sprite;
-}
 }
 

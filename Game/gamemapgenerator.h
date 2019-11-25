@@ -9,6 +9,8 @@
 #include "Tiles/towntile.h"
 #include "Tiles/watertile.h"
 #include "Buildings/farmbuilding.h"
+#include "Buildings/loggingbuilding.h"
+#include "Buildings/fishingbuilding.h"
 
 namespace Game{
 

@@ -14,12 +14,12 @@ GameTileBase::GameTileBase(const Course::Coordinate &location,
                        max_work,
                        production)
 {
-    sprite = nullptr;
+    sprite = QPixmap(50,50);
     hasTreasure = false;
     hasRobber = false;
 }
 
-QGraphicsPixmapItem *GameTileBase::getSprite()
+QPixmap GameTileBase::getSprite()
 {
     return sprite;
 }

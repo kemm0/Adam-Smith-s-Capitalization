@@ -15,19 +15,14 @@ GrassTile::GrassTile(const Course::Coordinate& location,
                        production)
 {
 
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png"));
-    width = sprite->pixmap().width();
-    height = sprite->pixmap().height();
+    sprite = QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png");
+    width = sprite.width();
+    height = sprite.height();
 }
 
 std::string GrassTile::getType() const
 {
     return "Grassland";
-}
-
-QGraphicsPixmapItem* GrassTile::getSprite()
-{
-    return sprite;
 }
 
 

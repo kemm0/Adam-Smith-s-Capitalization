@@ -15,9 +15,9 @@ WaterTile::WaterTile(const Course::Coordinate& location,
                        max_work,
                        production)
 {
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/water.png"));
-    width = sprite->pixmap().width();
-    height = sprite->pixmap().height();
+    sprite = QPixmap("../../juho-ja-leo/Game/Sprites/water.png");
+    width = sprite.width();
+    height = sprite.height();
 }
 
 std::string WaterTile::getType() const
@@ -25,9 +25,5 @@ std::string WaterTile::getType() const
     return "Water";
 }
 
-QGraphicsPixmapItem *WaterTile::getSprite()
-{
-    return sprite;
-}
 }
 

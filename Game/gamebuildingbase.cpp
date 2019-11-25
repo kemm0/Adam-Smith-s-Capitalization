@@ -13,10 +13,10 @@ Game::GameBuildingBase::GameBuildingBase(const std::shared_ptr<Game::GameEventHa
                            buildcost,
                            production)
 {
-    sprite = nullptr;
+    sprite = QPixmap(50,50);
 }
 
-QGraphicsPixmapItem *Game::GameBuildingBase::getSprite()
+QPixmap Game::GameBuildingBase::getSprite()
 {
     return sprite;
 }

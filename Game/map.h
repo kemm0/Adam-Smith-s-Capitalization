@@ -32,6 +32,7 @@ class Map : public QGraphicsScene
         void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
         void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) override;
         void drawMap();
+        QGraphicsPixmapItem* player;
 
     private:
         int tileSize;

@@ -21,7 +21,7 @@ public:
               const unsigned int& max_build = 3,
               const unsigned int& max_work = 3,
               const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
-    virtual QGraphicsPixmapItem* getSprite();
+    virtual QPixmap getSprite();
     /**
      * @brief Adds a new Building-object to the tile.
      *
@@ -51,7 +51,7 @@ public:
     bool setRobber(bool x);
     bool setTreasure(bool x);
 protected:
-    QGraphicsPixmapItem* sprite;
+    QPixmap sprite;
     bool hasRobber;
     bool hasTreasure;
     int treasure;

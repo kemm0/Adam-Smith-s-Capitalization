@@ -11,6 +11,7 @@ Map::Map(QObject *parent,std::shared_ptr<Game::GameEventHandler> eventHandler,st
     eventHandler_ = eventHandler;
     objManager_ = objManager;
     mapGenerator_ = mapGenerator;
+    player = nullptr;
     //setBackgroundBrush(Qt::black);
 
 }
@@ -38,17 +39,22 @@ void Map::drawMap()
 {
     for(unsigned int i = 0; i < objManager_->getGameTiles().size();i++){
         auto x = objManager_->getGameTiles().at(i);
-        addItem(x->getSprite());
+        QGraphicsPixmapItem* mapItem = new QGraphicsPixmapItem(x->getSprite());
+        mapItem->setPos(x->getCoordinate().x(),x->getCoordinate().y());
+        addItem(mapItem);
     }
-    addItem(objManager_->getPlayer()->sprite);
+    QGraphicsPixmapItem* playerImg = new QGraphicsPixmapItem(objManager_->getPlayer()->getSprite());
+    playerImg->setPos(objManager_->getPlayer()->getCoordinate().x(),objManager_->getPlayer()->getCoordinate().y());
+    player = playerImg;
+    addItem(playerImg);
 }
 
 void Map::showTileMovableEffect(QGraphicsItem* targetTile)
 {
     if(targetTile != nullptr){
         QGraphicsColorizeEffect* x = new QGraphicsColorizeEffect;
-        qreal x_distance = objManager_->getPlayer()->sprite->pos().x() - targetTile->pos().x();
-        qreal y_distance = objManager_->getPlayer()->sprite->pos().y() - targetTile->pos().y();
+        qreal x_distance = objManager_->getPlayer()->getCoordinate().x() - targetTile->pos().x();
+        qreal y_distance = objManager_->getPlayer()->getCoordinate().y() - targetTile->pos().y();
         int scenedistance = eventHandler_->getDiceValue() * 50;
         if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
             x->setColor(QColor(Qt::red)); //if too far away, show red tile
@@ -75,13 +81,12 @@ void Map::showTileHighlightEffect(QGraphicsItem* targetTile)
 
 void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
-    auto tTile = itemAt(mouseEvent->scenePos(),QTransform());
-    //std::cout<<"x: " + std::to_string(int(tTile->pos().x()))+ " y: " + std::to_string(int(tTile->pos().y()))<<std::endl;
+    auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
     if(eventHandler_->getThrown() && eventHandler_->getPlayerMoved() == false && eventHandler_->isMoving() == true){
         if(mouseEvent->button() == Qt::LeftButton){
-            auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
             if(targetTile != nullptr){
-                objManager_->getPlayer()->sprite->setPos(targetTile->pos().x(),targetTile->pos().y());
+                objManager_->getPlayer()->setCoordinate(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
+                player->setPos(targetTile->pos());
             }
             eventHandler_->setPlayerMoved(true);
             update();
@@ -90,19 +95,22 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     if(eventHandler_->isBuilding()){
         if(mouseEvent->button() == Qt::LeftButton){
-            auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
             if(targetTile != nullptr){
                 mapGenerator_->createBuilding(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
                 //std::cout<<objManager_->getGameTile(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()))->getType()<<std::endl;
-                //drawMap();
-                //addItem(objManager_->getGameTile(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()))->getSprite());
-                //QGraphicsPixmapItem* tileWithBuilding = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/fishinghut.png"));
-                //tileWithBuilding->setPos(targetTile->pos());
+                auto x = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
+                QGraphicsPixmapItem* mapItem = new QGraphicsPixmapItem(x->getSprite());
+                mapItem->setPos(targetTile->pos());
+                addItem(mapItem);
                 //removeItem(targetTile);
-                //addItem(tileWithBuilding);
             }
             update();
         }
+    }
+    else{
+        std::cout<<"Graphicsitem location x: " + std::to_string(int(targetTile->pos().x()))+ " y: " + std::to_string(int(targetTile->pos().y()))<<std::endl;
+        auto y = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
+        //std::cout<<"Database tile x: " + std::to_string(y->getCoordinate().x()) + " y: " + std::to_string(y->getCoordinate().y())<<std::endl;
     }
 }
 

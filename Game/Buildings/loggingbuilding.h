@@ -22,7 +22,6 @@ public:
                 const int& tilespaces = 1,
                 const Course::ResourceMap& buildcost = Game::ConstGameResourceMap::LOGGING_BUILD_COST,
                 const Course::ResourceMap& production = Game::ConstGameResourceMap::LOGGING_PRODUCTION);
-    QGraphicsPixmapItem* sprite;
     virtual std::string getType() const override;
 };
 }

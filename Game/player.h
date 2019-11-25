@@ -5,19 +5,22 @@
 #include "../CourseLib/core/gameobject.h"
 #include "QGraphicsPixmapItem"
 namespace Game{
+class GameEventHandler;
+class GameObjectManager;
 
-class Player : public Course::PlayerBase
+class Player : public Course::PlayerBase, public Course::GameObject
 {
 public:
     Player(const Course::Coordinate &coord,
            const std::string& name = "Adam Smith",
+           std::shared_ptr<Game::GameEventHandler> handler = nullptr,
+           std::shared_ptr<Game::GameObjectManager> manager = nullptr,
            const std::vector<std::shared_ptr<Course::GameObject> > objects = {});
-    QGraphicsPixmapItem * sprite;
-
     ~Player();
-    std::unique_ptr<Course::Coordinate> coord_;
+    QPixmap getSprite();
 
 private:
+        QPixmap sprite;
 
 };
 }

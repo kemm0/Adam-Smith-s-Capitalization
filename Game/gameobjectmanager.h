@@ -25,7 +25,7 @@ public:
     ~GameObjectManager();
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
-    void addTile(std::shared_ptr<Game::GameTileBase> tile);
+    void addGameTile(std::shared_ptr<Game::GameTileBase> tile);
 
     std::shared_ptr<Course::TileBase> getTile(
             const Course::Coordinate& coordinate);

@@ -11,7 +11,7 @@ MapWindow::MapWindow(QWidget *parent):
     connect(startingDialog,&startDialog::nameConfirmed,this,&MapWindow::setUsername);
     startingDialog->exec();
     m_ui->setupUi(this);
-    //this->setWindowState(Qt::WindowFullScreen);
+    //this->setWindowState(Qt::WindowFullScreen);   //Sets fullsceen mode
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
 
@@ -31,9 +31,6 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     showGameMessage(std::to_string(objManager->getGameTiles().size()));
-    if(objManager->getGameTiles().at(0)->getSprite() != nullptr){
-        showGameMessage("rur");
-    }
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
     //connect(gameMap,&Game::Map::scrollIn,this,&MapWindow::zoomIn);
@@ -56,7 +53,9 @@ void MapWindow::resizeEvent(QResizeEvent *event)
 
 void MapWindow::showEvent(QShowEvent *event)
 {
-    m_ui->gameMapView->ensureVisible(gameMap->sceneRect(),0,0);
+    //m_ui->gameMapView->ensureVisible(gameMap->sceneRect(),0,0);
+    m_ui->gameMapView->fitInView(gameMap->sceneRect(),Qt::KeepAspectRatio);
+    m_ui->gameMapView->centerOn(0,0);
 }
 
 void MapWindow::initMap()

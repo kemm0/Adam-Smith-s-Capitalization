@@ -16,9 +16,9 @@ Foresttile::Foresttile(const Course::Coordinate& location,
                        production)
 {
 
-    sprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/forest.png"));
-    width = sprite->pixmap().width();
-    height = sprite->pixmap().height();
+    sprite = QPixmap("../../juho-ja-leo/Game/Sprites/forest.png");
+    width = sprite.width();
+    height = sprite.height();
 }
 
 std::string Foresttile::getType() const
@@ -26,7 +26,7 @@ std::string Foresttile::getType() const
     return "Forest";
 }
 
-QGraphicsPixmapItem *Foresttile::getSprite()
+QPixmap Foresttile::getSprite()
 {
     return sprite;
 }

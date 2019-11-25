@@ -20,14 +20,14 @@ public:
                      const int& tilespaces = 1,
                      const Course::ResourceMap& buildcost = {},
                      const Course::ResourceMap& production = {});
-    virtual QGraphicsPixmapItem* getSprite();
+    virtual QPixmap getSprite();
     int getWidth();
     int getHeight();
 
 private:
 
 protected:
-    QGraphicsPixmapItem* sprite;
+    QPixmap sprite;
     int width;
     int height;
 };
