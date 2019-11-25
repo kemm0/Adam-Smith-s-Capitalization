@@ -49,6 +49,10 @@ void Map::drawMap()
     addItem(playerImg);
 }
 
+
+
+
+
 void Map::showTileMovableEffect(QGraphicsItem* targetTile)
 {
     if(targetTile != nullptr){
@@ -59,14 +63,26 @@ void Map::showTileMovableEffect(QGraphicsItem* targetTile)
         if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
             x->setColor(QColor(Qt::red)); //if too far away, show red tile
             x->setStrength(0.3);
+            setOnRange(false);
         }
         else{
             x->setColor(QColor(Qt::green));  //if not, show green tile
             x->setStrength(0.3);
+            setOnRange(true);
         }
         targetTile->setGraphicsEffect(x);
     }
 
+}
+
+void Map::setOnRange(bool on_range)
+{
+    range = on_range;
+}
+
+bool Map::getOnRange()
+{
+    return range;
 }
 
 void Map::showTileHighlightEffect(QGraphicsItem* targetTile)
@@ -84,12 +100,12 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
     if(eventHandler_->getThrown() && eventHandler_->getPlayerMoved() == false && eventHandler_->isMoving() == true){
         if(mouseEvent->button() == Qt::LeftButton){
-            if(targetTile != nullptr){
+            if(targetTile != nullptr && getOnRange() == true){
                 objManager_->getPlayer()->setCoordinate(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
                 player->setPos(targetTile->pos());
+                eventHandler_->setPlayerMoved(true);
+                update();
             }
-            eventHandler_->setPlayerMoved(true);
-            update();
         }
     }
 
@@ -124,4 +140,3 @@ void Map::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)
     }
 }
 }
-

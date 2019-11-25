@@ -33,6 +33,8 @@ class Map : public QGraphicsScene
         void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) override;
         void drawMap();
         QGraphicsPixmapItem* player;
+        void setOnRange(bool range);
+        bool getOnRange();
 
     private:
         int tileSize;
@@ -44,6 +46,7 @@ class Map : public QGraphicsScene
         std::shared_ptr<Game::GameMapGenerator> mapGenerator_;
         void showTileMovableEffect(QGraphicsItem* targetTile);
         void showTileHighlightEffect(QGraphicsItem* targetTile);
+        bool range;
     signals:
         void scrollOut();
         void scrollIn();
