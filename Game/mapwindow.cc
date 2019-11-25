@@ -34,12 +34,12 @@ MapWindow::MapWindow(QWidget *parent):
     showGameMessage(std::to_string(objManager->getGameTiles().size()));   
 
     //MUSIC
-    musicplayer = new QMediaPlayer;
+    /*musicplayer = new QMediaPlayer;
     musicPlaylist = new QMediaPlaylist();
     musicPlaylist->addMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/gamemusic.wav"));
     musicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);
     musicplayer->setPlaylist(musicPlaylist);
-    musicplayer->play();
+    musicplayer->play();*/
 
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;

@@ -45,6 +45,7 @@ class Map : public QGraphicsScene
         std::shared_ptr<Game::GameObjectManager> objManager_;
         std::shared_ptr<Game::GameMapGenerator> mapGenerator_;
         void showTileMovableEffect(QGraphicsItem* targetTile);
+        void showTileBuildOrSearchEffect(QGraphicsItem* targetTile);
         void showTileHighlightEffect(QGraphicsItem* targetTile);
         bool range;
     signals:

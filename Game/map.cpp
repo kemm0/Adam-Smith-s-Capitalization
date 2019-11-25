@@ -28,6 +28,10 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
         showTileMovableEffect(targetTile);
     }
+    else if(eventHandler_->isBuilding()== true){
+        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
+        showTileBuildOrSearchEffect(targetTile);
+    }
     else{
         QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
         showTileHighlightEffect(targetTile);
@@ -60,7 +64,12 @@ void Map::showTileMovableEffect(QGraphicsItem* targetTile)
         qreal x_distance = objManager_->getPlayer()->getCoordinate().x() - targetTile->pos().x();
         qreal y_distance = objManager_->getPlayer()->getCoordinate().y() - targetTile->pos().y();
         int scenedistance = eventHandler_->getDiceValue() * 50;
-        if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
+        if(x_distance == 0 && y_distance == 0){
+            x->setColor(QColor(Qt::red)); //if too far away, show red tile
+            x->setStrength(0.3);
+            setOnRange(false);
+        }
+        else if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
             x->setColor(QColor(Qt::red)); //if too far away, show red tile
             x->setStrength(0.3);
             setOnRange(false);
@@ -73,6 +82,27 @@ void Map::showTileMovableEffect(QGraphicsItem* targetTile)
         targetTile->setGraphicsEffect(x);
     }
 
+}
+
+void Map::showTileBuildOrSearchEffect(QGraphicsItem *targetTile)
+{
+    if(targetTile != nullptr){
+        QGraphicsColorizeEffect* x = new QGraphicsColorizeEffect;
+        qreal x_distance = objManager_->getPlayer()->getCoordinate().x() - targetTile->pos().x();
+        qreal y_distance = objManager_->getPlayer()->getCoordinate().y() - targetTile->pos().y();
+        int scenedistance = 1 * 50;
+        if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
+            x->setColor(QColor(Qt::red)); //if too far away, show red tile
+            x->setStrength(0.3);
+            setOnRange(false);
+        }
+        else{
+            x->setColor(QColor(Qt::green));  //if not, show green tile
+            x->setStrength(0.3);
+            setOnRange(true);
+        }
+        targetTile->setGraphicsEffect(x);
+    }
 }
 
 void Map::setOnRange(bool on_range)
