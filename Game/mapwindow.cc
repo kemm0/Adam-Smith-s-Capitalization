@@ -115,6 +115,12 @@ void MapWindow::on_endTurnButton_clicked()
     showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
     m_ui->diceButton->setDisabled(false);
     m_ui->endTurnButton->setDisabled(true);
+    m_ui->buildButton->setChecked(false);
+    m_ui->buildButton->setDisabled(false);
+    eventHandler->setPlayerBuilt(false);
+    m_ui->moveButton->setChecked(false);
+    m_ui->moveButton->setDisabled(false);
+    eventHandler->setPlayerMoved(false);
 }
 
 void MapWindow::setUsername(std::string name)
@@ -137,6 +143,8 @@ void MapWindow::on_moveButton_toggled(bool checked)
         if(eventHandler->getThrown() == true){
             eventHandler->setMoving(true);
             showGameMessage("Moving. Select a tile to move to.");
+
+
         }
         else{
             showGameMessage("You haven't thrown the dice yet. Throw the dice to be able to move.");

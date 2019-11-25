@@ -79,6 +79,12 @@ bool GameEventHandler::isBuilding()
     return building;
 }
 
+bool GameEventHandler::getPlayerBuilt()
+{
+    return built;
+}
+
+
 std::string GameEventHandler::getSelectedBuildingType()
 {
     return selectedBuildingType;
@@ -92,6 +98,11 @@ void GameEventHandler::setThrown(bool x)
 void GameEventHandler::setPlayerMoved(bool x)
 {
     moved = x;
+}
+
+void GameEventHandler::setPlayerBuilt(bool x)
+{
+    built = x;
 }
 
 void GameEventHandler::setMoving(bool x)

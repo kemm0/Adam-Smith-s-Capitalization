@@ -28,7 +28,7 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
         showTileMovableEffect(targetTile);
     }
-    else if(eventHandler_->isBuilding()== true){
+    else if(eventHandler_->isBuilding()== true && eventHandler_->getPlayerBuilt() == false){
         QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
         showTileBuildOrSearchEffect(targetTile);
     }
@@ -91,7 +91,12 @@ void Map::showTileBuildOrSearchEffect(QGraphicsItem *targetTile)
         qreal x_distance = objManager_->getPlayer()->getCoordinate().x() - targetTile->pos().x();
         qreal y_distance = objManager_->getPlayer()->getCoordinate().y() - targetTile->pos().y();
         int scenedistance = 1 * 50;
-        if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
+        if(x_distance == 0 && y_distance == 0){
+            x->setColor(QColor(Qt::red)); //if too far away, show red tile
+            x->setStrength(0.3);
+            setOnRange(false);
+        }
+        else if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
             x->setColor(QColor(Qt::red)); //if too far away, show red tile
             x->setStrength(0.3);
             setOnRange(false);
@@ -141,7 +146,8 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     if(eventHandler_->isBuilding()){
         if(mouseEvent->button() == Qt::LeftButton){
-            if(targetTile != nullptr){
+            if(targetTile != nullptr && eventHandler_->getPlayerBuilt() == false && eventHandler_->isBuilding() == true
+                    && getOnRange() == true){
                 mapGenerator_->createBuilding(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
                 //std::cout<<objManager_->getGameTile(Course::Coordinate(targetTile->pos().x(),targetTile->pos().y()))->getType()<<std::endl;
                 auto x = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
@@ -149,8 +155,9 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 mapItem->setPos(targetTile->pos());
                 addItem(mapItem);
                 //removeItem(targetTile);
+                eventHandler_->setPlayerBuilt(true);
+                update();
             }
-            update();
         }
     }
     else{

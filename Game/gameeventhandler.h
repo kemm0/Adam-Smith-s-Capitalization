@@ -35,11 +35,13 @@ public:
     bool getPlayerMoved();
     bool isMoving();
     bool isBuilding();
+    bool getPlayerBuilt();
     std::string getSelectedBuildingType();
 
     //setters
     void setThrown(bool x);
     void setPlayerMoved(bool x);
+    void setPlayerBuilt(bool x);
     void setMoving(bool x);
     void setBuildingState(bool x);
     void setSelectedBuildingType(std::string buildingType);
