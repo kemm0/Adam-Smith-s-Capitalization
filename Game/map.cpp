@@ -97,7 +97,7 @@ void Map::showTileBuildOrSearchEffect(QGraphicsItem *targetTile)
         qreal y_distance = objManager_->getPlayer()->getCoordinate().y() - targetTile->pos().y();
         int scenedistance = 1 * 50;
         if(x_distance == 0 && y_distance == 0){
-            x->setColor(QColor(Qt::white)); //if too far away, show red tile
+            x->setColor(QColor(Qt::white));
             x->setStrength(0.3);
             setOnRange(false);
         }
@@ -169,8 +169,13 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         if(mouseEvent->button() == Qt::LeftButton){
             if(targetTile != nullptr && eventHandler_->getPlayerSearched() == false && eventHandler_->isSearching() == true
                     && getOnRange() == true){
+                auto x = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
+                if (x->getRobber()){
 
+                }
+                else if(x->getTreasure()){
 
+                }
                 eventHandler_->setPlayerSearched(true);
                 update();
             }
