@@ -20,12 +20,16 @@ public:
     ~GameMapGenerator();
     void createMapObjects(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
     void createBuilding(Course::Coordinate location);
-
+    Course::Coordinate getRandomMapCoordinate();
+    void setTreasure();
+    void setRobber();
 
 private:
     std::vector<std::vector<int>> mapTemplate;
     std::shared_ptr<GameObjectManager> objManager_;
     std::shared_ptr<GameEventHandler> eventHandler_;
+    int mapWidth;
+    int mapHeight;
 };
 }
 

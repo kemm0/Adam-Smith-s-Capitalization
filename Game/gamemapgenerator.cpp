@@ -7,6 +7,7 @@ GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager
 {
     objManager_ = objManager;
     eventHandler_ = eventHandler;
+    srand(time(NULL));
     mapTemplate = {
         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0}, // -------> j = x
         {3,3,3,3,3,3,3,0,0,0,3,3,3,3,3,0,0,0,0,0}, // |
@@ -29,6 +30,14 @@ GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager
         {3,3,0,3,3,3,3,3,0,0,3,3,3,0,0,0,0,3,3,3},
         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,3,3,3},
     };
+    mapWidth = mapTemplate.at(0).size();
+    mapHeight = mapTemplate.size();
+    /*for(int i = 0; i< 100; i++){
+        getRandomMapCoordinate();
+    }*/
+    createMapObjects(objManager_,eventHandler_);
+    setRobber();
+    setTreasure();
 }
 
 GameMapGenerator::~GameMapGenerator()
@@ -72,6 +81,42 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
         targetTile->addGameBuilding(newFishingHut);
     }
 
+}
+
+Course::Coordinate GameMapGenerator::getRandomMapCoordinate()
+{
+    int randX = rand() % mapWidth * 50;
+    int randY = rand() % mapHeight * 50;
+    std::cout<<"X: " + std::to_string(randX) + " y: " + std::to_string(randX)<<std::endl;
+    return Course::Coordinate(randX,randY);
+}
+
+void GameMapGenerator::setTreasure()
+{
+    while(true){
+        Course::Coordinate randMapCoordinate = getRandomMapCoordinate();
+        std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(randMapCoordinate);
+        bool hasRobber = tile->getRobber();
+        if(!hasRobber){
+            tile->setRobber(true);
+            std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has Treasure"<<std::endl;
+            break;
+        }
+    }
+}
+
+void GameMapGenerator::setRobber()
+{
+    while(true){
+        Course::Coordinate randMapCoordinate = getRandomMapCoordinate();
+        std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(randMapCoordinate);
+        bool hasTreasure = tile->getTreasure();
+        if(!hasTreasure){
+            tile->setRobber(true);
+            std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has Robber"<<std::endl;
+            break;
+        }
+    }
 }
 
 void GameMapGenerator::createMapObjects(std::shared_ptr<GameObjectManager> objManager,std::shared_ptr<GameEventHandler> eventHandler)

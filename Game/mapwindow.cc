@@ -17,7 +17,6 @@ MapWindow::MapWindow(QWidget *parent):
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
 
     mapCreator = std::make_shared<Game::GameMapGenerator>(objManager,eventHandler);
-    mapCreator->createMapObjects(objManager,eventHandler);
 
     //objManager->initMap(eventHandler);
     gameMap = new Game::Map(nullptr,eventHandler,objManager,mapCreator);
