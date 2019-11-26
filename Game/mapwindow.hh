@@ -63,7 +63,9 @@ private slots:
 
     void on_buildButton_toggled(bool checked);
 
-    void on_searchAreaButton_clicked();
+
+
+    void on_searchAreaButton_toggled(bool checked);
 
 private:
     Ui::MapWindow* m_ui;

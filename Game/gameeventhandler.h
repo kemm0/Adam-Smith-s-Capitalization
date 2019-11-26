@@ -36,6 +36,8 @@ public:
     bool isMoving();
     bool isBuilding();
     bool getPlayerBuilt();
+    bool getPlayerSearched();
+    bool isSearching();
     std::string getSelectedBuildingType();
 
     //setters
@@ -45,6 +47,8 @@ public:
     void setMoving(bool x);
     void setBuildingState(bool x);
     void setSelectedBuildingType(std::string buildingType);
+    void setSearching(bool x);
+    void setPlayerSearched(bool x);
 
 private:
     bool threw;
@@ -54,6 +58,7 @@ private:
     int turn;
     bool building;
     bool built;
+    bool searching;
     bool searchedArea;
     std::string selectedBuildingType;
     std::shared_ptr<GameObjectManager> objManager;

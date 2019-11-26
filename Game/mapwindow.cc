@@ -31,6 +31,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->endTurnButton->setDisabled(true);
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
+    m_ui->searchAreaButton->setCheckable(true);
     showGameMessage(std::to_string(objManager->getGameTiles().size()));   
 
     //MUSIC
@@ -121,6 +122,7 @@ void MapWindow::on_endTurnButton_clicked()
     m_ui->moveButton->setChecked(false);
     m_ui->moveButton->setDisabled(false);
     eventHandler->setPlayerMoved(false);
+    eventHandler->setPlayerSearched(false);
 }
 
 void MapWindow::setUsername(std::string name)
@@ -187,6 +189,18 @@ void Game::MapWindow::on_buildButton_toggled(bool checked)
 
 }
 
-void Game::MapWindow::on_searchAreaButton_clicked()
+void Game::MapWindow::on_searchAreaButton_toggled(bool checked)
 {
+    if(checked==true && eventHandler->isSearching() == false){
+        m_ui->moveButton->setDisabled(true);
+        m_ui->buildButton->setDisabled(true);
+        eventHandler->setSearching(true);
+        showGameMessage("Searching. First select a tile next to you and then click a tile to search it.");
+    }
+    else{
+        m_ui->moveButton->setDisabled(false);
+        m_ui->buildButton->setDisabled(false);
+        eventHandler->setSearching(false);
+        showGameMessage("Stopped searching. Select an action.");
+    }
 }

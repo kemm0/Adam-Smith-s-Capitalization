@@ -84,6 +84,16 @@ bool GameEventHandler::getPlayerBuilt()
     return built;
 }
 
+bool GameEventHandler::getPlayerSearched()
+{
+    return searchedArea;
+}
+
+bool GameEventHandler::isSearching()
+{
+    return searching;
+}
+
 
 std::string GameEventHandler::getSelectedBuildingType()
 {
@@ -118,6 +128,16 @@ void GameEventHandler::setBuildingState(bool x)
 void GameEventHandler::setSelectedBuildingType(std::string buildingType)
 {
     selectedBuildingType =buildingType;
+}
+
+void GameEventHandler::setSearching(bool x)
+{
+    searching = x;
+}
+
+void GameEventHandler::setPlayerSearched(bool x)
+{
+    searchedArea = x;
 }
 
 void GameEventHandler::nextTurn()

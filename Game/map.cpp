@@ -32,6 +32,10 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
         showTileBuildOrSearchEffect(targetTile);
     }
+    else if(eventHandler_->isSearching()== true && eventHandler_->getPlayerSearched() == false){
+        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
+        showTileBuildOrSearchEffect(targetTile);
+    }
     else{
         QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
         showTileHighlightEffect(targetTile);
@@ -49,6 +53,7 @@ void Map::drawMap()
     }
     QGraphicsPixmapItem* playerImg = new QGraphicsPixmapItem(objManager_->getPlayer()->getSprite());
     playerImg->setPos(objManager_->getPlayer()->getCoordinate().x(),objManager_->getPlayer()->getCoordinate().y());
+    playerImg->setZValue(1000);
     player = playerImg;
     addItem(playerImg);
 }
@@ -92,17 +97,17 @@ void Map::showTileBuildOrSearchEffect(QGraphicsItem *targetTile)
         qreal y_distance = objManager_->getPlayer()->getCoordinate().y() - targetTile->pos().y();
         int scenedistance = 1 * 50;
         if(x_distance == 0 && y_distance == 0){
-            x->setColor(QColor(Qt::red)); //if too far away, show red tile
+            x->setColor(QColor(Qt::white)); //if too far away, show red tile
             x->setStrength(0.3);
             setOnRange(false);
         }
         else if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
-            x->setColor(QColor(Qt::red)); //if too far away, show red tile
+            x->setColor(QColor(Qt::white)); //if too far away, show red tile
             x->setStrength(0.3);
             setOnRange(false);
         }
         else{
-            x->setColor(QColor(Qt::green));  //if not, show green tile
+            x->setColor(QColor(Qt::yellow));  //if not, show green tile
             x->setStrength(0.3);
             setOnRange(true);
         }
@@ -144,7 +149,7 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         }
     }
 
-    if(eventHandler_->isBuilding()){
+    else if(eventHandler_->isBuilding()){
         if(mouseEvent->button() == Qt::LeftButton){
             if(targetTile != nullptr && eventHandler_->getPlayerBuilt() == false && eventHandler_->isBuilding() == true
                     && getOnRange() == true){
@@ -156,6 +161,17 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 addItem(mapItem);
                 //removeItem(targetTile);
                 eventHandler_->setPlayerBuilt(true);
+                update();
+            }
+        }
+    }
+    else if(eventHandler_->isSearching()){
+        if(mouseEvent->button() == Qt::LeftButton){
+            if(targetTile != nullptr && eventHandler_->getPlayerSearched() == false && eventHandler_->isSearching() == true
+                    && getOnRange() == true){
+
+
+                eventHandler_->setPlayerSearched(true);
                 update();
             }
         }
