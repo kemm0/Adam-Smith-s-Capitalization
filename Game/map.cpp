@@ -140,7 +140,7 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     auto targetTile = itemAt(mouseEvent->scenePos(),QTransform());
     if(eventHandler_->getThrown() && eventHandler_->getPlayerMoved() == false && eventHandler_->isMoving() == true){
         if(mouseEvent->button() == Qt::LeftButton){
-            if(targetTile != nullptr && getOnRange() == true){
+            if(targetTile != nullptr && getOnRange() == true && objManager_){
                 objManager_->getPlayer()->setCoordinate(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
                 player->setPos(targetTile->pos());
                 eventHandler_->setPlayerMoved(true);
@@ -170,8 +170,10 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             if(targetTile != nullptr && eventHandler_->getPlayerSearched() == false && eventHandler_->isSearching() == true
                     && getOnRange() == true){
                 auto x = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
-                if (x->getRobber()){
-
+                if (x->getRobber() == true){
+                    QGraphicsPixmapItem* robberSprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/robbersmall.png"));
+                    robberSprite->setPos(targetTile->pos());
+                    addItem(robberSprite);
                 }
                 else if(x->getTreasure()){
 

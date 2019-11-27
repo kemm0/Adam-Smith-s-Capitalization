@@ -1,6 +1,7 @@
 #include "player.h"
 #include "gameeventhandler.h"
 #include "gameobjectmanager.h"
+#include "gamebuildingbase.h"
 namespace Game{
 
 Player::Player(const Course::Coordinate &coord,
@@ -21,5 +22,7 @@ Player::~Player()
 QPixmap Player::getSprite()
 {
     return sprite;
+    std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(getObjects().at(0));
+    building->getProduction();
 }
 }

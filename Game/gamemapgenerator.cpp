@@ -107,14 +107,21 @@ void GameMapGenerator::setTreasure()
 
 void GameMapGenerator::setRobber()
 {
-    while(true){
+    int robberAmount = 3;
+    int robbersSet = 0;
+    while(robbersSet < robberAmount){
         Course::Coordinate randMapCoordinate = getRandomMapCoordinate();
         std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(randMapCoordinate);
+        std::cout<<"a"<<std::endl;
         bool hasTreasure = tile->getTreasure();
         if(!hasTreasure){
             tile->setRobber(true);
-            std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has Robber"<<std::endl;
-            break;
+            robbersSet += 1;
+        }
+    }
+    for(auto tile: objManager_->getGameTiles()){
+        if(tile->getRobber()){
+                        std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has Robber"<<std::endl;
         }
     }
 }

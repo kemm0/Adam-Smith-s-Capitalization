@@ -7,6 +7,7 @@
 namespace Game{
 class GameEventHandler;
 class GameObjectManager;
+class GameBuildingBase;
 
 class Player : public Course::PlayerBase, public Course::GameObject
 {
