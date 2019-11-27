@@ -4,9 +4,11 @@
 #include "../CourseLib/core/playerbase.h"
 #include "../CourseLib/core/gameobject.h"
 #include "QGraphicsPixmapItem"
+#include "gameresourcemap.h"
 namespace Game{
 class GameEventHandler;
 class GameObjectManager;
+class GameBuildingBase;
 
 class Player : public Course::PlayerBase, public Course::GameObject
 {
@@ -18,9 +20,12 @@ public:
            const std::vector<std::shared_ptr<Course::GameObject> > objects = {});
     ~Player();
     QPixmap getSprite();
+    int getMoney();
+    bool setMoney(std::map<Course::BasicResource, int>);
 
 private:
         QPixmap sprite;
+        int money;
 
 };
 }

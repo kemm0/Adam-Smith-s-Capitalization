@@ -122,6 +122,8 @@ void MapWindow::on_endTurnButton_clicked()
     m_ui->moveButton->setDisabled(false);
     eventHandler->setPlayerMoved(false);
     eventHandler->setPlayerSearched(false);
+    showGameMessage("Money " + std::to_string(objManager->getPlayer()->getMoney()));
+
 }
 
 void MapWindow::setUsername(std::string name)

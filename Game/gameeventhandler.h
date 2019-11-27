@@ -62,6 +62,7 @@ private:
     bool searchedArea;
     std::string selectedBuildingType;
     std::shared_ptr<GameObjectManager> objManager;
+    std::vector<std::shared_ptr<GameBuildingBase>> ownedBuildings;
 };
 }
 

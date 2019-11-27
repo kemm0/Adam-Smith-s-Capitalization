@@ -55,8 +55,19 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
                                                                                1,
                                                                                Game::ConstGameResourceMap::FARM_BUILD_COST,
                                                                                Game::ConstGameResourceMap::FARM_PRODUCTION);
-        std::cout<<"Adding game building"<<std::endl;
-        targetTile->addGameBuilding(newFarm);
+
+
+        if (objManager_->getPlayer()->setMoney(newFarm->BUILD_COST)){
+            objManager_->getPlayer()->addObject(newFarm);
+            std::cout<<"Adding game building"<<std::endl;
+            targetTile->addGameBuilding(newFarm);
+            std::cout<< std::to_string(objManager_->getPlayer()->getMoney()) << std::endl;
+        }
+        else{
+            std::cout<<"Out of money"<<std::endl;
+        }
+
+
     }
     else if(targetTile->getType()=="Forest"){
         std::cout<<"Tile type: Grassland"<<std::endl;
@@ -66,8 +77,18 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
                                                                                1,
                                                                                Game::ConstGameResourceMap::LOGGING_BUILD_COST,
                                                                                Game::ConstGameResourceMap::LOGGING_PRODUCTION);
-        std::cout<<"Adding game building"<<std::endl;
-        targetTile->addGameBuilding(newCabin);
+
+        if (objManager_->getPlayer()->setMoney(newCabin->BUILD_COST)){
+            objManager_->getPlayer()->addObject(newCabin);
+            std::cout<<"Adding game building"<<std::endl;
+            targetTile->addGameBuilding(newCabin);
+            std::cout<< std::to_string(objManager_->getPlayer()->getMoney()) << std::endl;
+        }
+        else{
+            std::cout<<"Out of money"<<std::endl;
+        }
+
+
     }
     else if(targetTile->getType()=="Water"){
         std::cout<<"Tile type: Grassland"<<std::endl;
@@ -77,8 +98,17 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
                                                                                1,
                                                                                Game::ConstGameResourceMap::FISHING_BUILD_COST,
                                                                                Game::ConstGameResourceMap::FISHING_PRODUCTION);
-        std::cout<<"Adding game building"<<std::endl;
-        targetTile->addGameBuilding(newFishingHut);
+        if (objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST)){
+            objManager_->getPlayer()->addObject(newFishingHut);
+            std::cout<<"Adding game building"<<std::endl;
+            targetTile->addGameBuilding(newFishingHut);
+            std::cout<< std::to_string(objManager_->getPlayer()->getMoney()) << std::endl;
+        }
+        else{
+            std::cout<<"Out of money"<<std::endl;
+        }
+
+
     }
 
 }
