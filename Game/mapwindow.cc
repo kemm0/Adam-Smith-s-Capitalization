@@ -31,7 +31,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
-    showGameMessage(std::to_string(objManager->getGameTiles().size()));   
+    showGameMessage(std::to_string(objManager->getGameTiles().size()));
 
     //MUSIC
     /*musicplayer = new QMediaPlayer;

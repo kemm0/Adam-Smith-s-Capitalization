@@ -23,6 +23,8 @@ Player::~Player()
 QPixmap Player::getSprite()
 {
     return sprite;
+    std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(getObjects().at(0));
+    building->getProduction();
 }
 
 int Player::getMoney()

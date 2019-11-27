@@ -20,7 +20,7 @@ namespace Game{
 
 class Map : public QGraphicsScene
 {
-        Q_OBJECT
+Q_OBJECT
 
     public:
         Map(QObject *parent = nullptr,
