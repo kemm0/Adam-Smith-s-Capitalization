@@ -40,14 +40,10 @@ int Player::getMoney()
     return money;
 }
 
-bool Player::setMoney(std::map<Course::BasicResource, int> amount)
+void Player::setMoney(std::map<Course::BasicResource, int> amount)
 {
     money += amount[Course::MONEY];
     if (money <= 0){
-        return false;
-    }
-    else{
-        return true;
     }
 }
 }

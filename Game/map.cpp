@@ -102,12 +102,12 @@ void Map::showTileBuildOrSearchEffect(QGraphicsItem *targetTile)
             setOnRange(false);
         }
         else if(x_distance > scenedistance|| x_distance < -scenedistance|| y_distance > scenedistance || y_distance < -scenedistance){  //check if player is too far away
-            x->setColor(QColor(Qt::white)); //if too far away, show red tile
+            x->setColor(QColor(Qt::white)); //if too far away, show white tile
             x->setStrength(0.3);
             setOnRange(false);
         }
         else{
-            x->setColor(QColor(Qt::yellow));  //if not, show green tile
+            x->setColor(QColor(Qt::yellow));  //if not, show yellow tile
             x->setStrength(0.3);
             setOnRange(true);
         }
@@ -174,9 +174,11 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     QGraphicsPixmapItem* robberSprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/robbersmall.png"));
                     robberSprite->setPos(targetTile->pos());
                     addItem(robberSprite);
+                    objManager_->getPlayer()->setMoney(Game::ConstGameResourceMap::ROBBER);
+
                 }
                 else if(x->getTreasure()){
-
+                    objManager_->getPlayer()->setMoney(Game::ConstGameResourceMap::TREASURE);
                 }
                 eventHandler_->setPlayerSearched(true);
                 update();

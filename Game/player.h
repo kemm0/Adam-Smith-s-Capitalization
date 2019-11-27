@@ -21,7 +21,7 @@ public:
     ~Player();
     QPixmap getSprite();
     int getMoney();
-    bool setMoney(std::map<Course::BasicResource, int>);
+    void setMoney(std::map<Course::BasicResource, int>);
 
 private:
         QPixmap sprite;

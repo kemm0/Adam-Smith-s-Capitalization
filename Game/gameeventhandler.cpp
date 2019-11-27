@@ -15,6 +15,8 @@ GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager)
     moving = false;
     building = false;
     built = false;
+    searching = false;
+    searchedArea = false;
     selectedBuildingType = "";
 }
 
