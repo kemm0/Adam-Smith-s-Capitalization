@@ -17,11 +17,11 @@ class FishingBuilding;
 class LoggingBuilding;
 
 
-class GameObjectManager: public Course::iObjectManager
+class GameObjectManager: public QObject, public Course::iObjectManager
 {
-
+Q_OBJECT
 public:
-    GameObjectManager();
+    GameObjectManager(QObject *parent = nullptr);
     ~GameObjectManager();
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);

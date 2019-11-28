@@ -18,11 +18,19 @@ class GameMapGenerator{
 public:
     GameMapGenerator(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
     ~GameMapGenerator();
-    void createMapObjects(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
+    void createMapObjects();
     void createBuilding(Course::Coordinate location);
     Course::Coordinate getRandomMapCoordinate();
-    void setTreasure();
-    void setRobber();
+    void setTreasure(int amount);
+    void setRobber(int amount);
+    void createGrassTile(Course::Coordinate location);
+    void createForestTile(Course::Coordinate location);
+    void createWaterTile(Course::Coordinate location);
+    void createPlayer(Course::Coordinate location);
+
+    void createFarmhouse(std::shared_ptr<GameTileBase> targetTile);
+    void createLoggingcabin(std::shared_ptr<GameTileBase> targetTile);
+    void createFishinghut(std::shared_ptr<GameTileBase> targetTile);
 
 private:
     std::vector<std::vector<int>> mapTemplate;

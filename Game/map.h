@@ -51,6 +51,11 @@ Q_OBJECT
     signals:
         void scrollOut();
         void scrollIn();
+        void robberFound();
+        void treasureFound();
+        void nothingFound();
+        void built();
+        void inspectTile(std::string info);
     public slots:
         //void zoom();
     };

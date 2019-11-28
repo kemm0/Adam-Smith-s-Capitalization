@@ -43,6 +43,7 @@ public:
     std::shared_ptr<Game::GameEventHandler> eventHandler;
     std::shared_ptr<Game::GameMapGenerator> mapCreator;
     QMediaPlayer* musicplayer;
+    QMediaPlayer* soundEffectPlayer;
     QMediaPlaylist* musicPlaylist;
     void showGameMessage(std::string message);
     std::string getUsername();
@@ -62,10 +63,13 @@ private slots:
     void zoomOut();
 
     void on_buildButton_toggled(bool checked);
-
-
-
     void on_searchAreaButton_toggled(bool checked);
+
+    void treasureFoundSound();
+    void robberFoundSound();
+    void nothingFoundSound();
+    void buildSound();
+    void showTileInfo(std::string info);
 
 private:
     Ui::MapWindow* m_ui;

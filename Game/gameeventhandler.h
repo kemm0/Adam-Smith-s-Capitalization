@@ -12,10 +12,11 @@ class GameTileBase;
 class GameBuildingBase;
 class FarmBuilding;
 
-class GameEventHandler : public Course::iGameEventHandler
+class GameEventHandler : public QObject, public Course::iGameEventHandler
 {
+Q_OBJECT
 public:
-    GameEventHandler(std::shared_ptr<GameObjectManager> manager);
+    GameEventHandler(std::shared_ptr<GameObjectManager> manager, QObject *parent = nullptr);
     ~GameEventHandler();
     virtual bool modifyResource(std::shared_ptr<Course::PlayerBase> player,
                                 Course::BasicResource resource,

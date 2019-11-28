@@ -31,7 +31,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
-    showGameMessage(std::to_string(objManager->getGameTiles().size()));
+    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
 
     //MUSIC
     /*musicplayer = new QMediaPlayer;
@@ -40,6 +40,15 @@ MapWindow::MapWindow(QWidget *parent):
     musicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);
     musicplayer->setPlaylist(musicPlaylist);
     musicplayer->play();*/
+
+    //SOUND EFFECTS
+    soundEffectPlayer = new QMediaPlayer();
+    connect(gameMap,&Map::robberFound,this,&MapWindow::robberFoundSound);
+    connect(gameMap,&Map::treasureFound,this,&MapWindow::treasureFoundSound);
+    connect(gameMap,&Map::nothingFound,this,&MapWindow::nothingFoundSound);
+    connect(gameMap,&Map::built,this,&MapWindow::buildSound);
+
+    connect(gameMap,&Map::inspectTile,this,&MapWindow::showTileInfo);
 
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
@@ -104,6 +113,8 @@ void MapWindow::on_quitButton_clicked()
 
 void MapWindow::on_diceButton_clicked()
 {
+    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/dice.wav"));
+    soundEffectPlayer->play();
     showGameMessage("You threw a " + std::to_string(eventHandler->throwDice()));
     m_ui->diceButton->setDisabled(true);
     m_ui->endTurnButton->setDisabled(false);
@@ -117,12 +128,14 @@ void MapWindow::on_endTurnButton_clicked()
     m_ui->endTurnButton->setDisabled(true);
     m_ui->buildButton->setChecked(false);
     m_ui->buildButton->setDisabled(false);
+    m_ui->searchAreaButton->setDisabled(false);
     eventHandler->setPlayerBuilt(false);
     m_ui->moveButton->setChecked(false);
     m_ui->moveButton->setDisabled(false);
     eventHandler->setPlayerMoved(false);
     eventHandler->setPlayerSearched(false);
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
+    showGameMessage("");
 }
 
 void MapWindow::setUsername(std::string name)
@@ -145,7 +158,6 @@ void MapWindow::on_moveButton_toggled(bool checked)
         if(eventHandler->getThrown() == true){
             eventHandler->setMoving(true);
             showGameMessage("Moving. Select a tile to move to.");
-
 
         }
         else{
@@ -192,6 +204,8 @@ void Game::MapWindow::on_buildButton_toggled(bool checked)
 void Game::MapWindow::on_searchAreaButton_toggled(bool checked)
 {
     if(checked==true && eventHandler->isSearching() == false){
+        soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/hmm.wav"));
+        soundEffectPlayer->play();
         m_ui->moveButton->setDisabled(true);
         m_ui->buildButton->setDisabled(true);
         eventHandler->setSearching(true);
@@ -203,4 +217,33 @@ void Game::MapWindow::on_searchAreaButton_toggled(bool checked)
         eventHandler->setSearching(false);
         showGameMessage("Stopped searching. Select an action.");
     }
+}
+
+void Game::MapWindow::treasureFoundSound()
+{
+    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/woohoo.wav"));
+    soundEffectPlayer->play();
+}
+
+void Game::MapWindow::robberFoundSound()
+{
+    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/scream.wav"));
+    soundEffectPlayer->play();
+}
+
+void Game::MapWindow::nothingFoundSound()
+{
+    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/rustle.wav"));
+    soundEffectPlayer->play();
+}
+
+void Game::MapWindow::buildSound()
+{
+    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/building.wav"));
+    soundEffectPlayer->play();
+}
+
+void Game::MapWindow::showTileInfo(std::string info)
+{
+    showGameMessage(info);
 }

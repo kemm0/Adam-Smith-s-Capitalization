@@ -4,7 +4,8 @@
 #include "Buildings/farmbuilding.h"
 namespace Game{
 
-GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager)
+GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager, QObject *parent)
+    :QObject(parent)
 {
     objManager = manager;
     diceValue = 0;

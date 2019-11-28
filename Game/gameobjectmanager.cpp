@@ -6,7 +6,8 @@
 #include "Buildings/loggingbuilding.h"
 
 namespace Game{
-GameObjectManager::GameObjectManager()
+GameObjectManager::GameObjectManager(QObject *parent)
+    :QObject(parent)
 {
 }
 

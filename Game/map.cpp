@@ -161,6 +161,7 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 addItem(mapItem);
                 //removeItem(targetTile);
                 eventHandler_->setPlayerBuilt(true);
+                emit built();
                 update();
             }
         }
@@ -175,10 +176,22 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     robberSprite->setPos(targetTile->pos());
                     addItem(robberSprite);
                     objManager_->getPlayer()->setMoney(Game::ConstGameResourceMap::ROBBER);
+                    emit robberFound();
 
                 }
-                else if(x->getTreasure()){
+                else if(x->getTreasure() == true){
+                    QGraphicsPixmapItem* treasureSprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/treasure.png"));
+                    treasureSprite->setPos(targetTile->pos());
+                    addItem(treasureSprite);
                     objManager_->getPlayer()->setMoney(Game::ConstGameResourceMap::TREASURE);
+                    emit treasureFound();
+                }
+                else{
+                    QGraphicsPixmapItem* crossSprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/cross.png"));
+                    crossSprite->setPos(targetTile->pos());
+                    addItem(crossSprite);
+                    emit nothingFound();
+
                 }
                 eventHandler_->setPlayerSearched(true);
                 update();
@@ -187,7 +200,8 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
     }
     else{
         std::cout<<"Graphicsitem location x: " + std::to_string(int(targetTile->pos().x()))+ " y: " + std::to_string(int(targetTile->pos().y()))<<std::endl;
-        auto y = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
+        auto tile = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
+        emit inspectTile("This is " + tile->getType() + ". There are " + std::to_string(tile->getBuildingCount()) + " buildings and " + std::to_string(tile->getWorkerCount()) + " workers in this area.");
         //std::cout<<"Database tile x: " + std::to_string(y->getCoordinate().x()) + " y: " + std::to_string(y->getCoordinate().y())<<std::endl;
     }
 }
