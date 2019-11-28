@@ -12,6 +12,8 @@ MapWindow::MapWindow(QWidget *parent):
     connect(startingDialog,&startDialog::nameConfirmed,this,&MapWindow::setUsername);
     startingDialog->exec();
     m_ui->setupUi(this);
+    setWindowIcon(QIcon(QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
+    setWindowTitle("Adam Smith's Civilization");
     //this->setWindowState(Qt::WindowFullScreen);   //Sets fullsceen mode
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);

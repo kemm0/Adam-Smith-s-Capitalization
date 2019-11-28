@@ -6,6 +6,8 @@ startDialog::startDialog(QWidget *parent) :
     ui(new Ui::startDialog)
 {
     ui->setupUi(this);
+    setWindowTitle("Settings");
+    setWindowIcon(QIcon(QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
     //this->setWindowState(Qt::WindowFullScreen);
 }
 
