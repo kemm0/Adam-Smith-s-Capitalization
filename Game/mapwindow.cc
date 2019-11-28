@@ -104,7 +104,6 @@ void MapWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-
 void MapWindow::on_quitButton_clicked()
 {
     this->close();
@@ -246,4 +245,14 @@ void Game::MapWindow::buildSound()
 void Game::MapWindow::showTileInfo(std::string info)
 {
     showGameMessage(info);
+}
+
+void Game::MapWindow::on_hiringList_activated(const QString &type)
+{
+    eventHandler->setWorkerType(type.toStdString());
+}
+
+void Game::MapWindow::on_hireButton_toggled(bool checked)
+{
+
 }

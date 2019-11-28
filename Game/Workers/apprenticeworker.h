@@ -23,6 +23,8 @@ public:
                 const Course::ResourceMapDouble& efficiency =
                     Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
                 );
+    virtual std::string getType() const override;
+    virtual void doSpecialAction();
 };
 }
 

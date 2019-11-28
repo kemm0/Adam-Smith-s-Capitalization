@@ -18,4 +18,14 @@ MasterWorker::MasterWorker(const std::shared_ptr<GameEventHandler>& eventhandler
 {
 
 }
+
+std::string MasterWorker::getType() const
+{
+    return "Master Worker";
+}
+
+void MasterWorker::doSpecialAction()
+{
+
+}
 }

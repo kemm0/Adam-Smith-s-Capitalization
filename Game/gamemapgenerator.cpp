@@ -158,6 +158,40 @@ void GameMapGenerator::createPlayer(Course::Coordinate location)
     objManager_->setPlayer(player);
 }
 
+void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
+{
+    if(eventHandler_->getWorkerType() == "Novice Worker"){
+        std::shared_ptr<NoviceWorker> worker = std::make_shared<NoviceWorker>(eventHandler_,
+                                                                                 objManager_,
+                                                                                 objManager_->getPlayer(),
+                                                                                 1,
+                                                                                 Game::ConstGameResourceMap::NW_RECRUITMENT_COST,
+                                                                                 Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
+                                                                                 );
+        targetTile->addWorker(worker);
+    }
+    else if(eventHandler_->getWorkerType() == "Apprentice Worker"){
+        std::shared_ptr<ApprenticeWorker> worker = std::make_shared<ApprenticeWorker>(eventHandler_,
+                                                                                 objManager_,
+                                                                                 objManager_->getPlayer(),
+                                                                                 1,
+                                                                                 Game::ConstGameResourceMap::AW_RECRUITMENT_COST,
+                                                                                 Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
+                                                                                 );
+        targetTile->addWorker(worker);
+    }
+    else if(eventHandler_->getWorkerType() == "Master Worker"){
+        std::shared_ptr<MasterWorker> worker = std::make_shared<MasterWorker>(eventHandler_,
+                                                                                 objManager_,
+                                                                                 objManager_->getPlayer(),
+                                                                                 1,
+                                                                                 Game::ConstGameResourceMap::MW_RECRUITMENT_COST,
+                                                                                 Game::ConstGameResourceMap::MW_WORKER_EFFICIENCY
+                                                                                 );
+        targetTile->addWorker(worker);
+    }
+}
+
 void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
 {
     std::shared_ptr<FarmBuilding> newFarm = std::make_shared<FarmBuilding>(eventHandler_,
@@ -169,7 +203,7 @@ void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
 
 
     objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
-    objManager_->getPlayer()->addObject(newFarm);
+    objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newFarm);
 }
 
@@ -183,7 +217,7 @@ void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTi
                                                                            Game::ConstGameResourceMap::LOGGING_PRODUCTION);
 
     objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
-    objManager_->getPlayer()->addObject(newCabin);
+    objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newCabin);
 }
 
@@ -196,7 +230,7 @@ void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile
                                                                            Game::ConstGameResourceMap::FISHING_BUILD_COST,
                                                                            Game::ConstGameResourceMap::FISHING_PRODUCTION);
     objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
-    objManager_->getPlayer()->addObject(newFishingHut);
+    objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newFishingHut);
 }
 
