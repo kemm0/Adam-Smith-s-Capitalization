@@ -49,6 +49,7 @@ public:
     std::string getUsername();
     void keyPressEvent(QKeyEvent *event);
 
+
 private slots:
     void on_quitButton_clicked();
 
@@ -71,9 +72,14 @@ private slots:
     void buildSound();
     void showTileInfo(std::string info);
 
+    void on_hiringList_activated(const QString &arg1);
+
+    void on_hireButton_toggled(bool checked);
+
 private:
     Ui::MapWindow* m_ui;
     startDialog* startingDialog;
+
 
 };
 }

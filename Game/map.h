@@ -15,6 +15,7 @@
 #include "player.h"
 #include "QGraphicsColorizeEffect"
 #include "gamemapgenerator.h"
+#include "algorithm"
 
 namespace Game{
 

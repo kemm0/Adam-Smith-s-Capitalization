@@ -39,7 +39,11 @@ public:
     bool getPlayerBuilt();
     bool getPlayerSearched();
     bool isSearching();
+    bool isHiring();
+    bool getHired();
     std::string getSelectedBuildingType();
+    std::string getWorkerType();
+
 
     //setters
     void setThrown(bool x);
@@ -50,6 +54,9 @@ public:
     void setSelectedBuildingType(std::string buildingType);
     void setSearching(bool x);
     void setPlayerSearched(bool x);
+    void setPlayerHired(bool x);
+    void setHiring(bool x);
+    void setWorkerType(std::string type);
 
 private:
     bool threw;
@@ -61,9 +68,12 @@ private:
     bool built;
     bool searching;
     bool searchedArea;
+    bool hiring;
+    bool hired;
     std::string selectedBuildingType;
     std::shared_ptr<GameObjectManager> objManager;
     std::vector<std::shared_ptr<GameBuildingBase>> ownedBuildings;
+    std::string workertype;
 };
 }
 

@@ -11,6 +11,10 @@
 #include "Buildings/farmbuilding.h"
 #include "Buildings/loggingbuilding.h"
 #include "Buildings/fishingbuilding.h"
+#include "Workers/noviceworker.h"
+#include "Workers/apprenticeworker.h"
+#include "Workers/masterworker.h"
+
 
 namespace Game{
 
@@ -27,6 +31,7 @@ public:
     void createForestTile(Course::Coordinate location);
     void createWaterTile(Course::Coordinate location);
     void createPlayer(Course::Coordinate location);
+    void createWorker(std::shared_ptr<GameTileBase> targetTile);
 
     void createFarmhouse(std::shared_ptr<GameTileBase> targetTile);
     void createLoggingcabin(std::shared_ptr<GameTileBase> targetTile);

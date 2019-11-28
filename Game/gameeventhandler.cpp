@@ -97,10 +97,20 @@ bool GameEventHandler::isSearching()
     return searching;
 }
 
+bool GameEventHandler::isHiring()
+{
+    return hiring;
+}
+
 
 std::string GameEventHandler::getSelectedBuildingType()
 {
     return selectedBuildingType;
+}
+
+std::string GameEventHandler::getWorkerType()
+{
+    return workertype;
 }
 
 void GameEventHandler::setThrown(bool x)
@@ -141,6 +151,11 @@ void GameEventHandler::setSearching(bool x)
 void GameEventHandler::setPlayerSearched(bool x)
 {
     searchedArea = x;
+}
+
+void GameEventHandler::setWorkerType(std::string type)
+{
+    workertype = type;
 }
 
 void GameEventHandler::nextTurn()

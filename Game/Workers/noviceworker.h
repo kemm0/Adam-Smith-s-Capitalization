@@ -22,6 +22,8 @@ public:
                 const Course::ResourceMapDouble& efficiency =
                     Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
                 );
+    virtual std::string getType() const override;
+    virtual void doSpecialAction();
 };
 }
 #endif // NOVICEWORKER_H

@@ -1,4 +1,4 @@
-#include "appenticeworker.h"
+#include "apprenticeworker.h"
 namespace Game {
 
 
@@ -15,6 +15,16 @@ ApprenticeWorker::ApprenticeWorker(const std::shared_ptr<GameEventHandler>& even
         tilespaces,
         cost,
         efficiency)
+{
+
+}
+
+std::string ApprenticeWorker::getType() const
+{
+    return "Apprentice Worker";
+}
+
+void ApprenticeWorker::doSpecialAction()
 {
 
 }

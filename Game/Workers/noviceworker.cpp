@@ -20,5 +20,15 @@ NoviceWorker::NoviceWorker(const std::shared_ptr<GameEventHandler>& eventhandler
 {
 
 }
+
+std::string NoviceWorker::getType() const
+{
+    return "Novice Worker";
+}
+
+void NoviceWorker::doSpecialAction()
+{
+
+}
 }
 
