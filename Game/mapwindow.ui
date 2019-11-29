@@ -181,17 +181,17 @@
        <widget class="QComboBox" name="hiringList">
         <item>
          <property name="text">
-          <string>Novice Worker</string>
+          <string>novice worker</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Apprentice Worker</string>
+          <string>apprentice worker</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Master Worker</string>
+          <string>master worker</string>
          </property>
         </item>
        </widget>

@@ -40,6 +40,8 @@ public:
     void loadFromMap();
     void setPlayer(std::shared_ptr<Game::Player> player);
     std::shared_ptr<Game::Player> getPlayer();
+    std::vector<std::shared_ptr<Course::WorkerBase>> workers;
+    std::vector<std::shared_ptr<Game::GameBuildingBase>> buildings;
 
 private:
     std::vector<std::shared_ptr<Course::GameObject>> gameObjects_;

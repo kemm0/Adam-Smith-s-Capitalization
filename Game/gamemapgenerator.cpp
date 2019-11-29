@@ -1,5 +1,8 @@
 #include <iostream>
 #include "gamemapgenerator.h"
+#include "../CourseLib/exceptions/illegalaction.h"
+#include "../CourseLib/exceptions/invalidpointer.h"
+#include "../CourseLib/exceptions/notenoughspace.h"
 
 namespace Game{
 
@@ -72,7 +75,7 @@ Course::Coordinate GameMapGenerator::getRandomMapCoordinate()
 {
     int randX = rand() % mapWidth * 50;
     int randY = rand() % mapHeight * 50;
-    std::cout<<"X: " + std::to_string(randX) + " y: " + std::to_string(randX)<<std::endl;
+    //std::cout<<"X: " + std::to_string(randX) + " y: " + std::to_string(randX)<<std::endl;
     return Course::Coordinate(randX,randY);
 }
 
@@ -90,7 +93,7 @@ void GameMapGenerator::setTreasure(int amount)
     }
     for(auto tile: objManager_->getGameTiles()){
         if(tile->getTreasure()==true){
-            std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has treasure"<<std::endl;
+            //std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has treasure"<<std::endl;
         }
     }
 }
@@ -101,7 +104,6 @@ void GameMapGenerator::setRobber(int amount)
     while(robbersSet < amount){
         Course::Coordinate randMapCoordinate = getRandomMapCoordinate();
         std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(randMapCoordinate);
-        std::cout<<"a"<<std::endl;
         bool hasTreasure = tile->getTreasure();
         if(!hasTreasure){
             tile->setRobber(true);
@@ -110,7 +112,7 @@ void GameMapGenerator::setRobber(int amount)
     }
     for(auto tile: objManager_->getGameTiles()){
         if(tile->getRobber()){
-                        std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has Robber"<<std::endl;
+                        //std::cout<<"Tile x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y()) + " has Robber"<<std::endl;
         }
     }
 }
@@ -123,7 +125,7 @@ void GameMapGenerator::createGrassTile(Course::Coordinate location)
     int spriteWidth = newTile->getSprite().width();
     int spriteHeight = newTile->getSprite().height();
     newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
-    std::cout<<"x: " + std::to_string(x*spriteHeight) + " y: " + std::to_string(x*spriteWidth) + "type: " + newTile->getType()<<std::endl;
+    //std::cout<<"x: " + std::to_string(x*spriteHeight) + " y: " + std::to_string(x*spriteWidth) + "type: " + newTile->getType()<<std::endl;
     objManager_->addGameTile(newTile);
 }
 
@@ -135,7 +137,7 @@ void GameMapGenerator::createForestTile(Course::Coordinate location)
     int spriteWidth = newTile->getSprite().width();
     int spriteHeight = newTile->getSprite().height();
     newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
-    std::cout<<"x: " + std::to_string(x*spriteHeight) + " y: " + std::to_string(x*spriteWidth) + "type: " + newTile->getType()<<std::endl;
+    //std::cout<<"x: " + std::to_string(x*spriteHeight) + " y: " + std::to_string(x*spriteWidth) + "type: " + newTile->getType()<<std::endl;
     objManager_->addGameTile(newTile);
 }
 
@@ -147,7 +149,7 @@ void GameMapGenerator::createWaterTile(Course::Coordinate location)
     int spriteWidth = newTile->getSprite().width();
     int spriteHeight = newTile->getSprite().height();
     newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
-    std::cout<<"x: " + std::to_string(x*spriteHeight) + " y: " + std::to_string(x*spriteWidth) + "type: " + newTile->getType()<<std::endl;
+    //std::cout<<"x: " + std::to_string(x*spriteHeight) + " y: " + std::to_string(x*spriteWidth) + "type: " + newTile->getType()<<std::endl;
     objManager_->addGameTile(newTile);
 
 }
@@ -160,7 +162,8 @@ void GameMapGenerator::createPlayer(Course::Coordinate location)
 
 void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
 {
-    if(eventHandler_->getWorkerType() == "Novice Worker"){
+    if(eventHandler_->getWorkerType() == "novice worker" && targetTile->hasSpaceForWorkers(1)){
+        std::cout<<"creating novice worker"<<std::endl;
         std::shared_ptr<NoviceWorker> worker = std::make_shared<NoviceWorker>(eventHandler_,
                                                                                  objManager_,
                                                                                  objManager_->getPlayer(),
@@ -168,9 +171,25 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
                                                                                  Game::ConstGameResourceMap::NW_RECRUITMENT_COST,
                                                                                  Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
                                                                                  );
-        targetTile->addWorker(worker);
+        std::cout<<"worker created"<<std::endl;
+        try {
+            targetTile->addWorker(worker);
+
+        } catch (Course::IllegalAction) {
+            std::cout<<"illegalaction"<<std::endl;
+        }
+        catch(Course::InvalidPointer){
+            std::cout<<"invalidptr"<<std::endl;
+        }
+        catch(Course::NotEnoughSpace){
+            std::cout<<"no space"<<std::endl;
+        }
+
+        objManager_->workers.push_back(worker);
+        std::cout<<targetTile->getWorkerCount()<<std::endl;
+        std::cout<<targetTile->hasSpaceForWorkers(1)<<std::endl;
     }
-    else if(eventHandler_->getWorkerType() == "Apprentice Worker"){
+    else if(eventHandler_->getWorkerType() == "apprentice worker"){
         std::shared_ptr<ApprenticeWorker> worker = std::make_shared<ApprenticeWorker>(eventHandler_,
                                                                                  objManager_,
                                                                                  objManager_->getPlayer(),
@@ -180,7 +199,7 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
                                                                                  );
         targetTile->addWorker(worker);
     }
-    else if(eventHandler_->getWorkerType() == "Master Worker"){
+    else if(eventHandler_->getWorkerType() == "master worker"){
         std::shared_ptr<MasterWorker> worker = std::make_shared<MasterWorker>(eventHandler_,
                                                                                  objManager_,
                                                                                  objManager_->getPlayer(),
@@ -236,7 +255,6 @@ void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile
 
 void GameMapGenerator::createMapObjects()
 {
-    std::cout<<"Game objects: " <<std::endl;
     for(unsigned int i = 0; i < mapTemplate.size(); i++){
         for(unsigned int j = 0; j < mapTemplate.at(i).size();j++){
             int tileCode = mapTemplate.at(i).at(j);
