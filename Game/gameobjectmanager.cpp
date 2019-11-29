@@ -12,6 +12,8 @@ GameObjectManager::GameObjectManager(QObject *parent)
     gameObjects_ = {};
     gameTiles = {};
     player_ = nullptr;
+    buildings = {};
+    workers = {};
 }
 
 GameObjectManager::~GameObjectManager()
@@ -69,16 +71,17 @@ std::shared_ptr<Course::TileBase> GameObjectManager::getTile(const Course::Objec
             return tile;
         }
     }
-    throw "Not found";
+    throw "ID not found";
 }
 
 std::vector<std::shared_ptr<Course::TileBase> > GameObjectManager::getTiles(const std::vector<Course::Coordinate> &coordinates)
 {
-    std::vector<std::shared_ptr<Course::TileBase>> foundtiles;
+    std::vector<std::shared_ptr<Course::TileBase>> foundtiles = {};
     for(auto coordinate: coordinates){
         for(auto tile:gameTiles){
             if(tile->getCoordinate() == coordinate){
                 foundtiles.push_back(tile);
+                return foundtiles;
             }
         }
     }

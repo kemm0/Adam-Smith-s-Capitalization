@@ -45,9 +45,6 @@ public:
     void addWorker(std::shared_ptr<Course::WorkerBase> worker);
     void addGameObject(std::shared_ptr<Course::GameObject> object);
 
-
-
-
 private:
     std::vector<std::shared_ptr<Game::GameBuildingBase>> buildings;
     std::vector<std::shared_ptr<Course::WorkerBase>> workers;

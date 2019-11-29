@@ -18,8 +18,8 @@ GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager, Q
     built = false;
     searching = false;
     searchedArea = false;
-    selectedBuildingType = "";
     hiring = false;
+    selectedBuildingType = "";
     workertype = "novice worker";
 }
 

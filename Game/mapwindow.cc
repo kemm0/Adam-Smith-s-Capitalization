@@ -269,4 +269,5 @@ void Game::MapWindow::on_hireButton_toggled(bool checked)
 void Game::MapWindow::on_hiringList_currentIndexChanged(const QString &arg1)
 {
     eventHandler->setWorkerType(arg1.toStdString());
+    std::cout<<eventHandler->getWorkerType()<<std::endl;
 }

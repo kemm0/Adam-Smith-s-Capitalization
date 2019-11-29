@@ -1,6 +1,8 @@
 #include <iostream>
 #include "gamemapgenerator.h"
 #include "../CourseLib/exceptions/illegalaction.h"
+#include "../CourseLib/exceptions/invalidpointer.h"
+#include "../CourseLib/exceptions/notenoughspace.h"
 
 namespace Game{
 
@@ -105,7 +107,6 @@ void GameMapGenerator::setRobber(int amount)
     while(robbersSet < amount){
         Course::Coordinate randMapCoordinate = getRandomMapCoordinate();
         std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(randMapCoordinate);
-        std::cout<<"a"<<std::endl;
         bool hasTreasure = tile->getTreasure();
         if(!hasTreasure){
             tile->setRobber(true);
