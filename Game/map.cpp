@@ -202,17 +202,14 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         if(mouseEvent->button() == Qt::LeftButton){
             auto buildings = objManager_->getPlayer()->getObjects();
             auto x = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
-
-            if(std::find(buildings.begin(), buildings.end(), x) != buildings.end()){
-
-            }
+            mapGenerator_->createWorker(x);
         }
 
     }
     else{
-        std::cout<<"Graphicsitem location x: " + std::to_string(int(targetTile->pos().x()))+ " y: " + std::to_string(int(targetTile->pos().y()))<<std::endl;
+        //std::cout<<"Graphicsitem location x: " + std::to_string(int(targetTile->pos().x()))+ " y: " + std::to_string(int(targetTile->pos().y()))<<std::endl;
         auto tile = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
-        emit inspectTile("This is " + tile->getType() + ". There are " + std::to_string(tile->getBuildingCount()) + " buildings and " + std::to_string(tile->getWorkerCount()) + " workers in this area.");
+        emit inspectTile("This is " + tile->getType() + ". There are " + std::to_string(tile->buildingsOnTile.size()) + " buildings and " + std::to_string(tile->getWorkerCount()) + " workers in this area.");
         //std::cout<<"Database tile x: " + std::to_string(y->getCoordinate().x()) + " y: " + std::to_string(y->getCoordinate().y())<<std::endl;
     }
 }

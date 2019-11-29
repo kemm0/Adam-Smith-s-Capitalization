@@ -72,9 +72,9 @@ private slots:
     void buildSound();
     void showTileInfo(std::string info);
 
-    void on_hiringList_activated(const QString &arg1);
-
     void on_hireButton_toggled(bool checked);
+
+    void on_hiringList_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MapWindow* m_ui;

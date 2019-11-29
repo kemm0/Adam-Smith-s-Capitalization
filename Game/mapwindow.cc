@@ -33,6 +33,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
+    m_ui->hireButton->setCheckable(true);
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
 
     //MUSIC
@@ -249,12 +250,19 @@ void Game::MapWindow::showTileInfo(std::string info)
     showGameMessage(info);
 }
 
-void Game::MapWindow::on_hiringList_activated(const QString &type)
-{
-    eventHandler->setWorkerType(type.toStdString());
-}
+
 
 void Game::MapWindow::on_hireButton_toggled(bool checked)
 {
+    if(checked == true){
+        eventHandler->setHiring(true);
+    }
+    else{
+        eventHandler->setHiring(false);
+    }
+}
 
+void Game::MapWindow::on_hiringList_currentIndexChanged(const QString &arg1)
+{
+    eventHandler->setWorkerType(arg1.toStdString());
 }

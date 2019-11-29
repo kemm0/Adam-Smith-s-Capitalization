@@ -57,7 +57,7 @@ protected:
     int treasure;
     int width;
     int height;
-    std::vector<std::shared_ptr<Course::WorkerBase>> workers;
+    //std::vector<std::shared_ptr<Course::WorkerBase>> workers;
 };
 }
 #endif // GAMETILEBASE_H
