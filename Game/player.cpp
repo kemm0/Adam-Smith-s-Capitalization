@@ -2,6 +2,7 @@
 #include "gameeventhandler.h"
 #include "gameobjectmanager.h"
 #include "gamebuildingbase.h"
+#include <iostream>
 namespace Game{
 
 Player::Player(const Course::Coordinate &coord,
@@ -29,14 +30,18 @@ QPixmap Player::getSprite()
 
 int Player::getMoney()
 {
-    if(getObjects().size() != 0){
+    /*if(getObjects().size() != 0){
         std::vector<std::shared_ptr<Course::GameObject>> object = getObjects();
         for(int i=0; i < object.size(); i++){
             std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(object.at(i));
-            Course::ResourceMap map = building->getProduction();
-            money += map[Course::MONEY];
+            if(building != nullptr){
+                std::cout<<getObjects().size()<<std::endl;
+                std::cout<<building->holdCount()<<std::endl;
+                Course::ResourceMap map = building->getProduction();
+                money += map[Course::MONEY];
+            }
         }
-    }
+    }*/
     return money;
 }
 
