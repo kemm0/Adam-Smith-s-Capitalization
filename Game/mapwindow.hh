@@ -45,12 +45,12 @@ public:
     QMediaPlayer* musicplayer;
     QMediaPlayer* soundEffectPlayer;
     QMediaPlaylist* musicPlaylist;
-    void showGameMessage(std::string message);
     std::string getUsername();
     void keyPressEvent(QKeyEvent *event);
 
 
 private slots:
+    void showGameMessage(std::string message);
     void on_quitButton_clicked();
 
     void on_diceButton_clicked();

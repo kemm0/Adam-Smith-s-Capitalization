@@ -23,7 +23,6 @@ public:
               const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
     virtual std::string getType() const override;
     virtual QPixmap getSprite() override;
-    virtual void addGameBuilding(const std::shared_ptr<Game::GameBuildingBase>& building);
 
 private:
 };

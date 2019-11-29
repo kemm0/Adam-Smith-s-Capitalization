@@ -10,7 +10,10 @@ enum mapCodes{
     FOREST = 3,
 };
 
-GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler)
+GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager,
+                                   std::shared_ptr<GameEventHandler> eventHandler,
+                                   QObject *parent)
+    :QObject(parent)
 {
     objManager_ = objManager;
     eventHandler_ = eventHandler;
@@ -161,59 +164,65 @@ void GameMapGenerator::createPlayer(Course::Coordinate location)
 
 void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
 {
-    //Kurssin koodissa on bugi. Kun koittaa lisätä max_workerin mukaan viimeistä workeria, lentää illegalaction.
-    //Worker kyllä lisätään workerien joukkoon, mutta sen jälkeen yritetään asettaa sen locationia, josta virhe lentäää
-    //Johtuu siitä, että katsotaan onko tilellä tilaa vielä sen jälkeen kun viimeinen worker on asetettu, mikä on aina false
-    if(eventHandler_->getWorkerType() == "novice worker"){
-        std::cout<<"creating novice worker"<<std::endl;
-        std::shared_ptr<NoviceWorker> worker = std::make_shared<NoviceWorker>(eventHandler_,
-                                                                                 objManager_,
-                                                                                 objManager_->getPlayer(),
-                                                                                 1,
-                                                                                 Game::ConstGameResourceMap::NW_RECRUITMENT_COST,
-                                                                                 Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
-                                                                                 );
-        try {
-            targetTile->setOwner(objManager_->getPlayer());
-            targetTile->addWorker(worker);
-        } catch (Course::IllegalAction) {
-            std::cout<<"last accepted worker"<<std::endl; //gets thrown for example when max_workercapacity = 3 and adding 3rd worker
+    bool tileHasABuilding = (targetTile->buildingsOnTile.size() != 0);
+    if(tileHasABuilding){
+        if(eventHandler_->getWorkerType() == "novice worker"){
+            std::cout<<"creating novice worker"<<std::endl;
+            std::shared_ptr<NoviceWorker> worker = std::make_shared<NoviceWorker>(eventHandler_,
+                                                                                     objManager_,
+                                                                                     objManager_->getPlayer(),
+                                                                                     1,
+                                                                                     Game::ConstGameResourceMap::NW_RECRUITMENT_COST,
+                                                                                     Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
+                                                                                     );
+            try {
+                targetTile->setOwner(objManager_->getPlayer());
+                targetTile->addWorker(worker);
+                objManager_->addWorker(worker);
+                emit gameMessage("You hired a novice worker.");
+            } catch (Course::IllegalAction) {
+                emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
+            }
         }
-        objManager_->addWorker(worker);
+        else if(eventHandler_->getWorkerType() == "apprentice worker"){
+            std::cout<<"creating apprentice worker"<<std::endl;
+            std::shared_ptr<ApprenticeWorker> worker = std::make_shared<ApprenticeWorker>(eventHandler_,
+                                                                                     objManager_,
+                                                                                     objManager_->getPlayer(),
+                                                                                     1,
+                                                                                     Game::ConstGameResourceMap::AW_RECRUITMENT_COST,
+                                                                                     Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
+                                                                                     );
+            try {
+                targetTile->setOwner(objManager_->getPlayer());
+                targetTile->addWorker(worker);
+                emit gameMessage("You hired an apprentice worker.");
+            } catch (Course::IllegalAction) {
+                emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
+            }
+            objManager_->addWorker(worker);
+        }
+        else if(eventHandler_->getWorkerType() == "master worker"){
+            std::cout<<"creating master worker"<<std::endl;
+            std::shared_ptr<MasterWorker> worker = std::make_shared<MasterWorker>(eventHandler_,
+                                                                                     objManager_,
+                                                                                     objManager_->getPlayer(),
+                                                                                     1,
+                                                                                     Game::ConstGameResourceMap::MW_RECRUITMENT_COST,
+                                                                                     Game::ConstGameResourceMap::MW_WORKER_EFFICIENCY
+                                                                                     );
+            try {
+                targetTile->setOwner(objManager_->getPlayer());
+                targetTile->addWorker(worker);
+                emit gameMessage("You hired a master worker.");
+            } catch (Course::IllegalAction) {
+                emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
+            }
+            objManager_->addWorker(worker);
+        }
     }
-    else if(eventHandler_->getWorkerType() == "apprentice worker"){
-        std::cout<<"creating apprentice worker"<<std::endl;
-        std::shared_ptr<ApprenticeWorker> worker = std::make_shared<ApprenticeWorker>(eventHandler_,
-                                                                                 objManager_,
-                                                                                 objManager_->getPlayer(),
-                                                                                 1,
-                                                                                 Game::ConstGameResourceMap::AW_RECRUITMENT_COST,
-                                                                                 Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
-                                                                                 );
-        try {
-            targetTile->setOwner(objManager_->getPlayer());
-            targetTile->addWorker(worker);
-        } catch (Course::IllegalAction) {
-            std::cout<<"last accepted worker"<<std::endl; //gets thrown for example when max_workercapacity = 3 and adding 3rd worker
-        }
-        objManager_->addWorker(worker);
-    }
-    else if(eventHandler_->getWorkerType() == "master worker"){
-        std::cout<<"creating master worker"<<std::endl;
-        std::shared_ptr<MasterWorker> worker = std::make_shared<MasterWorker>(eventHandler_,
-                                                                                 objManager_,
-                                                                                 objManager_->getPlayer(),
-                                                                                 1,
-                                                                                 Game::ConstGameResourceMap::MW_RECRUITMENT_COST,
-                                                                                 Game::ConstGameResourceMap::MW_WORKER_EFFICIENCY
-                                                                                 );
-        try {
-            targetTile->setOwner(objManager_->getPlayer());
-            targetTile->addWorker(worker);
-        } catch (Course::IllegalAction) {
-            std::cout<<"last accepted worker"<<std::endl; //gets thrown for example when max_workercapacity = 3 and adding 3rd worker
-        }
-        objManager_->addWorker(worker);
+    else{
+        emit gameMessage("Tile doesn't have buildings. You need a building to accommodate the workers");
     }
 }
 
@@ -230,6 +239,7 @@ void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
     objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newFarm);
+    emit gameMessage("You built a farm");
 }
 
 void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTile)
@@ -244,6 +254,7 @@ void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTi
     objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newCabin);
+    emit gameMessage("You built a logging cabin");
 }
 
 void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile)
@@ -257,6 +268,7 @@ void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile
     objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newFishingHut);
+    emit gameMessage("You built a fishing hut");
 }
 
 void GameMapGenerator::createMapObjects()

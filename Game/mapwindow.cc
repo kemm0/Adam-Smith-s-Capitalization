@@ -52,6 +52,7 @@ MapWindow::MapWindow(QWidget *parent):
     connect(gameMap,&Map::built,this,&MapWindow::buildSound);
 
     connect(gameMap,&Map::inspectTile,this,&MapWindow::showTileInfo);
+    connect(mapCreator.get(),&GameMapGenerator::gameMessage,this,&MapWindow::showGameMessage);
 
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
@@ -196,6 +197,7 @@ void Game::MapWindow::on_buildButton_toggled(bool checked)
         m_ui->moveButton->setDisabled(false);
         m_ui->searchAreaButton->setDisabled(false);
         eventHandler->setBuildingState(false);
+        //m_ui->buildButton->setDisabled(true);
         showGameMessage("Stopped building. Select an action.");
     }
 
@@ -256,9 +258,11 @@ void Game::MapWindow::on_hireButton_toggled(bool checked)
 {
     if(checked == true){
         eventHandler->setHiring(true);
+        showGameMessage("Hiring. Select a tile where you want to hire a worker.");
     }
     else{
         eventHandler->setHiring(false);
+        showGameMessage("Stopped hiring. Select an action.");
     }
 }
 
