@@ -17,6 +17,7 @@
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
 #include "gamemapgenerator.h"
+#include "QMessageBox"
 
 
 namespace Ui {
@@ -75,6 +76,8 @@ private slots:
     void on_hireButton_toggled(bool checked);
 
     void on_hiringList_currentIndexChanged(const QString &arg1);
+
+    void on_rulesButton_clicked();
 
 private:
     Ui::MapWindow* m_ui;
