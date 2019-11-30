@@ -125,6 +125,8 @@ bool Map::getOnRange()
     return range;
 }
 
+
+
 void Map::showTileHighlightEffect(QGraphicsItem* targetTile)
 {
     if(targetTile != nullptr){
@@ -203,6 +205,7 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             auto buildings = objManager_->getPlayer()->getObjects();
             auto x = objManager_->getGameTile(Course::Coordinate(int(targetTile->pos().x()),int(targetTile->pos().y())));
             mapGenerator_->createWorker(x);
+            eventHandler_->setPlayerHired(true);
         }
 
     }

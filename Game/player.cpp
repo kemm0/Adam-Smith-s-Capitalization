@@ -13,7 +13,8 @@ Player::Player(const Course::Coordinate &coord,
     : Course::PlayerBase(name,objects), Course::GameObject(coord,handler,manager)
 {
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png");
-    money = 500;
+    startingMoney = 500;
+    money = startingMoney;
 }
 
 Player::~Player()
@@ -48,7 +49,10 @@ int Player::getMoney()
 void Player::setMoney(std::map<Course::BasicResource, int> amount)
 {
     money += amount[Course::MONEY];
-    if (money <= 0){
-    }
+}
+
+int Player::getStartingMoney()
+{
+    return startingMoney;
 }
 }

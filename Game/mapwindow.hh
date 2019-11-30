@@ -79,11 +79,14 @@ private slots:
 
     void on_rulesButton_clicked();
 
+    void gameOver(bool ranOutOfMoney);
+
 private:
     Ui::MapWindow* m_ui;
     startDialog* startingDialog;
     void lock_and_unlock_other_buttons(bool toggle);
     void buttons_update();
+    int maxTurns;
 
 
 

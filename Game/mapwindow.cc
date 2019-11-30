@@ -29,7 +29,7 @@ MapWindow::MapWindow(QWidget *parent):
     showGameMessage("Hello " + username + "! \n"
                                           "Get ready to conquer Pirkanmaa"
                     );
-    m_ui->endTurnButton->setDisabled(true);
+    m_ui->endTurnButton->setDisabled(false);
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
@@ -55,6 +55,7 @@ MapWindow::MapWindow(QWidget *parent):
 
     connect(gameMap,&Map::inspectTile,this,&MapWindow::showTileInfo);
     connect(mapCreator.get(),&GameMapGenerator::gameMessage,this,&MapWindow::showGameMessage);
+    connect(eventHandler.get(), &GameEventHandler::gameOver, this, &MapWindow::gameOver);
 
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
@@ -64,6 +65,7 @@ MapWindow::MapWindow(QWidget *parent):
     //m_ui->gameMapView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     gameMap->setBackgroundBrush(Qt::black);
     m_ui->gameMapView->scale(0.9,0.9);
+    maxTurns = 20;
 }
 
 MapWindow::~MapWindow()
@@ -127,10 +129,13 @@ void MapWindow::on_diceButton_clicked()
 
 void MapWindow::on_endTurnButton_clicked()
 {
+    if(maxTurns - eventHandler->getTurn() == 0){
+        gameOver(false);
+    }
     eventHandler->endTurn();
-    showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
+    showGameMessage("Turns left: "+std::to_string(maxTurns - eventHandler->getTurn()));
     m_ui->diceButton->setDisabled(false);
-    m_ui->endTurnButton->setDisabled(true);
+    m_ui->endTurnButton->setDisabled(false);
     m_ui->searchAreaButton->setDisabled(false);
     m_ui->moveButton->setDisabled(false);
     m_ui->buildButton->setDisabled(false);
@@ -150,6 +155,7 @@ void MapWindow::on_endTurnButton_clicked()
     eventHandler->setBuildingState(false);
     eventHandler->setHiring(false);
     eventHandler->setSearching(false);
+    buttons_update();
 
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
     showGameMessage("");
@@ -317,6 +323,7 @@ void Game::MapWindow::buttons_update()
 void Game::MapWindow::lock_and_unlock_other_buttons(bool toggle)
 {
     if(toggle == true){
+        m_ui->endTurnButton->setDisabled(true);
         if(eventHandler->isMoving() == false){
             m_ui->moveButton->setDisabled(true);
         }
@@ -343,6 +350,7 @@ void Game::MapWindow::lock_and_unlock_other_buttons(bool toggle)
         }
     }
     else{
+        m_ui->endTurnButton->setDisabled(false);
         m_ui->moveButton->setDisabled(false);
         m_ui->moveButton->setChecked(false);
 
@@ -391,4 +399,35 @@ void Game::MapWindow::on_rulesButton_clicked()
                             "brought us in Adam Smith's Capitalization!");
     msgBox->setStandardButtons(QMessageBox::Close);
     msgBox->exec();
+    delete msgBox;
+}
+
+void Game::MapWindow::gameOver(bool ranOutOfMoney)
+{
+    QMessageBox *gameOverBox = new QMessageBox(this);
+    if(ranOutOfMoney == true){
+        gameOverBox->setWindowTitle("You suck!");
+        gameOverBox->setText("You ran out money. Adam Smith would be ashamed of you!\n\n"
+                             "Better luck next time.");
+    }
+    else{
+        int money = objManager->getPlayer()->getMoney();
+        if(money <= objManager->getPlayer()->getStartingMoney()){
+            gameOverBox->setWindowTitle("Do better");
+            gameOverBox->setText("Although you did't go bankruptcy, you did't earn any money either. "
+                                 "That is not how capitalism should work!\n\n"
+                                 "Try again if you dare.");
+        }
+        else{
+            gameOverBox->setWindowTitle("Nice!");
+            gameOverBox->setText("Great job! You made " +
+                                 QString::fromStdString(std::to_string(money)) +
+                                 "and you're now richer than ever while finns are even poorer!\n\n"
+                                 "Try again to do even better.");
+        }
+    }
+    gameOverBox->setStandardButtons(QMessageBox::Close);
+    gameOverBox->exec();
+    delete gameOverBox;
+    this->close();
 }

@@ -2,6 +2,8 @@
 #include "gametilebase.h"
 #include "gamebuildingbase.h"
 #include "Buildings/farmbuilding.h"
+
+
 namespace Game{
 
 GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager, QObject *parent)
@@ -176,6 +178,7 @@ void GameEventHandler::setWorkerType(std::string type)
     workertype = type;
 }
 
+
 void GameEventHandler::nextTurn()
 {
     turn += 1;
@@ -183,6 +186,15 @@ void GameEventHandler::nextTurn()
 
 int GameEventHandler::searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area)
 {
+
+}
+
+void GameEventHandler::checkIfOutOfMoney(std::map<Course::BasicResource, int> amount)
+{
+    //Amounts integer is negative
+    if(amount[Course::MONEY] <=  0 - objManager->getPlayer()->getMoney()){
+        emit gameOver(true);
+    }
 
 }
 
