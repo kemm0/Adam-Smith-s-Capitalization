@@ -34,7 +34,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
     m_ui->hireButton->setCheckable(true);
-    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
+    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 
     //MUSIC
     /*musicplayer = new QMediaPlayer;
@@ -53,6 +53,7 @@ MapWindow::MapWindow(QWidget *parent):
 
     connect(gameMap,&Map::inspectTile,this,&MapWindow::showTileInfo);
     connect(mapCreator.get(),&GameMapGenerator::gameMessage,this,&MapWindow::showGameMessage);
+    connect(eventHandler.get(),&GameEventHandler::gameMessage,this,&MapWindow::showGameMessage);
 
     //std::cout<<objManager->size<<std::endl;
     //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
@@ -126,7 +127,6 @@ void MapWindow::on_diceButton_clicked()
 void MapWindow::on_endTurnButton_clicked()
 {
     eventHandler->endTurn();
-    showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
     m_ui->diceButton->setDisabled(false);
     m_ui->endTurnButton->setDisabled(true);
     m_ui->buildButton->setChecked(false);
@@ -137,8 +137,8 @@ void MapWindow::on_endTurnButton_clicked()
     m_ui->moveButton->setDisabled(false);
     eventHandler->setPlayerMoved(false);
     eventHandler->setPlayerSearched(false);
-    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
     showGameMessage("");
+    showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
 }
 
 void MapWindow::setUsername(std::string name)

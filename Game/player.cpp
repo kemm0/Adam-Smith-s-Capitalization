@@ -14,6 +14,7 @@ Player::Player(const Course::Coordinate &coord,
 {
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png");
     money = 500;
+    resources = ConstGameResourceMap::PLAYER_STARTING_RESOURCES;
 }
 
 Player::~Player()
@@ -24,8 +25,6 @@ Player::~Player()
 QPixmap Player::getSprite()
 {
     return sprite;
-    std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(getObjects().at(0));
-    building->getProduction();
 }
 
 int Player::getMoney()
@@ -50,5 +49,15 @@ void Player::setMoney(std::map<Course::BasicResource, int> amount)
     money += amount[Course::MONEY];
     if (money <= 0){
     }
+}
+
+Course::ResourceMap Player::getResources()
+{
+    return resources;
+}
+
+void Player::modifyResources(Course::ResourceMap rmap)
+{
+    resources = Course::mergeResourceMaps(resources,rmap);
 }
 }

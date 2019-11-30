@@ -237,8 +237,9 @@ void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
                                                                            Game::ConstGameResourceMap::FARM_PRODUCTION);
 
 
-    objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
+    //objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
+    objManager_->getPlayer()->modifyResources(newFarm->BUILD_COST);
     targetTile->addGameBuilding(newFarm);
     emit gameMessage("You built a farm");
 }
@@ -252,7 +253,8 @@ void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTi
                                                                            Game::ConstGameResourceMap::LOGGING_BUILD_COST,
                                                                            Game::ConstGameResourceMap::LOGGING_PRODUCTION);
 
-    objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
+    //objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
+    objManager_->getPlayer()->modifyResources(newCabin->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newCabin);
     emit gameMessage("You built a logging cabin");
@@ -266,7 +268,8 @@ void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile
                                                                            1,
                                                                            Game::ConstGameResourceMap::FISHING_BUILD_COST,
                                                                            Game::ConstGameResourceMap::FISHING_PRODUCTION);
-    objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
+    //objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
+    objManager_->getPlayer()->modifyResources(newFishingHut->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newFishingHut);
     emit gameMessage("You built a fishing hut");

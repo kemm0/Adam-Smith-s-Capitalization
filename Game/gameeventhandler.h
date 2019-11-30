@@ -57,7 +57,8 @@ public:
     void setPlayerHired(bool x);
     void setHiring(bool x);
     void setWorkerType(std::string type);
-
+signals:
+    void gameMessage(std::string);
 private:
     bool threw;
     bool moved;

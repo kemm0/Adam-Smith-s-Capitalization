@@ -7,6 +7,10 @@ namespace Game {
 
 namespace ConstGameResourceMap {
 
+const Course::ResourceMap PLAYER_STARTING_RESOURCES = {
+    {Course::BasicResource::MONEY, 500}
+};
+
 const Course::ResourceMap EMPTY = {};
 
 // Building - Farm

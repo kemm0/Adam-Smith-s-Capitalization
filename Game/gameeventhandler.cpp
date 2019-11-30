@@ -40,11 +40,13 @@ bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> playe
 
 
 
+
 void GameEventHandler::endTurn()
 {
     turn += 1;
     threw = false;
     moved = false;
+    emit gameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 }
 
 int GameEventHandler::throwDice()
@@ -128,6 +130,10 @@ void GameEventHandler::setPlayerMoved(bool x)
 void GameEventHandler::setPlayerBuilt(bool x)
 {
     built = x;
+    if(x == true){
+        int money = objManager->getPlayer()->getResources().at(Course::MONEY);
+        emit gameMessage("Money left: " + std::to_string(money));
+    }
 }
 
 void GameEventHandler::setMoving(bool x)

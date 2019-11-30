@@ -5,6 +5,7 @@
 #include "../CourseLib/core/gameobject.h"
 #include "QGraphicsPixmapItem"
 #include "gameresourcemap.h"
+#include "gameresourcemap.h"
 namespace Game{
 class GameEventHandler;
 class GameObjectManager;
@@ -22,10 +23,15 @@ public:
     QPixmap getSprite();
     int getMoney();
     void setMoney(std::map<Course::BasicResource, int>);
+    Course::ResourceMap getResources();
+    void modifyResources(Course::ResourceMap rmap);
+    void getProfit();
+
 
 private:
         QPixmap sprite;
         int money;
+        Course::ResourceMap resources;
 
 };
 }
