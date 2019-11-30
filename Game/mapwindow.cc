@@ -34,6 +34,8 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
     m_ui->hireButton->setCheckable(true);
+
+
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
 
     //MUSIC
@@ -129,14 +131,26 @@ void MapWindow::on_endTurnButton_clicked()
     showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
     m_ui->diceButton->setDisabled(false);
     m_ui->endTurnButton->setDisabled(true);
-    m_ui->buildButton->setChecked(false);
-    m_ui->buildButton->setDisabled(false);
     m_ui->searchAreaButton->setDisabled(false);
-    eventHandler->setPlayerBuilt(false);
-    m_ui->moveButton->setChecked(false);
     m_ui->moveButton->setDisabled(false);
+    m_ui->buildButton->setDisabled(false);
+    m_ui->hireButton->setDisabled(false);
+
+    m_ui->buildButton->setChecked(false);
+    m_ui->hireButton->setChecked(false);
+    m_ui->moveButton->setChecked(false);
+    m_ui->searchAreaButton->setChecked(false);
+
     eventHandler->setPlayerMoved(false);
     eventHandler->setPlayerSearched(false);
+    eventHandler->setPlayerHired(false);
+    eventHandler->setPlayerBuilt(false);
+
+    eventHandler->setMoving(false);
+    eventHandler->setBuildingState(false);
+    eventHandler->setHiring(false);
+    eventHandler->setSearching(false);
+
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
     showGameMessage("");
 }
@@ -149,28 +163,28 @@ void MapWindow::setUsername(std::string name)
 
 void MapWindow::on_moveButton_toggled(bool checked)
 {
-    if(checked==true){
-        m_ui->buildButton->setDisabled(true);
-        m_ui->searchAreaButton->setDisabled(true);
-    }
-    else{
-        m_ui->buildButton->setDisabled(false);
-        m_ui->searchAreaButton->setDisabled(false);
-    }
     if(checked==true && eventHandler->getPlayerMoved() == false){
         if(eventHandler->getThrown() == true){
             eventHandler->setMoving(true);
+            lock_and_unlock_other_buttons(true);
             showGameMessage("Moving. Select a tile to move to.");
 
         }
         else{
             showGameMessage("You haven't thrown the dice yet. Throw the dice to be able to move.");
+            m_ui->moveButton->setChecked(false);
+            lock_and_unlock_other_buttons(false);
+            buttons_update();
         }
     }
     else if (checked == false && eventHandler->isMoving() == true){
         eventHandler->setMoving(false);
+        lock_and_unlock_other_buttons(false);
         showGameMessage("Stopped moving. Select an action.");
+        buttons_update();
+
     }
+
 }
 
 void MapWindow::zoomIn()
@@ -186,19 +200,17 @@ void MapWindow::zoomOut()
 
 void Game::MapWindow::on_buildButton_toggled(bool checked)
 {
-    if(checked==true && eventHandler->isBuilding() == false){
-        m_ui->moveButton->setDisabled(true);
-        m_ui->searchAreaButton->setDisabled(true);
+    if(checked==true && eventHandler->getPlayerBuilt() == false){
         eventHandler->setBuildingState(true);
+        lock_and_unlock_other_buttons(true);
         eventHandler->setSelectedBuildingType(m_ui->buildingsList->currentText().toStdString());
         showGameMessage("Bulding a " + eventHandler->getSelectedBuildingType()+  ". First select a building and then click a tile to build to.");
     }
-    else{
-        m_ui->moveButton->setDisabled(false);
-        m_ui->searchAreaButton->setDisabled(false);
+    else if(checked == false && eventHandler->isBuilding() == true){
         eventHandler->setBuildingState(false);
-        //m_ui->buildButton->setDisabled(true);
+        lock_and_unlock_other_buttons(false);
         showGameMessage("Stopped building. Select an action.");
+        buttons_update();
     }
 
 
@@ -207,19 +219,18 @@ void Game::MapWindow::on_buildButton_toggled(bool checked)
 
 void Game::MapWindow::on_searchAreaButton_toggled(bool checked)
 {
-    if(checked==true && eventHandler->isSearching() == false){
+    if(checked==true && eventHandler->getPlayerSearched() == false){
         soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/hmm.wav"));
         soundEffectPlayer->play();
-        m_ui->moveButton->setDisabled(true);
-        m_ui->buildButton->setDisabled(true);
         eventHandler->setSearching(true);
+        lock_and_unlock_other_buttons(true);
         showGameMessage("Searching. First select a tile next to you and then click a tile to search it.");
     }
-    else{
-        m_ui->moveButton->setDisabled(false);
-        m_ui->buildButton->setDisabled(false);
+    else if(checked == false && eventHandler->isSearching() == true){
         eventHandler->setSearching(false);
+        lock_and_unlock_other_buttons(false);
         showGameMessage("Stopped searching. Select an action.");
+        buttons_update();
     }
 }
 
@@ -256,13 +267,16 @@ void Game::MapWindow::showTileInfo(std::string info)
 
 void Game::MapWindow::on_hireButton_toggled(bool checked)
 {
-    if(checked == true){
+    if(checked == true && eventHandler->getHired() == false){
         eventHandler->setHiring(true);
+        lock_and_unlock_other_buttons(true);
         showGameMessage("Hiring. Select a tile where you want to hire a worker.");
     }
-    else{
+    else if(checked == false && eventHandler->isHiring() ==true){
         eventHandler->setHiring(false);
+        lock_and_unlock_other_buttons(false);
         showGameMessage("Stopped hiring. Select an action.");
+        buttons_update();
     }
 }
 
@@ -270,4 +284,76 @@ void Game::MapWindow::on_hiringList_currentIndexChanged(const QString &arg1)
 {
     eventHandler->setWorkerType(arg1.toStdString());
     std::cout<<eventHandler->getWorkerType()<<std::endl;
+}
+
+void Game::MapWindow::buttons_update()
+{
+    if(eventHandler->getPlayerMoved()){
+        m_ui->moveButton->setDisabled(true);
+    }
+    else{
+        m_ui->moveButton->setDisabled(false);
+    }
+    if(eventHandler->getPlayerBuilt()){
+        m_ui->buildButton->setDisabled(true);
+    }
+    else{
+        m_ui->buildButton->setDisabled(false);
+    }
+    if(eventHandler->getPlayerSearched()){
+        m_ui->searchAreaButton->setDisabled(true);
+    }
+    else{
+        m_ui->searchAreaButton->setDisabled(false);
+    }
+    if(eventHandler->getHired()){
+        m_ui->hireButton->setDisabled(true);
+    }
+    else{
+        m_ui->hireButton->setDisabled(false);
+    }
+}
+
+void Game::MapWindow::lock_and_unlock_other_buttons(bool toggle)
+{
+    if(toggle == true){
+        if(eventHandler->isMoving() == false){
+            m_ui->moveButton->setDisabled(true);
+        }
+        else{
+            m_ui->moveButton->setDisabled(false);
+        }
+        if(eventHandler->isBuilding() == false){
+            m_ui->buildButton->setDisabled(true);
+        }
+        else{
+            m_ui->buildButton->setDisabled(false);
+        }
+        if(eventHandler->isSearching() == false){
+            m_ui->searchAreaButton->setDisabled(true);
+        }
+        else{
+            m_ui->searchAreaButton->setDisabled(false);
+        }
+        if(eventHandler->isHiring() == false){
+            m_ui->hireButton->setDisabled(true);
+        }
+        else{
+            m_ui->hireButton->setDisabled(false);
+        }
+    }
+    else{
+        m_ui->moveButton->setDisabled(false);
+        m_ui->moveButton->setChecked(false);
+
+        m_ui->buildButton->setDisabled(false);
+        m_ui->buildButton->setChecked(false);
+
+        m_ui->searchAreaButton->setDisabled(false);
+        m_ui->searchAreaButton->setChecked(false);
+
+        m_ui->hireButton->setDisabled(false);
+        m_ui->hireButton->setChecked(false);
+
+    }
 }

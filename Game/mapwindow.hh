@@ -79,6 +79,9 @@ private slots:
 private:
     Ui::MapWindow* m_ui;
     startDialog* startingDialog;
+    void lock_and_unlock_other_buttons(bool toggle);
+    void buttons_update();
+
 
 
 };

@@ -19,6 +19,7 @@ GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager, Q
     searching = false;
     searchedArea = false;
     hiring = false;
+    hired = false;
     selectedBuildingType = "";
     workertype = "novice worker";
 }
@@ -104,6 +105,11 @@ bool GameEventHandler::isHiring()
     return hiring;
 }
 
+bool GameEventHandler::getHired()
+{
+    return hired;
+}
+
 
 std::string GameEventHandler::getSelectedBuildingType()
 {
@@ -153,6 +159,11 @@ void GameEventHandler::setSearching(bool x)
 void GameEventHandler::setPlayerSearched(bool x)
 {
     searchedArea = x;
+}
+
+void GameEventHandler::setPlayerHired(bool x)
+{
+    hired = x;
 }
 
 void GameEventHandler::setHiring(bool x)

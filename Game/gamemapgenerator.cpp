@@ -241,6 +241,7 @@ void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
     objManager_->getPlayer()->addObject(targetTile);
     targetTile->addGameBuilding(newFarm);
     emit gameMessage("You built a farm");
+
 }
 
 void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTile)
