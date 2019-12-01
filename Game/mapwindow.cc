@@ -13,7 +13,7 @@ MapWindow::MapWindow(QWidget *parent):
     startingDialog->exec();
     m_ui->setupUi(this);
     setWindowIcon(QIcon(QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
-    setWindowTitle("Adam Smith's Civilization");
+    setWindowTitle("Adam Smith's Capitalization");
     //this->setWindowState(Qt::WindowFullScreen);   //Sets fullsceen mode
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
@@ -39,12 +39,12 @@ MapWindow::MapWindow(QWidget *parent):
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
 
     //MUSIC
-    /*musicplayer = new QMediaPlayer;
+    musicplayer = new QMediaPlayer;
     musicPlaylist = new QMediaPlaylist();
     musicPlaylist->addMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/gamemusic.wav"));
     musicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);
     musicplayer->setPlaylist(musicPlaylist);
-    musicplayer->play();*/
+    musicplayer->play();
 
     //SOUND EFFECTS
     soundEffectPlayer = new QMediaPlayer();
@@ -57,12 +57,6 @@ MapWindow::MapWindow(QWidget *parent):
     connect(mapCreator.get(),&GameMapGenerator::gameMessage,this,&MapWindow::showGameMessage);
     connect(eventHandler.get(), &GameEventHandler::gameOver, this, &MapWindow::gameOver);
 
-    //std::cout<<objManager->size<<std::endl;
-    //std::cout<<mapCreator->mapTemplate.size()<<std::endl;
-    //connect(gameMap,&Game::Map::scrollIn,this,&MapWindow::zoomIn);
-    //connect(gameMap,&Game::Map::scrollOut,this,&MapWindow::zoomOut);
-    //m_ui->gameMapView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //m_ui->gameMapView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     gameMap->setBackgroundBrush(Qt::black);
     m_ui->gameMapView->scale(0.9,0.9);
     maxTurns = 20;
@@ -80,17 +74,9 @@ void MapWindow::resizeEvent(QResizeEvent *event)
 
 void MapWindow::showEvent(QShowEvent *event)
 {
-    //m_ui->gameMapView->ensureVisible(gameMap->sceneRect(),0,0);
     m_ui->gameMapView->fitInView(gameMap->sceneRect(),Qt::KeepAspectRatio);
-    //m_ui->gameMapView->centerOn(0,0);
 }
 
-void MapWindow::initMap()
-{
-    /*Course::WorldGenerator* x = &Course::WorldGenerator::getInstance();
-    x->addConstructor<Game::GrassTile>(10);
-    x->generateMap(20,20,10,objManager,eventHandler);*/
-}
 
 void MapWindow::showGameMessage(std::string message)
 {
@@ -201,7 +187,6 @@ void MapWindow::zoomIn()
 void MapWindow::zoomOut()
 {
     m_ui->gameMapView->scale(0.9,0.9);
-}
 }
 
 void Game::MapWindow::on_buildButton_toggled(bool checked)
@@ -430,4 +415,5 @@ void Game::MapWindow::gameOver(bool ranOutOfMoney)
     gameOverBox->exec();
     delete gameOverBox;
     this->close();
+}
 }

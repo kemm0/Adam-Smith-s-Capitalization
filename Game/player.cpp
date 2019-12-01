@@ -2,6 +2,7 @@
 #include "gameeventhandler.h"
 #include "gameobjectmanager.h"
 #include "gamebuildingbase.h"
+#include "gametilebase.h"
 #include <iostream>
 namespace Game{
 
@@ -25,24 +26,24 @@ Player::~Player()
 QPixmap Player::getSprite()
 {
     return sprite;
-    std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(getObjects().at(0));
-    building->getProduction();
 }
 
 int Player::getMoney()
 {
-    /*if(getObjects().size() != 0){
-        std::vector<std::shared_ptr<Course::GameObject>> object = getObjects();
-        for(int i=0; i < object.size(); i++){
-            std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(object.at(i));
-            if(building != nullptr){
-                std::cout<<getObjects().size()<<std::endl;
-                std::cout<<building->holdCount()<<std::endl;
-                Course::ResourceMap map = building->getProduction();
-                money += map[Course::MONEY];
-            }
+    for(std::shared_ptr<Course::GameObject> object:getObjects()){
+        std::shared_ptr<GameTileBase> tile = std::dynamic_pointer_cast<GameTileBase>(object);
+        if(tile){
+            std::cout<<"object muutettu tileksi"<<std::endl;
+            std::cout<<tile->getType()<<std::endl;
+            std::cout<<tile->getBuildingCount()<<std::endl;
+            std::cout<<tile->getWorkerCount()<<std::endl;
+            tile->generateResources();
         }
-    }*/
+        else{
+            std::cout<<"Lol ei pysty muuttaan objectia gametileksi"<<std::endl;
+        }
+    }
+
     return money;
 }
 

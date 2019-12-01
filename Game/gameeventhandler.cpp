@@ -38,7 +38,7 @@ bool GameEventHandler::modifyResource(std::shared_ptr<Course::PlayerBase> player
 
 bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> player, Course::ResourceMap resources)
 {
-
+    objManager->getPlayer()->setMoney(resources);
 }
 
 
@@ -184,18 +184,12 @@ void GameEventHandler::nextTurn()
     turn += 1;
 }
 
-int GameEventHandler::searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area)
-{
-
-}
-
 void GameEventHandler::checkIfOutOfMoney(std::map<Course::BasicResource, int> amount)
 {
     //Amounts integer is negative
     if(amount[Course::MONEY] <=  0 - objManager->getPlayer()->getMoney()){
         emit gameOver(true);
     }
-
 }
 
 
