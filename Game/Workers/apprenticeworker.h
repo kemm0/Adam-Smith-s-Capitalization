@@ -10,7 +10,9 @@
 #include "gameresourcemap.h"
 
 namespace Game {
-
+/**
+ * @brief The ApprenticeWorker class represents apprentice worker
+ */
 class ApprenticeWorker: public Course::WorkerBase
 {
 public:

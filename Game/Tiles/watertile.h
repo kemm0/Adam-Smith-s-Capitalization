@@ -10,8 +10,9 @@
 #include "gametilebase.h"
 
 namespace Game{
-
-
+/**
+ * @brief The WaterTile class represents water
+ */
 class WaterTile: public Game::GameTileBase//, public QGraphicsPixmapItem
 {
 public:

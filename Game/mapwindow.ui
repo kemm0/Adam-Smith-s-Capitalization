@@ -148,17 +148,17 @@
        <widget class="QComboBox" name="buildingsList">
         <item>
          <property name="text">
-          <string>Farmhouse</string>
+          <string>Farmhouse (50)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Logging Cabin</string>
+          <string>Logging Cabin (100)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Fishing Hut</string>
+          <string>Fishing Hut(200)</string>
          </property>
         </item>
        </widget>
@@ -181,17 +181,17 @@
        <widget class="QComboBox" name="hiringList">
         <item>
          <property name="text">
-          <string>novice worker</string>
+          <string>Novice worker (30)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>apprentice worker</string>
+          <string>Apprentice worker (50)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>master worker</string>
+          <string>Master worker (70)</string>
          </property>
         </item>
        </widget>
