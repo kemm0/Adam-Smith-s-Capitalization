@@ -9,9 +9,13 @@ namespace Game{
 class GameEventHandler;
 class GameObjectManager;
 class GameBuildingBase;
+
 /**
  * @brief The Player class used for player instance
  */
+
+class GameTileBase;
+
 class Player : public Course::PlayerBase, public Course::GameObject
 
 {

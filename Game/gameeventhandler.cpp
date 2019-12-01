@@ -38,7 +38,7 @@ bool GameEventHandler::modifyResource(std::shared_ptr<Course::PlayerBase> player
 
 bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> player, Course::ResourceMap resources)
 {
-
+    objManager->getPlayer()->setMoney(resources);
 }
 
 
@@ -190,7 +190,6 @@ void GameEventHandler::checkIfOutOfMoney(std::map<Course::BasicResource, int> am
     if(amount[Course::MONEY] <=  0 - objManager->getPlayer()->getMoney()){
         emit gameOver(true);
     }
-
 }
 
 

@@ -37,7 +37,6 @@ public:
     ~MapWindow();
     void resizeEvent(QResizeEvent* event) override;
     void showEvent(QShowEvent* event) override;
-    void initMap();
     int tileSize;
     int mapWidth;
     int mapHeight;
@@ -50,7 +49,9 @@ public:
     QMediaPlayer* soundEffectPlayer;
     QMediaPlaylist* musicPlaylist;
     std::string getUsername(); //get username from startwindow
-    void keyPressEvent(QKeyEvent *event);
+
+    void keyPressEvent(QKeyEvent *event) override;
+
 
 
 private slots:

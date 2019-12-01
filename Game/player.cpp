@@ -2,6 +2,7 @@
 #include "gameeventhandler.h"
 #include "gameobjectmanager.h"
 #include "gamebuildingbase.h"
+#include "gametilebase.h"
 #include <iostream>
 namespace Game{
 
@@ -25,23 +26,20 @@ Player::~Player()
 QPixmap Player::getSprite()
 {
     return sprite;
-    std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(getObjects().at(0));
-    building->getProduction();
 }
 
 int Player::getMoney()
 {
-    /*if(getObjects().size() != 0){
-        std::vector<std::shared_ptr<Course::GameObject>> object = getObjects();
-        for(int i=0; i < object.size(); i++){
-            std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(object.at(i));
-            if(building != nullptr){
-                std::cout<<getObjects().size()<<std::endl;
-                Course::ResourceMap map = building->getProduction();
-                money += map.at(Course::MONEY);
-            }
+
+    for(std::shared_ptr<Course::GameObject> object:getObjects()){
+        std::shared_ptr<GameTileBase> tile = std::dynamic_pointer_cast<GameTileBase>(object);
+        if(tile){
+            tile->generateResources();
+
         }
-    }*/
+
+    }
+
     return money;
 }
 
