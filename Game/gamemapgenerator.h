@@ -18,9 +18,12 @@
 
 namespace Game{
 
-class GameMapGenerator{
+class GameMapGenerator: public QObject{
+Q_OBJECT
 public:
-    GameMapGenerator(std::shared_ptr<GameObjectManager> objManager, std::shared_ptr<GameEventHandler> eventHandler);
+    GameMapGenerator(std::shared_ptr<GameObjectManager> objManager,
+                     std::shared_ptr<GameEventHandler> eventHandler,
+                     QObject *parent = nullptr);
     ~GameMapGenerator();
     void createMapObjects();
     void createBuilding(Course::Coordinate location);
@@ -36,6 +39,8 @@ public:
     void createFarmhouse(std::shared_ptr<GameTileBase> targetTile);
     void createLoggingcabin(std::shared_ptr<GameTileBase> targetTile);
     void createFishinghut(std::shared_ptr<GameTileBase> targetTile);
+signals:
+    void gameMessage(std::string);
 
 private:
     std::vector<std::vector<int>> mapTemplate;
@@ -43,6 +48,7 @@ private:
     std::shared_ptr<GameEventHandler> eventHandler_;
     int mapWidth;
     int mapHeight;
+
 };
 }
 

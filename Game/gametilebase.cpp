@@ -24,16 +24,10 @@ QPixmap GameTileBase::getSprite()
     return sprite;
 }
 
-void GameTileBase::addGameBuilding(const std::shared_ptr<GameBuildingBase> &building)
+void GameTileBase::updateSprite(QPixmap newSprite)
 {
-    buildingsOnTile.push_back(building);
-    std::cout<<"size of buildings on this tile after adding: " + std::to_string(buildingsOnTile.size())<<std::endl;
-    sprite = building->getSprite();
-    //QPixmap pm = building->getSprite()->pixmap();
-    //sprite->setPixmap(pm);
-    //std::cout<<"tried to modify sprite"<<std::endl;
+    sprite = newSprite;
 }
-
 
 bool GameTileBase::getRobber()
 {
@@ -54,7 +48,6 @@ int GameTileBase::getWidth()
 {
     return width;
 }
-
 
 bool GameTileBase::setRobber(bool x)
 {

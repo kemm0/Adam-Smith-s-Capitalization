@@ -9,8 +9,10 @@ namespace Game{
 class GameEventHandler;
 class GameObjectManager;
 class GameBuildingBase;
+class GameTileBase;
 
 class Player : public Course::PlayerBase, public Course::GameObject
+
 {
 public:
     Player(const Course::Coordinate &coord,
@@ -22,10 +24,12 @@ public:
     QPixmap getSprite();
     int getMoney();
     void setMoney(std::map<Course::BasicResource, int>);
+    int getStartingMoney();
 
 private:
         QPixmap sprite;
         int money;
+        int startingMoney;
 
 };
 }

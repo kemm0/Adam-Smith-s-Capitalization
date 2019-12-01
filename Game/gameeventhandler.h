@@ -5,6 +5,8 @@
 #include "../CourseLib/interfaces/igameeventhandler.h"
 #include "gameobjectmanager.h"
 #include "gameresourcemap.h"
+#include "QMessageBox"
+
 
 namespace Game{
 
@@ -28,6 +30,8 @@ public:
     void nextTurn();
     int searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area);
     void createBuilding(Course::Coordinate location);
+    void checkIfOutOfMoney(std::map<Course::BasicResource, int> amount);
+
 
     //getters
     int getDiceValue();
@@ -58,6 +62,11 @@ public:
     void setHiring(bool x);
     void setWorkerType(std::string type);
 
+signals:
+    void gameOver(bool ranOutOfMoney);
+
+
+
 private:
     bool threw;
     bool moved;
@@ -72,7 +81,6 @@ private:
     bool hired;
     std::string selectedBuildingType;
     std::shared_ptr<GameObjectManager> objManager;
-    std::vector<std::shared_ptr<GameBuildingBase>> ownedBuildings;
     std::string workertype;
 };
 }

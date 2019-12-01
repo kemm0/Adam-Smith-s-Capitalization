@@ -21,7 +21,6 @@ FarmBuilding::FarmBuilding(const std::shared_ptr<GameEventHandler>& eventhandler
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/farmhouse.png");
     width = sprite.width();
     height = sprite.height();
-    std::cout<<"succesfully created a farmhouse"<<std::endl;
 
 }
 

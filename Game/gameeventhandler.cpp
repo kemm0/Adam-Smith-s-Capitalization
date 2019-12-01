@@ -2,6 +2,8 @@
 #include "gametilebase.h"
 #include "gamebuildingbase.h"
 #include "Buildings/farmbuilding.h"
+
+
 namespace Game{
 
 GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager, QObject *parent)
@@ -19,6 +21,7 @@ GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager, Q
     searching = false;
     searchedArea = false;
     hiring = false;
+    hired = false;
     selectedBuildingType = "";
     workertype = "novice worker";
 }
@@ -35,7 +38,7 @@ bool GameEventHandler::modifyResource(std::shared_ptr<Course::PlayerBase> player
 
 bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> player, Course::ResourceMap resources)
 {
-
+    objManager->getPlayer()->setMoney(resources);
 }
 
 
@@ -104,6 +107,11 @@ bool GameEventHandler::isHiring()
     return hiring;
 }
 
+bool GameEventHandler::getHired()
+{
+    return hired;
+}
+
 
 std::string GameEventHandler::getSelectedBuildingType()
 {
@@ -155,6 +163,11 @@ void GameEventHandler::setPlayerSearched(bool x)
     searchedArea = x;
 }
 
+void GameEventHandler::setPlayerHired(bool x)
+{
+    hired = x;
+}
+
 void GameEventHandler::setHiring(bool x)
 {
     hiring = x;
@@ -165,14 +178,18 @@ void GameEventHandler::setWorkerType(std::string type)
     workertype = type;
 }
 
+
 void GameEventHandler::nextTurn()
 {
     turn += 1;
 }
 
-int GameEventHandler::searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area)
+void GameEventHandler::checkIfOutOfMoney(std::map<Course::BasicResource, int> amount)
 {
-
+    //Amounts integer is negative
+    if(amount[Course::MONEY] <=  0 - objManager->getPlayer()->getMoney()){
+        emit gameOver(true);
+    }
 }
 
 
