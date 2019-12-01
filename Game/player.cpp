@@ -37,9 +37,8 @@ int Player::getMoney()
             std::shared_ptr<GameBuildingBase> building = std::static_pointer_cast<GameBuildingBase>(object.at(i));
             if(building != nullptr){
                 std::cout<<getObjects().size()<<std::endl;
-                std::cout<<building->holdCount()<<std::endl;
                 Course::ResourceMap map = building->getProduction();
-                money += map[Course::MONEY];
+                money += map.at(Course::MONEY);
             }
         }
     }*/

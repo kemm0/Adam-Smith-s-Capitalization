@@ -36,7 +36,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->hireButton->setCheckable(true);
 
 
-    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
+    //showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
 
     //MUSIC
     /*musicplayer = new QMediaPlayer;

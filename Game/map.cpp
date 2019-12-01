@@ -163,6 +163,7 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 addItem(mapItem);
                 //removeItem(targetTile);
                 eventHandler_->setPlayerBuilt(true);
+                std::cout << std::to_string(objManager_->getPlayer()->getMoney()) <<std::endl;
                 emit built();
                 update();
             }

@@ -41,11 +41,14 @@ public:
      * @brief nextTurn starts new round
      */
     void nextTurn();
-
+    /**
+     * @brief checkIfOutOfMoney checks if players money goes negative and emits
+     * gameover signal if that happens
+     * @param amount
+     */
     void checkIfOutOfMoney(std::map<Course::BasicResource, int> amount);
 
-
-    //getters
+    //getters used in mapwindow to determine action situation
     int getDiceValue();
     int getTurn();
     bool getThrown();
@@ -61,7 +64,7 @@ public:
     std::string getWorkerType();
 
 
-    //setters
+    //setters used when setting action situation from mapwindow
     void setThrown(bool x);
     void setPlayerMoved(bool x);
     void setPlayerBuilt(bool x);
@@ -75,6 +78,10 @@ public:
     void setWorkerType(std::string type);
 
 signals:
+    /**
+     * @brief gameOver catched in mapwindow to end game
+     * @param ranOutOfMoney tels if gameover due to bankcruptcy or not
+     */
     void gameOver(bool ranOutOfMoney);
 
 

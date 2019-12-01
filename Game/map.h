@@ -18,7 +18,9 @@
 #include "algorithm"
 
 namespace Game{
-
+/**
+ * @brief The Map class draws the map with tiles and player
+ */
 class Map : public QGraphicsScene
 {
 Q_OBJECT
@@ -28,12 +30,26 @@ Q_OBJECT
             std::shared_ptr<Game::GameEventHandler> eventHandler = nullptr,
             std::shared_ptr<Game::GameObjectManager> objManager = nullptr,
             std::shared_ptr<Game::GameMapGenerator> mapGenerator = nullptr);
-
+        /**
+         * @brief mouseMoveEvent highligts the tile that is pointed with cursor
+         * @param event different colored highlight when building or searching depending on event
+         */
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+        /**
+         * @brief mousePressEvent moves player, builds a house, searches and hires workers
+         * @param mouseEvent a click
+         */
         void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
         void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) override;
+        /**
+         * @brief drawMap draw correct tiles spesified by gamemapgenerator
+         */
         void drawMap();
         QGraphicsPixmapItem* player;
+        /**
+         * @brief setOnRange used to determine if clicked tile is close enough for action
+         * @param range
+         */
         void setOnRange(bool range);
         bool getOnRange();
 
@@ -45,8 +61,20 @@ Q_OBJECT
         std::shared_ptr<Game::GameEventHandler> eventHandler_;
         std::shared_ptr<Game::GameObjectManager> objManager_;
         std::shared_ptr<Game::GameMapGenerator> mapGenerator_;
+        /**
+         * @brief showTileMovableEffect hihglight tiles that are on range to move with green, red if not
+         * @param targetTile where cursor is
+         */
         void showTileMovableEffect(QGraphicsItem* targetTile);
+        /**
+         * @brief showTileBuildOrSearchEffect yellow highlight effect for tiles in range for build or search
+         * @param targetTile where cursor is
+         */
         void showTileBuildOrSearchEffect(QGraphicsItem* targetTile);
+        /**
+         * @brief showTileHighlightEffect white highlight effect for tiles under cursor
+         * @param targetTile where cursor is
+         */
         void showTileHighlightEffect(QGraphicsItem* targetTile);
         bool range;
     signals:

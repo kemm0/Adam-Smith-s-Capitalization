@@ -9,7 +9,9 @@ namespace Game{
 class GameEventHandler;
 class GameObjectManager;
 class GameBuildingBase;
-
+/**
+ * @brief The Player class used for player instance
+ */
 class Player : public Course::PlayerBase, public Course::GameObject
 
 {
@@ -20,9 +22,9 @@ public:
            std::shared_ptr<Game::GameObjectManager> manager = nullptr,
            const std::vector<std::shared_ptr<Course::GameObject> > objects = {});
     ~Player();
-    QPixmap getSprite();
-    int getMoney();
-    void setMoney(std::map<Course::BasicResource, int>);
+    QPixmap getSprite(); // QPixmap used to draw player
+    int getMoney(); // counts money
+    void setMoney(std::map<Course::BasicResource, int>); // adds or subtracts money
     int getStartingMoney();
 
 private:

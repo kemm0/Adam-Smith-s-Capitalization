@@ -6,7 +6,9 @@
 namespace Ui {
 class startDialog;
 }
-
+/**
+ * @brief The startDialog class asks for player name and starts the game
+ */
 class startDialog : public QDialog
 {
     Q_OBJECT
