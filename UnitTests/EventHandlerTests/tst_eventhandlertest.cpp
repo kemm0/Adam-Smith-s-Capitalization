@@ -4,6 +4,11 @@
 #include "gameeventhandler.h"
 #include "gameobjectmanager.h"
 
+/**
+ * @brief The EventHandlerTest class
+ * Tests the funtions of Game's GameEventHandler class. Tests for some getters and setters are grouped in a same test case
+ */
+
 class EventHandlerTest : public QObject
 {
     Q_OBJECT
@@ -26,6 +31,8 @@ private slots:
     void testPlayerHiringStatus();
     void testPlayerHiredStatus();
     void testSelectedWorkerType();
+    void testModifyResources();
+    void testModifyResource();
 
 
 };
@@ -40,6 +47,10 @@ EventHandlerTest::~EventHandlerTest()
 
 }
 
+/**
+ * @brief EventHandlerTest::testDiceThrow
+ * Tests GameEventHandler's throwDice()-function. Checks if the values are between 1 and 6
+ */
 void EventHandlerTest::testDiceThrow()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -50,6 +61,12 @@ void EventHandlerTest::testDiceThrow()
         QVERIFY(eventHandler->getDiceValue() == diceNumber);
     }
 }
+
+/**
+ * @brief EventHandlerTest::testEndTurn
+ * Tests GameEventHandler's endTurn()-function. All statuses should be false at the end of the turn
+ * and the turn number should be 1 higher at start of the next turn
+ */
 void EventHandlerTest::testEndTurn(){
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
     std::shared_ptr<Game::GameEventHandler> eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
@@ -71,6 +88,12 @@ void EventHandlerTest::testEndTurn(){
     }
 }
 
+// Getter and Setter function tests
+
+/**
+ * @brief EventHandlerTest::testGetTurn
+ * Tests GameEventHandler's getTurn()-function.
+ */
 void EventHandlerTest::testGetTurn()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -82,6 +105,10 @@ void EventHandlerTest::testGetTurn()
     }
 }
 
+/**
+ * @brief EventHandlerTest::testThrownStatus
+ * Tests GameEventHandler's getThrown() and setThrown()-functions.
+ */
 void EventHandlerTest::testThrownStatus()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -93,6 +120,10 @@ void EventHandlerTest::testThrownStatus()
     QVERIFY(eventHandler->getThrown() == false);
 }
 
+/**
+ * @brief EventHandlerTest::testPlayerMovedStatus
+ * Tests GameEventHandler's getPlayerMoved()-function and setPlayerMoved()-function.
+ */
 void EventHandlerTest::testPlayerMovedStatus()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -104,6 +135,10 @@ void EventHandlerTest::testPlayerMovedStatus()
     QVERIFY(eventHandler->getPlayerMoved() == false);
 }
 
+/**
+ * @brief EventHandlerTest::testPlayerMovingStatus
+ * Tests GameEventHandler's isMoving() and setMoving()-functions.
+ */
 void EventHandlerTest::testPlayerMovingStatus()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -114,6 +149,11 @@ void EventHandlerTest::testPlayerMovingStatus()
     eventHandler->setMoving(false);
     QVERIFY(eventHandler->isMoving() == false);
 }
+
+/**
+ * @brief EventHandlerTest::testPlayerBuildingStatus
+ * Tests GameEventHandler's isBuilding() and setBuildingState()-functions.
+ */
 
 void EventHandlerTest::testPlayerBuildingStatus()
 {
@@ -126,6 +166,11 @@ void EventHandlerTest::testPlayerBuildingStatus()
     QVERIFY(eventHandler->isBuilding() == false);
 }
 
+/**
+ * @brief EventHandlerTest::testPlayerBuiltStatus
+ *  Tests GameEventHandler's getPlayerBuilt() and setPlayerBuilt()-functions.
+ */
+
 void EventHandlerTest::testPlayerBuiltStatus()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -136,6 +181,11 @@ void EventHandlerTest::testPlayerBuiltStatus()
     eventHandler->setPlayerBuilt(false);
     QVERIFY(eventHandler->getPlayerBuilt() == false);
 }
+
+/**
+ * @brief EventHandlerTest::testPlayerSearchedStatus
+ *  Tests GameEventHandler's getPlayerSearched() and setPlayerSearched()-functions.
+ */
 
 void EventHandlerTest::testPlayerSearchedStatus()
 {
@@ -148,6 +198,10 @@ void EventHandlerTest::testPlayerSearchedStatus()
     QVERIFY(eventHandler->getPlayerSearched() == false);
 }
 
+/**
+ * @brief EventHandlerTest::testPlayerSearchingStatus
+ *  Tests GameEventHandler's setSearching() and isSearching()-functions.
+ */
 void EventHandlerTest::testPlayerSearchingStatus()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -159,6 +213,10 @@ void EventHandlerTest::testPlayerSearchingStatus()
     QVERIFY(eventHandler->isSearching() == false);
 }
 
+/**
+ * @brief EventHandlerTest::testPlayerHiringStatus
+ *  Tests GameEventHandler's isHiring() and setHiring()-functions.
+ */
 void EventHandlerTest::testPlayerHiringStatus()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -170,6 +228,10 @@ void EventHandlerTest::testPlayerHiringStatus()
     QVERIFY(eventHandler->isHiring() == false);
 }
 
+/**
+ * @brief EventHandlerTest::testPlayerHiredStatus
+ *  Tests GameEventHandler's setPlayerHired() and getHired()-functions.
+ */
 void EventHandlerTest::testPlayerHiredStatus()
 {
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
@@ -181,7 +243,34 @@ void EventHandlerTest::testPlayerHiredStatus()
     QVERIFY(eventHandler->getHired() == false);
 }
 
+/**
+ * @brief EventHandlerTest::testSelectedWorkerType
+ * Tests GameEventHandler's setWorkerType() and getWorkerType()-functions.
+ */
 void EventHandlerTest::testSelectedWorkerType()
+{
+    std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
+    std::shared_ptr<Game::GameEventHandler> eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
+    std::string novice = "novice worker";
+    std::string apprentice = "apprentice worker";
+    std::string master = "master worker";
+
+    eventHandler->setWorkerType(novice);
+    QVERIFY(eventHandler->getWorkerType() == novice);
+
+    eventHandler->setWorkerType(apprentice);
+    QVERIFY(eventHandler->getWorkerType() == apprentice);
+
+    eventHandler->setWorkerType(master);
+    QVERIFY(eventHandler->getWorkerType() == master);
+}
+
+void EventHandlerTest::testModifyResources()
+{
+
+}
+
+void EventHandlerTest::testModifyResource()
 {
 
 }

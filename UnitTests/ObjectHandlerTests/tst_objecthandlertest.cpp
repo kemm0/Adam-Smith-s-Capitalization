@@ -45,14 +45,12 @@ void ObjectHandlerTest::testAddTiles()
         tiles.push_back(newTile);
     }
     objManager->addTiles(tiles);
-    std::cout<<tiles.size()<<std::endl;
-    std::cout<<objManager->getGameObjects().size()<<std::endl;
     QVERIFY(tiles.size() == objManager->getGameObjects().size());
 }
 
 void ObjectHandlerTest::testAddGameTile()
 {
-    /*
+
     std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<Game::GameObjectManager>();
     std::shared_ptr<Game::GameEventHandler> eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
     QVERIFY(objManager->getGameTiles().size() == 0);
@@ -63,7 +61,7 @@ void ObjectHandlerTest::testAddGameTile()
                                                                                        objManager);
         objManager->addGameTile(newTile);
         QVERIFY(objManager->getGameTiles().size() == currentSize + 1);
-    }*/
+    }
 
 }
 

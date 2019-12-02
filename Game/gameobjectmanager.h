@@ -29,6 +29,7 @@ public:
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
     void addGameTile(std::shared_ptr<Game::GameTileBase> tile);
     void addWorker(std::shared_ptr<Course::WorkerBase> worker);
+    void addBuilding(std::shared_ptr<Game::GameBuildingBase> building);
     void addGameObject(std::shared_ptr<Course::GameObject> object);
 
     //getters
