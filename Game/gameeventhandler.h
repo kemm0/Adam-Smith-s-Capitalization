@@ -27,9 +27,6 @@ public:
                                  Course::ResourceMap resources);
     void endTurn();
     int throwDice();
-    void nextTurn();
-    int searchArea(std::vector<std::shared_ptr<Game::GameTileBase> > area);
-    void createBuilding(Course::Coordinate location);
     void checkIfOutOfMoney(std::map<Course::BasicResource, int> amount);
 
 

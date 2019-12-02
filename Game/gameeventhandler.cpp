@@ -48,6 +48,13 @@ void GameEventHandler::endTurn()
     turn += 1;
     threw = false;
     moved = false;
+    moving = false;
+    building = false;
+    built = false;
+    searching = false;
+    searchedArea = false;
+    hiring = false;
+    hired = false;
 }
 
 int GameEventHandler::throwDice()
@@ -176,12 +183,6 @@ void GameEventHandler::setHiring(bool x)
 void GameEventHandler::setWorkerType(std::string type)
 {
     workertype = type;
-}
-
-
-void GameEventHandler::nextTurn()
-{
-    turn += 1;
 }
 
 void GameEventHandler::checkIfOutOfMoney(std::map<Course::BasicResource, int> amount)

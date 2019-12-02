@@ -12,11 +12,13 @@ SOURCES +=  tst_objecthandlertest.cpp \
             ../../Game/gameobjectmanager.cpp\
             ../../Game/player.cpp \
             ../../Game/gametilebase.cpp \
+            ../../Game/Workers/noviceworker.cpp \
 
 HEADERS +=  ../../Game/gameeventhandler.h \
             ../../Game/gameobjectmanager.h\
             ../../Game/player.h \
             ../../Game/gametilebase.h \
+            ../../Game/Workers/noviceworker.h \
 
 INCLUDEPATH += ../../Game \
             ../../Course/CourseLib/
