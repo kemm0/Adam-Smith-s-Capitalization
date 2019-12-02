@@ -3,7 +3,7 @@
 
 #include "../CourseLib/core/playerbase.h"
 #include "../CourseLib/core/gameobject.h"
-#include "QGraphicsPixmapItem"
+#include "QPixmap"
 #include "gameresourcemap.h"
 namespace Game{
 class GameEventHandler;
