@@ -17,7 +17,9 @@
 
 
 namespace Game{
-
+/**
+ * @brief The GameMapGenerator class creates tiles for maps in the start and when buildings are built
+ */
 class GameMapGenerator: public QObject{
 Q_OBJECT
 public:
@@ -25,14 +27,8 @@ public:
                      std::shared_ptr<GameEventHandler> eventHandler,
                      QObject *parent = nullptr);
     ~GameMapGenerator();
-    /**
-     * @brief createMapObjects creates tiles in start of the game
-     */
+    
     void createMapObjects();
-    /**
-     * @brief createBuilding creates building tile 
-     * @param location coordinates determined by player click
-     */
     void createBuilding(Course::Coordinate location);
     Course::Coordinate getRandomMapCoordinate();
     void setTreasure(int amount);
@@ -41,23 +37,16 @@ public:
     void createForestTile(Course::Coordinate location);
     void createWaterTile(Course::Coordinate location);
     void createPlayer(Course::Coordinate location);
-    /**
-     * @brief createWorker adds worker for a tile
-     * @param targetTile determined by player click
-     */
     void createWorker(std::shared_ptr<GameTileBase> targetTile);
 
     void createFarmhouse(std::shared_ptr<GameTileBase> targetTile);
     void createLoggingcabin(std::shared_ptr<GameTileBase> targetTile);
     void createFishinghut(std::shared_ptr<GameTileBase> targetTile);
 signals:
-    /**
-     * @brief gameMessage shows game messages in mapwindow
-     */
     void gameMessage(std::string);
 
 private:
-    std::vector<std::vector<int>> mapTemplate; //Coordinate for drawing the map
+    std::vector<std::vector<int>> mapTemplate; // Map template for current map used
     std::shared_ptr<GameObjectManager> objManager_;
     std::shared_ptr<GameEventHandler> eventHandler_;
     int mapWidth;
