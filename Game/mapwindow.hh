@@ -34,20 +34,8 @@ class MapWindow : public QMainWindow
 
 public:
     explicit MapWindow(QWidget *parent = 0);
-    ~MapWindow();
     void resizeEvent(QResizeEvent* event) override;
     void showEvent(QShowEvent* event) override;
-    int tileSize;
-    int mapWidth;
-    int mapHeight;
-    Game::Map* gameMap;
-    std::string username;
-    std::shared_ptr<Game::GameObjectManager> objManager;
-    std::shared_ptr<Game::GameEventHandler> eventHandler;
-    std::shared_ptr<Game::GameMapGenerator> mapCreator;
-    QMediaPlayer* musicplayer;
-    QMediaPlayer* soundEffectPlayer;
-    QMediaPlaylist* musicPlaylist;
     std::string getUsername(); //get username from startwindow
 
     void keyPressEvent(QKeyEvent *event) override;
@@ -90,12 +78,6 @@ private slots:
      * @param checked
      */
     void on_searchAreaButton_toggled(bool checked);
-    // Sound effects for actions
-    void treasureFoundSound();
-    void robberFoundSound();
-    void nothingFoundSound();
-    void buildSound();
-    void showTileInfo(std::string info);
     /**
      * @brief on_hireButton_toggled lets player hire workers
      * @param checked
@@ -117,8 +99,21 @@ private slots:
     void gameOver(bool ranOutOfMoney);
 
 private:
+    int maxTurns;
+    int tileSize;
+    int mapWidth;
+    int mapHeight;
+    std::shared_ptr<Game::GameObjectManager> objManager;
+    std::shared_ptr<Game::GameEventHandler> eventHandler;
+    std::shared_ptr<Game::GameMapGenerator> mapCreator;
+    Game::Map* gameMap;
+    std::string username;
     Ui::MapWindow* m_ui;
     startDialog* startingDialog;
+    QMediaPlayer* musicplayer;
+    QMediaPlayer* soundEffectPlayer;
+    QMediaPlaylist* musicPlaylist;
+
     /**
      * @brief lock_and_unlock_other_buttons locks other buttons when one button is pressed
      * and releases them if toggle = false
@@ -129,7 +124,12 @@ private:
      * @brief buttons_update locks button if ongoing action or action has been made in turn
      */
     void buttons_update();
-    int maxTurns;
+    // Sound effects for actions
+    void treasureFoundSound();
+    void robberFoundSound();
+    void nothingFoundSound();
+    void buildSound();
+    void showTileInfo(std::string info);
 
 
 

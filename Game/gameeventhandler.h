@@ -20,6 +20,11 @@ class GameEventHandler : public QObject, public Course::iGameEventHandler
 {
 Q_OBJECT
 public:
+    /**
+     * @brief GameEventHandler
+     * @param manager points to the game's object manager
+     * @param parent
+     */
     GameEventHandler(std::shared_ptr<GameObjectManager> manager, QObject *parent = nullptr);
     ~GameEventHandler();
 

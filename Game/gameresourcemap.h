@@ -2,6 +2,8 @@
 #define GAMERESOURCEMAP_H
 #include "../CourseLib/core/basicresources.h"
 
+//Contains all costs and production rates for buildings and workers as 
+//well as penalties and gains for robbers and treasures
 
 namespace Game {
 
@@ -38,7 +40,7 @@ const Course::ResourceMap FISHING_PRODUCTION = {
 
 // Worker - NoviceWorker
 const Course::ResourceMapDouble NW_WORKER_EFFICIENCY = {
-    {Course::MONEY, 10},
+    {Course::MONEY, 1.25},
 };
 
 const Course::ResourceMap NW_RECRUITMENT_COST = {
@@ -47,7 +49,7 @@ const Course::ResourceMap NW_RECRUITMENT_COST = {
 
 // Worker - ApprenticeWorker
 const Course::ResourceMapDouble AW_WORKER_EFFICIENCY = {
-    {Course::MONEY, 20},
+    {Course::MONEY, 1.5},
 };
 
 const Course::ResourceMap AW_RECRUITMENT_COST = {
@@ -56,19 +58,21 @@ const Course::ResourceMap AW_RECRUITMENT_COST = {
 
 // Worker - MasterWorker
 const Course::ResourceMapDouble MW_WORKER_EFFICIENCY = {
-    {Course::MONEY, 30},
+    {Course::MONEY, 1.75},
 };
 
 const Course::ResourceMap MW_RECRUITMENT_COST = {
     {Course::MONEY, -70},
 };
+// Tile without building doesnt have effect
 const Course::ResourceMap TILE_BP = {
-    {Course::MONEY, 1},
+    {Course::MONEY, 0},
 };
-
+// Robbers
 const Course::ResourceMap ROBBER = {
     {Course::MONEY, -500},
 };
+// Treasures
 const Course::ResourceMap TREASURE = {
     {Course::MONEY, 500},
 };

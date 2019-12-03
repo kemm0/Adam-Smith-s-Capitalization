@@ -12,6 +12,9 @@
 
 namespace Game{
 
+/**
+ * @brief The GameTileBase class base class for all tiles used in game. Inherited from TileBase
+ */
 class GameTileBase : public Course::TileBase
 {
 public:
@@ -21,19 +24,21 @@ public:
               const unsigned int& max_build = 1,
               const unsigned int& max_work = 3,
               const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
-    virtual void updateSprite(QPixmap newSprite);
-
-    //getters
+    /**
+     * @brief getSprite
+     * @return Qpixmap image to draw buildings to mapwindow
+     */
     virtual QPixmap getSprite();
-    bool getRobber();
-    bool getTreasure();
-    int getHeight();
-    int getWidth();
+    void updateSprite(QPixmap newSprite);
+    virtual void addGameBuilding(const std::shared_ptr<Game::GameBuildingBase>& building);
+    bool getRobber(); // if tile contains robber
+    bool getTreasure(); // if tile has treasure
+    int getHeight(); // tile height
+    int getWidth(); // tile width
+    std::vector<std::shared_ptr<GameBuildingBase>> buildingsOnTile; // in this game only one building in tile
 
-    //setters
     bool setRobber(bool x);
     bool setTreasure(bool x);
-
 protected:
     QPixmap sprite;
     bool hasRobber;
@@ -41,6 +46,7 @@ protected:
     int treasure;
     int width;
     int height;
+    //std::vector<std::shared_ptr<Course::WorkerBase>> workers;
 };
 }
 #endif // GAMETILEBASE_H

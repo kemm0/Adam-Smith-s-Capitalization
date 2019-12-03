@@ -49,17 +49,14 @@ std::shared_ptr<Course::TileBase> GameObjectManager::getTile(const Course::Coord
 
 std::shared_ptr<Game::GameTileBase> GameObjectManager::getGameTile(const Course::Coordinate &coordinate)
 {
+    //std::cout<<"Values i got x: " + std::to_string(coordinate.x()) + " y: "+ std::to_string(coordinate.y())<<std::endl;
     for(std::shared_ptr<Game::GameTileBase> tile: gameTiles){
         if(tile->getCoordinate() == coordinate){
+            //std::cout<<"exact same tile found! x: " + std::to_string(tile->getCoordinate().x()) + " y: " + std::to_string(tile->getCoordinate().y())<<std::endl;
             return tile;
         }
     }
     return nullptr;
-}
-
-std::vector<std::shared_ptr<GameBuildingBase> > GameObjectManager::getBuildings()
-{
-    return buildings;
 }
 
 std::vector<std::shared_ptr<Course::GameObject> > GameObjectManager::getGameObjects()
@@ -84,16 +81,11 @@ std::vector<std::shared_ptr<Course::TileBase> > GameObjectManager::getTiles(cons
         for(auto tile:gameTiles){
             if(tile->getCoordinate() == coordinate){
                 foundtiles.push_back(tile);
+                return foundtiles;
             }
         }
     }
-    if(foundtiles.size() != 0){
-        return foundtiles;
-    }
-    else{
-        throw "no tiles found";
-    }
-
+    throw "no tiles found";
 }
 
 std::vector<std::shared_ptr<GameTileBase> > GameObjectManager::getGameTiles()
@@ -120,11 +112,6 @@ std::vector<std::shared_ptr<Course::WorkerBase> > GameObjectManager::getWorkers(
 void GameObjectManager::addWorker(std::shared_ptr<Course::WorkerBase> worker)
 {
     workers.push_back(worker);
-}
-
-void GameObjectManager::addBuilding(std::shared_ptr<Game::GameBuildingBase> building)
-{
-    buildings.push_back(building);
 }
 
 void GameObjectManager::addGameObject(std::shared_ptr<Course::GameObject> object)

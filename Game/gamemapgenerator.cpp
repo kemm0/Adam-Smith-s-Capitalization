@@ -6,12 +6,6 @@
 
 namespace Game{
 
-enum mapCodes{
-    GRASSLAND = 0,
-    WATER = 1,
-    FOREST = 3,
-};
-
 GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager,
                                    std::shared_ptr<GameEventHandler> eventHandler,
                                    QObject *parent)
