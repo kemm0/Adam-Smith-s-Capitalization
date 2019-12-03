@@ -42,7 +42,7 @@ const Course::ResourceMap FISHING_PRODUCTION = {
 
 // Worker - NoviceWorker
 const Course::ResourceMapDouble NW_WORKER_EFFICIENCY = {
-    {Course::MONEY, 1.25},
+    {Course::MONEY, 10},
 };
 
 const Course::ResourceMap NW_RECRUITMENT_COST = {
@@ -51,7 +51,7 @@ const Course::ResourceMap NW_RECRUITMENT_COST = {
 
 // Worker - ApprenticeWorker
 const Course::ResourceMapDouble AW_WORKER_EFFICIENCY = {
-    {Course::MONEY, 1.5},
+    {Course::MONEY, 20},
 };
 
 const Course::ResourceMap AW_RECRUITMENT_COST = {
@@ -60,14 +60,14 @@ const Course::ResourceMap AW_RECRUITMENT_COST = {
 
 // Worker - MasterWorker
 const Course::ResourceMapDouble MW_WORKER_EFFICIENCY = {
-    {Course::MONEY, 1.75},
+    {Course::MONEY, 30},
 };
 
 const Course::ResourceMap MW_RECRUITMENT_COST = {
     {Course::MONEY, -70},
 };
 const Course::ResourceMap TILE_BP = {
-    {Course::MONEY, 0},
+    {Course::MONEY, 1},
 };
 
 const Course::ResourceMap ROBBER = {

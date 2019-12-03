@@ -17,6 +17,7 @@
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
 #include "gamemapgenerator.h"
+#include "QMessageBox"
 
 
 namespace Ui {
@@ -33,7 +34,6 @@ public:
     ~MapWindow();
     void resizeEvent(QResizeEvent* event) override;
     void showEvent(QShowEvent* event) override;
-    void initMap();
     int tileSize;
     int mapWidth;
     int mapHeight;
@@ -46,7 +46,7 @@ public:
     QMediaPlayer* soundEffectPlayer;
     QMediaPlaylist* musicPlaylist;
     std::string getUsername();
-    void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
 
 
 private slots:
@@ -76,9 +76,17 @@ private slots:
 
     void on_hiringList_currentIndexChanged(const QString &arg1);
 
+    void on_rulesButton_clicked();
+
+    void gameOver(bool ranOutOfMoney);
+
 private:
     Ui::MapWindow* m_ui;
     startDialog* startingDialog;
+    void lock_and_unlock_other_buttons(bool toggle);
+    void buttons_update();
+    int maxTurns;
+
 
 
 };

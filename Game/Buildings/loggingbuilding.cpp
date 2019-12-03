@@ -20,8 +20,6 @@ LoggingBuilding::LoggingBuilding(const std::shared_ptr<GameEventHandler>& eventh
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/logcabin.png");
     width = sprite.width();
     height = sprite.height();
-
-
 }
 
 std::string LoggingBuilding::getType() const
