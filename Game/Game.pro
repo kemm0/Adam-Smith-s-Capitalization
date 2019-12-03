@@ -76,5 +76,4 @@ else:unix: PRE_TARGETDEPS += \
 
 FORMS += \
     mapwindow.ui \
-    startwindow.ui \
     startdialog.ui
