@@ -45,17 +45,12 @@ Q_OBJECT
          */
         void drawMap();
         QGraphicsPixmapItem* player;
-        /**
-         * @brief setOnRange used to determine if clicked tile is close enough for action
-         * @param range
-         */
-        void setOnRange(bool range);
-        bool getOnRange();
 
     private:
         int tileSize;
         int mapWidth;
         int mapHeight;
+        bool onRange;
         QGraphicsItem* selectedTile;
         std::shared_ptr<Game::GameEventHandler> eventHandler_;
         std::shared_ptr<Game::GameObjectManager> objManager_;
@@ -75,7 +70,6 @@ Q_OBJECT
          * @param targetTile where cursor is
          */
         void showTileHighlightEffect(QGraphicsItem* targetTile);
-        bool range;
     signals:
         /**
          * @brief robberFound

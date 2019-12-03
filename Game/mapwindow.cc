@@ -23,6 +23,7 @@ MapWindow::MapWindow(QWidget *parent):
     //objManager->initMap(eventHandler);
     gameMap = new Game::Map(nullptr,eventHandler,objManager,mapCreator);
     gameMap->drawMap();
+    gameMap->setFocus();
     m_ui->gameMapView->setScene(gameMap);
     m_ui->gameMapView->setMouseTracking(true);
     m_ui->gameMapView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
@@ -40,6 +41,7 @@ MapWindow::MapWindow(QWidget *parent):
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
 
     //MUSIC
+    // self made with bandlab :D enjoy
     musicplayer = new QMediaPlayer;
     musicPlaylist = new QMediaPlaylist();
     musicPlaylist->addMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/gamemusic.wav"));
@@ -48,6 +50,7 @@ MapWindow::MapWindow(QWidget *parent):
     musicplayer->play();
 
     //SOUND EFFECTS
+    //all sound effects are from freesounds.org and have a license that allows free usage of the files
     soundEffectPlayer = new QMediaPlayer();
     connect(gameMap,&Map::robberFound,this,&MapWindow::robberFoundSound);
     connect(gameMap,&Map::treasureFound,this,&MapWindow::treasureFoundSound);
@@ -370,6 +373,7 @@ void MapWindow::on_rulesButton_clicked()
     msgBox->setInformativeText("In this game you play as Adam Smith, father of capitalism! Your aim is to earn money by building houses, "
                                "hiring dirty finns to work for you and searching for treasures while avoiding robbers and alcoholics.\n\n"
                                "One turn composes of four possible actions that can be made in arbitrary order: Moving, seaching, building and hiring. "
+                               "You can zoom in and out of the map with + (plus) and - (minus) keys and move around the map with arrow keys"
                                "Most actions are done by clicking a button and then clicking a tile in the map.\n\n"
                                "Moving: You can move to any direction an amount specified by dice. Make sure to throw the dice before moving.\n\n"
                                "Searching: You can search a tile next to you. There is a chance of finding a great treasure as well as being robbed.\n\n"
@@ -410,7 +414,7 @@ void MapWindow::gameOver(bool ranOutOfMoney)
         int money = objManager->getPlayer()->getMoney();
         if(money <= objManager->getPlayer()->getStartingMoney()){
             gameOverBox->setWindowTitle("Do better");
-            gameOverBox->setText("Although you did't go bankruptcy, you did't earn any money either. "
+            gameOverBox->setText("Although you did't go bankrupt, you did't earn any money either. "
                                  "That is not how capitalism should work!\n\n"
                                  "Try again if you dare.");
         }
