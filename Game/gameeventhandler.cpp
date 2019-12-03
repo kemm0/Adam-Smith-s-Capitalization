@@ -43,6 +43,7 @@ bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> playe
 
 
 
+
 void GameEventHandler::endTurn()
 {
     turn += 1;
@@ -55,6 +56,7 @@ void GameEventHandler::endTurn()
     searchedArea = false;
     hiring = false;
     hired = false;
+    //emit gameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 }
 
 int GameEventHandler::throwDice()

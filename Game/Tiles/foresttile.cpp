@@ -26,9 +26,4 @@ std::string Foresttile::getType() const
     return "Forest";
 }
 
-QPixmap Foresttile::getSprite()
-{
-    return sprite;
-}
-
 }

@@ -84,9 +84,11 @@ public:
     std::vector<std::shared_ptr<Course::WorkerBase>> getWorkers();
     void addWorker(std::shared_ptr<Course::WorkerBase> worker);
     void addGameObject(std::shared_ptr<Course::GameObject> object);
+    void addBuilding(std::shared_ptr<Course::BuildingBase> building);
+    std::vector<std::shared_ptr<Course::BuildingBase>> getBuildings();
 
 private:
-    std::vector<std::shared_ptr<Game::GameBuildingBase>> buildings;
+    std::vector<std::shared_ptr<Course::BuildingBase>> buildings;
     std::vector<std::shared_ptr<Course::WorkerBase>> workers;
     std::vector<std::shared_ptr<Course::GameObject>> gameObjects_;
     std::vector<std::shared_ptr<Game::GameTileBase>> gameTiles;

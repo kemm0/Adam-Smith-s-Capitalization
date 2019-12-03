@@ -18,6 +18,15 @@ namespace Game{
 class GameTileBase : public Course::TileBase
 {
 public:
+    /**
+     * @brief GameTileBase
+     * @param location
+     * @param eventhandler
+     * @param objectmanager
+     * @param max_build maximum amount of buildings that can be placed on the tile
+     * @param max_work maximum amount of workers that can be placed on the tile
+     * @param production
+     */
     GameTileBase(const Course::Coordinate& location,
               const std::shared_ptr<GameEventHandler>& eventhandler,
               const std::shared_ptr<GameObjectManager>& objectmanager,
@@ -26,19 +35,48 @@ public:
               const Course::ResourceMap& production = Game::ConstGameResourceMap::TILE_BP);
     /**
      * @brief getSprite
-     * @return Qpixmap image to draw buildings to mapwindow
+     * @return Qpixmap image to draw buildings to map scene
      */
     virtual QPixmap getSprite();
+    /**
+     * @brief updateSprite
+     * @param newSprite
+     * sets the sprite image to the given one
+     */
     void updateSprite(QPixmap newSprite);
-    virtual void addGameBuilding(const std::shared_ptr<Game::GameBuildingBase>& building);
-    bool getRobber(); // if tile contains robber
-    bool getTreasure(); // if tile has treasure
-    int getHeight(); // tile height
-    int getWidth(); // tile width
-    std::vector<std::shared_ptr<GameBuildingBase>> buildingsOnTile; // in this game only one building in tile
+    /**
+     * @brief getRobber
+     * @return true, if tile has robber, false if not
+     */
+    bool getRobber();
+    /**
+     * @brief getTreasure
+     * @return true, if tile has treasure, false if not
+     */
+    bool getTreasure();
+    /**
+     * @brief getHeight
+     * @return height of the sprite image
+     */
+    int getHeight();
+    /**
+     * @brief getWidth
+     * @return width of the sprite image
+     */
+    int getWidth();
 
-    bool setRobber(bool x);
-    bool setTreasure(bool x);
+    /**
+     * @brief setRobber if robber == true, tile will have a robber
+     * @param robber
+     * @return
+     */
+    bool setRobber(bool robber);
+    /**
+     * @brief setTreasure if treasure == true, tile will have a trasure
+     * @param treasure
+     * @return
+     */
+    bool setTreasure(bool treasure);
 protected:
     QPixmap sprite;
     bool hasRobber;
@@ -46,7 +84,6 @@ protected:
     int treasure;
     int width;
     int height;
-    //std::vector<std::shared_ptr<Course::WorkerBase>> workers;
 };
 }
 #endif // GAMETILEBASE_H

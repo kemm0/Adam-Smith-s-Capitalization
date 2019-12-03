@@ -19,9 +19,16 @@ public:
     ~startDialog();
 
 private slots:
+    /**
+     * @brief on_buttonBox_accepted called when user presses ok at the dialog screen
+     */
     void on_buttonBox_accepted();
 
 signals:
+    /**
+     * @brief nameConfirmed sends the given username to connected components
+     * @param name
+     */
     void nameConfirmed(std::string name);
 
 private:

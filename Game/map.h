@@ -40,7 +40,6 @@ Q_OBJECT
          * @param mouseEvent a click
          */
         void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
-        void wheelEvent(QGraphicsSceneWheelEvent *wheelEvent) override;
         /**
          * @brief drawMap draw correct tiles spesified by gamemapgenerator
          */
@@ -78,15 +77,31 @@ Q_OBJECT
         void showTileHighlightEffect(QGraphicsItem* targetTile);
         bool range;
     signals:
-        void scrollOut();
-        void scrollIn();
+        /**
+         * @brief robberFound
+         * emitted when player encounters a robber
+         */
         void robberFound();
+        /**
+         * @brief treasureFound
+         * emitted when player encounters a treasure
+         */
         void treasureFound();
+        /**
+         * @brief nothingFound
+         * emitted when player searches an empty tile
+         */
         void nothingFound();
+        /**
+         * @brief built
+         * emitted when player has built a building
+         */
         void built();
+        /**
+         * @brief inspectTile sends the tile's type when emitted
+         * @param info
+         */
         void inspectTile(std::string info);
-    public slots:
-        //void zoom();
     };
 }
 

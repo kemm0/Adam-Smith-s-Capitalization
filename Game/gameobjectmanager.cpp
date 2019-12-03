@@ -81,11 +81,15 @@ std::vector<std::shared_ptr<Course::TileBase> > GameObjectManager::getTiles(cons
         for(auto tile:gameTiles){
             if(tile->getCoordinate() == coordinate){
                 foundtiles.push_back(tile);
-                return foundtiles;
             }
         }
     }
-    throw "no tiles found";
+    if(foundtiles.size() != 0){
+        return foundtiles;
+    }
+    else{
+        throw "no tiles found";
+    }
 }
 
 std::vector<std::shared_ptr<GameTileBase> > GameObjectManager::getGameTiles()
@@ -117,5 +121,15 @@ void GameObjectManager::addWorker(std::shared_ptr<Course::WorkerBase> worker)
 void GameObjectManager::addGameObject(std::shared_ptr<Course::GameObject> object)
 {
     gameObjects_.push_back(object);
+}
+
+void GameObjectManager::addBuilding(std::shared_ptr<Course::BuildingBase> building)
+{
+    buildings.push_back(building);
+}
+
+std::vector<std::shared_ptr<Course::BuildingBase> > GameObjectManager::getBuildings()
+{
+    return buildings;
 }
 }

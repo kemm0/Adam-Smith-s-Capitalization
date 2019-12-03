@@ -34,10 +34,28 @@ class MapWindow : public QMainWindow
 
 public:
     explicit MapWindow(QWidget *parent = 0);
-    void resizeEvent(QResizeEvent* event) override;
-    void showEvent(QShowEvent* event) override;
-    std::string getUsername(); //get username from startwindow
+    ~MapWindow();
 
+    /**
+     * @brief resizeEvent handles events where user changes the mapwindow's size
+     * @param event
+     */
+    void resizeEvent(QResizeEvent* event) override;
+    /**
+     * @brief showEvent is called when mapwindow show up on the screen
+     * @param event
+     */
+    void showEvent(QShowEvent* event) override;
+    /**
+     * @brief getUsername used to get username from starting dialog to the game
+     * @return
+     */
+    std::string getUsername();
+
+    /**
+     * @brief keyPressEvent handles events where user presses a key on keyboard
+     * @param event
+     */
     void keyPressEvent(QKeyEvent *event) override;
 
 

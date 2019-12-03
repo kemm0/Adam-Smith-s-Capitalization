@@ -34,6 +34,7 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
     m_ui->hireButton->setCheckable(true);
+    //showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 
 
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
@@ -55,6 +56,7 @@ MapWindow::MapWindow(QWidget *parent):
 
     connect(gameMap,&Map::inspectTile,this,&MapWindow::showTileInfo);
     connect(mapCreator.get(),&GameMapGenerator::gameMessage,this,&MapWindow::showGameMessage);
+    connect(eventHandler.get(),&GameEventHandler::gameMessage,this,&MapWindow::showGameMessage);
     connect(eventHandler.get(), &GameEventHandler::gameOver, this, &MapWindow::gameOver);
 
     gameMap->setBackgroundBrush(Qt::black);
@@ -145,6 +147,7 @@ void MapWindow::on_endTurnButton_clicked()
 
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
     showGameMessage("");
+    showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
 }
 
 void MapWindow::setUsername(std::string name)

@@ -217,6 +217,12 @@ void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
                                                                            Game::ConstGameResourceMap::FARM_BUILD_COST,
                                                                            Game::ConstGameResourceMap::FARM_PRODUCTION);
 
+/*<<<<<<< HEAD
+    //objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
+    objManager_->getPlayer()->addObject(targetTile);
+    objManager_->getPlayer()->modifyResources(newFarm->BUILD_COST);
+    targetTile->addGameBuilding(newFarm);
+=======*/
     eventHandler_->checkIfOutOfMoney(newFarm->BUILD_COST);
     objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
@@ -235,8 +241,14 @@ void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTi
                                                                            1,
                                                                            Game::ConstGameResourceMap::LOGGING_BUILD_COST,
                                                                            Game::ConstGameResourceMap::LOGGING_PRODUCTION);
+/*<<<<<<< HEAD
+
+    //objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
+    objManager_->getPlayer()->modifyResources(newCabin->BUILD_COST);
+=======*/
     eventHandler_->checkIfOutOfMoney(newCabin->BUILD_COST);
     objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
+
     objManager_->getPlayer()->addObject(targetTile);
     objManager_->addGameObject(newCabin);
     targetTile->addBuilding(newCabin);
@@ -252,8 +264,13 @@ void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile
                                                                            1,
                                                                            Game::ConstGameResourceMap::FISHING_BUILD_COST,
                                                                            Game::ConstGameResourceMap::FISHING_PRODUCTION);
+/*<<<<<<< HEAD
+    //objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
+    objManager_->getPlayer()->modifyResources(newFishingHut->BUILD_COST);
+=======*/
     eventHandler_->checkIfOutOfMoney(newFishingHut->BUILD_COST);
     objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
+
     objManager_->getPlayer()->addObject(targetTile);
     objManager_->addGameObject(newFishingHut);
     targetTile->addBuilding(newFishingHut);

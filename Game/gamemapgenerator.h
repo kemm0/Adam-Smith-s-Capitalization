@@ -34,6 +34,12 @@ enum mapCodes{
 class GameMapGenerator: public QObject{
 Q_OBJECT
 public:
+    /**
+     * @brief GameMapGenerator
+     * @param objManager
+     * @param eventHandler
+     * @param parent
+     */
     GameMapGenerator(std::shared_ptr<GameObjectManager> objManager,
                      std::shared_ptr<GameEventHandler> eventHandler,
                      QObject *parent = nullptr);

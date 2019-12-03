@@ -49,14 +49,14 @@ int GameTileBase::getWidth()
     return width;
 }
 
-bool GameTileBase::setRobber(bool x)
+bool GameTileBase::setRobber(bool robber)
 {
-    hasRobber = x;
+    hasRobber = robber;
 }
 
-bool GameTileBase::setTreasure(bool x)
+bool GameTileBase::setTreasure(bool treasure)
 {
-    hasTreasure = x;
+    hasTreasure = treasure;
 }
 
 }

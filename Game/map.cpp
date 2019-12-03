@@ -161,7 +161,6 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 mapItem->setPos(targetTile->pos());
                 addItem(mapItem);
                 eventHandler_->setPlayerBuilt(true);
-                std::cout << std::to_string(objManager_->getPlayer()->getMoney()) <<std::endl;
                 emit built();
                 update();
             }
@@ -213,16 +212,6 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         emit inspectTile(
                     "This is " + tile->getType() + ". There are " + std::to_string(tile->getBuildingCount())
                     + " buildings and " + std::to_string(tile->getWorkerCount()) + " workers in this area.");
-    }
-}
-
-void Map::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)
-{
-    if(wheelEvent->delta() > 0){
-        emit scrollIn();
-    }
-    else if (wheelEvent->delta()){
-        emit scrollOut();
     }
 }
 }

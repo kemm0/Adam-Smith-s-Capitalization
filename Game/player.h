@@ -5,16 +5,16 @@
 #include "../CourseLib/core/gameobject.h"
 #include "QPixmap"
 #include "gameresourcemap.h"
+#include "gameresourcemap.h"
 namespace Game{
 class GameEventHandler;
 class GameObjectManager;
 class GameBuildingBase;
+class GameTileBase;
 
 /**
  * @brief The Player class used for player instance
  */
-
-class GameTileBase;
 
 class Player : public Course::PlayerBase, public Course::GameObject
 
@@ -28,12 +28,16 @@ public:
     ~Player();
     QPixmap getSprite(); // QPixmap used to draw player
     int getMoney(); // counts money
-    void setMoney(std::map<Course::BasicResource, int>); // adds or subtracts money
+    void setMoney(std::map<Course::BasicResource , int>); // adds or subtracts money
+    Course::ResourceMap getResources();
+    void modifyResources(Course::ResourceMap rmap);
+    void getProfit();
     int getStartingMoney();
 
 private:
         QPixmap sprite;
         int money;
+        Course::ResourceMap resources;
         int startingMoney;
 
 };
