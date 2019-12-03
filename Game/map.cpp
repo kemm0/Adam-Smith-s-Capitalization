@@ -161,6 +161,7 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                 mapItem->setPos(targetTile->pos());
                 addItem(mapItem);
                 eventHandler_->setPlayerBuilt(true);
+                std::cout << std::to_string(objManager_->getPlayer()->getMoney()) <<std::endl;
                 emit built();
                 update();
             }

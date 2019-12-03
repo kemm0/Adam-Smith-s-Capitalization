@@ -10,7 +10,9 @@
 #include "gameresourcemap.h"
 
 namespace Game {
-
+/**
+ * @brief The MasterWorker class represents master worker
+ */
 class MasterWorker: public Course::WorkerBase
 {
 public:

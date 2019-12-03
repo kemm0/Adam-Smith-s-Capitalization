@@ -9,7 +9,9 @@
 #include "gameresourcemap.h"
 
 namespace Game {
-
+/**
+ * @brief The NoviceWorker class represents novice worker
+ */
 class NoviceWorker: public Course::WorkerBase
 {
 public:

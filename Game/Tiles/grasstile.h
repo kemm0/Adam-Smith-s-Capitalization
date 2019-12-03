@@ -6,7 +6,9 @@
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
 namespace Game{
-
+/**
+ * @brief The GrassTile class represents grass
+ */
 class GrassTile : public Game::GameTileBase//, public QGraphicsPixmapItem
 {
 public:

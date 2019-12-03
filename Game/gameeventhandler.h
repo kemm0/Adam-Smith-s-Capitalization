@@ -13,19 +13,29 @@ namespace Game{
 class GameTileBase;
 class GameBuildingBase;
 class FarmBuilding;
-
+/**
+ * @brief The GameEventHandler class interface inherited from iGameEventHandler.
+ */
 class GameEventHandler : public QObject, public Course::iGameEventHandler
 {
 Q_OBJECT
 public:
     GameEventHandler(std::shared_ptr<GameObjectManager> manager, QObject *parent = nullptr);
     ~GameEventHandler();
+
     virtual bool modifyResource(std::shared_ptr<Course::PlayerBase> player,
                                 Course::BasicResource resource,
                                 int amount);
     virtual bool modifyResources(std::shared_ptr<Course::PlayerBase> player,
                                  Course::ResourceMap resources);
+    /**
+     * @brief endTurn increases turn count
+     */
     void endTurn();
+    /**
+     * @brief throwDice
+     * @return dice number
+     */
     int throwDice();
     void checkIfOutOfMoney(std::map<Course::BasicResource, int> amount);
 

@@ -12,9 +12,9 @@
 
 
 namespace Game {
-
-
-
+/**
+ * @brief The FarmBuilding class represents farm
+ */
 class FarmBuilding: public Game::GameBuildingBase
 {
 public:

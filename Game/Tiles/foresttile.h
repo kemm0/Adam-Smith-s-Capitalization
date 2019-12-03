@@ -10,8 +10,9 @@
 #include "gamebuildingbase.h"
 
 namespace Game{
-
-
+/**
+ * @brief The Foresttile class represents forest
+ */
 class Foresttile: public Game::GameTileBase//, public QGraphicsPixmapItem
 {
 public:

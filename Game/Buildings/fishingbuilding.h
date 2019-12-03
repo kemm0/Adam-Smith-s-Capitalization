@@ -11,9 +11,9 @@
 #include "gamebuildingbase.h"
 
 namespace Game {
-
-
-
+/**
+ * @brief The FishingBuilding class represents fishing hut
+ */
 class FishingBuilding: public Game::GameBuildingBase
 {
 public:

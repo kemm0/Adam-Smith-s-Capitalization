@@ -11,8 +11,9 @@
 #include "gamebuildingbase.h"
 
 namespace Game {
-
-
+/**
+ * @brief The LoggingBuilding class represents logging cabin
+ */
 class LoggingBuilding: public Game::GameBuildingBase
 {
 public:

@@ -189,7 +189,7 @@ void MapWindow::zoomOut()
     m_ui->gameMapView->scale(0.9,0.9);
 }
 
-void Game::MapWindow::on_buildButton_toggled(bool checked)
+void MapWindow::on_buildButton_toggled(bool checked)
 {
     if(checked==true && eventHandler->getPlayerBuilt() == false){
         eventHandler->setBuildingState(true);
@@ -208,7 +208,7 @@ void Game::MapWindow::on_buildButton_toggled(bool checked)
 
 }
 
-void Game::MapWindow::on_searchAreaButton_toggled(bool checked)
+void MapWindow::on_searchAreaButton_toggled(bool checked)
 {
     if(checked==true && eventHandler->getPlayerSearched() == false){
         soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/hmm.wav"));
@@ -225,38 +225,38 @@ void Game::MapWindow::on_searchAreaButton_toggled(bool checked)
     }
 }
 
-void Game::MapWindow::treasureFoundSound()
+void MapWindow::treasureFoundSound()
 {
     soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/woohoo.wav"));
     soundEffectPlayer->play();
 }
 
-void Game::MapWindow::robberFoundSound()
+void MapWindow::robberFoundSound()
 {
     soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/scream.wav"));
     soundEffectPlayer->play();
 }
 
-void Game::MapWindow::nothingFoundSound()
+void MapWindow::nothingFoundSound()
 {
     soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/rustle.wav"));
     soundEffectPlayer->play();
 }
 
-void Game::MapWindow::buildSound()
+void MapWindow::buildSound()
 {
     soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/building.wav"));
     soundEffectPlayer->play();
 }
 
-void Game::MapWindow::showTileInfo(std::string info)
+void MapWindow::showTileInfo(std::string info)
 {
     showGameMessage(info);
 }
 
 
 
-void Game::MapWindow::on_hireButton_toggled(bool checked)
+void MapWindow::on_hireButton_toggled(bool checked)
 {
     if(checked == true && eventHandler->getHired() == false){
         eventHandler->setHiring(true);
@@ -271,13 +271,21 @@ void Game::MapWindow::on_hireButton_toggled(bool checked)
     }
 }
 
-void Game::MapWindow::on_hiringList_currentIndexChanged(const QString &arg1)
+void MapWindow::on_hiringList_currentIndexChanged(const QString &arg1)
 {
-    eventHandler->setWorkerType(arg1.toStdString());
-    std::cout<<eventHandler->getWorkerType()<<std::endl;
+    if (arg1.toStdString() == "Novice worker (30)"){
+        eventHandler->setWorkerType("novice worker");
+    }
+    else if(arg1.toStdString() == "Apprentice worker (50)"){
+        eventHandler->setWorkerType("apprentice worker");
+    }
+    else if(arg1.toStdString() == "Master worker (70)"){
+        eventHandler->setWorkerType("master worker");
+    }
+
 }
 
-void Game::MapWindow::buttons_update()
+void MapWindow::buttons_update()
 {
     if(eventHandler->getPlayerMoved()){
         m_ui->moveButton->setDisabled(true);
@@ -305,7 +313,7 @@ void Game::MapWindow::buttons_update()
     }
 }
 
-void Game::MapWindow::lock_and_unlock_other_buttons(bool toggle)
+void MapWindow::lock_and_unlock_other_buttons(bool toggle)
 {
     if(toggle == true){
         m_ui->endTurnButton->setDisabled(true);
@@ -351,7 +359,7 @@ void Game::MapWindow::lock_and_unlock_other_buttons(bool toggle)
     }
 }
 
-void Game::MapWindow::on_rulesButton_clicked()
+void MapWindow::on_rulesButton_clicked()
 {
     QMessageBox *msgBox = new QMessageBox(this);
     msgBox->setWindowTitle("Game rules");
@@ -387,7 +395,7 @@ void Game::MapWindow::on_rulesButton_clicked()
     delete msgBox;
 }
 
-void Game::MapWindow::gameOver(bool ranOutOfMoney)
+void MapWindow::gameOver(bool ranOutOfMoney)
 {
     QMessageBox *gameOverBox = new QMessageBox(this);
     if(ranOutOfMoney == true){

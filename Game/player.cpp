@@ -30,18 +30,14 @@ QPixmap Player::getSprite()
 
 int Player::getMoney()
 {
+
     for(std::shared_ptr<Course::GameObject> object:getObjects()){
         std::shared_ptr<GameTileBase> tile = std::dynamic_pointer_cast<GameTileBase>(object);
         if(tile){
-            std::cout<<"object muutettu tileksi"<<std::endl;
-            std::cout<<tile->getType()<<std::endl;
-            std::cout<<tile->getBuildingCount()<<std::endl;
-            std::cout<<tile->getWorkerCount()<<std::endl;
             tile->generateResources();
+
         }
-        else{
-            std::cout<<"Lol ei pysty muuttaan objectia gametileksi"<<std::endl;
-        }
+
     }
 
     return money;
