@@ -8,6 +8,7 @@ MapWindow::MapWindow(QWidget *parent):
     QMainWindow(parent),
     m_ui(new Ui::MapWindow)
 {
+    //Start dialog
     startingDialog = new startDialog();
     connect(startingDialog,
             &startDialog::nameConfirmed,
@@ -15,10 +16,14 @@ MapWindow::MapWindow(QWidget *parent):
             &MapWindow::setUsername);
 
     startingDialog->exec();
+
     m_ui->setupUi(this);
+
     setWindowIcon(QIcon(QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
     setWindowTitle("Adam Smith's Capitalization");
+
     //this->setWindowState(Qt::WindowFullScreen);   //Sets fullsceen mode
+
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
 
@@ -31,19 +36,16 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->gameMapView->setScene(gameMap);
     m_ui->gameMapView->setMouseTracking(true);
     m_ui->gameMapView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    showGameMessage("Hello " + username + "! \n"
-                                          "Get ready to conquer Pirkanmaa"
-                    );
+
     m_ui->endTurnButton->setDisabled(false);
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
     m_ui->hireButton->setCheckable(true);
 
-
-    showGameMessage(
-                "Money: " + std::to_string(
-                    objManager->getPlayer()->getResources().at(Course::MONEY)));
+    showGameMessage("Hello " + username + "! \n"
+                                          "Get ready to conquer Pirkanmaa"
+                    );
 
     updateMoneyLabel(objManager->getPlayer()->getResources().at(Course::MONEY));
     m_ui->MoneyTextLabel->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/money.png"));

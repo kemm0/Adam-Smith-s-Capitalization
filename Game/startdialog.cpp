@@ -9,6 +9,8 @@ startDialog::startDialog(QWidget *parent) :
     setWindowTitle("Settings");
     setWindowIcon(QIcon(QPixmap(
                             "../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
+    ui->bgImage->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/background.png"));
+    ui->bgImage->setFixedSize(500,500);
 }
 
 startDialog::~startDialog()
