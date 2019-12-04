@@ -71,13 +71,13 @@ public:
      * @param robber
      * @return
      */
-    bool setRobber(bool robber);
+    void setRobber(bool robber);
     /**
      * @brief setTreasure if treasure == true, tile will have a trasure
      * @param treasure
      * @return
      */
-    bool setTreasure(bool treasure);
+    void setTreasure(bool treasure);
 protected:
     QPixmap sprite;
     bool hasRobber;

@@ -79,12 +79,17 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
                         objManager_,
                         objManager_->getPlayer());
         }
-        eventHandler_->modifyResources(objManager_->getPlayer(),newBuilding->BUILD_COST);
-        objManager_->getPlayer()->addObject(targetTile);
-        objManager_->addGameObject(newBuilding);
-        targetTile->addBuilding(newBuilding);
-        targetTile->updateSprite(newBuilding->getSprite());
-        emit gameMessage("You built a " + newBuilding->getType() + ".");
+        try {
+            eventHandler_->modifyResources(objManager_->getPlayer(),newBuilding->BUILD_COST);
+            objManager_->getPlayer()->addObject(targetTile);
+            objManager_->addGameObject(newBuilding);
+            targetTile->addBuilding(newBuilding);
+            targetTile->updateSprite(newBuilding->getSprite());
+            emit gameMessage("You built a " + newBuilding->getType() + ".");
+        } catch (Course::IllegalAction) {
+            emit gameMessage("You cannot build more buildings on this tile.");
+            throw Course::IllegalAction();
+        }
     }
 
 }
