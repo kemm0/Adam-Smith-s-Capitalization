@@ -9,6 +9,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
 #include <QMediaPlayer>
+#include <QMessageBox>
 #include <math.h>
 #include <iostream>
 #include "map.h"
@@ -17,7 +18,7 @@
 #include "gameobjectmanager.h"
 #include "gameeventhandler.h"
 #include "gamemapgenerator.h"
-#include "QMessageBox"
+#include "gameresourcemap.h"
 
 
 namespace Ui {
@@ -115,6 +116,10 @@ private slots:
      * @param ranOutOfMoney if player went bankcruptcy
      */
     void gameOver(bool ranOutOfMoney);
+    /**
+     * @brief updateMoneyLabel
+     */
+    void updateMoneyLabel(int amount);
 
 private:
     int maxTurns;

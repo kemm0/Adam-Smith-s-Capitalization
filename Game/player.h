@@ -16,30 +16,33 @@ class GameTileBase;
  * @brief The Player class used for player instance
  */
 
-class Player : public Course::PlayerBase, public Course::GameObject
+class Player : public QObject, public Course::PlayerBase, public Course::GameObject
 
 {
+
+Q_OBJECT
+
 public:
     Player(const Course::Coordinate &coord,
            const std::string& name = "Adam Smith",
            std::shared_ptr<Game::GameEventHandler> handler = nullptr,
            std::shared_ptr<Game::GameObjectManager> manager = nullptr,
-           const std::vector<std::shared_ptr<Course::GameObject> > objects = {});
+           const std::vector<std::shared_ptr<Course::GameObject> > objects = {},
+           QObject *parent = nullptr);
     ~Player();
     QPixmap getSprite(); // QPixmap used to draw player
-    int getMoney(); // counts money
-    void setMoney(std::map<Course::BasicResource , int>); // adds or subtracts money
     Course::ResourceMap getResources();
     void modifyResources(Course::ResourceMap rmap);
     void getProfit();
     int getStartingMoney();
 
+signals:
+    void currentMoney(int amount);
+
 private:
         QPixmap sprite;
         int money;
         Course::ResourceMap resources;
-        int startingMoney;
-
 };
 }
 

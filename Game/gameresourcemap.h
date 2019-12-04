@@ -10,7 +10,7 @@ namespace Game {
 namespace ConstGameResourceMap {
 
 const Course::ResourceMap PLAYER_STARTING_RESOURCES = {
-    {Course::BasicResource::MONEY, 500}
+    {Course::BasicResource::MONEY, 200}
 };
 
 const Course::ResourceMap EMPTY = {};
@@ -74,11 +74,11 @@ const Course::ResourceMap TILE_BP = {
 };
 // Robbers
 const Course::ResourceMap ROBBER = {
-    {Course::MONEY, -500},
+    {Course::MONEY, -200},
 };
 // Treasures
 const Course::ResourceMap TREASURE = {
-    {Course::MONEY, 500},
+    {Course::MONEY, 200},
 };
 }
 }

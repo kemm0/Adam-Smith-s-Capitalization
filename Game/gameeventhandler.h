@@ -42,7 +42,6 @@ public:
      * @return dice number
      */
     int throwDice();
-    void checkIfOutOfMoney(std::map<Course::BasicResource, int> amount);
 
 
     //getters

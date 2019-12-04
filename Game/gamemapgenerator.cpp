@@ -157,7 +157,7 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
                 targetTile->setOwner(objManager_->getPlayer());
                 targetTile->addWorker(worker);
                 objManager_->addWorker(worker);
-                objManager_->getPlayer()->setMoney(worker->RECRUITMENT_COST);
+                eventHandler_->modifyResources(objManager_->getPlayer(),worker->RECRUITMENT_COST);
                 emit gameMessage("You hired a novice worker.");
             } catch (Course::IllegalAction) {
                 emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
@@ -176,7 +176,7 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
                 targetTile->setOwner(objManager_->getPlayer());
                 targetTile->addWorker(worker);
                 objManager_->addWorker(worker);
-                objManager_->getPlayer()->setMoney(worker->RECRUITMENT_COST);
+                eventHandler_->modifyResources(objManager_->getPlayer(),worker->RECRUITMENT_COST);
                 emit gameMessage("You hired an apprentice worker.");
             } catch (Course::IllegalAction) {
                 emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
@@ -196,7 +196,7 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
                 targetTile->addWorker(worker);
                 emit gameMessage("You hired a master worker.");
                 objManager_->addWorker(worker);
-                objManager_->getPlayer()->setMoney(worker->RECRUITMENT_COST);
+                eventHandler_->modifyResources(objManager_->getPlayer(),worker->RECRUITMENT_COST);
             } catch (Course::IllegalAction) {
                 emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
             }
@@ -217,14 +217,8 @@ void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
                                                                            Game::ConstGameResourceMap::FARM_BUILD_COST,
                                                                            Game::ConstGameResourceMap::FARM_PRODUCTION);
 
-/*<<<<<<< HEAD
-    //objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
-    objManager_->getPlayer()->addObject(targetTile);
-    objManager_->getPlayer()->modifyResources(newFarm->BUILD_COST);
-    targetTile->addGameBuilding(newFarm);
-=======*/
-    eventHandler_->checkIfOutOfMoney(newFarm->BUILD_COST);
-    objManager_->getPlayer()->setMoney(newFarm->BUILD_COST);
+
+    eventHandler_->modifyResources(objManager_->getPlayer(),newFarm->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     objManager_->addGameObject(newFarm);
     targetTile->addBuilding(newFarm);
@@ -241,14 +235,8 @@ void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTi
                                                                            1,
                                                                            Game::ConstGameResourceMap::LOGGING_BUILD_COST,
                                                                            Game::ConstGameResourceMap::LOGGING_PRODUCTION);
-/*<<<<<<< HEAD
 
-    //objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
-    objManager_->getPlayer()->modifyResources(newCabin->BUILD_COST);
-=======*/
-    eventHandler_->checkIfOutOfMoney(newCabin->BUILD_COST);
-    objManager_->getPlayer()->setMoney(newCabin->BUILD_COST);
-
+    eventHandler_->modifyResources(objManager_->getPlayer(),newCabin->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     objManager_->addGameObject(newCabin);
     targetTile->addBuilding(newCabin);
@@ -264,13 +252,8 @@ void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile
                                                                            1,
                                                                            Game::ConstGameResourceMap::FISHING_BUILD_COST,
                                                                            Game::ConstGameResourceMap::FISHING_PRODUCTION);
-/*<<<<<<< HEAD
-    //objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
-    objManager_->getPlayer()->modifyResources(newFishingHut->BUILD_COST);
-=======*/
-    eventHandler_->checkIfOutOfMoney(newFishingHut->BUILD_COST);
-    objManager_->getPlayer()->setMoney(newFishingHut->BUILD_COST);
 
+    eventHandler_->modifyResources(objManager_->getPlayer(),newFishingHut->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
     objManager_->addGameObject(newFishingHut);
     targetTile->addBuilding(newFishingHut);

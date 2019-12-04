@@ -33,12 +33,31 @@ GameEventHandler::~GameEventHandler()
 
 bool GameEventHandler::modifyResource(std::shared_ptr<Course::PlayerBase> player, Course::BasicResource resource, int amount)
 {
-
+    std::shared_ptr<Game::Player> gameplayer = std::dynamic_pointer_cast<Game::Player>(player);
+    if(gameplayer){
+        Course::ResourceMap resources = {{resource,amount}};
+        gameplayer->modifyResources(resources);
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> player, Course::ResourceMap resources)
 {
-    objManager->getPlayer()->setMoney(resources);
+    std::shared_ptr<Game::Player> gameplayer = std::dynamic_pointer_cast<Game::Player>(player);
+    if(gameplayer){
+        gameplayer->modifyResources(resources);
+        int money = gameplayer->getResources().at(Course::MONEY);
+        if(money <= 0){
+            emit gameOver(true);
+        }
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 
@@ -46,6 +65,7 @@ bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> playe
 
 void GameEventHandler::endTurn()
 {
+    objManager->getPlayer()->getProfit();
     turn += 1;
     threw = false;
     moved = false;
@@ -186,14 +206,4 @@ void GameEventHandler::setWorkerType(std::string type)
 {
     workertype = type;
 }
-
-void GameEventHandler::checkIfOutOfMoney(std::map<Course::BasicResource, int> amount)
-{
-    //Amounts integer is negative
-    if(amount[Course::MONEY] <=  0 - objManager->getPlayer()->getMoney()){
-        emit gameOver(true);
-    }
-}
-
-
 }

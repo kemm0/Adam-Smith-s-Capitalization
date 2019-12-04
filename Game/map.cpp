@@ -166,15 +166,14 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     QGraphicsPixmapItem* robberSprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/robbersmall.png"));
                     robberSprite->setPos(targetTile->pos());
                     addItem(robberSprite);
-                    objManager_->getPlayer()->setMoney(Game::ConstGameResourceMap::ROBBER);
+                    eventHandler_->modifyResources(objManager_->getPlayer(),Game::ConstGameResourceMap::ROBBER);
                     emit robberFound();
-
                 }
                 else if(gameTile->getTreasure() == true){
                     QGraphicsPixmapItem* treasureSprite = new QGraphicsPixmapItem(QPixmap("../../juho-ja-leo/Game/Sprites/treasure.png"));
                     treasureSprite->setPos(targetTile->pos());
                     addItem(treasureSprite);
-                    objManager_->getPlayer()->setMoney(Game::ConstGameResourceMap::TREASURE);
+                    eventHandler_->modifyResources(objManager_->getPlayer(),Game::ConstGameResourceMap::TREASURE);
                     emit treasureFound();
                 }
                 else{

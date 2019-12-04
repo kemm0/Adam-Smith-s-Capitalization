@@ -35,10 +35,9 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
     m_ui->hireButton->setCheckable(true);
-    //showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 
 
-    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
+    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 
     //MUSIC
     // self made with bandlab :D enjoy
@@ -61,6 +60,7 @@ MapWindow::MapWindow(QWidget *parent):
     connect(mapCreator.get(),&GameMapGenerator::gameMessage,this,&MapWindow::showGameMessage);
     connect(eventHandler.get(),&GameEventHandler::gameMessage,this,&MapWindow::showGameMessage);
     connect(eventHandler.get(), &GameEventHandler::gameOver, this, &MapWindow::gameOver);
+    connect(objManager->getPlayer().get(), &Player::currentMoney,this,&MapWindow::updateMoneyLabel);
 
     gameMap->setBackgroundBrush(Qt::black);
     m_ui->gameMapView->scale(0.9,0.9);
@@ -148,7 +148,7 @@ void MapWindow::on_endTurnButton_clicked()
     eventHandler->setSearching(false);
     buttons_update();
 
-    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getMoney()));
+    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
     showGameMessage("");
     showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
 }
@@ -201,7 +201,7 @@ void MapWindow::on_buildButton_toggled(bool checked)
         eventHandler->setBuildingState(true);
         lock_and_unlock_other_buttons(true);
         eventHandler->setSelectedBuildingType(m_ui->buildingsList->currentText().toStdString());
-        showGameMessage("Bulding a " + eventHandler->getSelectedBuildingType()+  ". First select a building and then click a tile to build to.");
+        showGameMessage("Bulding. First select a building and then click a tile to build to.");
     }
     else if(checked == false && eventHandler->isBuilding() == true){
         eventHandler->setBuildingState(false);
@@ -372,8 +372,9 @@ void MapWindow::on_rulesButton_clicked()
     msgBox->setText("How to play:");
     msgBox->setInformativeText("In this game you play as Adam Smith, father of capitalism! Your aim is to earn money by building houses, "
                                "hiring dirty finns to work for you and searching for treasures while avoiding robbers and alcoholics.\n\n"
-                               "One turn composes of four possible actions that can be made in arbitrary order: Moving, seaching, building and hiring. "
-                               "You can zoom in and out of the map with + (plus) and - (minus) keys and move around the map with arrow keys"
+                               "One turn composes of four possible actions that can be made in arbitrary order: Moving, seaching, building and hiring. \n\n"
+                               "You can zoom in and out of the map with + (plus) and - (minus) keys and move around the map with arrow keys.\n"
+                               "Right clicking a tile gives information about it (it's workers and buildings).\n"
                                "Most actions are done by clicking a button and then clicking a tile in the map.\n\n"
                                "Moving: You can move to any direction an amount specified by dice. Make sure to throw the dice before moving.\n\n"
                                "Searching: You can search a tile next to you. There is a chance of finding a great treasure as well as being robbed.\n\n"
@@ -411,8 +412,9 @@ void MapWindow::gameOver(bool ranOutOfMoney)
                              "Better luck next time.");
     }
     else{
-        int money = objManager->getPlayer()->getMoney();
-        if(money <= objManager->getPlayer()->getStartingMoney()){
+        int money = objManager->getPlayer()->getResources().at(Course::MONEY);
+        int startingMoney = Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES.at(Course::MONEY);
+        if(money <= startingMoney){
             gameOverBox->setWindowTitle("Do better");
             gameOverBox->setText("Although you did't go bankrupt, you did't earn any money either. "
                                  "That is not how capitalism should work!\n\n"
@@ -430,5 +432,10 @@ void MapWindow::gameOver(bool ranOutOfMoney)
     gameOverBox->exec();
     delete gameOverBox;
     this->close();
+}
+
+void MapWindow::updateMoneyLabel(int amount)
+{
+    m_ui->moneyAmountLabel->setText(QString::fromStdString(std::to_string(amount)));
 }
 }
