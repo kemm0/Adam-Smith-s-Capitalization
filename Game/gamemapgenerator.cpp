@@ -23,7 +23,7 @@ GameMapGenerator::GameMapGenerator(
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, // i = y
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
@@ -52,17 +52,39 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
 {
     std::shared_ptr<GameTileBase> targetTile = objManager_->getGameTile(
                 location);
-    if(targetTile->getType()=="Grassland"){
-        createFarmhouse(targetTile);
-
+    if(targetTile->getType() == "Town"){
+        emit gameMessage("You cannot build here."
+                         " Find a free area to build on");
+        throw Course::IllegalAction();
     }
-    else if(targetTile->getType()=="Forest"){
-        createLoggingcabin(targetTile);
+    else{
+        std::shared_ptr<GameBuildingBase> newBuilding;
+        if(targetTile->getType()=="Grassland"){
+            newBuilding = std::make_shared<FarmBuilding>(
+                        eventHandler_,
+                        objManager_,
+                        objManager_->getPlayer());
+        }
+        else if(targetTile->getType()=="Forest"){
+            newBuilding = std::make_shared<LoggingBuilding>(
+                        eventHandler_,
+                        objManager_,
+                        objManager_->getPlayer());
 
 
-    }
-    else if(targetTile->getType()=="Water"){
-        createFishinghut(targetTile);
+        }
+        else if(targetTile->getType()=="Water"){
+            newBuilding = std::make_shared<FishingBuilding>(
+                        eventHandler_,
+                        objManager_,
+                        objManager_->getPlayer());
+        }
+        eventHandler_->modifyResources(objManager_->getPlayer(),newBuilding->BUILD_COST);
+        objManager_->getPlayer()->addObject(targetTile);
+        objManager_->addGameObject(newBuilding);
+        targetTile->addBuilding(newBuilding);
+        targetTile->updateSprite(newBuilding->getSprite());
+        emit gameMessage("You built a " + newBuilding->getType() + ".");
     }
 
 }
@@ -104,49 +126,6 @@ void GameMapGenerator::setRobber(int amount)
     }
 }
 
-void GameMapGenerator::createGrassTile(Course::Coordinate location)
-{
-    int x = location.x();
-    int y = location.y();
-    std::shared_ptr<GrassTile> newTile = std::make_shared<GrassTile>(
-                location,
-                eventHandler_,
-                objManager_);
-    int spriteWidth = newTile->getSprite().width();
-    int spriteHeight = newTile->getSprite().height();
-    newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
-    objManager_->addGameTile(newTile);
-}
-
-void GameMapGenerator::createForestTile(Course::Coordinate location)
-{
-    int x = location.x();
-    int y = location.y();
-    std::shared_ptr<Foresttile> newTile = std::make_shared<Foresttile>(
-                location,
-                eventHandler_,
-                objManager_);
-    int spriteWidth = newTile->getSprite().width();
-    int spriteHeight = newTile->getSprite().height();
-    newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
-    objManager_->addGameTile(newTile);
-}
-
-void GameMapGenerator::createWaterTile(Course::Coordinate location)
-{
-    int x = location.x();
-    int y = location.y();
-    std::shared_ptr<WaterTile> newTile = std::make_shared<WaterTile>(
-                location,
-                eventHandler_,
-                objManager_);
-    int spriteWidth = newTile->getSprite().width();
-    int spriteHeight = newTile->getSprite().height();
-    newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
-    objManager_->addGameTile(newTile);
-
-}
-
 void GameMapGenerator::createPlayer(Course::Coordinate location)
 {
     std::shared_ptr<Game::Player> player = std::make_shared<Game::Player>(
@@ -163,30 +142,21 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
             worker = std::make_shared<NoviceWorker>(
                 eventHandler_,
                 objManager_,
-                objManager_->getPlayer(),
-                1,
-                Game::ConstGameResourceMap::NW_RECRUITMENT_COST,
-                Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
+                objManager_->getPlayer()
             );
         }
         else if(eventHandler_->getWorkerType() == "apprentice worker"){
             worker = std::make_shared<ApprenticeWorker>(
                 eventHandler_,
                 objManager_,
-                objManager_->getPlayer(),
-                1,
-                Game::ConstGameResourceMap::AW_RECRUITMENT_COST,
-                Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
+                objManager_->getPlayer()
             );
         }
         else if(eventHandler_->getWorkerType() == "master worker"){
             worker = std::make_shared<MasterWorker>(
                 eventHandler_,
                 objManager_,
-                objManager_->getPlayer(),
-                1,
-                Game::ConstGameResourceMap::MW_RECRUITMENT_COST,
-                Game::ConstGameResourceMap::MW_WORKER_EFFICIENCY
+                objManager_->getPlayer()
             );
 
         }
@@ -209,82 +179,43 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
     }
 }
 
-void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
-{
-    std::shared_ptr<FarmBuilding> newFarm = std::make_shared<FarmBuilding>(
-                eventHandler_,
-                objManager_,
-                objManager_->getPlayer(),
-                1,
-                Game::ConstGameResourceMap::FARM_BUILD_COST,
-                Game::ConstGameResourceMap::FARM_PRODUCTION);
-
-
-    eventHandler_->modifyResources(objManager_->getPlayer(),newFarm->BUILD_COST);
-    objManager_->getPlayer()->addObject(targetTile);
-    objManager_->addGameObject(newFarm);
-    targetTile->addBuilding(newFarm);
-    targetTile->updateSprite(newFarm->getSprite());
-    emit gameMessage("You built a farm");
-
-}
-
-void GameMapGenerator::createLoggingcabin(
-        std::shared_ptr<GameTileBase> targetTile)
-{
-    std::shared_ptr<LoggingBuilding> newCabin = std::make_shared<
-            LoggingBuilding>(
-                eventHandler_,
-                objManager_,
-                objManager_->getPlayer(),
-                1,
-                Game::ConstGameResourceMap::LOGGING_BUILD_COST,
-                Game::ConstGameResourceMap::LOGGING_PRODUCTION);
-
-    eventHandler_->modifyResources(objManager_->getPlayer(),newCabin->BUILD_COST);
-    objManager_->getPlayer()->addObject(targetTile);
-    objManager_->addGameObject(newCabin);
-    targetTile->addBuilding(newCabin);
-    targetTile->updateSprite(newCabin->getSprite());
-    emit gameMessage("You built a logging cabin");
-}
-
-void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile)
-{
-    std::shared_ptr<FishingBuilding> newFishingHut = std::make_shared<
-            FishingBuilding>(
-                eventHandler_,
-                objManager_,
-                objManager_->getPlayer(),
-                1,
-                Game::ConstGameResourceMap::FISHING_BUILD_COST,
-                Game::ConstGameResourceMap::FISHING_PRODUCTION);
-
-    eventHandler_->modifyResources(
-                objManager_->getPlayer(),
-                newFishingHut->BUILD_COST);
-
-    objManager_->getPlayer()->addObject(targetTile);
-    objManager_->addGameObject(newFishingHut);
-    targetTile->addBuilding(newFishingHut);
-    targetTile->updateSprite(newFishingHut->getSprite());
-    emit gameMessage("You built a fishing hut");
-}
-
 void GameMapGenerator::createMapObjects()
 {
     for(unsigned int i = 0; i < mapTemplate.size(); i++){
         for(unsigned int j = 0; j < mapTemplate.at(i).size();j++){
             int tileCode = mapTemplate.at(i).at(j);
+            Course::Coordinate location(j,i);
+            std::shared_ptr<Game::GameTileBase> newTile;
             if(tileCode == GRASSLAND){
-                createGrassTile(Course::Coordinate(j,i));
+                newTile = std::make_shared<GrassTile>(
+                            location,
+                            eventHandler_,
+                            objManager_);
             }
             else if(tileCode == FOREST){
-                createForestTile(Course::Coordinate(j,i));
+                newTile = std::make_shared<Foresttile>(
+                            location,
+                            eventHandler_,
+                            objManager_);
         }
             else if(tileCode == WATER){
-                createWaterTile(Course::Coordinate(j,i));
+                newTile = std::make_shared<WaterTile>(
+                            location,
+                            eventHandler_,
+                            objManager_);
+
         }
+            else if(tileCode == TOWN){
+                newTile = std::make_shared<TownTile>(
+                            location,
+                            eventHandler_,
+                            objManager_);
+
+        }
+            int spriteWidth = newTile->getSprite().width();
+            int spriteHeight = newTile->getSprite().height();
+            newTile->setCoordinate(Course::Coordinate(j*spriteHeight,i*spriteWidth));
+            objManager_->addGameTile(newTile);
     }
     createPlayer(getRandomMapCoordinate());
 }

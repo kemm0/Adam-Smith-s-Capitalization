@@ -25,6 +25,7 @@ namespace Game{
 enum mapCodes{
     GRASSLAND = 0,
     WATER = 1,
+    TOWN = 2,
     FOREST = 3,
 };
 
@@ -65,27 +66,6 @@ public:
     void setRobber(int amount);
 
     /**
-     * @brief createGrassTile
-     * @param location
-     * Creates a new GrassTile to the given location and adds it to object manager
-     */
-    void createGrassTile(Course::Coordinate location);
-
-    /**
-     * @brief createForestTile
-     * @param location
-     * Creates a new ForestTile to the given location and adds it to
-     * object manager
-     */
-    void createForestTile(Course::Coordinate location);
-    /**
-     * @brief createWaterTile
-     * @param location
-     * Creates a new WaterTile to the given location and adds it to
-     * object manager
-     */
-    void createWaterTile(Course::Coordinate location);
-    /**
      * @brief createPlayer
      * @param location
      * Creates a new Player character and adds it to object manager
@@ -100,29 +80,6 @@ public:
      */
     void createWorker(std::shared_ptr<GameTileBase> targetTile);
 
-    /**
-     * @brief createFarmhouse
-     * @param targetTile
-     * Creates a new FarmBuilding to the given Tile and adds it to
-     * object manager
-     */
-    void createFarmhouse(std::shared_ptr<GameTileBase> targetTile);
-
-    /**
-     * @brief createLoggingcabin
-     * @param targetTile
-     * Creates a new LoggingBuilding to the given Tile and adds it to
-     * object manager
-     */
-    void createLoggingcabin(std::shared_ptr<GameTileBase> targetTile);
-
-    /**
-     * @brief createFishinghut
-     * @param targetTile
-     * Creates a new FishingBuilding to the given Tile and adds it to
-     * object manager
-     */
-    void createFishinghut(std::shared_ptr<GameTileBase> targetTile);
 signals:
     /**
      * @brief gameMessage

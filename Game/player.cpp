@@ -53,4 +53,14 @@ void Player::getProfit()
         }
     }
 }
+
+bool Player::hasTreasure()
+{
+    return treasure;
+}
+
+void Player::setTreasure(bool t)
+{
+    treasure = t;
+}
 }

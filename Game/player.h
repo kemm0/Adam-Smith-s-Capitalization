@@ -39,6 +39,8 @@ public:
     void modifyResources(Course::ResourceMap rmap);
     void getProfit();
     int getStartingMoney();
+    bool hasTreasure();
+    void setTreasure(bool t);
 
 signals:
     void currentMoney(int amount);
@@ -47,6 +49,7 @@ private:
         QPixmap sprite;
         int money;
         Course::ResourceMap resources;
+        bool treasure;
 };
 }
 

@@ -14,6 +14,7 @@ GameEventHandler::GameEventHandler(
     objManager = manager;
     diceValue = 0;
     srand(time(NULL));
+    maxTurns = 20;
     turn = 1;
     threw = false;
     moved = false;
@@ -56,10 +57,13 @@ bool GameEventHandler::modifyResources(
     std::shared_ptr<Game::Player> gameplayer = std::dynamic_pointer_cast<
             Game::Player>(player);
     if(gameplayer){
+        if(resources == ConstGameResourceMap::TREASURE){
+            objManager->getPlayer()->setTreasure(true);
+        }
         gameplayer->modifyResources(resources);
         int money = gameplayer->getResources().at(Course::MONEY);
         if(money <= 0){
-            emit gameOver(true);
+            emit gameOver(BANKRUPT);
         }
         return true;
     }
@@ -73,10 +77,42 @@ bool GameEventHandler::modifyResources(
 
 void GameEventHandler::endTurn()
 {
+    turn += 1;
     if(objManager->getPlayer() != nullptr){
         objManager->getPlayer()->getProfit();
+        if(turn == maxTurns){
+            //check if player is in a town tile
+            bool playerInTown = false;
+            for(auto tile: objManager->getGameTiles()){
+                if(tile->getType() == "Town"){
+                    if(tile->getCoordinate()
+                            == objManager->getPlayer()->getCoordinate()){
+                        playerInTown = true;
+                    }
+                }
+            }
+            if(playerInTown){
+                bool foundTreasure = objManager->getPlayer()->hasTreasure();
+                bool madeProfit = (objManager->getPlayer()->getResources().at(Course::MONEY)
+                        > ConstGameResourceMap::PLAYER_STARTING_RESOURCES.at(Course::MONEY));
+                if(!foundTreasure){
+                    emit gameOver(NO_TREASURE);
+                }
+                else if(madeProfit){
+                    emit gameOver(GOT_RICH);
+                }
+                else{
+                    emit gameOver(NO_PROFIT);
+                }
+
+            }
+            else{
+                emit gameOver(LATE);
+            }
+        }
     }
-    turn += 1;
+    emit gameMessage("Turns left: "
+                    + std::to_string(maxTurns - turn));
     threw = false;
     moved = false;
     moving = false;

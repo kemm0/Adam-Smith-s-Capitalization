@@ -117,7 +117,7 @@ private slots:
      * @brief gameOver opens pop window displaying different messages
      * @param ranOutOfMoney if player went bankcruptcy
      */
-    void gameOver(bool ranOutOfMoney);
+    void gameOver(gameOverState state);
     /**
      * @brief updateMoneyLabel
      */
@@ -126,7 +126,6 @@ private slots:
     void on_pricesButton_clicked();
 
 private:
-    int maxTurns;
     int tileSize;
     int mapWidth;
     int mapHeight;

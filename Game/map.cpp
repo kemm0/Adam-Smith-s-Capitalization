@@ -160,13 +160,18 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     Course::Coordinate(int(targetTile->pos().x()),
                                        int(targetTile->pos().y())));
         if(mouseEvent->button() == Qt::RightButton){
-            emit inspectTile(
-                        "This is " + gameTile->getType() +
-                        ". There are " + std::to_string(
-                            gameTile->getBuildingCount())
-                        + " buildings and " + std::to_string(
-                            gameTile->getWorkerCount()) +
-                        " workers in this area.");
+            if(gameTile->getType() == "Town"){
+                emit inspectTile("This is a town. I should return here "
+                                 "when im done with making money");
+            }
+            else {
+                emit inspectTile("This is " + gameTile->getType() +
+                                    ". There are " + std::to_string(
+                                        gameTile->getBuildingCount())
+                                    + " buildings and " + std::to_string(
+                                        gameTile->getWorkerCount()) +
+                                    " workers in this area.");
+            }
         }
 
         else if(mouseEvent->button() == Qt::LeftButton){
@@ -197,17 +202,20 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             }
 
             else if(buildSelected){
-                mapGenerator_->createBuilding(Course::Coordinate(
-                                                  int(targetTile->pos().x()),
-                                                  int(targetTile->pos().y())));
-                QGraphicsPixmapItem* mapItem = new QGraphicsPixmapItem(
-                            gameTile->getSprite());
+                try {
+                    mapGenerator_->createBuilding(Course::Coordinate(
+                                                      int(targetTile->pos().x()),
+                                                      int(targetTile->pos().y())));
+                    QGraphicsPixmapItem* mapItem = new QGraphicsPixmapItem(
+                                gameTile->getSprite());
 
-                mapItem->setPos(targetTile->pos());
-                addItem(mapItem);
-                eventHandler_->setPlayerBuilt(true);
-                emit built();
-                update();
+                    mapItem->setPos(targetTile->pos());
+                    addItem(mapItem);
+                    eventHandler_->setPlayerBuilt(true);
+                    emit built();
+                    update();
+                } catch (Course::IllegalAction) {
+                }
             }
             else if(searchSelected){
                 if (gameTile->getRobber() == true){

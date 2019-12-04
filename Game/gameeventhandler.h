@@ -13,6 +13,19 @@ namespace Game{
 class GameTileBase;
 class GameBuildingBase;
 class FarmBuilding;
+
+/**
+ * @brief The gameOverState enum
+ * different endings for the game
+ */
+enum gameOverState{
+    GOT_RICH,
+    LATE,
+    BANKRUPT,
+    NO_PROFIT,
+    NO_TREASURE
+};
+
 /**
  * @brief The GameEventHandler class interface inherited from iGameEventHandler.
  */
@@ -74,7 +87,7 @@ public:
     void setWorkerType(std::string type);
 signals:
     void gameMessage(std::string);
-    void gameOver(bool ranOutOfMoney);
+    void gameOver(gameOverState);
 
 private:
     bool threw;
@@ -82,6 +95,7 @@ private:
     bool moving;
     int diceValue;
     int turn;
+    int maxTurns;
     bool building;
     bool built;
     bool searching;

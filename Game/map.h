@@ -16,6 +16,7 @@
 #include "QGraphicsColorizeEffect"
 #include "gamemapgenerator.h"
 #include "algorithm"
+#include "../../Course/CourseLib/exceptions/illegalaction.h"
 
 namespace Game{
 /**

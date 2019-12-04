@@ -85,7 +85,6 @@ MapWindow::MapWindow(QWidget *parent):
 
     gameMap->setBackgroundBrush(Qt::black);
     m_ui->gameMapView->scale(0.9,0.9);
-    maxTurns = 20;
 }
 
 MapWindow::~MapWindow()
@@ -142,12 +141,7 @@ void MapWindow::on_diceButton_clicked()
 
 void MapWindow::on_endTurnButton_clicked()
 {
-    if(maxTurns - eventHandler->getTurn() == 0){
-        gameOver(false);
-    }
     eventHandler->endTurn();
-    showGameMessage("Turns left: "
-                    + std::to_string(maxTurns - eventHandler->getTurn()));
 
     m_ui->diceButton->setDisabled(false);
     m_ui->endTurnButton->setDisabled(false);
@@ -408,17 +402,17 @@ void MapWindow::on_rulesButton_clicked()
     delete rules;
 }
 
-void MapWindow::gameOver(bool ranOutOfMoney)
+void MapWindow::gameOver(gameOverState state)
 {
     QMessageBox *gameOverBox = new QMessageBox(this);
-    if(ranOutOfMoney == true){
+    int money = objManager->getPlayer()->getResources().at(Course::MONEY);
+    if(state == BANKRUPT){
         gameOverBox->setWindowTitle("You suck!");
         gameOverBox->setText("You ran out money. "
                              "Adam Smith would be ashamed of you!\n\n"
                              "Better luck next time.");
     }
-    else{
-        int money = objManager->getPlayer()->getResources().at(Course::MONEY);
+    else if(state == NO_PROFIT){
         int startingMoney = Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES.at(Course::MONEY);
         if(money <= startingMoney){
             gameOverBox->setWindowTitle("Do better");
@@ -427,14 +421,29 @@ void MapWindow::gameOver(bool ranOutOfMoney)
                                  "That is not how capitalism should work!\n\n"
                                  "Try again if you dare.");
         }
-        else{
-            gameOverBox->setWindowTitle("Nice!");
-            gameOverBox->setText("Great job! You made " +
-                                 QString::fromStdString(std::to_string(money)) +
-                                 "and you're now richer than ever while "
-                                 "finns are even poorer!\n\n"
-                                 "Try again to do even better.");
-        }
+    }
+    else if(state == GOT_RICH){
+        gameOverBox->setWindowTitle("Nice!");
+        gameOverBox->setText("Great job! You made " +
+                             QString::fromStdString(std::to_string(money)) +
+                             " and you're now richer than ever while "
+                             "finns are even poorer!\n\n"
+                             "Try again to do even better.");
+    }
+    else if(state == LATE){
+        gameOverBox->setWindowTitle("Too Late!");
+        gameOverBox->setText("You didn't make it back to town in time"
+                             " and now you are stuck with these weird finns. "
+                             "Life sucks now that you won't be able "
+                             "to get home to your favourite tea, biscuits and"
+                             "writing literature. "
+                             "You lost the game.");
+    }
+    else if(state == NO_TREASURE){
+        gameOverBox->setWindowTitle("No Treasure!");
+        gameOverBox->setText("You didn't find any treasures. This was supposed"
+                             " to be an adventure! Adam Smith got bored to"
+                             " death. \n\n You lost the game.");
     }
     gameOverBox->setStandardButtons(QMessageBox::Close);
     gameOverBox->exec();
