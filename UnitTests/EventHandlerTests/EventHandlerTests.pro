@@ -18,6 +18,7 @@ HEADERS += ../../Game/gameeventhandler.h \
             ../../Game/gameobjectmanager.h\
             ../../Game/player.h \
             ../../Game/gametilebase.h \
+            ../../Game/gameresourcemap.h \
 
 INCLUDEPATH += ../../Game \
             ../../Course/CourseLib/

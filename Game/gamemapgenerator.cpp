@@ -14,7 +14,7 @@ GameMapGenerator::GameMapGenerator(
 {
     objManager_ = objManager;
     eventHandler_ = eventHandler;
-    srand(time(NULL));
+    srand(uint(time(nullptr)));
     mapTemplate = {
         {3,3,3,3,3,3,3,0,1,0,3,3,3,3,3,3,3,3,3,3}, // -------> j = x
         {3,3,3,3,3,3,3,0,1,0,3,3,3,3,3,0,3,3,3,3}, // |
@@ -80,7 +80,8 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
                         objManager_->getPlayer());
         }
         try {
-            eventHandler_->modifyResources(objManager_->getPlayer(),newBuilding->BUILD_COST);
+            eventHandler_->modifyResources(objManager_->getPlayer(),
+                                           newBuilding->BUILD_COST);
             objManager_->getPlayer()->addObject(targetTile);
             objManager_->addGameObject(newBuilding);
             targetTile->addBuilding(newBuilding);

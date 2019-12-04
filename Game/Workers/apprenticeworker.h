@@ -26,7 +26,7 @@ public:
                     Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
                 );
     virtual std::string getType() const override;
-    virtual void doSpecialAction();
+    virtual void doSpecialAction() override;
 };
 }
 

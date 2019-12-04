@@ -18,39 +18,44 @@ MapWindow::MapWindow(QWidget *parent):
     startingDialog->exec();
 
     m_ui->setupUi(this);
-
     setWindowIcon(QIcon(QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
     setWindowTitle("Adam Smith's Capitalization");
 
-    //this->setWindowState(Qt::WindowFullScreen);   //Sets fullsceen mode
-
+    //initialize game components
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
-
     mapCreator = std::make_shared<Game::GameMapGenerator>(objManager,
                                                           eventHandler);
 
+    //initialize game windows
+    prices = new PriceWindow(this);
+    prices->setWindowTitle("Prices");
+    rules = new rulesWindow(this);
+    rules->setWindowTitle("Game Info");
+    showGameMessage(
+                "Hello " + username + "! \n Get ready to conquer Pirkanmaa");
+    updateMoneyLabel(objManager->getPlayer()->getResources().at(Course::MONEY));
+    m_ui->MoneyTextLabel->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/money.png"));
+
+    //initialize map
     gameMap = new Game::Map(nullptr,eventHandler,objManager,mapCreator);
     gameMap->drawMap();
     gameMap->setFocus();
     m_ui->gameMapView->setScene(gameMap);
     m_ui->gameMapView->setMouseTracking(true);
     m_ui->gameMapView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    gameMap->setBackgroundBrush(Qt::black);
+    m_ui->gameMapView->scale(0.9,0.9);
 
+    //initialize buttons
     m_ui->endTurnButton->setDisabled(false);
     m_ui->moveButton->setCheckable(true);
     m_ui->buildButton->setCheckable(true);
     m_ui->searchAreaButton->setCheckable(true);
     m_ui->hireButton->setCheckable(true);
 
-    showGameMessage("Hello " + username + "! \n"
-                                          "Get ready to conquer Pirkanmaa"
-                    );
+    //Initialize music
 
-    updateMoneyLabel(objManager->getPlayer()->getResources().at(Course::MONEY));
-    m_ui->MoneyTextLabel->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/money.png"));
-
-    //MUSIC
     // self made with bandlab :D enjoy
     musicplayer = new QMediaPlayer;
     musicPlaylist = new QMediaPlaylist();
@@ -63,7 +68,8 @@ MapWindow::MapWindow(QWidget *parent):
     musicplayer->setPlaylist(musicPlaylist);
     musicplayer->play();
 
-    //SOUND EFFECTS
+    //Initialize sound effects
+
     //all sound effects are from freesounds.org
     //and have a license that allows free usage of the files
     soundEffectPlayer = new QMediaPlayer();
@@ -72,6 +78,7 @@ MapWindow::MapWindow(QWidget *parent):
     connect(gameMap,&Map::nothingFound,this,&MapWindow::nothingFoundSound);
     connect(gameMap,&Map::built,this,&MapWindow::buildSound);
 
+    // Connect signals and slots
     connect(gameMap,&Map::inspectTile,this,&MapWindow::showGameMessage);
     connect(mapCreator.get(),&GameMapGenerator::gameMessage,
             this,
@@ -83,13 +90,16 @@ MapWindow::MapWindow(QWidget *parent):
     connect(objManager->getPlayer().get(), &Player::currentMoney,
             this,&MapWindow::updateMoneyLabel);
 
-    gameMap->setBackgroundBrush(Qt::black);
-    m_ui->gameMapView->scale(0.9,0.9);
 }
 
 MapWindow::~MapWindow()
 {
     delete m_ui;
+    delete soundEffectPlayer;
+    delete musicplayer;
+    delete musicPlaylist;
+    delete startingDialog;
+    delete rules;
 }
 
 void MapWindow::resizeEvent(QResizeEvent *event)
@@ -389,10 +399,7 @@ void MapWindow::lock_and_unlock_other_buttons(bool toggle)
 
 void MapWindow::on_rulesButton_clicked()
 {
-    rulesWindow *rules = new rulesWindow(this);
-    rules->setWindowTitle("Game Info");
-    rules->exec();
-    delete rules;
+    rules->show();
 }
 
 void MapWindow::gameOver(gameOverState state)
@@ -454,8 +461,5 @@ void MapWindow::updateMoneyLabel(int amount)
 
 void Game::MapWindow::on_pricesButton_clicked()
 {
-    PriceWindow *prices = new PriceWindow(this);
-    prices->setWindowTitle("Prices");
-    prices->exec();
-    delete prices;
+    prices->show();
 }

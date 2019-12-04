@@ -24,7 +24,7 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     for(auto item : items()){
         if(item->graphicsEffect() != nullptr){
             delete item->graphicsEffect();
-            item->setGraphicsEffect(0);
+            item->setGraphicsEffect(nullptr);
         }
     }
     QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
@@ -67,7 +67,7 @@ void Map::drawMap()
     int playerX = objManager_->getPlayer()->getCoordinate().x();
     int playerY = objManager_->getPlayer()->getCoordinate().y();
     playerImg->setPos(playerX,playerY);
-    playerImg->setZValue(1000);
+    playerImg->setZValue(1000); //always draws player on top
     player = playerImg;
     addItem(playerImg);
 }
@@ -129,44 +129,6 @@ void Map::showRangeEffect(QGraphicsItem* targetTile, std::string action)
         targetTile->setGraphicsEffect(graphicsEffect);
     }
 
-}
-
-void Map::showTileBuildOrSearchEffect(QGraphicsItem *targetTile)
-{
-    if(targetTile != nullptr){
-        QGraphicsColorizeEffect* graphicsEffect = new QGraphicsColorizeEffect;
-        int x_distance = int(objManager_->getPlayer()->getCoordinate().x()
-                            - targetTile->pos().x());
-        int y_distance = int(objManager_->getPlayer()->getCoordinate().y()
-                            - targetTile->pos().y());
-        int validDistance = TILE_WIDTH;
-
-        bool tooFar = (x_distance > validDistance
-                || x_distance < -validDistance
-                || y_distance > validDistance
-                || y_distance < -validDistance);
-
-        bool sameTile = (x_distance == 0 && y_distance == 0);
-        if(sameTile){
-            graphicsEffect->setColor(QColor(Qt::white));
-            graphicsEffect->setStrength(0.3);
-            onRange = false;
-        }
-        //check if player is too far away
-        else if(tooFar){
-             //if too far away, show white tile
-            graphicsEffect->setColor(QColor(Qt::white));
-            graphicsEffect->setStrength(0.3);
-            onRange = false;
-        }
-        else{
-            //if not, show yellow tile
-            graphicsEffect->setColor(QColor(Qt::yellow));
-            graphicsEffect->setStrength(0.3);
-            onRange =true;
-        }
-        targetTile->setGraphicsEffect(graphicsEffect);
-    }
 }
 
 void Map::showTileHighlightEffect(QGraphicsItem* targetTile)

@@ -19,12 +19,20 @@
 namespace Game{
 
 /**
+ * @brief TILE_WIDTH
+ * all tiles should have the same width
+ */
+static const int TILE_WIDTH = 50;
+/**
+ * @brief TILE_HEIGHT
+ * all tiles should have the same height
+ */
+static const int TILE_HEIGHT = 50;
+
+/**
  * @brief The mapCodes enum
  * Name for each integer value that represents a tile type in mapTemplate
  */
-
-static const int TILE_WIDTH = 50;
-static const int TILE_HEIGHT = 50;
 
 enum mapCodes{
     GRASSLAND = 0,

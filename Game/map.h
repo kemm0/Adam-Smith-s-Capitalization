@@ -59,21 +59,16 @@ Q_OBJECT
         std::shared_ptr<Game::GameObjectManager> objManager_;
         std::shared_ptr<Game::GameMapGenerator> mapGenerator_;
         /**
-         * @brief showTileMovableEffect hihglight tiles that are on range to
-         * move with green, red if not
-         * @param targetTile where cursor is
+         * @brief showTileMovableEffect hihglight tiles green if they are
+         * valid for selected action and red if they are not
+         * @param targetTile where cursor is, action that defines validity of
+         * tiles
          */
         void showRangeEffect(QGraphicsItem* targetTile,
                                    std::string action);
         /**
-         * @brief showTileBuildOrSearchEffect yellow highlight effect for tiles
-         * in range for build or search
-         * @param targetTile where cursor is
-         */
-        void showTileBuildOrSearchEffect(QGraphicsItem* targetTile);
-        /**
          * @brief showTileHighlightEffect white highlight effect for tiles
-         * under cursor
+         * under cursor when the player is not doing any action
          * @param targetTile where cursor is
          */
         void showTileHighlightEffect(QGraphicsItem* targetTile);

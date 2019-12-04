@@ -14,7 +14,7 @@ class startDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit startDialog(QWidget *parent = 0);
+    explicit startDialog(QWidget *parent = nullptr);
     Ui::startDialog *ui;
     ~startDialog();
 

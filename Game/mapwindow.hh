@@ -36,8 +36,8 @@ class MapWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MapWindow(QWidget *parent = 0);
-    ~MapWindow();
+    explicit MapWindow(QWidget *parent = nullptr);
+    ~MapWindow() override;
 
     /**
      * @brief resizeEvent handles events where user changes the mapwindow's size
@@ -139,6 +139,8 @@ private:
     QMediaPlayer* musicplayer;
     QMediaPlayer* soundEffectPlayer;
     QMediaPlaylist* musicPlaylist;
+    PriceWindow *prices;
+    rulesWindow *rules;
 
     /**
      * @brief lock_and_unlock_other_buttons locks other buttons when one button

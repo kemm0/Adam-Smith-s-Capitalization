@@ -1,8 +1,10 @@
 #include <QtTest>
+#include <QCoreApplication>
 
 // add necessary includes here
 #include "gameeventhandler.h"
 #include "gameobjectmanager.h"
+#include "gameresourcemap.h"
 
 /**
  * @brief The EventHandlerTest class
@@ -300,14 +302,73 @@ void EventHandlerTest::testSelectedWorkerType()
 
 void EventHandlerTest::testModifyResources()
 {
+    Course::Coordinate location(0,0);
+    std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<
+            Game::GameObjectManager>();
+
+    std::shared_ptr<Game::GameEventHandler> eventHandler = std::make_shared<
+            Game::GameEventHandler>(objManager);
+
+    std::shared_ptr<Game::Player> player1 = std::make_shared<Game::Player>(
+                location,"James",eventHandler,objManager);
+
+    objManager->setPlayer(player1);
+    QVERIFY(player1->getResources() == Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES);
+    eventHandler->modifyResources(
+                objManager->getPlayer(),
+                Game::ConstGameResourceMap::FARM_BUILD_COST);
+    QVERIFY(objManager->getPlayer()->getResources() == Course::mergeResourceMaps(
+                Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES,
+                Game::ConstGameResourceMap::FARM_BUILD_COST));
+
+    std::shared_ptr<Game::Player> player2 = std::make_shared<Game::Player>(
+                location,"James",eventHandler,objManager);
+    objManager->setPlayer(player2);
+    QVERIFY(objManager->getPlayer()->getResources() == Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES);
+
+    eventHandler->modifyResources(
+                objManager->getPlayer(),
+                Game::ConstGameResourceMap::TREASURE);
+    QVERIFY(objManager->getPlayer()->getResources() == Course::mergeResourceMaps(
+                Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES,
+                Game::ConstGameResourceMap::TREASURE));
 
 }
 
 void EventHandlerTest::testModifyResource()
 {
+    Course::Coordinate location(0,0);
+    std::shared_ptr<Game::GameObjectManager> objManager = std::make_shared<
+            Game::GameObjectManager>();
 
+    std::shared_ptr<Game::GameEventHandler> eventHandler = std::make_shared<
+            Game::GameEventHandler>(objManager);
+
+    std::shared_ptr<Game::Player> player1 = std::make_shared<Game::Player>(
+                location,"James",eventHandler,objManager);
+
+    objManager->setPlayer(player1);
+    QVERIFY(player1->getResources() == Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES);
+    eventHandler->modifyResource(
+                objManager->getPlayer(),
+                Course::MONEY,100);
+    QVERIFY(objManager->getPlayer()->getResources().at(Course::MONEY)==(
+                Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES.at(
+                    Course::MONEY)+100));
+
+    std::shared_ptr<Game::Player> player2 = std::make_shared<Game::Player>(
+                location,"James",eventHandler,objManager);
+    objManager->setPlayer(player2);
+
+    QVERIFY(player2->getResources() == Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES);
+    eventHandler->modifyResource(
+                objManager->getPlayer(),
+                Course::MONEY,-100);
+    QVERIFY(objManager->getPlayer()->getResources().at(Course::MONEY)==(
+                Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES.at(
+                    Course::MONEY)-100));
 }
 
-QTEST_APPLESS_MAIN(EventHandlerTest)
+QTEST_MAIN(EventHandlerTest)
 
 #include "tst_eventhandlertest.moc"

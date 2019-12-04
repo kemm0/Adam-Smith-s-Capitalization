@@ -12,7 +12,7 @@ class PriceWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit PriceWindow(QWidget *parent = 0);
+    explicit PriceWindow(QWidget *parent = nullptr);
     ~PriceWindow();
 
 private:

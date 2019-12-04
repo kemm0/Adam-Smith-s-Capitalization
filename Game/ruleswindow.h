@@ -12,7 +12,7 @@ class rulesWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit rulesWindow(QWidget *parent = 0);
+    explicit rulesWindow(QWidget *parent = nullptr);
     ~rulesWindow();
 
     void showRules();

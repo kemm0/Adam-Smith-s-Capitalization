@@ -25,7 +25,7 @@ public:
                     Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
                 );
     virtual std::string getType() const override;
-    virtual void doSpecialAction();
+    virtual void doSpecialAction() override;
 };
 }
 #endif // NOVICEWORKER_H
