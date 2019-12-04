@@ -25,7 +25,6 @@ GameEventHandler::GameEventHandler(
     searchedArea = false;
     hiring = false;
     hired = false;
-    selectedBuildingType = "";
     workertype = "novice worker";
 }
 
@@ -186,12 +185,6 @@ bool GameEventHandler::getHired()
     return hired;
 }
 
-
-std::string GameEventHandler::getSelectedBuildingType()
-{
-    return selectedBuildingType;
-}
-
 std::string GameEventHandler::getWorkerType()
 {
     return workertype;
@@ -220,11 +213,6 @@ void GameEventHandler::setMoving(bool x)
 void GameEventHandler::setBuildingState(bool x)
 {
     building = x;
-}
-
-void GameEventHandler::setSelectedBuildingType(std::string buildingType)
-{
-    selectedBuildingType =buildingType;
 }
 
 void GameEventHandler::setSearching(bool x)

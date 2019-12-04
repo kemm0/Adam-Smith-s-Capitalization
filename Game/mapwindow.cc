@@ -72,7 +72,7 @@ MapWindow::MapWindow(QWidget *parent):
     connect(gameMap,&Map::nothingFound,this,&MapWindow::nothingFoundSound);
     connect(gameMap,&Map::built,this,&MapWindow::buildSound);
 
-    connect(gameMap,&Map::inspectTile,this,&MapWindow::showTileInfo);
+    connect(gameMap,&Map::inspectTile,this,&MapWindow::showGameMessage);
     connect(mapCreator.get(),&GameMapGenerator::gameMessage,
             this,
             &MapWindow::showGameMessage);
@@ -282,13 +282,6 @@ void MapWindow::buildSound()
                 QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/building.wav"));
     soundEffectPlayer->play();
 }
-
-void MapWindow::showTileInfo(std::string info)
-{
-    showGameMessage(info);
-}
-
-
 
 void MapWindow::on_hireButton_toggled(bool checked)
 {

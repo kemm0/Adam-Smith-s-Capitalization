@@ -152,11 +152,26 @@ private:
      */
     void buttons_update();
     // Sound effects for actions
+    /**
+     * @brief treasureFoundSound
+     * played on finding a treasure
+     */
     void treasureFoundSound();
+    /**
+     * @brief robberFoundSound
+     * played on encountering a robber
+     */
     void robberFoundSound();
+    /**
+     * @brief nothingFoundSound
+     * played when the searched tile is empty
+     */
     void nothingFoundSound();
+    /**
+     * @brief buildSound
+     * played on building a new building
+     */
     void buildSound();
-    void showTileInfo(std::string info);
 
 
 

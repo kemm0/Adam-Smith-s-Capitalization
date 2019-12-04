@@ -27,6 +27,12 @@ public:
      */
     GameObjectManager(QObject *parent = nullptr);
     ~GameObjectManager();
+
+    /**
+     * @brief addTiles
+     * @param tiles
+     * stores a vector of tiles into the object manager
+     */
     void addTiles(
             const std::vector<std::shared_ptr<Course::TileBase>>& tiles);
     /**
@@ -85,9 +91,30 @@ public:
      * @return vector with all the workers
      */
     std::vector<std::shared_ptr<Course::WorkerBase>> getWorkers();
+    /**
+     * @brief addWorker
+     * @param worker
+     * stores a worker in the object manager
+     */
     void addWorker(std::shared_ptr<Course::WorkerBase> worker);
+    /**
+     * @brief addGameObject
+     * @param object
+     * stores a game object in the object manager
+     */
     void addGameObject(std::shared_ptr<Course::GameObject> object);
+    /**
+     * @brief addBuilding
+     * @param building
+     * stores a builkding in the object manager
+     */
     void addBuilding(std::shared_ptr<Course::BuildingBase> building);
+
+    /**
+     * @brief getBuildings
+     * @return vector of buildings
+     * returns all the buildings that have been stored
+     */
     std::vector<std::shared_ptr<Course::BuildingBase>> getBuildings();
 
 private:
