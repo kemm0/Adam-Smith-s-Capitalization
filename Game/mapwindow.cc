@@ -9,7 +9,11 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui(new Ui::MapWindow)
 {
     startingDialog = new startDialog();
-    connect(startingDialog,&startDialog::nameConfirmed,this,&MapWindow::setUsername);
+    connect(startingDialog,
+            &startDialog::nameConfirmed,
+            this,
+            &MapWindow::setUsername);
+
     startingDialog->exec();
     m_ui->setupUi(this);
     setWindowIcon(QIcon(QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
@@ -18,9 +22,9 @@ MapWindow::MapWindow(QWidget *parent):
     objManager = std::make_shared<Game::GameObjectManager>();
     eventHandler = std::make_shared<Game::GameEventHandler>(objManager);
 
-    mapCreator = std::make_shared<Game::GameMapGenerator>(objManager,eventHandler);
+    mapCreator = std::make_shared<Game::GameMapGenerator>(objManager,
+                                                          eventHandler);
 
-    //objManager->initMap(eventHandler);
     gameMap = new Game::Map(nullptr,eventHandler,objManager,mapCreator);
     gameMap->drawMap();
     gameMap->setFocus();
@@ -37,7 +41,9 @@ MapWindow::MapWindow(QWidget *parent):
     m_ui->hireButton->setCheckable(true);
 
 
-    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
+    showGameMessage(
+                "Money: " + std::to_string(
+                    objManager->getPlayer()->getResources().at(Course::MONEY)));
 
     updateMoneyLabel(objManager->getPlayer()->getResources().at(Course::MONEY));
     m_ui->MoneyTextLabel->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/money.png"));
@@ -46,13 +52,18 @@ MapWindow::MapWindow(QWidget *parent):
     // self made with bandlab :D enjoy
     musicplayer = new QMediaPlayer;
     musicPlaylist = new QMediaPlaylist();
-    musicPlaylist->addMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/gamemusic.wav"));
+
+    musicPlaylist->addMedia(
+                QUrl::fromLocalFile(
+                    "../../juho-ja-leo/Game/Music/gamemusic.wav"));
+
     musicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);
     musicplayer->setPlaylist(musicPlaylist);
     musicplayer->play();
 
     //SOUND EFFECTS
-    //all sound effects are from freesounds.org and have a license that allows free usage of the files
+    //all sound effects are from freesounds.org
+    //and have a license that allows free usage of the files
     soundEffectPlayer = new QMediaPlayer();
     connect(gameMap,&Map::robberFound,this,&MapWindow::robberFoundSound);
     connect(gameMap,&Map::treasureFound,this,&MapWindow::treasureFoundSound);
@@ -60,10 +71,15 @@ MapWindow::MapWindow(QWidget *parent):
     connect(gameMap,&Map::built,this,&MapWindow::buildSound);
 
     connect(gameMap,&Map::inspectTile,this,&MapWindow::showTileInfo);
-    connect(mapCreator.get(),&GameMapGenerator::gameMessage,this,&MapWindow::showGameMessage);
-    connect(eventHandler.get(),&GameEventHandler::gameMessage,this,&MapWindow::showGameMessage);
-    connect(eventHandler.get(), &GameEventHandler::gameOver, this, &MapWindow::gameOver);
-    connect(objManager->getPlayer().get(), &Player::currentMoney,this,&MapWindow::updateMoneyLabel);
+    connect(mapCreator.get(),&GameMapGenerator::gameMessage,
+            this,
+            &MapWindow::showGameMessage);
+    connect(eventHandler.get(),&GameEventHandler::gameMessage,
+            this,&MapWindow::showGameMessage);
+    connect(eventHandler.get(), &GameEventHandler::gameOver,
+            this, &MapWindow::gameOver);
+    connect(objManager->getPlayer().get(), &Player::currentMoney,
+            this,&MapWindow::updateMoneyLabel);
 
     gameMap->setBackgroundBrush(Qt::black);
     m_ui->gameMapView->scale(0.9,0.9);
@@ -114,7 +130,8 @@ void MapWindow::on_quitButton_clicked()
 
 void MapWindow::on_diceButton_clicked()
 {
-    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/dice.wav"));
+    soundEffectPlayer->setMedia(
+                QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/dice.wav"));
     soundEffectPlayer->play();
     showGameMessage("You threw a " + std::to_string(eventHandler->throwDice()));
     m_ui->diceButton->setDisabled(true);
@@ -127,7 +144,9 @@ void MapWindow::on_endTurnButton_clicked()
         gameOver(false);
     }
     eventHandler->endTurn();
-    showGameMessage("Turns left: "+std::to_string(maxTurns - eventHandler->getTurn()));
+    showGameMessage("Turns left: "
+                    + std::to_string(maxTurns - eventHandler->getTurn()));
+
     m_ui->diceButton->setDisabled(false);
     m_ui->endTurnButton->setDisabled(false);
     m_ui->searchAreaButton->setDisabled(false);
@@ -151,7 +170,6 @@ void MapWindow::on_endTurnButton_clicked()
     eventHandler->setSearching(false);
     buttons_update();
 
-    showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
     showGameMessage("");
     showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
 }
@@ -172,7 +190,9 @@ void MapWindow::on_moveButton_toggled(bool checked)
 
         }
         else{
-            showGameMessage("You haven't thrown the dice yet. Throw the dice to be able to move.");
+            showGameMessage("You haven't thrown the dice yet."
+                            " Throw the dice to be able to move.");
+
             m_ui->moveButton->setChecked(false);
             lock_and_unlock_other_buttons(false);
             buttons_update();
@@ -203,8 +223,11 @@ void MapWindow::on_buildButton_toggled(bool checked)
     if(checked==true && eventHandler->getPlayerBuilt() == false){
         eventHandler->setBuildingState(true);
         lock_and_unlock_other_buttons(true);
-        eventHandler->setSelectedBuildingType(m_ui->buildingsList->currentText().toStdString());
-        showGameMessage("Bulding. First select a building and then click a tile to build to.");
+        eventHandler->setSelectedBuildingType(
+                    m_ui->buildingsList->currentText().toStdString());
+
+        showGameMessage("Bulding. First select a building"
+                        " and then click a tile to build to.");
     }
     else if(checked == false && eventHandler->isBuilding() == true){
         eventHandler->setBuildingState(false);
@@ -220,11 +243,15 @@ void MapWindow::on_buildButton_toggled(bool checked)
 void MapWindow::on_searchAreaButton_toggled(bool checked)
 {
     if(checked==true && eventHandler->getPlayerSearched() == false){
-        soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/hmm.wav"));
+        soundEffectPlayer->setMedia(
+                    QUrl::fromLocalFile(
+                        "../../juho-ja-leo/Game/Music/hmm.wav"));
+
         soundEffectPlayer->play();
         eventHandler->setSearching(true);
         lock_and_unlock_other_buttons(true);
-        showGameMessage("Searching. First select a tile next to you and then click a tile to search it.");
+        showGameMessage("Searching. First select a tile next to you "
+                        "and then click a tile to search it.");
     }
     else if(checked == false && eventHandler->isSearching() == true){
         eventHandler->setSearching(false);
@@ -236,25 +263,29 @@ void MapWindow::on_searchAreaButton_toggled(bool checked)
 
 void MapWindow::treasureFoundSound()
 {
-    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/woohoo.wav"));
+    soundEffectPlayer->setMedia(
+                QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/woohoo.wav"));
     soundEffectPlayer->play();
 }
 
 void MapWindow::robberFoundSound()
 {
-    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/scream.wav"));
+    soundEffectPlayer->setMedia(
+                QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/scream.wav"));
     soundEffectPlayer->play();
 }
 
 void MapWindow::nothingFoundSound()
 {
-    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/rustle.wav"));
+    soundEffectPlayer->setMedia(
+                QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/rustle.wav"));
     soundEffectPlayer->play();
 }
 
 void MapWindow::buildSound()
 {
-    soundEffectPlayer->setMedia(QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/building.wav"));
+    soundEffectPlayer->setMedia(
+                QUrl::fromLocalFile("../../juho-ja-leo/Game/Music/building.wav"));
     soundEffectPlayer->play();
 }
 
@@ -270,7 +301,8 @@ void MapWindow::on_hireButton_toggled(bool checked)
     if(checked == true && eventHandler->getHired() == false){
         eventHandler->setHiring(true);
         lock_and_unlock_other_buttons(true);
-        showGameMessage("Hiring. Select a tile where you want to hire a worker.");
+        showGameMessage("Hiring. "
+                        "Select a tile where you want to hire a worker.");
     }
     else if(checked == false && eventHandler->isHiring() ==true){
         eventHandler->setHiring(false);
@@ -411,7 +443,8 @@ void MapWindow::gameOver(bool ranOutOfMoney)
     QMessageBox *gameOverBox = new QMessageBox(this);
     if(ranOutOfMoney == true){
         gameOverBox->setWindowTitle("You suck!");
-        gameOverBox->setText("You ran out money. Adam Smith would be ashamed of you!\n\n"
+        gameOverBox->setText("You ran out money. "
+                             "Adam Smith would be ashamed of you!\n\n"
                              "Better luck next time.");
     }
     else{
@@ -419,7 +452,8 @@ void MapWindow::gameOver(bool ranOutOfMoney)
         int startingMoney = Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES.at(Course::MONEY);
         if(money <= startingMoney){
             gameOverBox->setWindowTitle("Do better");
-            gameOverBox->setText("Although you did't go bankrupt, you did't earn any money either. "
+            gameOverBox->setText("Although you did't go bankrupt,"
+                                 " you did't earn any money either. "
                                  "That is not how capitalism should work!\n\n"
                                  "Try again if you dare.");
         }
@@ -427,7 +461,8 @@ void MapWindow::gameOver(bool ranOutOfMoney)
             gameOverBox->setWindowTitle("Nice!");
             gameOverBox->setText("Great job! You made " +
                                  QString::fromStdString(std::to_string(money)) +
-                                 "and you're now richer than ever while finns are even poorer!\n\n"
+                                 "and you're now richer than ever while "
+                                 "finns are even poorer!\n\n"
                                  "Try again to do even better.");
         }
     }
@@ -439,6 +474,7 @@ void MapWindow::gameOver(bool ranOutOfMoney)
 
 void MapWindow::updateMoneyLabel(int amount)
 {
-    m_ui->moneyAmountLabel->setText(QString::fromStdString(std::to_string(amount)));
+    m_ui->moneyAmountLabel->setText(
+                QString::fromStdString(std::to_string(amount)));
 }
 }

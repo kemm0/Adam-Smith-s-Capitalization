@@ -26,12 +26,13 @@ public:
      * @param buildcost
      * @param production
      */
-    LoggingBuilding(const std::shared_ptr<GameEventHandler>& eventhandler,
-                const std::shared_ptr<GameObjectManager>& objectmanager,
-                const std::shared_ptr<Game::Player>& owner,
-                const int& tilespaces = 1,
-                const Course::ResourceMap& buildcost = Game::ConstGameResourceMap::LOGGING_BUILD_COST,
-                const Course::ResourceMap& production = Game::ConstGameResourceMap::LOGGING_PRODUCTION);
+    LoggingBuilding(
+            const std::shared_ptr<GameEventHandler>& eventhandler,
+            const std::shared_ptr<GameObjectManager>& objectmanager,
+            const std::shared_ptr<Game::Player>& owner,
+            const int& tilespaces = 1,
+            const Course::ResourceMap& buildcost = Game::ConstGameResourceMap::LOGGING_BUILD_COST,
+            const Course::ResourceMap& production = Game::ConstGameResourceMap::LOGGING_PRODUCTION);
     /**
      * @brief getType
      * @return

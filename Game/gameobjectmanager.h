@@ -53,7 +53,8 @@ public:
     /**
      * @brief getTiles
      * @param coordinates
-     * @return vector of shared pointers that point to the tiles with given coordinates
+     * @return vector of shared pointers that point to the
+     * tiles with given coordinates
      * Use to get the tiles in an area or multiple locations
      */
     std::vector<std::shared_ptr<Course::TileBase>> getTiles(
@@ -66,14 +67,16 @@ public:
     /**
      * @brief getGameTile returns the tile in given coordinates
      */
-    std::shared_ptr<Game::GameTileBase> getGameTile(const Course::Coordinate& coordinate);
+    std::shared_ptr<Game::GameTileBase> getGameTile(
+            const Course::Coordinate& coordinate);
     /**
      * @brief setPlayer used from mapgenerator to set player
      * @param player
      */
     void setPlayer(std::shared_ptr<Game::Player> player);
     /**
-     * @brief getPlayer used in different classes to get players pointer to get to players attributes
+     * @brief getPlayer used in different classes to get players pointer to
+     * get to players attributes
      * @return pointer to player
      */
     std::shared_ptr<Game::Player> getPlayer();

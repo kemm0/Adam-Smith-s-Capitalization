@@ -12,7 +12,8 @@ Player::Player(const Course::Coordinate &coord,
                std::shared_ptr<Game::GameObjectManager> manager,
                const std::vector<std::shared_ptr<Course::GameObject> > objects,
                QObject *parent)
-    : QObject(parent), Course::PlayerBase(name,objects), Course::GameObject(coord,handler,manager)
+    : QObject(parent), Course::PlayerBase(name,objects),
+      Course::GameObject(coord,handler,manager)
 {
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png");
     money = 500;
@@ -44,7 +45,9 @@ void Player::modifyResources(Course::ResourceMap rmap)
 void Player::getProfit()
 {
     for(std::shared_ptr<Course::GameObject> object:getObjects()){
-        std::shared_ptr<GameTileBase> tile = std::dynamic_pointer_cast<GameTileBase>(object);
+        std::shared_ptr<GameTileBase> tile = std::dynamic_pointer_cast<
+                GameTileBase>(object);
+
         if(tile){
             tile->generateResources();
         }

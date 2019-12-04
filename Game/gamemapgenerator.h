@@ -74,13 +74,15 @@ public:
     /**
      * @brief createForestTile
      * @param location
-     * Creates a new ForestTile to the given location and adds it to object manager
+     * Creates a new ForestTile to the given location and adds it to
+     * object manager
      */
     void createForestTile(Course::Coordinate location);
     /**
      * @brief createWaterTile
      * @param location
-     * Creates a new WaterTile to the given location and adds it to object manager
+     * Creates a new WaterTile to the given location and adds it to
+     * object manager
      */
     void createWaterTile(Course::Coordinate location);
     /**
@@ -93,28 +95,32 @@ public:
     /**
      * @brief createWorker
      * @param targetTile
-     * Creates a new worker according to the selected worker type in eventHandler and adds it to the given Tile's list of workers.
+     * Creates a new worker according to the selected worker type in
+     * eventHandler and adds it to the given Tile's list of workers.
      */
     void createWorker(std::shared_ptr<GameTileBase> targetTile);
 
     /**
      * @brief createFarmhouse
      * @param targetTile
-     * Creates a new FarmBuilding to the given Tile and adds it to object manager
+     * Creates a new FarmBuilding to the given Tile and adds it to
+     * object manager
      */
     void createFarmhouse(std::shared_ptr<GameTileBase> targetTile);
 
     /**
      * @brief createLoggingcabin
      * @param targetTile
-     * Creates a new LoggingBuilding to the given Tile and adds it to object manager
+     * Creates a new LoggingBuilding to the given Tile and adds it to
+     * object manager
      */
     void createLoggingcabin(std::shared_ptr<GameTileBase> targetTile);
 
     /**
      * @brief createFishinghut
      * @param targetTile
-     * Creates a new FishingBuilding to the given Tile and adds it to object manager
+     * Creates a new FishingBuilding to the given Tile and adds it to
+     * object manager
      */
     void createFishinghut(std::shared_ptr<GameTileBase> targetTile);
 signals:
@@ -125,7 +131,9 @@ signals:
     void gameMessage(std::string);
 
 private:
-    std::vector<std::vector<int>> mapTemplate; // Map template for current map used
+    // MapTemplate is a
+    // Matrix that defines which tiles will be built at which coordinate
+    std::vector<std::vector<int>> mapTemplate;
     std::shared_ptr<GameObjectManager> objManager_;
     std::shared_ptr<GameEventHandler> eventHandler_;
     int mapWidth;

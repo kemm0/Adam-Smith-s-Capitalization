@@ -138,13 +138,14 @@ private:
     QMediaPlaylist* musicPlaylist;
 
     /**
-     * @brief lock_and_unlock_other_buttons locks other buttons when one button is pressed
-     * and releases them if toggle = false
+     * @brief lock_and_unlock_other_buttons locks other buttons when one button
+     *  is pressed and releases them if toggle = false
      * @param toggle
      */
     void lock_and_unlock_other_buttons(bool toggle);
     /**
-     * @brief buttons_update locks button if ongoing action or action has been made in turn
+     * @brief buttons_update locks button if ongoing action or action has been
+     * made in turn
      */
     void buttons_update();
     // Sound effects for actions

@@ -16,7 +16,11 @@ class GameTileBase;
  * @brief The Player class used for player instance
  */
 
-class Player : public QObject, public Course::PlayerBase, public Course::GameObject
+class Player :
+
+        public QObject,
+        public Course::PlayerBase,
+        public Course::GameObject
 
 {
 

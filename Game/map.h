@@ -32,11 +32,13 @@ Q_OBJECT
             std::shared_ptr<Game::GameMapGenerator> mapGenerator = nullptr);
         /**
          * @brief mouseMoveEvent highligts the tile that is pointed with cursor
-         * @param event different colored highlight when building or searching depending on event
+         * @param event different colored highlight when building or searching
+         *  depending on event
          */
         void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
         /**
-         * @brief mousePressEvent moves player, builds a house, searches and hires workers
+         * @brief mousePressEvent moves player, builds a house,
+         * searches and hires workers
          * @param mouseEvent a click
          */
         void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
@@ -56,17 +58,20 @@ Q_OBJECT
         std::shared_ptr<Game::GameObjectManager> objManager_;
         std::shared_ptr<Game::GameMapGenerator> mapGenerator_;
         /**
-         * @brief showTileMovableEffect hihglight tiles that are on range to move with green, red if not
+         * @brief showTileMovableEffect hihglight tiles that are on range to
+         * move with green, red if not
          * @param targetTile where cursor is
          */
         void showTileMovableEffect(QGraphicsItem* targetTile);
         /**
-         * @brief showTileBuildOrSearchEffect yellow highlight effect for tiles in range for build or search
+         * @brief showTileBuildOrSearchEffect yellow highlight effect for tiles
+         * in range for build or search
          * @param targetTile where cursor is
          */
         void showTileBuildOrSearchEffect(QGraphicsItem* targetTile);
         /**
-         * @brief showTileHighlightEffect white highlight effect for tiles under cursor
+         * @brief showTileHighlightEffect white highlight effect for tiles
+         * under cursor
          * @param targetTile where cursor is
          */
         void showTileHighlightEffect(QGraphicsItem* targetTile);

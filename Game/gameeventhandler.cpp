@@ -6,7 +6,9 @@
 
 namespace Game{
 
-GameEventHandler::GameEventHandler(std::shared_ptr<GameObjectManager> manager, QObject *parent)
+GameEventHandler::GameEventHandler(
+        std::shared_ptr<GameObjectManager> manager,
+        QObject *parent)
     :QObject(parent)
 {
     objManager = manager;
@@ -31,9 +33,12 @@ GameEventHandler::~GameEventHandler()
 
 }
 
-bool GameEventHandler::modifyResource(std::shared_ptr<Course::PlayerBase> player, Course::BasicResource resource, int amount)
+bool GameEventHandler::modifyResource(
+        std::shared_ptr<Course::PlayerBase> player,
+        Course::BasicResource resource, int amount)
 {
-    std::shared_ptr<Game::Player> gameplayer = std::dynamic_pointer_cast<Game::Player>(player);
+    std::shared_ptr<Game::Player> gameplayer = std::dynamic_pointer_cast<
+            Game::Player>(player);
     if(gameplayer){
         Course::ResourceMap resources = {{resource,amount}};
         gameplayer->modifyResources(resources);
@@ -44,9 +49,12 @@ bool GameEventHandler::modifyResource(std::shared_ptr<Course::PlayerBase> player
     }
 }
 
-bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> player, Course::ResourceMap resources)
+bool GameEventHandler::modifyResources(
+        std::shared_ptr<Course::PlayerBase> player,
+        Course::ResourceMap resources)
 {
-    std::shared_ptr<Game::Player> gameplayer = std::dynamic_pointer_cast<Game::Player>(player);
+    std::shared_ptr<Game::Player> gameplayer = std::dynamic_pointer_cast<
+            Game::Player>(player);
     if(gameplayer){
         gameplayer->modifyResources(resources);
         int money = gameplayer->getResources().at(Course::MONEY);
@@ -65,7 +73,9 @@ bool GameEventHandler::modifyResources(std::shared_ptr<Course::PlayerBase> playe
 
 void GameEventHandler::endTurn()
 {
-    objManager->getPlayer()->getProfit();
+    if(objManager->getPlayer() != nullptr){
+        objManager->getPlayer()->getProfit();
+    }
     turn += 1;
     threw = false;
     moved = false;
@@ -76,7 +86,6 @@ void GameEventHandler::endTurn()
     searchedArea = false;
     hiring = false;
     hired = false;
-    //emit gameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 }
 
 int GameEventHandler::throwDice()

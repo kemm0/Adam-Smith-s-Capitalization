@@ -13,7 +13,7 @@
 namespace Game{
 
 /**
- * @brief The GameTileBase class base class for all tiles used in game. Inherited from TileBase
+ * @brief The GameTileBase class base class for all tiles used in game.
  */
 class GameTileBase : public Course::TileBase
 {
@@ -23,7 +23,8 @@ public:
      * @param location
      * @param eventhandler
      * @param objectmanager
-     * @param max_build maximum amount of buildings that can be placed on the tile
+     * @param max_build maximum amount of buildings that can be placed on
+     *  the tile
      * @param max_work maximum amount of workers that can be placed on the tile
      * @param production
      */

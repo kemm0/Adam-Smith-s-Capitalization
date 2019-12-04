@@ -6,9 +6,10 @@
 
 namespace Game{
 
-GameMapGenerator::GameMapGenerator(std::shared_ptr<GameObjectManager> objManager,
-                                   std::shared_ptr<GameEventHandler> eventHandler,
-                                   QObject *parent)
+GameMapGenerator::GameMapGenerator(
+        std::shared_ptr<GameObjectManager> objManager,
+        std::shared_ptr<GameEventHandler> eventHandler,
+        QObject *parent)
     :QObject(parent)
 {
     objManager_ = objManager;
@@ -49,7 +50,8 @@ GameMapGenerator::~GameMapGenerator()
 }
 void GameMapGenerator::createBuilding(Course::Coordinate location)
 {
-    std::shared_ptr<GameTileBase> targetTile = objManager_->getGameTile(location);
+    std::shared_ptr<GameTileBase> targetTile = objManager_->getGameTile(
+                location);
     if(targetTile->getType()=="Grassland"){
         createFarmhouse(targetTile);
 
@@ -77,7 +79,8 @@ void GameMapGenerator::setTreasure(int amount)
     int treasuresSet = 0;
     while(treasuresSet < amount){
         Course::Coordinate randMapCoordinate = getRandomMapCoordinate();
-        std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(randMapCoordinate);
+        std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(
+                    randMapCoordinate);
         bool hasRobber = tile->getRobber();
         if(!hasRobber){
             tile->setTreasure(true);
@@ -91,7 +94,8 @@ void GameMapGenerator::setRobber(int amount)
     int robbersSet = 0;
     while(robbersSet < amount){
         Course::Coordinate randMapCoordinate = getRandomMapCoordinate();
-        std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(randMapCoordinate);
+        std::shared_ptr<GameTileBase> tile = objManager_->getGameTile(
+                    randMapCoordinate);
         bool hasTreasure = tile->getTreasure();
         if(!hasTreasure){
             tile->setRobber(true);
@@ -104,7 +108,10 @@ void GameMapGenerator::createGrassTile(Course::Coordinate location)
 {
     int x = location.x();
     int y = location.y();
-    std::shared_ptr<GrassTile> newTile = std::make_shared<GrassTile>(location,eventHandler_,objManager_);
+    std::shared_ptr<GrassTile> newTile = std::make_shared<GrassTile>(
+                location,
+                eventHandler_,
+                objManager_);
     int spriteWidth = newTile->getSprite().width();
     int spriteHeight = newTile->getSprite().height();
     newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
@@ -115,7 +122,10 @@ void GameMapGenerator::createForestTile(Course::Coordinate location)
 {
     int x = location.x();
     int y = location.y();
-    std::shared_ptr<Foresttile> newTile = std::make_shared<Foresttile>(location,eventHandler_,objManager_);
+    std::shared_ptr<Foresttile> newTile = std::make_shared<Foresttile>(
+                location,
+                eventHandler_,
+                objManager_);
     int spriteWidth = newTile->getSprite().width();
     int spriteHeight = newTile->getSprite().height();
     newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
@@ -126,7 +136,10 @@ void GameMapGenerator::createWaterTile(Course::Coordinate location)
 {
     int x = location.x();
     int y = location.y();
-    std::shared_ptr<WaterTile> newTile = std::make_shared<WaterTile>(location,eventHandler_,objManager_);
+    std::shared_ptr<WaterTile> newTile = std::make_shared<WaterTile>(
+                location,
+                eventHandler_,
+                objManager_);
     int spriteWidth = newTile->getSprite().width();
     int spriteHeight = newTile->getSprite().height();
     newTile->setCoordinate(Course::Coordinate(x*spriteHeight,y*spriteWidth));
@@ -136,7 +149,8 @@ void GameMapGenerator::createWaterTile(Course::Coordinate location)
 
 void GameMapGenerator::createPlayer(Course::Coordinate location)
 {
-    std::shared_ptr<Game::Player> player = std::make_shared<Game::Player>(location);
+    std::shared_ptr<Game::Player> player = std::make_shared<Game::Player>(
+                location);
     objManager_->setPlayer(player);
 }
 
@@ -144,78 +158,66 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
 {
     bool tileHasABuilding = (targetTile->getBuildingCount() != 0);
     if(tileHasABuilding){
+        std::shared_ptr<Course::WorkerBase> worker;
         if(eventHandler_->getWorkerType() == "novice worker"){
-            std::cout<<"creating novice worker"<<std::endl;
-            std::shared_ptr<NoviceWorker> worker = std::make_shared<NoviceWorker>(eventHandler_,
-                                                                                     objManager_,
-                                                                                     objManager_->getPlayer(),
-                                                                                     1,
-                                                                                     Game::ConstGameResourceMap::NW_RECRUITMENT_COST,
-                                                                                     Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
-                                                                                     );
-            try {
-                targetTile->setOwner(objManager_->getPlayer());
-                targetTile->addWorker(worker);
-                objManager_->addWorker(worker);
-                eventHandler_->modifyResources(objManager_->getPlayer(),worker->RECRUITMENT_COST);
-                emit gameMessage("You hired a novice worker.");
-            } catch (Course::IllegalAction) {
-                emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
-            }
+            worker = std::make_shared<NoviceWorker>(
+                eventHandler_,
+                objManager_,
+                objManager_->getPlayer(),
+                1,
+                Game::ConstGameResourceMap::NW_RECRUITMENT_COST,
+                Game::ConstGameResourceMap::NW_WORKER_EFFICIENCY
+            );
         }
         else if(eventHandler_->getWorkerType() == "apprentice worker"){
-            std::cout<<"creating apprentice worker"<<std::endl;
-            std::shared_ptr<ApprenticeWorker> worker = std::make_shared<ApprenticeWorker>(eventHandler_,
-                                                                                     objManager_,
-                                                                                     objManager_->getPlayer(),
-                                                                                     1,
-                                                                                     Game::ConstGameResourceMap::AW_RECRUITMENT_COST,
-                                                                                     Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
-                                                                                     );
-            try {
-                targetTile->setOwner(objManager_->getPlayer());
-                targetTile->addWorker(worker);
-                objManager_->addWorker(worker);
-                eventHandler_->modifyResources(objManager_->getPlayer(),worker->RECRUITMENT_COST);
-                emit gameMessage("You hired an apprentice worker.");
-            } catch (Course::IllegalAction) {
-                emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
-            }
+            worker = std::make_shared<ApprenticeWorker>(
+                eventHandler_,
+                objManager_,
+                objManager_->getPlayer(),
+                1,
+                Game::ConstGameResourceMap::AW_RECRUITMENT_COST,
+                Game::ConstGameResourceMap::AW_WORKER_EFFICIENCY
+            );
         }
         else if(eventHandler_->getWorkerType() == "master worker"){
-            std::cout<<"creating master worker"<<std::endl;
-            std::shared_ptr<MasterWorker> worker = std::make_shared<MasterWorker>(eventHandler_,
-                                                                                     objManager_,
-                                                                                     objManager_->getPlayer(),
-                                                                                     1,
-                                                                                     Game::ConstGameResourceMap::MW_RECRUITMENT_COST,
-                                                                                     Game::ConstGameResourceMap::MW_WORKER_EFFICIENCY
-                                                                                     );
-            try {
-                targetTile->setOwner(objManager_->getPlayer());
-                targetTile->addWorker(worker);
-                emit gameMessage("You hired a master worker.");
-                objManager_->addWorker(worker);
-                eventHandler_->modifyResources(objManager_->getPlayer(),worker->RECRUITMENT_COST);
-            } catch (Course::IllegalAction) {
-                emit gameMessage("Cannot place worker. Tile's worker capacity is full.");
-            }
+            worker = std::make_shared<MasterWorker>(
+                eventHandler_,
+                objManager_,
+                objManager_->getPlayer(),
+                1,
+                Game::ConstGameResourceMap::MW_RECRUITMENT_COST,
+                Game::ConstGameResourceMap::MW_WORKER_EFFICIENCY
+            );
 
+        }
+        try {
+            targetTile->setOwner(objManager_->getPlayer());
+            targetTile->addWorker(worker);
+            objManager_->addWorker(worker);
+            eventHandler_->modifyResources(
+                        objManager_->getPlayer(),
+                        worker->RECRUITMENT_COST);
+            emit gameMessage("You hired a " + worker->getType() + ".");
+        } catch (Course::IllegalAction) {
+            emit gameMessage("Cannot place worker."
+                             " Tile's worker capacity is full.");
         }
     }
     else{
-        emit gameMessage("Tile doesn't have buildings. You need a building to accommodate the workers");
+        emit gameMessage("Tile doesn't have buildings. "
+                         "You need a building to accommodate the workers");
     }
 }
 
 void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
 {
-    std::shared_ptr<FarmBuilding> newFarm = std::make_shared<FarmBuilding>(eventHandler_,
-                                                                           objManager_,
-                                                                           objManager_->getPlayer(),
-                                                                           1,
-                                                                           Game::ConstGameResourceMap::FARM_BUILD_COST,
-                                                                           Game::ConstGameResourceMap::FARM_PRODUCTION);
+    std::shared_ptr<FarmBuilding> newFarm = std::make_shared<FarmBuilding>(
+                eventHandler_,
+                objManager_,
+                objManager_->getPlayer(),
+                1,
+                Game::ConstGameResourceMap::FARM_BUILD_COST,
+                Game::ConstGameResourceMap::FARM_PRODUCTION);
 
 
     eventHandler_->modifyResources(objManager_->getPlayer(),newFarm->BUILD_COST);
@@ -227,14 +229,17 @@ void GameMapGenerator::createFarmhouse(std::shared_ptr<GameTileBase> targetTile)
 
 }
 
-void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTile)
+void GameMapGenerator::createLoggingcabin(
+        std::shared_ptr<GameTileBase> targetTile)
 {
-    std::shared_ptr<LoggingBuilding> newCabin = std::make_shared<LoggingBuilding>(eventHandler_,
-                                                                           objManager_,
-                                                                           objManager_->getPlayer(),
-                                                                           1,
-                                                                           Game::ConstGameResourceMap::LOGGING_BUILD_COST,
-                                                                           Game::ConstGameResourceMap::LOGGING_PRODUCTION);
+    std::shared_ptr<LoggingBuilding> newCabin = std::make_shared<
+            LoggingBuilding>(
+                eventHandler_,
+                objManager_,
+                objManager_->getPlayer(),
+                1,
+                Game::ConstGameResourceMap::LOGGING_BUILD_COST,
+                Game::ConstGameResourceMap::LOGGING_PRODUCTION);
 
     eventHandler_->modifyResources(objManager_->getPlayer(),newCabin->BUILD_COST);
     objManager_->getPlayer()->addObject(targetTile);
@@ -246,14 +251,19 @@ void GameMapGenerator::createLoggingcabin(std::shared_ptr<GameTileBase> targetTi
 
 void GameMapGenerator::createFishinghut(std::shared_ptr<GameTileBase> targetTile)
 {
-    std::shared_ptr<FishingBuilding> newFishingHut = std::make_shared<FishingBuilding>(eventHandler_,
-                                                                           objManager_,
-                                                                           objManager_->getPlayer(),
-                                                                           1,
-                                                                           Game::ConstGameResourceMap::FISHING_BUILD_COST,
-                                                                           Game::ConstGameResourceMap::FISHING_PRODUCTION);
+    std::shared_ptr<FishingBuilding> newFishingHut = std::make_shared<
+            FishingBuilding>(
+                eventHandler_,
+                objManager_,
+                objManager_->getPlayer(),
+                1,
+                Game::ConstGameResourceMap::FISHING_BUILD_COST,
+                Game::ConstGameResourceMap::FISHING_PRODUCTION);
 
-    eventHandler_->modifyResources(objManager_->getPlayer(),newFishingHut->BUILD_COST);
+    eventHandler_->modifyResources(
+                objManager_->getPlayer(),
+                newFishingHut->BUILD_COST);
+
     objManager_->getPlayer()->addObject(targetTile);
     objManager_->addGameObject(newFishingHut);
     targetTile->addBuilding(newFishingHut);
