@@ -17,6 +17,7 @@ Player::Player(const Course::Coordinate &coord,
 {
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/adamsmith_small.png");
     money = 500;
+    treasure = false;
     resources = ConstGameResourceMap::PLAYER_STARTING_RESOURCES;
     emit currentMoney(resources.at(Course::MONEY));
 }
