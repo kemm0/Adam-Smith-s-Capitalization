@@ -206,7 +206,7 @@
    <property name="font">
     <font>
      <family>Z003</family>
-     <pointsize>25</pointsize>
+     <pointsize>18</pointsize>
      <weight>75</weight>
      <italic>true</italic>
      <bold>true</bold>
