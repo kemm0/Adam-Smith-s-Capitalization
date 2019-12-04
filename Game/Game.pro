@@ -26,7 +26,9 @@ SOURCES += \
     Workers/noviceworker.cpp \
     Workers/masterworker.cpp \
     gamebuildingbase.cpp \
-    Workers/apprenticeworker.cpp
+    Workers/apprenticeworker.cpp \
+    pricewindow.cpp \
+    ruleswindow.cpp
 
 HEADERS += \
     mapwindow.hh \
@@ -48,7 +50,9 @@ HEADERS += \
     Workers/masterworker.h \
     gameresourcemap.h \
     gamebuildingbase.h \
-    Workers/apprenticeworker.h
+    Workers/apprenticeworker.h \
+    pricewindow.h \
+    ruleswindow.h
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -76,4 +80,6 @@ else:unix: PRE_TARGETDEPS += \
 
 FORMS += \
     mapwindow.ui \
-    startdialog.ui
+    startdialog.ui \
+    pricewindow.ui \
+    ruleswindow.ui

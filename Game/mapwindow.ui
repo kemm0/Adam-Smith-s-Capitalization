@@ -321,22 +321,10 @@
     <item row="8" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QComboBox" name="buildingsList">
-        <item>
-         <property name="text">
-          <string>Farmhouse (50)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Logging Cabin (100)</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Fishing Hut(200)</string>
-         </property>
-        </item>
+       <widget class="QPushButton" name="pricesButton">
+        <property name="text">
+         <string>Prices</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -357,17 +345,17 @@
        <widget class="QComboBox" name="hiringList">
         <item>
          <property name="text">
-          <string>Novice worker (30)</string>
+          <string>Novice worker</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Apprentice worker (50)</string>
+          <string>Apprentice worker</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Master worker (70)</string>
+          <string>Master worker</string>
          </property>
         </item>
        </widget>

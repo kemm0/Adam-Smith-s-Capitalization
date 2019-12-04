@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PriceWindow</class>
+ <widget class="QDialog" name="PriceWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>243</red>
+        <green>243</green>
+        <blue>243</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>243</red>
+        <green>243</green>
+        <blue>243</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>243</red>
+        <green>243</green>
+        <blue>243</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>243</red>
+        <green>243</green>
+        <blue>243</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
+  <property name="font">
+   <font>
+    <family>Z003</family>
+    <italic>true</italic>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="BuildingCostsSection">
+    <item>
+     <widget class="QLabel" name="BuildingCosts">
+      <property name="text">
+       <string>Building costs:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="farmCost">
+      <property name="text">
+       <string>Farm: 50</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="logginCabinCost">
+      <property name="text">
+       <string>Logging Cabin: 100</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="FishingHutCost">
+      <property name="text">
+       <string>Fishing Hut: 200</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>20</y>
+     <width>143</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="BuildingProfitsSection">
+    <item>
+     <widget class="QLabel" name="BuildingProfits">
+      <property name="text">
+       <string>Building profits:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="farmProfit">
+      <property name="text">
+       <string>Farm: 10</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="logginCabinProfit">
+      <property name="text">
+       <string>Logging Cabin: 20</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="FishingHutProfit">
+      <property name="text">
+       <string>Fishing Hut: 30</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>140</y>
+     <width>174</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="HiringCostsSection">
+    <item>
+     <widget class="QLabel" name="HiringCosts">
+      <property name="text">
+       <string>Hiring costs:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="NoviceWorkerCost">
+      <property name="text">
+       <string>Novice worker: 30</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="ApprenticeWorkerCost">
+      <property name="text">
+       <string>Apprentice worker: 50</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="MasterWorkerCost">
+      <property name="text">
+       <string>Master worker: 70</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_4">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>140</y>
+     <width>174</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="WorkerProfitsSection">
+    <item>
+     <widget class="QLabel" name="WorkerProfits">
+      <property name="text">
+       <string>Worker profits:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="NoviceWorkerProfit">
+      <property name="text">
+       <string>Novice worker: 10</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="ApprenticeWorkerProfit">
+      <property name="text">
+       <string>Apprentice worker: 20</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="MasterWorkerProfit">
+      <property name="text">
+       <string>Master worker: 30</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

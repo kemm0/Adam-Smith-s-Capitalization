@@ -12,6 +12,8 @@
 #include <QMessageBox>
 #include <math.h>
 #include <iostream>
+#include "ruleswindow.h"
+#include "pricewindow.h"
 #include "map.h"
 #include "startdialog.h"
 #include "../CourseLib/interfaces/igameeventhandler.h"
@@ -120,6 +122,8 @@ private slots:
      * @brief updateMoneyLabel
      */
     void updateMoneyLabel(int amount);
+
+    void on_pricesButton_clicked();
 
 private:
     int maxTurns;
