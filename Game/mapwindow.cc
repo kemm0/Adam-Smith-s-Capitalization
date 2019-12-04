@@ -40,7 +40,7 @@ MapWindow::MapWindow(QWidget *parent):
     showGameMessage("Money: " + std::to_string(objManager->getPlayer()->getResources().at(Course::MONEY)));
 
     updateMoneyLabel(objManager->getPlayer()->getResources().at(Course::MONEY));
-    m_ui->MoneyTextLabel->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/treasure.png"));
+    m_ui->MoneyTextLabel->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/money.png"));
 
     //MUSIC
     // self made with bandlab :D enjoy
