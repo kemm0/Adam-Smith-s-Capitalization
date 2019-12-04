@@ -27,11 +27,13 @@ void rulesWindow::showRules()
                "You can see your current money next to the coin-icon"
                "Most actions are done by clicking a button and then left clicking a tile in the map.\n\n"
                "Moving: You can move to any direction an amount specified by dice. Make sure to throw the dice before moving.\n\n"
-               "Searching: You can search a tile next to you. There is a chance of finding a great treasure as well as being robbed.\n\n"
+               "Searching: You can search a tile next to you. There is a chance of finding a great treasure as well as being robbed. "
+               "Searching costs 10 units. \n\n"
                "Building: Build a house in an row in tile away from you. Different buildings cost different amounts "
                "and produce different amounts of money. To cancel building just press the build-button again\n\n"
                "Hiring: You can hire people working in any of your buildings. Hiring a skilled person costs more but also "
-               "yields a greater bonus to buildings production.\n\n"
+               "yields a greater bonus to buildings production.\n"
+               "Since these are all exhausting actions, you may only do them once per round.\n\n"
                "Young money, cash money!");
 }
 

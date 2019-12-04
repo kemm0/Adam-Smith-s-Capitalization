@@ -16,26 +16,26 @@ GameMapGenerator::GameMapGenerator(
     eventHandler_ = eventHandler;
     srand(time(NULL));
     mapTemplate = {
-        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0}, // -------> j = x
-        {3,3,3,3,3,3,3,0,0,0,3,3,3,3,3,0,0,0,0,0}, // |
-        {3,3,3,3,3,3,3,0,0,0,0,3,3,3,0,0,0,0,0,0}, // |
-        {0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0}, // |
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, // i = y
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
-        {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,0},
-        {1,1,1,1,3,3,3,1,1,1,1,1,1,1,3,3,3,3,0,0},
+        {3,3,3,3,3,3,3,0,1,0,3,3,3,3,3,3,3,3,3,3}, // -------> j = x
+        {3,3,3,3,3,3,3,0,1,0,3,3,3,3,3,0,3,3,3,3}, // |
+        {3,3,3,3,3,3,0,0,1,0,0,0,0,3,0,0,3,3,3,3}, // |
+        {3,3,3,0,0,0,0,0,1,1,0,0,0,0,0,0,0,3,3,3}, // |
+        {3,3,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,3,3,3}, // i = y
+        {3,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,3,3},
+        {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,3,3,3},
+        {0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,3,3},
+        {0,0,0,0,0,0,0,1,1,0,2,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1},
+        {0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1},
+        {0,0,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,3,0},
+        {1,1,1,0,3,3,3,1,1,1,0,0,0,0,3,3,3,3,0,0},
         {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
-        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-        {0,0,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,3,3,3},
-        {3,3,0,3,3,3,3,3,0,0,3,3,3,0,0,0,0,3,3,3},
-        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,3,3,3},
+        {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3},
+        {3,3,0,0,3,3,3,3,3,0,3,3,0,0,0,0,0,0,0,3},
+        {3,3,0,0,3,3,3,3,3,0,3,3,3,0,0,0,0,3,3,3},
+        {3,3,3,3,3,3,3,3,3,0,3,3,3,3,0,0,0,3,3,3},
+        {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,3,3,3},
     };
     mapWidth = mapTemplate.at(0).size();
     mapHeight = mapTemplate.size();
@@ -91,8 +91,8 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
 
 Course::Coordinate GameMapGenerator::getRandomMapCoordinate()
 {
-    int randX = rand() % mapWidth * 50;
-    int randY = rand() % mapHeight * 50;
+    int randX = rand() % int(mapWidth) * TILE_WIDTH;
+    int randY = rand() % int(mapHeight) * TILE_HEIGHT;
     return Course::Coordinate(randX,randY);
 }
 
@@ -171,11 +171,13 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
         } catch (Course::IllegalAction) {
             emit gameMessage("Cannot place worker."
                              " Tile's worker capacity is full.");
+            throw Course::IllegalAction();
         }
     }
     else{
         emit gameMessage("Tile doesn't have buildings. "
                          "You need a building to accommodate the workers");
+        throw Course::IllegalAction();
     }
 }
 
@@ -184,7 +186,7 @@ void GameMapGenerator::createMapObjects()
     for(unsigned int i = 0; i < mapTemplate.size(); i++){
         for(unsigned int j = 0; j < mapTemplate.at(i).size();j++){
             int tileCode = mapTemplate.at(i).at(j);
-            Course::Coordinate location(j,i);
+            Course::Coordinate location(int(j)*TILE_WIDTH,int(i)*TILE_HEIGHT);
             std::shared_ptr<Game::GameTileBase> newTile;
             if(tileCode == GRASSLAND){
                 newTile = std::make_shared<GrassTile>(
@@ -212,9 +214,6 @@ void GameMapGenerator::createMapObjects()
                             objManager_);
 
         }
-            int spriteWidth = newTile->getSprite().width();
-            int spriteHeight = newTile->getSprite().height();
-            newTile->setCoordinate(Course::Coordinate(j*spriteHeight,i*spriteWidth));
             objManager_->addGameTile(newTile);
     }
     createPlayer(getRandomMapCoordinate());

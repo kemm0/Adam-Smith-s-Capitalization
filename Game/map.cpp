@@ -27,23 +27,28 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             item->setGraphicsEffect(0);
         }
     }
+    QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
     if(eventHandler_->isMoving()== true
             && eventHandler_->getPlayerMoved() == false){
-        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
-        showTileMovableEffect(targetTile);
+        showRangeEffect(targetTile, "move");
     }
     else if(eventHandler_->isBuilding()== true
             && eventHandler_->getPlayerBuilt() == false){
-        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
-        showTileBuildOrSearchEffect(targetTile);
+        showRangeEffect(targetTile, "build");
     }
     else if(eventHandler_->isSearching()== true
             && eventHandler_->getPlayerSearched() == false){
-        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
-        showTileBuildOrSearchEffect(targetTile);
+        showRangeEffect(targetTile, "search");
+    }
+    else if(eventHandler_->isSearching()== true
+            && eventHandler_->getPlayerSearched() == false){
+        showRangeEffect(targetTile, "search");
+    }
+    else if(eventHandler_->isHiring()== true
+            && eventHandler_->getHired() == false){
+        showRangeEffect(targetTile, "hire");
     }
     else{
-        QGraphicsItem* targetTile = itemAt(event->scenePos(),QTransform());
         showTileHighlightEffect(targetTile);
     }
     update();
@@ -71,34 +76,52 @@ void Map::drawMap()
 
 
 
-void Map::showTileMovableEffect(QGraphicsItem* targetTile)
+void Map::showRangeEffect(QGraphicsItem* targetTile, std::string action)
 {
     if(targetTile != nullptr){
+
         QGraphicsColorizeEffect* graphicsEffect = new QGraphicsColorizeEffect;
-        qreal x_distance = (objManager_->getPlayer()->getCoordinate().x()
+        int x_distance = int(objManager_->getPlayer()->getCoordinate().x()
                             - targetTile->pos().x());
-        qreal y_distance = (objManager_->getPlayer()->getCoordinate().y()
+        int y_distance = int(objManager_->getPlayer()->getCoordinate().y()
                             - targetTile->pos().y());
+        int validDistance = 0;
+        bool sameTile = (x_distance == 0 && y_distance == 0);
+        bool notValidTile = true;
 
-        int scenedistance = eventHandler_->getDiceValue() * 50;
+        if(action == "move"){
+            validDistance = eventHandler_->getDiceValue() * TILE_WIDTH;
+            notValidTile = (    x_distance > validDistance
+                            || x_distance < -validDistance
+                            || y_distance > validDistance
+                            || y_distance < -validDistance);
+        }
+        else if (action == "build" || action == "search"){
+            validDistance = TILE_WIDTH;
+            notValidTile = (x_distance > validDistance
+                    || x_distance < -validDistance
+                    || y_distance > validDistance
+                    || y_distance < -validDistance);
+        }
+        else if(action == "hire"){
+            auto gameTile = objManager_->getTile(
+                        Course::Coordinate(
+                        int(targetTile->pos().x()),
+                        int(targetTile->pos().y())));
+            notValidTile = (gameTile->getBuildingCount() == 0);
+        }
 
-        if(x_distance == 0 && y_distance == 0){
-            //if too far away, show red tile
+        if(sameTile){
             graphicsEffect->setColor(QColor(Qt::red));
             graphicsEffect->setStrength(0.3);
             onRange = false;
         }
-        //check if player is too far away
-        else if(x_distance > scenedistance|| x_distance < -scenedistance
-                || y_distance > scenedistance
-                || y_distance < -scenedistance){
-            //if too far away, show red tile
+        else if(notValidTile){
             graphicsEffect->setColor(QColor(Qt::red));
             graphicsEffect->setStrength(0.3);
             onRange = false;
         }
         else{
-            //if not, show green tile
             graphicsEffect->setColor(QColor(Qt::green));
             graphicsEffect->setStrength(0.3);
             onRange = true;
@@ -112,21 +135,25 @@ void Map::showTileBuildOrSearchEffect(QGraphicsItem *targetTile)
 {
     if(targetTile != nullptr){
         QGraphicsColorizeEffect* graphicsEffect = new QGraphicsColorizeEffect;
-        qreal x_distance = (objManager_->getPlayer()->getCoordinate().x()
+        int x_distance = int(objManager_->getPlayer()->getCoordinate().x()
                             - targetTile->pos().x());
-        qreal y_distance = (objManager_->getPlayer()->getCoordinate().y()
+        int y_distance = int(objManager_->getPlayer()->getCoordinate().y()
                             - targetTile->pos().y());
-        int scenedistance = 1 * 50;
-        if(x_distance == 0 && y_distance == 0){
+        int validDistance = TILE_WIDTH;
+
+        bool tooFar = (x_distance > validDistance
+                || x_distance < -validDistance
+                || y_distance > validDistance
+                || y_distance < -validDistance);
+
+        bool sameTile = (x_distance == 0 && y_distance == 0);
+        if(sameTile){
             graphicsEffect->setColor(QColor(Qt::white));
             graphicsEffect->setStrength(0.3);
             onRange = false;
         }
         //check if player is too far away
-        else if(x_distance > scenedistance
-                || x_distance < -scenedistance
-                || y_distance > scenedistance
-                || y_distance < -scenedistance){
+        else if(tooFar){
              //if too far away, show white tile
             graphicsEffect->setColor(QColor(Qt::white));
             graphicsEffect->setStrength(0.3);
@@ -245,13 +272,18 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
                     emit nothingFound();
 
                 }
+                eventHandler_->modifyResources(objManager_->getPlayer(),
+                                               ConstGameResourceMap::SEARCH);
                 eventHandler_->setPlayerSearched(true);
                 update();
             }
             else if(hireSelected){
                     auto buildings = objManager_->getPlayer()->getObjects();
-                    mapGenerator_->createWorker(gameTile);
-                    eventHandler_->setPlayerHired(true);
+                    try {
+                        mapGenerator_->createWorker(gameTile);
+                        eventHandler_->setPlayerHired(true);
+                    } catch (Course::IllegalAction) {
+                    }
 
             }
         }

@@ -22,6 +22,10 @@ namespace Game{
  * @brief The mapCodes enum
  * Name for each integer value that represents a tile type in mapTemplate
  */
+
+static const int TILE_WIDTH = 50;
+static const int TILE_HEIGHT = 50;
+
 enum mapCodes{
     GRASSLAND = 0,
     WATER = 1,
@@ -93,8 +97,8 @@ private:
     std::vector<std::vector<int>> mapTemplate;
     std::shared_ptr<GameObjectManager> objManager_;
     std::shared_ptr<GameEventHandler> eventHandler_;
-    int mapWidth;
-    int mapHeight;
+    unsigned int mapWidth;
+    unsigned int mapHeight;
 
 };
 }

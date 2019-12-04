@@ -80,6 +80,11 @@ const Course::ResourceMap ROBBER = {
 const Course::ResourceMap TREASURE = {
     {Course::MONEY, 200},
 };
+
+// Searching
+const Course::ResourceMap SEARCH = {
+    {Course::MONEY, -10},
+};
 }
 }
 

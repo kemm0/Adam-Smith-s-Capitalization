@@ -301,13 +301,13 @@ void MapWindow::on_hireButton_toggled(bool checked)
 
 void MapWindow::on_hiringList_currentIndexChanged(const QString &arg1)
 {
-    if (arg1.toStdString() == "Novice worker (30)"){
+    if (arg1.toStdString() == "Novice worker"){
         eventHandler->setWorkerType("novice worker");
     }
-    else if(arg1.toStdString() == "Apprentice worker (50)"){
+    else if(arg1.toStdString() == "Apprentice worker"){
         eventHandler->setWorkerType("apprentice worker");
     }
-    else if(arg1.toStdString() == "Master worker (70)"){
+    else if(arg1.toStdString() == "Master worker"){
         eventHandler->setWorkerType("master worker");
     }
 
@@ -408,7 +408,7 @@ void MapWindow::gameOver(gameOverState state)
     else if(state == NO_PROFIT){
         int startingMoney = Game::ConstGameResourceMap::PLAYER_STARTING_RESOURCES.at(Course::MONEY);
         if(money <= startingMoney){
-            gameOverBox->setWindowTitle("Do better");
+            gameOverBox->setWindowTitle("Do better!");
             gameOverBox->setText("Although you did't go bankrupt,"
                                  " you did't earn any money either. "
                                  "That is not how capitalism should work!\n\n"
@@ -417,8 +417,9 @@ void MapWindow::gameOver(gameOverState state)
     }
     else if(state == GOT_RICH){
         gameOverBox->setWindowTitle("Nice!");
-        gameOverBox->setText("Great job! You made " +
-                             QString::fromStdString(std::to_string(money)) +
+        gameOverBox->setText("Great job, " + QString::fromStdString(username) +
+                             "! You made " + QString::fromStdString(
+                                 std::to_string(money)) +
                              " and you're now richer than ever while "
                              "finns are even poorer!\n\n"
                              "Try again to do even better.");

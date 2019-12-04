@@ -63,7 +63,8 @@ Q_OBJECT
          * move with green, red if not
          * @param targetTile where cursor is
          */
-        void showTileMovableEffect(QGraphicsItem* targetTile);
+        void showRangeEffect(QGraphicsItem* targetTile,
+                                   std::string action);
         /**
          * @brief showTileBuildOrSearchEffect yellow highlight effect for tiles
          * in range for build or search
