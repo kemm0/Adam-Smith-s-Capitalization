@@ -6,7 +6,7 @@ startDialog::startDialog(QWidget *parent) :
     ui(new Ui::startDialog)
 {
     ui->setupUi(this);
-    setWindowTitle("Settings");
+    setWindowTitle("Adam Smith's Capitalization");
     setWindowIcon(QIcon(QPixmap(
                             "../../juho-ja-leo/Game/Sprites/adamsmith_small.png")));
     ui->bgImage->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/background.png"));
