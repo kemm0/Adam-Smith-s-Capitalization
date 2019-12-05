@@ -21,6 +21,9 @@ TownTile::TownTile(
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/town.png");
     width = sprite.width();
     height = sprite.height();
+    setDescription("brief","This is a Finnish town.\nI need to get back there"
+                           " to make it to my ride home.\nBut first i need "
+                           "to make some money.");
 }
 
 std::string TownTile::getType() const

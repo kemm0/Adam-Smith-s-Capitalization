@@ -110,7 +110,7 @@ void GameEventHandler::endTurn()
             }
         }
     }
-    emit gameMessage("Turns left: "
+    emit gameMessage("Turn "+ std::to_string(turn) + "\nTurns left: "
                     + std::to_string(maxTurns - turn));
     threw = false;
     moved = false;

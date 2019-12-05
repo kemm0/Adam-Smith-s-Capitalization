@@ -15,8 +15,12 @@ Map::Map(QObject *parent,
     objManager_ = objManager;
     mapGenerator_ = mapGenerator;
     player = nullptr;
-    //setBackgroundBrush(Qt::black);
 
+}
+
+Map::~Map()
+{
+    delete player;
 }
 
 void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -35,10 +39,6 @@ void Map::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     else if(eventHandler_->isBuilding()== true
             && eventHandler_->getPlayerBuilt() == false){
         showRangeEffect(targetTile, "build");
-    }
-    else if(eventHandler_->isSearching()== true
-            && eventHandler_->getPlayerSearched() == false){
-        showRangeEffect(targetTile, "search");
     }
     else if(eventHandler_->isSearching()== true
             && eventHandler_->getPlayerSearched() == false){
@@ -70,6 +70,106 @@ void Map::drawMap()
     playerImg->setZValue(1000); //always draws player on top
     player = playerImg;
     addItem(playerImg);
+}
+
+void Map::move(std::shared_ptr<GameTileBase> gameTile)
+{
+    if(onRange == true){
+        int x = gameTile->getCoordinate().x();
+        int y = gameTile->getCoordinate().y();
+        objManager_->getPlayer()->setCoordinate(Course::Coordinate(x,y));
+        player->setPos(x,y);
+        eventHandler_->setPlayerMoved(true);
+        update();
+    }
+}
+
+void Map::hire(std::shared_ptr<GameTileBase> gameTile)
+{
+    auto buildings = objManager_->getPlayer()->getObjects();
+    try {
+        mapGenerator_->createWorker(gameTile);
+        eventHandler_->setPlayerHired(true);
+    } catch (Course::IllegalAction) {
+    }
+}
+
+void Map::build(std::shared_ptr<GameTileBase> gameTile)
+{
+    int x = gameTile->getCoordinate().x();
+    int y = gameTile->getCoordinate().y();
+    try {
+        mapGenerator_->createBuilding(Course::Coordinate(x,y));
+        QGraphicsPixmapItem* mapItem = new QGraphicsPixmapItem(
+                    gameTile->getSprite());
+
+        mapItem->setPos(x,y);
+        addItem(mapItem);
+        eventHandler_->setPlayerBuilt(true);
+        emit built();
+        update();
+    } catch (Course::IllegalAction) {
+    }
+
+}
+
+void Map::search(std::shared_ptr<GameTileBase> gameTile)
+{
+    int x = gameTile->getCoordinate().x();
+    int y = gameTile->getCoordinate().y();
+
+    if (gameTile->getRobber() == true){
+        QGraphicsPixmapItem* robberSprite = new QGraphicsPixmapItem(
+                    QPixmap("../../juho-ja-leo/Game/Sprites/robbersmall.png"));
+        robberSprite->setPos(x,y);
+        addItem(robberSprite);
+        eventHandler_->modifyResources(
+                    objManager_->getPlayer(),
+                    Game::ConstGameResourceMap::ROBBER);
+        emit robberFound();
+    }
+    else if(gameTile->getTreasure() == true){
+        QGraphicsPixmapItem* treasureSprite = new QGraphicsPixmapItem(
+                    QPixmap("../../juho-ja-leo/Game/Sprites/treasure.png"));
+        treasureSprite->setPos(x,y);
+        addItem(treasureSprite);
+        eventHandler_->modifyResources(objManager_->getPlayer(),
+                                       Game::ConstGameResourceMap::TREASURE);
+        emit treasureFound();
+    }
+    else{
+        QGraphicsPixmapItem* crossSprite = new QGraphicsPixmapItem(
+                    QPixmap("../../juho-ja-leo/Game/Sprites/cross.png"));
+        crossSprite->setPos(x,y);
+        addItem(crossSprite);
+        emit nothingFound();
+
+    }
+    eventHandler_->modifyResources(objManager_->getPlayer(),
+                                   ConstGameResourceMap::SEARCH);
+    eventHandler_->setPlayerSearched(true);
+    update();
+}
+
+void Map::inspect(std::shared_ptr<GameTileBase> gameTile)
+{
+    if(gameTile->getType() == "Town"){
+        emit inspectTile(gameTile->getDescription("brief") + "\n\n");
+    }
+    else {
+        try {
+            emit inspectTile(gameTile->getDescription("brief") +
+                                ".\nThere are " + std::to_string(
+                                    gameTile->getBuildingCount())
+                                + " buildings and " + std::to_string(
+                                    gameTile->getWorkerCount()) +
+                                " workers in this area.\n\n");
+
+        } catch (Course::KeyError()) {
+            emit inspectTile("I dont know anything about this area.");
+        }
+    }
+
 }
 
 
@@ -148,19 +248,9 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
         auto gameTile = objManager_->getGameTile(
                     Course::Coordinate(int(targetTile->pos().x()),
                                        int(targetTile->pos().y())));
+
         if(mouseEvent->button() == Qt::RightButton){
-            if(gameTile->getType() == "Town"){
-                emit inspectTile("This is a town. I should return here "
-                                 "when im done with making money");
-            }
-            else {
-                emit inspectTile("This is " + gameTile->getType() +
-                                    ". There are " + std::to_string(
-                                        gameTile->getBuildingCount())
-                                    + " buildings and " + std::to_string(
-                                        gameTile->getWorkerCount()) +
-                                    " workers in this area.");
-            }
+            inspect(gameTile);
         }
 
         else if(mouseEvent->button() == Qt::LeftButton){
@@ -180,72 +270,17 @@ void Map::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
             bool hireSelected = (eventHandler_->isHiring() == true
                                  && eventHandler_->getHired() == false);
             if(moveSelected){
-                if(onRange == true){
-                    objManager_->getPlayer()->setCoordinate(
-                                Course::Coordinate(int(targetTile->pos().x()),
-                                                   int(targetTile->pos().y())));
-                    player->setPos(targetTile->pos());
-                    eventHandler_->setPlayerMoved(true);
-                    update();
-                }
+                move(gameTile);
             }
 
             else if(buildSelected){
-                try {
-                    mapGenerator_->createBuilding(Course::Coordinate(
-                                                      int(targetTile->pos().x()),
-                                                      int(targetTile->pos().y())));
-                    QGraphicsPixmapItem* mapItem = new QGraphicsPixmapItem(
-                                gameTile->getSprite());
-
-                    mapItem->setPos(targetTile->pos());
-                    addItem(mapItem);
-                    eventHandler_->setPlayerBuilt(true);
-                    emit built();
-                    update();
-                } catch (Course::IllegalAction) {
-                }
+                build(gameTile);
             }
             else if(searchSelected){
-                if (gameTile->getRobber() == true){
-                    QGraphicsPixmapItem* robberSprite = new QGraphicsPixmapItem(
-                                QPixmap("../../juho-ja-leo/Game/Sprites/robbersmall.png"));
-                    robberSprite->setPos(targetTile->pos());
-                    addItem(robberSprite);
-                    eventHandler_->modifyResources(
-                                objManager_->getPlayer(),
-                                Game::ConstGameResourceMap::ROBBER);
-                    emit robberFound();
-                }
-                else if(gameTile->getTreasure() == true){
-                    QGraphicsPixmapItem* treasureSprite = new QGraphicsPixmapItem(
-                                QPixmap("../../juho-ja-leo/Game/Sprites/treasure.png"));
-                    treasureSprite->setPos(targetTile->pos());
-                    addItem(treasureSprite);
-                    eventHandler_->modifyResources(objManager_->getPlayer(),
-                                                   Game::ConstGameResourceMap::TREASURE);
-                    emit treasureFound();
-                }
-                else{
-                    QGraphicsPixmapItem* crossSprite = new QGraphicsPixmapItem(
-                                QPixmap("../../juho-ja-leo/Game/Sprites/cross.png"));
-                    crossSprite->setPos(targetTile->pos());
-                    addItem(crossSprite);
-                    emit nothingFound();
-
-                }
-                eventHandler_->modifyResources(objManager_->getPlayer(),
-                                               ConstGameResourceMap::SEARCH);
-                eventHandler_->setPlayerSearched(true);
-                update();
+                search(gameTile);
             }
             else if(hireSelected){
-                    auto buildings = objManager_->getPlayer()->getObjects();
-                    try {
-                        mapGenerator_->createWorker(gameTile);
-                        eventHandler_->setPlayerHired(true);
-                    } catch (Course::IllegalAction) {
-                    }
+                hire(gameTile);
 
             }
         }

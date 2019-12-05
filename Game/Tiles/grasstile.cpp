@@ -20,6 +20,8 @@ GrassTile::GrassTile(
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/grasstile2.png");
     width = sprite.width();
     height = sprite.height();
+    setDescription("brief","This is a typical grassy field.\nLooks like a "
+                           "good place for farming");
 }
 
 std::string GrassTile::getType() const

@@ -21,6 +21,8 @@ Foresttile::Foresttile(
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/forest.png");
     width = sprite.width();
     height = sprite.height();
+    setDescription("brief","This is a typical finnish forest.\nLooks like a "
+                           "good place for logging");
 }
 
 std::string Foresttile::getType() const

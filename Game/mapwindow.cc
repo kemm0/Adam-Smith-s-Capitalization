@@ -33,7 +33,7 @@ MapWindow::MapWindow(QWidget *parent):
     rules = new rulesWindow(this);
     rules->setWindowTitle("Game Info");
     showGameMessage(
-                "Hello " + username + "! \n Get ready to conquer Pirkanmaa");
+                "Hello " + username + "! \nGet ready to conquer Pirkanmaa\n");
     updateMoneyLabel(objManager->getPlayer()->getResources().at(Course::MONEY));
     m_ui->MoneyTextLabel->setPixmap(QPixmap("../../juho-ja-leo/Game/Sprites/money.png"));
 
@@ -115,7 +115,7 @@ void MapWindow::showEvent(QShowEvent *event)
 
 void MapWindow::showGameMessage(std::string message)
 {
-    m_ui->gameDialogueBrowser->append(QString::fromStdString(message));
+    m_ui->gameDialogueBrowser->append(QString::fromStdString(message) + "\n");
 }
 
 std::string MapWindow::getUsername()
@@ -175,9 +175,6 @@ void MapWindow::on_endTurnButton_clicked()
     eventHandler->setHiring(false);
     eventHandler->setSearching(false);
     buttons_update();
-
-    showGameMessage("");
-    showGameMessage("Turn number: "+std::to_string(eventHandler->getTurn()));
 }
 
 void MapWindow::setUsername(std::string name)
@@ -230,8 +227,7 @@ void MapWindow::on_buildButton_toggled(bool checked)
         eventHandler->setBuildingState(true);
         lock_and_unlock_other_buttons(true);
 
-        showGameMessage("Bulding. First select a building"
-                        " and then click a tile to build to.");
+        showGameMessage("Bulding. Click a tile to build to.");
     }
     else if(checked == false && eventHandler->isBuilding() == true){
         eventHandler->setBuildingState(false);
@@ -434,17 +430,17 @@ void MapWindow::gameOver(gameOverState state)
     else if(state == LATE){
         gameOverBox->setWindowTitle("Too Late!");
         gameOverBox->setText("You didn't make it back to town in time"
-                             " and now you are stuck with these weird finns. "
+                             " and now you are stuck with these weird finns. \n"
                              "Life sucks now that you won't be able "
-                             "to get home to your favourite tea, biscuits and"
-                             "writing literature. "
+                             "to get home to your favourite tea, biscuits and "
+                             "writing literature.\n"
                              "You lost the game.");
     }
     else if(state == NO_TREASURE){
         gameOverBox->setWindowTitle("No Treasure!");
         gameOverBox->setText("You didn't find any treasures. This was supposed"
-                             " to be an adventure! Adam Smith got bored to"
-                             " death. \n\n You lost the game.");
+                             " to be an adventure! \nAdam Smith got bored to"
+                             " death. \n\nYou lost the game.");
     }
     gameOverBox->setStandardButtons(QMessageBox::Close);
     gameOverBox->exec();

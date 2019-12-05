@@ -20,6 +20,8 @@ WaterTile::WaterTile(
     sprite = QPixmap("../../juho-ja-leo/Game/Sprites/water.png");
     width = sprite.width();
     height = sprite.height();
+    setDescription("brief","This is a body of water.\nMurky, but it is full "
+                           "of fish.\nLooks like a good place for fishing.");
 }
 
 std::string WaterTile::getType() const

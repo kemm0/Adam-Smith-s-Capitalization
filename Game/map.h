@@ -17,6 +17,7 @@
 #include "gamemapgenerator.h"
 #include "algorithm"
 #include "../../Course/CourseLib/exceptions/illegalaction.h"
+#include "../../Course/CourseLib/exceptions/keyerror.h"
 
 namespace Game{
 /**
@@ -31,6 +32,9 @@ Q_OBJECT
             std::shared_ptr<Game::GameEventHandler> eventHandler = nullptr,
             std::shared_ptr<Game::GameObjectManager> objManager = nullptr,
             std::shared_ptr<Game::GameMapGenerator> mapGenerator = nullptr);
+
+        ~Map() override;
+
         /**
          * @brief mouseMoveEvent highligts the tile that is pointed with cursor
          * @param event different colored highlight when building or searching
@@ -47,14 +51,43 @@ Q_OBJECT
          * @brief drawMap draw correct tiles spesified by gamemapgenerator
          */
         void drawMap();
-        QGraphicsPixmapItem* player;
+        /**
+         * @brief move
+         * @param gameTile
+         * Moves the player to the given location
+         */
+        void move(std::shared_ptr<GameTileBase> gameTile);
+        /**
+         * @brief hire
+         * @param gameTile
+         * informs the mapgenerator to create a selected worker on the tile
+         */
+        void hire(std::shared_ptr<GameTileBase> gameTile);
+        /**
+         * @brief build
+         * @param gameTile
+         * informs the mapgenerator to create a building on the given location
+         */
+        void build(std::shared_ptr<GameTileBase> gameTile);
+        /**
+         * @brief search
+         * @param gameTile
+         * Searches a tile and checks if it has a treasure or a robber
+         */
+        void search(std::shared_ptr<GameTileBase> gameTile);
+        /**
+         * @brief inspect
+         * @param gameTile
+         * Prints out information of the tile to the game's text box
+         */
+        void inspect(std::shared_ptr<GameTileBase> gameTile);
 
     private:
         int tileSize;
         int mapWidth;
         int mapHeight;
         bool onRange;
-        QGraphicsItem* selectedTile;
+        QGraphicsPixmapItem* player;
         std::shared_ptr<Game::GameEventHandler> eventHandler_;
         std::shared_ptr<Game::GameObjectManager> objManager_;
         std::shared_ptr<Game::GameMapGenerator> mapGenerator_;
