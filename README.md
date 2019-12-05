@@ -1,23 +1,28 @@
-# Programming 3 Exercise project template
+Game Story:
 
-1. Make sure you have setup ssh-key for your GitLab account. https://course-gitlab.tuni.fi/profile/keys
-2. Clone using --recursive
-3. Make sure you can build the project. (Should compile without issues if your environment is setup correctly)
+Unknown to most, Adam Smith, the forefather of capitalism and an absolute mad lad, made a secret detour on his way from Glasgow to Toulouse. What could be the reason for this detour? Where did Smith go? What did he find?!?
+ 
+As a young lad living in 1700s Scotland, Smith had a severe accident. This near-death experience led Smith to question his entire life. After years spent in solitude meditating, Smith finally figured it out: It's all about money! 
+ 
+Inspired by his revolutionary idea, Smith devoted his life for spreading the joyful word of capitalism. Unfortunately, not everyone agreed with Smith. A small county in a cold, dark and uncivilized country far up north had declared its disinterest on capitalistic worldview. The name of this small county was Pirkanmaa?
+ 
+Play as Adam Smith the father of capitalism in 1700s Pirkanmaa. Show the dirty finns how capitalism solves all the problems by robbing their natural resources and forcing them to work in sweatshops. Experience the glory and satisfaction in making as much money as possible as well as claim your part of the happiness that capitalism has brought us in Adam Smith's Capitalization!
 
-## Submodule / CourseLibrary
-Submodule for CourseLibrary is currently configured to use ssh. If you haven't yet setup an ssh-key. Go do it at  https://course-gitlab.tuni.fi/profile/keys
+Peliohjeet:
 
-The page contains also instructions for generating and using existing ssh-keys.
+Pelin tavoitteena on tienata mahdollisimman paljon rahaa rajoitetun kierrosmäärän puitteissa. Pelaaja voi rakentaa taloja ja palkata niihin työntekijöitä jolloin joka vuorolla tienataan rakennuksista, työntekijöistä sekä molempien ominaisuuksista riippuva summa rahaa. Pelaaja voi myös suorittaa etsinnän ruudulle ja löytää aarteita tai tulla ryöstetyksi. Pelin voittaa, kun tuottaa enemmän rahaa, kuin millä aloitti ja ehtii matkustamaan vuorojen loppuun mennessä kaupunkiin. Lisäksi pelin aikana pitää löytää ainakin yksi aarre. Jos rahat loppuvat, rahaa on vähemmän kuin alussa, ei ehdi vuorojen loputtua kaupunkiin, tai ei löydä yhtään aarretta, häviää pelin. 
+Pelaajalla on alussa 200 yksikköä rahaa. 
+Rakennusten hinnat ja tuotot:
+-	Farmi maksaa 50 (tuotto 10/vuoro), ja se rakennetaan grasslandille. 
+-	Logging cabin maksaa 100 (tuotto 20/vuoro ), ja se rakennetaan forestiin. 
+-	Fishing hut maksaa 200  (tuotto 30/vuoro) ja se rakennetaan watertilelle. 
+Rakennukset eivät tuota itsestään vielä mitään, vaan vaativat myös työntekijöitä tuottaakseen rahaa. 
 
-Don't change anything in CourseLibrary ( You won't be able to submit changes made in it )
+Työntekijöiden hinnat ja tuotot:
+-	Novice worker maksaa 30 (tuotto 10/vuoro)
+-	Apprentice worker maksaa 50 (tuotto 20/vuoro)
+-	Master worker maksaa 70 (tuotto 30/vuoro)
 
-If you find any bugs and/or missing features you can report them in GitLab  https://course-gitlab.tuni.fi/tie-02402-ohj3_2019-2020/courselibrary/issues
+Eri tileillä on erilaisia työntekijäkapasiteetteja. Forest tilelle voi palkata 4 työläistä, Grass tilelle 3 ja Water  tilelle 5.
+Etsimällä tilen voit löytää arvokkaan aarteen. Saatat myös tulla ryöstetyksi, sillä alueella on rosvoja jotka ovat myös rikkauksien perässä. Tilen etsintä maksaa 10 yksikköä rahaa.
 
-## Other notes
-
-You'll probably want to remove MapWindow and make your own, especially if you want a grade better than 1. It's in this template just so you can get started more easily and do some experimenting.
-
-You should create your own code inside your own namespace :)
-
-
-# You are allowed (and probably should) make changes to this file after you have started your project. :)
