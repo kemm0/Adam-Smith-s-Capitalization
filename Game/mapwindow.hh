@@ -12,6 +12,8 @@
 #include <QMessageBox>
 #include <math.h>
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "ruleswindow.h"
 #include "pricewindow.h"
 #include "map.h"
@@ -61,6 +63,15 @@ public:
      */
     void keyPressEvent(QKeyEvent *event) override;
 
+    /**
+     * @brief markHighScore
+     * @param username
+     * @param score
+     * saves the current score to highscores.txt if it's better than the
+     *  previous one or if there is no score with the given name
+     */
+    void markHighScore(std::string username, int score);
+
 
 
 private slots:
@@ -81,13 +92,26 @@ private slots:
      * @brief on_endTurnButton_clicked resets all buttons
      */
     void on_endTurnButton_clicked();
+    /**
+     * @brief setUsername
+     * @param username
+     * stores the username given in startdialog
+     */
     void setUsername(std::string username);
     /**
      * @brief on_moveButton_toggled if dice is thrown, lets player move
      * @param checked
      */
     void on_moveButton_toggled(bool checked);
+    /**
+     * @brief zoomIn
+     * scales the graphicsview by 1.1
+     */
     void zoomIn();
+    /**
+     * @brief zoomOut
+     * scales the graphicsview by 0.9
+     */
     void zoomOut();
     /**
      * @brief on_buildButton_toggled lets player built houses
@@ -122,7 +146,10 @@ private slots:
      * @brief updateMoneyLabel
      */
     void updateMoneyLabel(int amount);
-
+    /**
+     * @brief on_pricesButton_clicked
+     * opens up a window that shows prices
+     */
     void on_pricesButton_clicked();
 
 private:
@@ -153,7 +180,7 @@ private:
      * made in turn
      */
     void buttons_update();
-    // Sound effects for actions
+
     /**
      * @brief treasureFoundSound
      * played on finding a treasure
@@ -174,8 +201,6 @@ private:
      * played on building a new building
      */
     void buildSound();
-
-
 
 };
 }

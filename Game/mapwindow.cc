@@ -89,7 +89,6 @@ MapWindow::MapWindow(QWidget *parent):
             this, &MapWindow::gameOver);
     connect(objManager->getPlayer().get(), &Player::currentMoney,
             this,&MapWindow::updateMoneyLabel);
-
 }
 
 MapWindow::~MapWindow()
@@ -130,6 +129,70 @@ void MapWindow::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key()== Qt::Key_Minus){
         zoomOut();
+    }
+}
+
+void MapWindow::markHighScore(std::string username, int score)
+{
+    if(username.empty()){
+        username = "Anonymous";
+    }
+    std::map<std::string,int> highscoresFromFile = {};
+    std::ifstream highScoreRead("highscores.txt");
+    std::string highscore;
+    if(highScoreRead.is_open()){
+        // read from file
+        try{
+            while(std::getline(highScoreRead,highscore)){
+                std::string playerName = highscore.substr(0,highscore.find(':'));
+                std::string playerScore = highscore.substr(
+                            highscore.find(':')+1,highscore.length()-1);
+
+                highscoresFromFile.insert({playerName,std::stoi(playerScore)});
+            }
+            highScoreRead.close();
+        }
+        catch(const std::exception &){
+            showGameMessage("Could not read high scores");
+            //empty the file
+            std::ofstream highScoreWrite("highscores.txt");
+            highScoreWrite<<""<<std::endl;
+            highScoreWrite.close();
+        }
+
+        //if score with same playername found, check if current score
+        // is bigger than previous and update it.
+        if(highscoresFromFile.find(username) != highscoresFromFile.end()){
+            if(highscoresFromFile.at(username) < score){
+                highscoresFromFile.at(username) = score;
+            }
+        }
+        // else add score
+        else{
+            highscoresFromFile.insert({username,score});
+        }
+        try{
+            // write scores to file
+            std::ofstream highScoreWrite("highscores.txt");
+            for(auto pair: highscoresFromFile){
+                highScoreWrite<<pair.first + ":" + std::to_string(pair.second)<<std::endl;
+            }
+            highScoreWrite.close();
+        }catch(const std::exception &){
+            showGameMessage("Could not save highscore");
+        }
+    }
+    //if there is no file for highscores, create one.
+    else{
+        try{
+            std::ofstream highScoreWrite("highscores.txt");
+            highScoreWrite<<username + ":"
+                             + std::to_string(score)<<std::endl;
+            highScoreWrite.close();
+        }
+        catch(const std::exception &){
+            showGameMessage("Could not save highscore");
+        }
     }
 }
 
@@ -426,6 +489,8 @@ void MapWindow::gameOver(gameOverState state)
                              " and you're now richer than ever while "
                              "finns are even poorer!\n\n"
                              "Try again to do even better.");
+        markHighScore(username,
+                      objManager->getPlayer()->getResources().at(Course::MONEY));
     }
     else if(state == LATE){
         gameOverBox->setWindowTitle("Too Late!");

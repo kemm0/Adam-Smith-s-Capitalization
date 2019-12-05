@@ -26,7 +26,7 @@
   <widget class="QPushButton" name="RulesButton">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>50</x>
      <y>260</y>
      <width>84</width>
      <height>28</height>
@@ -39,7 +39,7 @@
   <widget class="QPushButton" name="StoryButton">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>160</x>
      <y>260</y>
      <width>84</width>
      <height>28</height>
@@ -60,6 +60,19 @@
    </property>
    <property name="text">
     <string>Game Rules</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="highScoreButton">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>260</y>
+     <width>84</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Scoreboard</string>
    </property>
   </widget>
  </widget>

@@ -1,0 +1,198 @@
+\hypertarget{class_game_1_1_map}{\section{Game\-:\-:Map Class Reference}
+\label{class_game_1_1_map}\index{Game\-::\-Map@{Game\-::\-Map}}
+}
+
+
+The \hyperlink{class_game_1_1_map}{Map} class draws the map with tiles and player.  
+
+
+
+
+{\ttfamily \#include $<$map.\-h$>$}
+
+Inheritance diagram for Game\-:\-:Map\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_1_1_map}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_map_a1ae4376a50d7234a5d56cd66ff9686d9}{void \hyperlink{class_game_1_1_map_a1ae4376a50d7234a5d56cd66ff9686d9}{robber\-Found} ()}\label{class_game_1_1_map_a1ae4376a50d7234a5d56cd66ff9686d9}
+
+\begin{DoxyCompactList}\small\item\em robber\-Found emitted when player encounters a robber \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_map_ac966080c6fe166edf48f150331a6d699}{void \hyperlink{class_game_1_1_map_ac966080c6fe166edf48f150331a6d699}{treasure\-Found} ()}\label{class_game_1_1_map_ac966080c6fe166edf48f150331a6d699}
+
+\begin{DoxyCompactList}\small\item\em treasure\-Found emitted when player encounters a treasure \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_map_a00eae9638e9b5066954d81b5a8100443}{void \hyperlink{class_game_1_1_map_a00eae9638e9b5066954d81b5a8100443}{nothing\-Found} ()}\label{class_game_1_1_map_a00eae9638e9b5066954d81b5a8100443}
+
+\begin{DoxyCompactList}\small\item\em nothing\-Found emitted when player searches an empty tile \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_map_a5672c918010de381ccfca5a82a1a1c6a}{void \hyperlink{class_game_1_1_map_a5672c918010de381ccfca5a82a1a1c6a}{built} ()}\label{class_game_1_1_map_a5672c918010de381ccfca5a82a1a1c6a}
+
+\begin{DoxyCompactList}\small\item\em built emitted when player has built a building \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_ac2461e5dd8dc2ac1e55e727158568a46}{inspect\-Tile} (std\-::string info)
+\begin{DoxyCompactList}\small\item\em inspect\-Tile sends the tile's type when emitted \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_map_ab35bc9a7f6eb93296195984acc3a7b91}{{\bfseries Map} (Q\-Object $\ast$parent=nullptr, std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_event_handler}{Game\-::\-Game\-Event\-Handler} $>$ event\-Handler=nullptr, std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_object_manager}{Game\-::\-Game\-Object\-Manager} $>$ obj\-Manager=nullptr, std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_map_generator}{Game\-::\-Game\-Map\-Generator} $>$ map\-Generator=nullptr)}\label{class_game_1_1_map_ab35bc9a7f6eb93296195984acc3a7b91}
+
+\item 
+void \hyperlink{class_game_1_1_map_ad321530ce793b6aa4e0717f5273e3da5}{mouse\-Move\-Event} (Q\-Graphics\-Scene\-Mouse\-Event $\ast$event) override
+\begin{DoxyCompactList}\small\item\em mouse\-Move\-Event highligts the tile that is pointed with cursor \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_acd0b3b07cca5ead1401cf7eda3ad0e17}{mouse\-Press\-Event} (Q\-Graphics\-Scene\-Mouse\-Event $\ast$mouse\-Event) override
+\begin{DoxyCompactList}\small\item\em mouse\-Press\-Event moves player, builds a house, searches and hires workers \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_map_aca53e9bced941a53bbb8778e051cbad0}{void \hyperlink{class_game_1_1_map_aca53e9bced941a53bbb8778e051cbad0}{draw\-Map} ()}\label{class_game_1_1_map_aca53e9bced941a53bbb8778e051cbad0}
+
+\begin{DoxyCompactList}\small\item\em draw\-Map draw correct tiles spesified by gamemapgenerator \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_a94213a3927088efe42d57c746feb319b}{move} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} $>$ game\-Tile)
+\begin{DoxyCompactList}\small\item\em move \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_a49051ab00e2e5e4d0c8be5f56af39d43}{hire} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} $>$ game\-Tile)
+\begin{DoxyCompactList}\small\item\em hire \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_a3e4b9485c9e1298b630e7aa82facb8bc}{build} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} $>$ game\-Tile)
+\begin{DoxyCompactList}\small\item\em build \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_ab66fc12a68048a3ddfb8a49316224ded}{search} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} $>$ game\-Tile)
+\begin{DoxyCompactList}\small\item\em search \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_ad91ccc0d5e244a66c6f37d0075f6be6d}{inspect} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} $>$ game\-Tile)
+\begin{DoxyCompactList}\small\item\em inspect \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_game_1_1_map}{Map} class draws the map with tiles and player. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_1_1_map_a3e4b9485c9e1298b630e7aa82facb8bc}{\index{Game\-::\-Map@{Game\-::\-Map}!build@{build}}
+\index{build@{build}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{build}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::build (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Tile\-Base} $>$}]{game\-Tile}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_map_a3e4b9485c9e1298b630e7aa82facb8bc}
+
+
+build 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\-Tile} & informs the mapgenerator to create a building on the given location \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_a49051ab00e2e5e4d0c8be5f56af39d43}{\index{Game\-::\-Map@{Game\-::\-Map}!hire@{hire}}
+\index{hire@{hire}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{hire}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::hire (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Tile\-Base} $>$}]{game\-Tile}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_map_a49051ab00e2e5e4d0c8be5f56af39d43}
+
+
+hire 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\-Tile} & informs the mapgenerator to create a selected worker on the tile \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_ad91ccc0d5e244a66c6f37d0075f6be6d}{\index{Game\-::\-Map@{Game\-::\-Map}!inspect@{inspect}}
+\index{inspect@{inspect}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{inspect}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::inspect (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Tile\-Base} $>$}]{game\-Tile}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_map_ad91ccc0d5e244a66c6f37d0075f6be6d}
+
+
+inspect 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\-Tile} & Prints out information of the tile to the game's text box \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_ac2461e5dd8dc2ac1e55e727158568a46}{\index{Game\-::\-Map@{Game\-::\-Map}!inspect\-Tile@{inspect\-Tile}}
+\index{inspect\-Tile@{inspect\-Tile}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{inspect\-Tile}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::inspect\-Tile (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{info}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{class_game_1_1_map_ac2461e5dd8dc2ac1e55e727158568a46}
+
+
+inspect\-Tile sends the tile's type when emitted 
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_ad321530ce793b6aa4e0717f5273e3da5}{\index{Game\-::\-Map@{Game\-::\-Map}!mouse\-Move\-Event@{mouse\-Move\-Event}}
+\index{mouse\-Move\-Event@{mouse\-Move\-Event}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{mouse\-Move\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::mouse\-Move\-Event (
+\begin{DoxyParamCaption}
+\item[{Q\-Graphics\-Scene\-Mouse\-Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}}\label{class_game_1_1_map_ad321530ce793b6aa4e0717f5273e3da5}
+
+
+mouse\-Move\-Event highligts the tile that is pointed with cursor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & different colored highlight when building or searching depending on event \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_acd0b3b07cca5ead1401cf7eda3ad0e17}{\index{Game\-::\-Map@{Game\-::\-Map}!mouse\-Press\-Event@{mouse\-Press\-Event}}
+\index{mouse\-Press\-Event@{mouse\-Press\-Event}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{mouse\-Press\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::mouse\-Press\-Event (
+\begin{DoxyParamCaption}
+\item[{Q\-Graphics\-Scene\-Mouse\-Event $\ast$}]{mouse\-Event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}}\label{class_game_1_1_map_acd0b3b07cca5ead1401cf7eda3ad0e17}
+
+
+mouse\-Press\-Event moves player, builds a house, searches and hires workers 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-Event} & a click \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_a94213a3927088efe42d57c746feb319b}{\index{Game\-::\-Map@{Game\-::\-Map}!move@{move}}
+\index{move@{move}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{move}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::move (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Tile\-Base} $>$}]{game\-Tile}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_map_a94213a3927088efe42d57c746feb319b}
+
+
+move 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\-Tile} & Moves the player to the given location \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_ab66fc12a68048a3ddfb8a49316224ded}{\index{Game\-::\-Map@{Game\-::\-Map}!search@{search}}
+\index{search@{search}!Game::Map@{Game\-::\-Map}}
+\subsubsection[{search}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-::search (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Tile\-Base} $>$}]{game\-Tile}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_map_ab66fc12a68048a3ddfb8a49316224ded}
+
+
+search 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\-Tile} & Searches a tile and checks if it has a treasure or a robber \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+map.\-h\item 
+map.\-cpp\end{DoxyCompactItemize}

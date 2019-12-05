@@ -73,3 +73,37 @@ void rulesWindow::on_StoryButton_clicked()
     ui->label->setText("Backstory: ");
     showStory();
 }
+
+
+void rulesWindow::on_highScoreButton_clicked()
+{
+    ui->label->setText("Scoreboard:");
+    ui->textBrowser->clear();
+    std::map<std::string,int> highscoresFromFile = {};
+    std::ifstream highScoreRead("highscores.txt");
+    std::string highscore;
+    if(highScoreRead.is_open()){
+        try{
+            while(std::getline(highScoreRead,highscore)){
+                std::string playerName = highscore.substr(0,highscore.find(':'));
+                std::string playerScore = highscore.substr(
+                            highscore.find(':')+1,highscore.length()-1);
+
+                highscoresFromFile.insert({playerName,std::stoi(playerScore)});
+            }
+            highScoreRead.close();
+            for(auto pair: highscoresFromFile){
+                ui->textBrowser->append(QString::fromStdString(pair.first + " : " +
+                                        std::to_string(pair.second)));
+            }
+        }
+        catch(const std::exception &){
+            ui->textBrowser->setText("Couldn't open scores from file.\n"
+                                     "highscores.txt might be corrupted.\n"
+                                     "erase all text from the file.");
+        }
+    }
+    else{
+        ui->textBrowser->setText("There aren't any scores yet");
+    }
+}
