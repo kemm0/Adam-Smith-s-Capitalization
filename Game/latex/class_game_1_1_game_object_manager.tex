@@ -1,0 +1,269 @@
+\hypertarget{class_game_1_1_game_object_manager}{\section{Game\-:\-:Game\-Object\-Manager Class Reference}
+\label{class_game_1_1_game_object_manager}\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}}
+}
+Inheritance diagram for Game\-:\-:Game\-Object\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_1_1_game_object_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_game_object_manager_a6f07c1fc06916333432392170fab4439}{Game\-Object\-Manager} (Q\-Object $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_game_1_1_game_object_manager}{Game\-Object\-Manager}. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_object_manager_a616e55e5188f96f3925b7f14f4f9b2f1}{add\-Tiles} (const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Course\-::\-Tile\-Base $>$$>$ \&tiles)
+\begin{DoxyCompactList}\small\item\em add\-Tiles \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_game_object_manager_abfe2898c4389ca575093917f88e0087b}{void \hyperlink{class_game_1_1_game_object_manager_abfe2898c4389ca575093917f88e0087b}{add\-Game\-Tile} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-::\-Game\-Tile\-Base} $>$ tile)}\label{class_game_1_1_game_object_manager_abfe2898c4389ca575093917f88e0087b}
+
+\begin{DoxyCompactList}\small\item\em add\-Game\-Tile adds tile to gametile-\/vector \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_game_object_manager_aff2871bd2a6f7daae354da6fee9e1d5d}{std\-::shared\-\_\-ptr$<$ Course\-::\-Tile\-Base $>$ {\bfseries get\-Tile} (const Course\-::\-Coordinate \&coordinate)}\label{class_game_1_1_game_object_manager_aff2871bd2a6f7daae354da6fee9e1d5d}
+
+\item 
+std\-::vector$<$ std\-::shared\-\_\-ptr\\*
+$<$ Course\-::\-Game\-Object $>$ $>$ \hyperlink{class_game_1_1_game_object_manager_a770203790e7e11185bf53ef1f066cd6c}{get\-Game\-Objects} ()
+\begin{DoxyCompactList}\small\item\em get\-Game\-Objects \end{DoxyCompactList}\item 
+std\-::shared\-\_\-ptr$<$ Course\-::\-Tile\-Base $>$ \hyperlink{class_game_1_1_game_object_manager_acfcc8a567591bf1bcb3d7a040534383b}{get\-Tile} (const Course\-::\-Object\-Id \&id)
+\begin{DoxyCompactList}\small\item\em get\-Tile \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::shared\-\_\-ptr\\*
+$<$ Course\-::\-Tile\-Base $>$ $>$ \hyperlink{class_game_1_1_game_object_manager_a2db95d0caf64f0745bfb78d38ab5eb9f}{get\-Tiles} (const std\-::vector$<$ Course\-::\-Coordinate $>$ \&coordinates)
+\begin{DoxyCompactList}\small\item\em get\-Tiles \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::shared\-\_\-ptr\\*
+$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-::\-Game\-Tile\-Base} $>$ $>$ \hyperlink{class_game_1_1_game_object_manager_ac600164bb9c69c764aeb0c110a772305}{get\-Game\-Tiles} ()
+\begin{DoxyCompactList}\small\item\em get\-Game\-Tiles \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_game_object_manager_a1b7ed09f5aa0db4be872b580040d2614}{std\-::shared\-\_\-ptr\\*
+$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-::\-Game\-Tile\-Base} $>$ \hyperlink{class_game_1_1_game_object_manager_a1b7ed09f5aa0db4be872b580040d2614}{get\-Game\-Tile} (const Course\-::\-Coordinate \&coordinate)}\label{class_game_1_1_game_object_manager_a1b7ed09f5aa0db4be872b580040d2614}
+
+\begin{DoxyCompactList}\small\item\em get\-Game\-Tile returns the tile in given coordinates \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_object_manager_a2a3c2db760d5dae0eca50ba1336d111a}{set\-Player} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_player}{Game\-::\-Player} $>$ player)
+\begin{DoxyCompactList}\small\item\em set\-Player used from mapgenerator to set player \end{DoxyCompactList}\item 
+std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_player}{Game\-::\-Player} $>$ \hyperlink{class_game_1_1_game_object_manager_a324505448a478a74a4485c7517f2af8d}{get\-Player} ()
+\begin{DoxyCompactList}\small\item\em get\-Player used in different classes to get players pointer to get to players attributes \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::shared\-\_\-ptr\\*
+$<$ Course\-::\-Worker\-Base $>$ $>$ \hyperlink{class_game_1_1_game_object_manager_a15bafc071007133e9a4c971050b72506}{get\-Workers} ()
+\begin{DoxyCompactList}\small\item\em get\-Workers \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_object_manager_ab5dc0d2150e7df5821b974b12ee4cf54}{add\-Worker} (std\-::shared\-\_\-ptr$<$ Course\-::\-Worker\-Base $>$ worker)
+\begin{DoxyCompactList}\small\item\em add\-Worker \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_object_manager_ae0e1788a3b1b9edf64cda2a259201832}{add\-Game\-Object} (std\-::shared\-\_\-ptr$<$ Course\-::\-Game\-Object $>$ object)
+\begin{DoxyCompactList}\small\item\em add\-Game\-Object \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_object_manager_a0515eff15f2bf07611c2192cf1283fbe}{add\-Building} (std\-::shared\-\_\-ptr$<$ Course\-::\-Building\-Base $>$ building)
+\begin{DoxyCompactList}\small\item\em add\-Building \end{DoxyCompactList}\item 
+std\-::vector$<$ std\-::shared\-\_\-ptr\\*
+$<$ Course\-::\-Building\-Base $>$ $>$ \hyperlink{class_game_1_1_game_object_manager_ad3513f166c73c56409e4abe89bb5d021}{get\-Buildings} ()
+\begin{DoxyCompactList}\small\item\em get\-Buildings \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_game_1_1_game_object_manager_a6f07c1fc06916333432392170fab4439}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!Game\-Object\-Manager@{Game\-Object\-Manager}}
+\index{Game\-Object\-Manager@{Game\-Object\-Manager}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{Game\-Object\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game\-Object\-Manager\-::\-Game\-Object\-Manager (
+\begin{DoxyParamCaption}
+\item[{Q\-Object $\ast$}]{parent = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a6f07c1fc06916333432392170fab4439}
+
+
+\hyperlink{class_game_1_1_game_object_manager}{Game\-Object\-Manager}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_1_1_game_object_manager_a0515eff15f2bf07611c2192cf1283fbe}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!add\-Building@{add\-Building}}
+\index{add\-Building@{add\-Building}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{add\-Building}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Object\-Manager\-::add\-Building (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ Course\-::\-Building\-Base $>$}]{building}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a0515eff15f2bf07611c2192cf1283fbe}
+
+
+add\-Building 
+
+
+\begin{DoxyParams}{Parameters}
+{\em building} & stores a builkding in the object manager \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_object_manager_ae0e1788a3b1b9edf64cda2a259201832}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!add\-Game\-Object@{add\-Game\-Object}}
+\index{add\-Game\-Object@{add\-Game\-Object}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{add\-Game\-Object}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Object\-Manager\-::add\-Game\-Object (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ Course\-::\-Game\-Object $>$}]{object}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_ae0e1788a3b1b9edf64cda2a259201832}
+
+
+add\-Game\-Object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & stores a game object in the object manager \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_object_manager_a616e55e5188f96f3925b7f14f4f9b2f1}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!add\-Tiles@{add\-Tiles}}
+\index{add\-Tiles@{add\-Tiles}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{add\-Tiles}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Object\-Manager\-::add\-Tiles (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Course\-::\-Tile\-Base $>$$>$ \&}]{tiles}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a616e55e5188f96f3925b7f14f4f9b2f1}
+
+
+add\-Tiles 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tiles} & stores a vector of tiles into the object manager \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_object_manager_ab5dc0d2150e7df5821b974b12ee4cf54}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!add\-Worker@{add\-Worker}}
+\index{add\-Worker@{add\-Worker}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{add\-Worker}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Object\-Manager\-::add\-Worker (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ Course\-::\-Worker\-Base $>$}]{worker}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_ab5dc0d2150e7df5821b974b12ee4cf54}
+
+
+add\-Worker 
+
+
+\begin{DoxyParams}{Parameters}
+{\em worker} & stores a worker in the object manager \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_object_manager_ad3513f166c73c56409e4abe89bb5d021}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!get\-Buildings@{get\-Buildings}}
+\index{get\-Buildings@{get\-Buildings}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{get\-Buildings}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Course\-::\-Building\-Base $>$ $>$ Game\-::\-Game\-Object\-Manager\-::get\-Buildings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_ad3513f166c73c56409e4abe89bb5d021}
+
+
+get\-Buildings 
+
+\begin{DoxyReturn}{Returns}
+vector of buildings returns all the buildings that have been stored 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_object_manager_a770203790e7e11185bf53ef1f066cd6c}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!get\-Game\-Objects@{get\-Game\-Objects}}
+\index{get\-Game\-Objects@{get\-Game\-Objects}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{get\-Game\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Course\-::\-Game\-Object $>$ $>$ Game\-::\-Game\-Object\-Manager\-::get\-Game\-Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a770203790e7e11185bf53ef1f066cd6c}
+
+
+get\-Game\-Objects 
+
+\begin{DoxyReturn}{Returns}
+vector containing all gameobjects 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_object_manager_ac600164bb9c69c764aeb0c110a772305}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!get\-Game\-Tiles@{get\-Game\-Tiles}}
+\index{get\-Game\-Tiles@{get\-Game\-Tiles}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{get\-Game\-Tiles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::shared\-\_\-ptr$<$ {\bf Game\-Tile\-Base} $>$ $>$ Game\-::\-Game\-Object\-Manager\-::get\-Game\-Tiles (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_ac600164bb9c69c764aeb0c110a772305}
+
+
+get\-Game\-Tiles 
+
+\begin{DoxyReturn}{Returns}
+returns vector containing all gametiles 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_object_manager_a324505448a478a74a4485c7517f2af8d}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!get\-Player@{get\-Player}}
+\index{get\-Player@{get\-Player}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{get\-Player}]{\setlength{\rightskip}{0pt plus 5cm}std\-::shared\-\_\-ptr$<$ {\bf Player} $>$ Game\-::\-Game\-Object\-Manager\-::get\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a324505448a478a74a4485c7517f2af8d}
+
+
+get\-Player used in different classes to get players pointer to get to players attributes 
+
+\begin{DoxyReturn}{Returns}
+pointer to player 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_object_manager_acfcc8a567591bf1bcb3d7a040534383b}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!get\-Tile@{get\-Tile}}
+\index{get\-Tile@{get\-Tile}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{get\-Tile}]{\setlength{\rightskip}{0pt plus 5cm}std\-::shared\-\_\-ptr$<$ Course\-::\-Tile\-Base $>$ Game\-::\-Game\-Object\-Manager\-::get\-Tile (
+\begin{DoxyParamCaption}
+\item[{const Course\-::\-Object\-Id \&}]{id}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_acfcc8a567591bf1bcb3d7a040534383b}
+
+
+get\-Tile 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+shared pointer that points to the tile that has the given I\-D Use to get a tile with a certain I\-D 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_object_manager_a2db95d0caf64f0745bfb78d38ab5eb9f}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!get\-Tiles@{get\-Tiles}}
+\index{get\-Tiles@{get\-Tiles}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{get\-Tiles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Course\-::\-Tile\-Base $>$ $>$ Game\-::\-Game\-Object\-Manager\-::get\-Tiles (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ Course\-::\-Coordinate $>$ \&}]{coordinates}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a2db95d0caf64f0745bfb78d38ab5eb9f}
+
+
+get\-Tiles 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coordinates} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of shared pointers that point to the tiles with given coordinates Use to get the tiles in an area or multiple locations 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_object_manager_a15bafc071007133e9a4c971050b72506}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!get\-Workers@{get\-Workers}}
+\index{get\-Workers@{get\-Workers}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{get\-Workers}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ std\-::shared\-\_\-ptr$<$ Course\-::\-Worker\-Base $>$ $>$ Game\-::\-Game\-Object\-Manager\-::get\-Workers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a15bafc071007133e9a4c971050b72506}
+
+
+get\-Workers 
+
+\begin{DoxyReturn}{Returns}
+vector with all the workers 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_object_manager_a2a3c2db760d5dae0eca50ba1336d111a}{\index{Game\-::\-Game\-Object\-Manager@{Game\-::\-Game\-Object\-Manager}!set\-Player@{set\-Player}}
+\index{set\-Player@{set\-Player}!Game::GameObjectManager@{Game\-::\-Game\-Object\-Manager}}
+\subsubsection[{set\-Player}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Object\-Manager\-::set\-Player (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-::\-Player} $>$}]{player}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_object_manager_a2a3c2db760d5dae0eca50ba1336d111a}
+
+
+set\-Player used from mapgenerator to set player 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+gameobjectmanager.\-h\item 
+gameobjectmanager.\-cpp\end{DoxyCompactItemize}

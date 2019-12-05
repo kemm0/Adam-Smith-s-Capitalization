@@ -1,0 +1,106 @@
+\hypertarget{class_game_1_1_map_window}{\section{Game\-:\-:Map\-Window Class Reference}
+\label{class_game_1_1_map_window}\index{Game\-::\-Map\-Window@{Game\-::\-Map\-Window}}
+}
+
+
+The \hyperlink{class_game_1_1_map_window}{Map\-Window} class game window where is map, buttons and messageboxes.  
+
+
+
+
+{\ttfamily \#include $<$mapwindow.\-hh$>$}
+
+Inheritance diagram for Game\-:\-:Map\-Window\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_1_1_map_window}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_map_window_aada219bb81fc36f618ce6c6db562e21f}{{\bfseries Map\-Window} (Q\-Widget $\ast$parent=nullptr)}\label{class_game_1_1_map_window_aada219bb81fc36f618ce6c6db562e21f}
+
+\item 
+void \hyperlink{class_game_1_1_map_window_adba5d7b1e410b80248431586d7e06787}{resize\-Event} (Q\-Resize\-Event $\ast$event) override
+\begin{DoxyCompactList}\small\item\em resize\-Event handles events where user changes the mapwindow's size \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_window_a3ad805cd0011042bae64f7c0680dee75}{show\-Event} (Q\-Show\-Event $\ast$event) override
+\begin{DoxyCompactList}\small\item\em show\-Event is called when mapwindow show up on the screen \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_game_1_1_map_window_abddb4e34e8944de58ea55dd263a216e8}{get\-Username} ()
+\begin{DoxyCompactList}\small\item\em get\-Username used to get username from starting dialog to the game \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_map_window_acf9cb2d5196093123ddbddc77b2e8da8}{key\-Press\-Event} (Q\-Key\-Event $\ast$event) override
+\begin{DoxyCompactList}\small\item\em key\-Press\-Event handles events where user presses a key on keyboard \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_game_1_1_map_window}{Map\-Window} class game window where is map, buttons and messageboxes. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_1_1_map_window_abddb4e34e8944de58ea55dd263a216e8}{\index{Game\-::\-Map\-Window@{Game\-::\-Map\-Window}!get\-Username@{get\-Username}}
+\index{get\-Username@{get\-Username}!Game::MapWindow@{Game\-::\-Map\-Window}}
+\subsubsection[{get\-Username}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Game\-::\-Map\-Window\-::get\-Username (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_map_window_abddb4e34e8944de58ea55dd263a216e8}
+
+
+get\-Username used to get username from starting dialog to the game 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_map_window_acf9cb2d5196093123ddbddc77b2e8da8}{\index{Game\-::\-Map\-Window@{Game\-::\-Map\-Window}!key\-Press\-Event@{key\-Press\-Event}}
+\index{key\-Press\-Event@{key\-Press\-Event}!Game::MapWindow@{Game\-::\-Map\-Window}}
+\subsubsection[{key\-Press\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-Window\-::key\-Press\-Event (
+\begin{DoxyParamCaption}
+\item[{Q\-Key\-Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}}\label{class_game_1_1_map_window_acf9cb2d5196093123ddbddc77b2e8da8}
+
+
+key\-Press\-Event handles events where user presses a key on keyboard 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_window_adba5d7b1e410b80248431586d7e06787}{\index{Game\-::\-Map\-Window@{Game\-::\-Map\-Window}!resize\-Event@{resize\-Event}}
+\index{resize\-Event@{resize\-Event}!Game::MapWindow@{Game\-::\-Map\-Window}}
+\subsubsection[{resize\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-Window\-::resize\-Event (
+\begin{DoxyParamCaption}
+\item[{Q\-Resize\-Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}}\label{class_game_1_1_map_window_adba5d7b1e410b80248431586d7e06787}
+
+
+resize\-Event handles events where user changes the mapwindow's size 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_map_window_a3ad805cd0011042bae64f7c0680dee75}{\index{Game\-::\-Map\-Window@{Game\-::\-Map\-Window}!show\-Event@{show\-Event}}
+\index{show\-Event@{show\-Event}!Game::MapWindow@{Game\-::\-Map\-Window}}
+\subsubsection[{show\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Map\-Window\-::show\-Event (
+\begin{DoxyParamCaption}
+\item[{Q\-Show\-Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}}}\label{class_game_1_1_map_window_a3ad805cd0011042bae64f7c0680dee75}
+
+
+show\-Event is called when mapwindow show up on the screen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+mapwindow.\-hh\item 
+mapwindow.\-cc\end{DoxyCompactItemize}

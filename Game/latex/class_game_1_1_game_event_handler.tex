@@ -1,0 +1,526 @@
+\hypertarget{class_game_1_1_game_event_handler}{\section{Game\-:\-:Game\-Event\-Handler Class Reference}
+\label{class_game_1_1_game_event_handler}\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}}
+}
+
+
+The \hyperlink{class_game_1_1_game_event_handler}{Game\-Event\-Handler} class interface inherited from i\-Game\-Event\-Handler.  
+
+
+
+
+{\ttfamily \#include $<$gameeventhandler.\-h$>$}
+
+Inheritance diagram for Game\-:\-:Game\-Event\-Handler\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_1_1_game_event_handler}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_game_event_handler_aa66e8120504a75349d8a4281758f2996}{void \hyperlink{class_game_1_1_game_event_handler_aa66e8120504a75349d8a4281758f2996}{game\-Message} (std\-::string)}\label{class_game_1_1_game_event_handler_aa66e8120504a75349d8a4281758f2996}
+
+\begin{DoxyCompactList}\small\item\em game\-Message passes a message (string) to connected components \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_game_event_handler_a84188b624b591fb2d354e89e85fb81ba}{void \hyperlink{class_game_1_1_game_event_handler_a84188b624b591fb2d354e89e85fb81ba}{game\-Over} (game\-Over\-State)}\label{class_game_1_1_game_event_handler_a84188b624b591fb2d354e89e85fb81ba}
+
+\begin{DoxyCompactList}\small\item\em game\-Over passes information of the state that the game ended with \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_game_event_handler_a26aed05051abfec41c863fc8073e324b}{Game\-Event\-Handler} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_object_manager}{Game\-Object\-Manager} $>$ manager, Q\-Object $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_game_1_1_game_event_handler}{Game\-Event\-Handler}. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_game_1_1_game_event_handler_a94426aa16bad3385bc3d75249596325c}{modify\-Resource} (std\-::shared\-\_\-ptr$<$ Course\-::\-Player\-Base $>$ player, Course\-::\-Basic\-Resource resource, int amount)
+\begin{DoxyCompactList}\small\item\em modify\-Resource \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_game_1_1_game_event_handler_af2f37590702d555bb6635a6a7793ebb2}{modify\-Resources} (std\-::shared\-\_\-ptr$<$ Course\-::\-Player\-Base $>$ player, Course\-::\-Resource\-Map resources)
+\begin{DoxyCompactList}\small\item\em modify\-Resources \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_game_event_handler_a30de50de65075fe9e5c76ef83ff638a7}{void \hyperlink{class_game_1_1_game_event_handler_a30de50de65075fe9e5c76ef83ff638a7}{end\-Turn} ()}\label{class_game_1_1_game_event_handler_a30de50de65075fe9e5c76ef83ff638a7}
+
+\begin{DoxyCompactList}\small\item\em end\-Turn increases turn count \end{DoxyCompactList}\item 
+int \hyperlink{class_game_1_1_game_event_handler_a261195d24462d7d0921cf38cea1b2c2b}{throw\-Dice} ()
+\begin{DoxyCompactList}\small\item\em throw\-Dice \end{DoxyCompactList}\item 
+int \hyperlink{class_game_1_1_game_event_handler_a991f80f0f775aafebcda3648d23bcd34}{get\-Dice\-Value} ()
+\begin{DoxyCompactList}\small\item\em get\-Dice\-Value \end{DoxyCompactList}\item 
+int \hyperlink{class_game_1_1_game_event_handler_a6ec04e17ce2ad5e01e7ff295228f2e93}{get\-Turn} ()
+\begin{DoxyCompactList}\small\item\em get\-Turn \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_adc5c0fcca540aecee10f4f686cd75a8a}{get\-Thrown} ()
+\begin{DoxyCompactList}\small\item\em get\-Thrown \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_a92a48620bbbed7ada1723c4fccd1cd12}{get\-Player\-Moved} ()
+\begin{DoxyCompactList}\small\item\em get\-Player\-Moved \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_a9795d3f9e717f6c25f4ce04364f805b7}{is\-Moving} ()
+\begin{DoxyCompactList}\small\item\em is\-Moving \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_af885960b5f0a12cfb8d0a66aaabb830d}{is\-Building} ()
+\begin{DoxyCompactList}\small\item\em is\-Building \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_a30283da07c58c1de52d5a2ed61fd0577}{get\-Player\-Built} ()
+\begin{DoxyCompactList}\small\item\em get\-Player\-Built \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_ae08a601526a33a4416258d258976ed50}{get\-Player\-Searched} ()
+\begin{DoxyCompactList}\small\item\em get\-Player\-Searched \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_a603e124ff876bcad84bc3360124f707b}{is\-Searching} ()
+\begin{DoxyCompactList}\small\item\em is\-Searching \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_a32e3c3c3f8a7dc3d73befa8f899197cb}{is\-Hiring} ()
+\begin{DoxyCompactList}\small\item\em is\-Hiring \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_event_handler_a158bbaf5035c67ea7b298e9962b8f55f}{get\-Hired} ()
+\begin{DoxyCompactList}\small\item\em get\-Hired \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_game_1_1_game_event_handler_ab485ab211069cdb82d912a05ff1cfe50}{get\-Worker\-Type} ()
+\begin{DoxyCompactList}\small\item\em get\-Worker\-Type \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_ac3d2b6edba2a72379753ee6cf31d09d3}{set\-Thrown} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Thrown \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a1ebcaa75d732a1a65403d8abd34e4ce2}{set\-Player\-Moved} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Player\-Moved \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a99683723d5d65e7d21e5fa1a155d2186}{set\-Player\-Built} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Player\-Built \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a55e45f31053d73f476b8b4a791a0c0a0}{set\-Moving} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Moving \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a245850510b1043fd39beaa470b129421}{set\-Building\-State} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Building\-State \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a41926d8f979f3475d1917d4e6c467cdc}{set\-Selected\-Building\-Type} (std\-::string building\-Type)
+\begin{DoxyCompactList}\small\item\em set\-Selected\-Building\-Type \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a7a92ee4a45984a10990cc67fa25156b1}{set\-Searching} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Searching \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a70bd7161dcab377c9208d4d0ed098819}{set\-Player\-Searched} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Player\-Searched \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_ac8c930bb1e2c019e2fc8bf83e46cfd9d}{set\-Player\-Hired} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Player\-Hired \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a71d75a9e789a8fbf1475ac3c932030bb}{set\-Hiring} (bool x)
+\begin{DoxyCompactList}\small\item\em set\-Hiring \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_event_handler_a57dbd2bd7edf4c42cf4a3d69e3eeaffe}{set\-Worker\-Type} (std\-::string type)
+\begin{DoxyCompactList}\small\item\em set\-Worker\-Type \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_game_1_1_game_event_handler}{Game\-Event\-Handler} class interface inherited from i\-Game\-Event\-Handler. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_game_1_1_game_event_handler_a26aed05051abfec41c863fc8073e324b}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!Game\-Event\-Handler@{Game\-Event\-Handler}}
+\index{Game\-Event\-Handler@{Game\-Event\-Handler}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{Game\-Event\-Handler}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game\-Event\-Handler\-::\-Game\-Event\-Handler (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Object\-Manager} $>$}]{manager, }
+\item[{Q\-Object $\ast$}]{parent = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a26aed05051abfec41c863fc8073e324b}
+
+
+\hyperlink{class_game_1_1_game_event_handler}{Game\-Event\-Handler}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em manager} & points to the game's object manager \\
+\hline
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_1_1_game_event_handler_a991f80f0f775aafebcda3648d23bcd34}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Dice\-Value@{get\-Dice\-Value}}
+\index{get\-Dice\-Value@{get\-Dice\-Value}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Dice\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Game\-Event\-Handler\-::get\-Dice\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a991f80f0f775aafebcda3648d23bcd34}
+
+
+get\-Dice\-Value 
+
+\begin{DoxyReturn}{Returns}
+the value of the dice 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a158bbaf5035c67ea7b298e9962b8f55f}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Hired@{get\-Hired}}
+\index{get\-Hired@{get\-Hired}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Hired}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::get\-Hired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a158bbaf5035c67ea7b298e9962b8f55f}
+
+
+get\-Hired 
+
+\begin{DoxyReturn}{Returns}
+true, if player has hired, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a30283da07c58c1de52d5a2ed61fd0577}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Player\-Built@{get\-Player\-Built}}
+\index{get\-Player\-Built@{get\-Player\-Built}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Player\-Built}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::get\-Player\-Built (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a30283da07c58c1de52d5a2ed61fd0577}
+
+
+get\-Player\-Built 
+
+\begin{DoxyReturn}{Returns}
+true, if player has built, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a92a48620bbbed7ada1723c4fccd1cd12}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Player\-Moved@{get\-Player\-Moved}}
+\index{get\-Player\-Moved@{get\-Player\-Moved}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Player\-Moved}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::get\-Player\-Moved (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a92a48620bbbed7ada1723c4fccd1cd12}
+
+
+get\-Player\-Moved 
+
+\begin{DoxyReturn}{Returns}
+true, if player has moved, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_ae08a601526a33a4416258d258976ed50}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Player\-Searched@{get\-Player\-Searched}}
+\index{get\-Player\-Searched@{get\-Player\-Searched}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Player\-Searched}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::get\-Player\-Searched (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_ae08a601526a33a4416258d258976ed50}
+
+
+get\-Player\-Searched 
+
+\begin{DoxyReturn}{Returns}
+true, if player has searched, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_adc5c0fcca540aecee10f4f686cd75a8a}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Thrown@{get\-Thrown}}
+\index{get\-Thrown@{get\-Thrown}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Thrown}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::get\-Thrown (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_adc5c0fcca540aecee10f4f686cd75a8a}
+
+
+get\-Thrown 
+
+\begin{DoxyReturn}{Returns}
+true, if player has thrown, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a6ec04e17ce2ad5e01e7ff295228f2e93}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Turn@{get\-Turn}}
+\index{get\-Turn@{get\-Turn}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Turn}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Game\-Event\-Handler\-::get\-Turn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a6ec04e17ce2ad5e01e7ff295228f2e93}
+
+
+get\-Turn 
+
+\begin{DoxyReturn}{Returns}
+current turn 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_ab485ab211069cdb82d912a05ff1cfe50}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!get\-Worker\-Type@{get\-Worker\-Type}}
+\index{get\-Worker\-Type@{get\-Worker\-Type}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{get\-Worker\-Type}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Game\-::\-Game\-Event\-Handler\-::get\-Worker\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_ab485ab211069cdb82d912a05ff1cfe50}
+
+
+get\-Worker\-Type 
+
+\begin{DoxyReturn}{Returns}
+the Type of worker that has been selected 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_af885960b5f0a12cfb8d0a66aaabb830d}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!is\-Building@{is\-Building}}
+\index{is\-Building@{is\-Building}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{is\-Building}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::is\-Building (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_af885960b5f0a12cfb8d0a66aaabb830d}
+
+
+is\-Building 
+
+\begin{DoxyReturn}{Returns}
+true, if player is building, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a32e3c3c3f8a7dc3d73befa8f899197cb}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!is\-Hiring@{is\-Hiring}}
+\index{is\-Hiring@{is\-Hiring}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{is\-Hiring}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::is\-Hiring (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a32e3c3c3f8a7dc3d73befa8f899197cb}
+
+
+is\-Hiring 
+
+\begin{DoxyReturn}{Returns}
+true, if player is hiring, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a9795d3f9e717f6c25f4ce04364f805b7}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!is\-Moving@{is\-Moving}}
+\index{is\-Moving@{is\-Moving}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{is\-Moving}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::is\-Moving (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a9795d3f9e717f6c25f4ce04364f805b7}
+
+
+is\-Moving 
+
+\begin{DoxyReturn}{Returns}
+true, if player is moving, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a603e124ff876bcad84bc3360124f707b}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!is\-Searching@{is\-Searching}}
+\index{is\-Searching@{is\-Searching}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{is\-Searching}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::is\-Searching (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a603e124ff876bcad84bc3360124f707b}
+
+
+is\-Searching 
+
+\begin{DoxyReturn}{Returns}
+true, if player is searching, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a94426aa16bad3385bc3d75249596325c}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!modify\-Resource@{modify\-Resource}}
+\index{modify\-Resource@{modify\-Resource}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{modify\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::modify\-Resource (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ Course\-::\-Player\-Base $>$}]{player, }
+\item[{Course\-::\-Basic\-Resource}]{resource, }
+\item[{int}]{amount}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_1_1_game_event_handler_a94426aa16bad3385bc3d75249596325c}
+
+
+modify\-Resource 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & \\
+\hline
+{\em resource} & \\
+\hline
+{\em amount} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if modification was successful, false if not used to modify player's one resource by given amount 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_af2f37590702d555bb6635a6a7793ebb2}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!modify\-Resources@{modify\-Resources}}
+\index{modify\-Resources@{modify\-Resources}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{modify\-Resources}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Event\-Handler\-::modify\-Resources (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ Course\-::\-Player\-Base $>$}]{player, }
+\item[{Course\-::\-Resource\-Map}]{resources}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_1_1_game_event_handler_af2f37590702d555bb6635a6a7793ebb2}
+
+
+modify\-Resources 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & \\
+\hline
+{\em resources} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if modification was successful, false if not used to add or substract player's resources 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_event_handler_a245850510b1043fd39beaa470b129421}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Building\-State@{set\-Building\-State}}
+\index{set\-Building\-State@{set\-Building\-State}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Building\-State}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Building\-State (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a245850510b1043fd39beaa470b129421}
+
+
+set\-Building\-State 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a71d75a9e789a8fbf1475ac3c932030bb}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Hiring@{set\-Hiring}}
+\index{set\-Hiring@{set\-Hiring}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Hiring}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Hiring (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a71d75a9e789a8fbf1475ac3c932030bb}
+
+
+set\-Hiring 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a55e45f31053d73f476b8b4a791a0c0a0}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Moving@{set\-Moving}}
+\index{set\-Moving@{set\-Moving}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Moving}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Moving (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a55e45f31053d73f476b8b4a791a0c0a0}
+
+
+set\-Moving 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a99683723d5d65e7d21e5fa1a155d2186}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Player\-Built@{set\-Player\-Built}}
+\index{set\-Player\-Built@{set\-Player\-Built}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Player\-Built}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Player\-Built (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a99683723d5d65e7d21e5fa1a155d2186}
+
+
+set\-Player\-Built 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_ac8c930bb1e2c019e2fc8bf83e46cfd9d}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Player\-Hired@{set\-Player\-Hired}}
+\index{set\-Player\-Hired@{set\-Player\-Hired}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Player\-Hired}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Player\-Hired (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_ac8c930bb1e2c019e2fc8bf83e46cfd9d}
+
+
+set\-Player\-Hired 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a1ebcaa75d732a1a65403d8abd34e4ce2}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Player\-Moved@{set\-Player\-Moved}}
+\index{set\-Player\-Moved@{set\-Player\-Moved}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Player\-Moved}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Player\-Moved (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a1ebcaa75d732a1a65403d8abd34e4ce2}
+
+
+set\-Player\-Moved 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a70bd7161dcab377c9208d4d0ed098819}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Player\-Searched@{set\-Player\-Searched}}
+\index{set\-Player\-Searched@{set\-Player\-Searched}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Player\-Searched}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Player\-Searched (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a70bd7161dcab377c9208d4d0ed098819}
+
+
+set\-Player\-Searched 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a7a92ee4a45984a10990cc67fa25156b1}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Searching@{set\-Searching}}
+\index{set\-Searching@{set\-Searching}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Searching}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Searching (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a7a92ee4a45984a10990cc67fa25156b1}
+
+
+set\-Searching 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a41926d8f979f3475d1917d4e6c467cdc}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Selected\-Building\-Type@{set\-Selected\-Building\-Type}}
+\index{set\-Selected\-Building\-Type@{set\-Selected\-Building\-Type}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Selected\-Building\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Selected\-Building\-Type (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{building\-Type}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a41926d8f979f3475d1917d4e6c467cdc}
+
+
+set\-Selected\-Building\-Type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em building\-Type} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_ac3d2b6edba2a72379753ee6cf31d09d3}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Thrown@{set\-Thrown}}
+\index{set\-Thrown@{set\-Thrown}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Thrown}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Thrown (
+\begin{DoxyParamCaption}
+\item[{bool}]{x}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_ac3d2b6edba2a72379753ee6cf31d09d3}
+
+
+set\-Thrown 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a57dbd2bd7edf4c42cf4a3d69e3eeaffe}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!set\-Worker\-Type@{set\-Worker\-Type}}
+\index{set\-Worker\-Type@{set\-Worker\-Type}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{set\-Worker\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Event\-Handler\-::set\-Worker\-Type (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{type}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a57dbd2bd7edf4c42cf4a3d69e3eeaffe}
+
+
+set\-Worker\-Type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_event_handler_a261195d24462d7d0921cf38cea1b2c2b}{\index{Game\-::\-Game\-Event\-Handler@{Game\-::\-Game\-Event\-Handler}!throw\-Dice@{throw\-Dice}}
+\index{throw\-Dice@{throw\-Dice}!Game::GameEventHandler@{Game\-::\-Game\-Event\-Handler}}
+\subsubsection[{throw\-Dice}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Game\-Event\-Handler\-::throw\-Dice (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_event_handler_a261195d24462d7d0921cf38cea1b2c2b}
+
+
+throw\-Dice 
+
+\begin{DoxyReturn}{Returns}
+dice number 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+gameeventhandler.\-h\item 
+gameeventhandler.\-cpp\end{DoxyCompactItemize}

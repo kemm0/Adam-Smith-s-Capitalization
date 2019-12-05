@@ -1,0 +1,230 @@
+\hypertarget{class_game_1_1_game_tile_base}{\section{Game\-:\-:Game\-Tile\-Base Class Reference}
+\label{class_game_1_1_game_tile_base}\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}}
+}
+
+
+The \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} class base class for all tiles used in game.  
+
+
+
+
+{\ttfamily \#include $<$gametilebase.\-h$>$}
+
+Inheritance diagram for Game\-:\-:Game\-Tile\-Base\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_game_1_1_game_tile_base}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_game_tile_base_ac89ced36f5a5c6a9c598a59e0a9bde9f}{Game\-Tile\-Base} (const Course\-::\-Coordinate \&location, const std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_event_handler}{Game\-Event\-Handler} $>$ \&eventhandler, const std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_object_manager}{Game\-Object\-Manager} $>$ \&objectmanager, const unsigned int \&max\-\_\-build=1, const unsigned int \&max\-\_\-work=3, const Course\-::\-Resource\-Map \&production=Game\-::\-Const\-Game\-Resource\-Map\-::\-T\-I\-L\-E\-\_\-\-B\-P)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base}. \end{DoxyCompactList}\item 
+virtual Q\-Pixmap \hyperlink{class_game_1_1_game_tile_base_a88170bec69ba095ca6ffeea469532bff}{get\-Sprite} ()
+\begin{DoxyCompactList}\small\item\em get\-Sprite \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_tile_base_a4c986a263864df783c280cc127b595d3}{update\-Sprite} (Q\-Pixmap new\-Sprite)
+\begin{DoxyCompactList}\small\item\em update\-Sprite \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_tile_base_a180c056c094375ecad334dadc1413608}{get\-Robber} ()
+\begin{DoxyCompactList}\small\item\em get\-Robber \end{DoxyCompactList}\item 
+bool \hyperlink{class_game_1_1_game_tile_base_aa20e5ba9b5ba81a4d72786aa0f05495e}{get\-Treasure} ()
+\begin{DoxyCompactList}\small\item\em get\-Treasure \end{DoxyCompactList}\item 
+int \hyperlink{class_game_1_1_game_tile_base_a65cb55e1e7de1c0c3b8cbf770d8e325c}{get\-Height} ()
+\begin{DoxyCompactList}\small\item\em get\-Height \end{DoxyCompactList}\item 
+int \hyperlink{class_game_1_1_game_tile_base_a0b02032614ded5bc23ed81bd81cef6cf}{get\-Width} ()
+\begin{DoxyCompactList}\small\item\em get\-Width \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_tile_base_a0be2dfb1431a55bce1f84b29645ae932}{set\-Robber} (bool robber)
+\begin{DoxyCompactList}\small\item\em set\-Robber if robber == true, tile will have a robber \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_tile_base_a2bc4d0458c01992cc5a975d119765551}{set\-Treasure} (bool treasure)
+\begin{DoxyCompactList}\small\item\em set\-Treasure if treasure == true, tile will have a trasure \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_game_tile_base_a2d72336befccee4083acae3e36bbc40e}{Q\-Pixmap {\bfseries sprite}}\label{class_game_1_1_game_tile_base_a2d72336befccee4083acae3e36bbc40e}
+
+\item 
+\hypertarget{class_game_1_1_game_tile_base_a64279e63a53c5a9d8f44e50493eac9c6}{bool {\bfseries has\-Robber}}\label{class_game_1_1_game_tile_base_a64279e63a53c5a9d8f44e50493eac9c6}
+
+\item 
+\hypertarget{class_game_1_1_game_tile_base_a5ddf32ac3c7cda213c767879a12d5610}{bool {\bfseries has\-Treasure}}\label{class_game_1_1_game_tile_base_a5ddf32ac3c7cda213c767879a12d5610}
+
+\item 
+\hypertarget{class_game_1_1_game_tile_base_ad939859fa92994f157d7728b60b3dbff}{int {\bfseries treasure}}\label{class_game_1_1_game_tile_base_ad939859fa92994f157d7728b60b3dbff}
+
+\item 
+\hypertarget{class_game_1_1_game_tile_base_ad0ee0109c45a8091f2bc202d4a4ab0ff}{int {\bfseries width}}\label{class_game_1_1_game_tile_base_ad0ee0109c45a8091f2bc202d4a4ab0ff}
+
+\item 
+\hypertarget{class_game_1_1_game_tile_base_aef220c70f71d82800229b071e52689a3}{int {\bfseries height}}\label{class_game_1_1_game_tile_base_aef220c70f71d82800229b071e52689a3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} class base class for all tiles used in game. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_game_1_1_game_tile_base_ac89ced36f5a5c6a9c598a59e0a9bde9f}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!Game\-Tile\-Base@{Game\-Tile\-Base}}
+\index{Game\-Tile\-Base@{Game\-Tile\-Base}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{Game\-Tile\-Base}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game\-Tile\-Base\-::\-Game\-Tile\-Base (
+\begin{DoxyParamCaption}
+\item[{const Course\-::\-Coordinate \&}]{location, }
+\item[{const std\-::shared\-\_\-ptr$<$ {\bf Game\-Event\-Handler} $>$ \&}]{eventhandler, }
+\item[{const std\-::shared\-\_\-ptr$<$ {\bf Game\-Object\-Manager} $>$ \&}]{objectmanager, }
+\item[{const unsigned int \&}]{max\-\_\-build = {\ttfamily 1}, }
+\item[{const unsigned int \&}]{max\-\_\-work = {\ttfamily 3}, }
+\item[{const Course\-::\-Resource\-Map \&}]{production = {\ttfamily Game\-:\-:ConstGameResourceMap\-:\-:TILE\-\_\-BP}}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_ac89ced36f5a5c6a9c598a59e0a9bde9f}
+
+
+\hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & \\
+\hline
+{\em eventhandler} & \\
+\hline
+{\em objectmanager} & \\
+\hline
+{\em max\-\_\-build} & maximum amount of buildings that can be placed on the tile \\
+\hline
+{\em max\-\_\-work} & maximum amount of workers that can be placed on the tile \\
+\hline
+{\em production} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_1_1_game_tile_base_a65cb55e1e7de1c0c3b8cbf770d8e325c}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!get\-Height@{get\-Height}}
+\index{get\-Height@{get\-Height}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{get\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Game\-Tile\-Base\-::get\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_a65cb55e1e7de1c0c3b8cbf770d8e325c}
+
+
+get\-Height 
+
+\begin{DoxyReturn}{Returns}
+height of the sprite image 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_tile_base_a180c056c094375ecad334dadc1413608}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!get\-Robber@{get\-Robber}}
+\index{get\-Robber@{get\-Robber}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{get\-Robber}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Tile\-Base\-::get\-Robber (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_a180c056c094375ecad334dadc1413608}
+
+
+get\-Robber 
+
+\begin{DoxyReturn}{Returns}
+true, if tile has robber, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_tile_base_a88170bec69ba095ca6ffeea469532bff}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!get\-Sprite@{get\-Sprite}}
+\index{get\-Sprite@{get\-Sprite}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{get\-Sprite}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Pixmap Game\-::\-Game\-Tile\-Base\-::get\-Sprite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_1_1_game_tile_base_a88170bec69ba095ca6ffeea469532bff}
+
+
+get\-Sprite 
+
+\begin{DoxyReturn}{Returns}
+Qpixmap image to draw buildings to map scene 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_tile_base_aa20e5ba9b5ba81a4d72786aa0f05495e}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!get\-Treasure@{get\-Treasure}}
+\index{get\-Treasure@{get\-Treasure}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{get\-Treasure}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Game\-Tile\-Base\-::get\-Treasure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_aa20e5ba9b5ba81a4d72786aa0f05495e}
+
+
+get\-Treasure 
+
+\begin{DoxyReturn}{Returns}
+true, if tile has treasure, false if not 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_tile_base_a0b02032614ded5bc23ed81bd81cef6cf}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!get\-Width@{get\-Width}}
+\index{get\-Width@{get\-Width}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{get\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Game\-Tile\-Base\-::get\-Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_a0b02032614ded5bc23ed81bd81cef6cf}
+
+
+get\-Width 
+
+\begin{DoxyReturn}{Returns}
+width of the sprite image 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_tile_base_a0be2dfb1431a55bce1f84b29645ae932}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!set\-Robber@{set\-Robber}}
+\index{set\-Robber@{set\-Robber}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{set\-Robber}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Tile\-Base\-::set\-Robber (
+\begin{DoxyParamCaption}
+\item[{bool}]{robber}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_a0be2dfb1431a55bce1f84b29645ae932}
+
+
+set\-Robber if robber == true, tile will have a robber 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robber} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_tile_base_a2bc4d0458c01992cc5a975d119765551}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!set\-Treasure@{set\-Treasure}}
+\index{set\-Treasure@{set\-Treasure}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{set\-Treasure}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Tile\-Base\-::set\-Treasure (
+\begin{DoxyParamCaption}
+\item[{bool}]{treasure}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_a2bc4d0458c01992cc5a975d119765551}
+
+
+set\-Treasure if treasure == true, tile will have a trasure 
+
+
+\begin{DoxyParams}{Parameters}
+{\em treasure} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_tile_base_a4c986a263864df783c280cc127b595d3}{\index{Game\-::\-Game\-Tile\-Base@{Game\-::\-Game\-Tile\-Base}!update\-Sprite@{update\-Sprite}}
+\index{update\-Sprite@{update\-Sprite}!Game::GameTileBase@{Game\-::\-Game\-Tile\-Base}}
+\subsubsection[{update\-Sprite}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Tile\-Base\-::update\-Sprite (
+\begin{DoxyParamCaption}
+\item[{Q\-Pixmap}]{new\-Sprite}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_tile_base_a4c986a263864df783c280cc127b595d3}
+
+
+update\-Sprite 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Sprite} & sets the sprite image to the given one \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+gametilebase.\-h\item 
+gametilebase.\-cpp\end{DoxyCompactItemize}

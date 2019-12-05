@@ -1,0 +1,96 @@
+\hypertarget{class_game_1_1_game_building_base}{\section{Game\-:\-:Game\-Building\-Base Class Reference}
+\label{class_game_1_1_game_building_base}\index{Game\-::\-Game\-Building\-Base@{Game\-::\-Game\-Building\-Base}}
+}
+
+
+The \hyperlink{class_game_1_1_game_building_base}{Game\-Building\-Base} class is a base class for buildings with a sprite/image component. Inherited from Building\-Base.  
+
+
+
+
+{\ttfamily \#include $<$gamebuildingbase.\-h$>$}
+
+Inheritance diagram for Game\-:\-:Game\-Building\-Base\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_game_1_1_game_building_base}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_game_building_base_a715b5d8f912a668a3e65c5357d524f66}{{\bfseries Game\-Building\-Base} (const std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_event_handler}{Game\-Event\-Handler} $>$ \&eventhandler, const std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_object_manager}{Game\-Object\-Manager} $>$ \&objectmanager, const std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_player}{Player} $>$ \&owner, const int \&tilespaces=1, const Course\-::\-Resource\-Map \&buildcost=\{\}, const Course\-::\-Resource\-Map \&production=\{\})}\label{class_game_1_1_game_building_base_a715b5d8f912a668a3e65c5357d524f66}
+
+\item 
+virtual Q\-Pixmap \hyperlink{class_game_1_1_game_building_base_a8eacd371cae363d396accefb637b04b6}{get\-Sprite} ()
+\begin{DoxyCompactList}\small\item\em get\-Sprite Q\-Pix\-Map graphics for buildings \end{DoxyCompactList}\item 
+int \hyperlink{class_game_1_1_game_building_base_a5d20b7f0aac3ccbc671c25911a7cd9a1}{get\-Width} ()
+\begin{DoxyCompactList}\small\item\em get\-Width \end{DoxyCompactList}\item 
+int \hyperlink{class_game_1_1_game_building_base_ac1a873f44dd45d52a919e7638c07498e}{get\-Height} ()
+\begin{DoxyCompactList}\small\item\em get\-Height \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_game_building_base_a0e218fa83174063e74574ad12a0c9d13}{Q\-Pixmap {\bfseries sprite}}\label{class_game_1_1_game_building_base_a0e218fa83174063e74574ad12a0c9d13}
+
+\item 
+\hypertarget{class_game_1_1_game_building_base_a0a56d68ac3f8d437aef06671ce9a19c6}{int {\bfseries width}}\label{class_game_1_1_game_building_base_a0a56d68ac3f8d437aef06671ce9a19c6}
+
+\item 
+\hypertarget{class_game_1_1_game_building_base_a1502712620fb26a336d10de32977438e}{int {\bfseries height}}\label{class_game_1_1_game_building_base_a1502712620fb26a336d10de32977438e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_game_1_1_game_building_base}{Game\-Building\-Base} class is a base class for buildings with a sprite/image component. Inherited from Building\-Base. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_1_1_game_building_base_ac1a873f44dd45d52a919e7638c07498e}{\index{Game\-::\-Game\-Building\-Base@{Game\-::\-Game\-Building\-Base}!get\-Height@{get\-Height}}
+\index{get\-Height@{get\-Height}!Game::GameBuildingBase@{Game\-::\-Game\-Building\-Base}}
+\subsubsection[{get\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Game\-Building\-Base\-::get\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_building_base_ac1a873f44dd45d52a919e7638c07498e}
+
+
+get\-Height 
+
+\begin{DoxyReturn}{Returns}
+the height of the sprite image 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_building_base_a8eacd371cae363d396accefb637b04b6}{\index{Game\-::\-Game\-Building\-Base@{Game\-::\-Game\-Building\-Base}!get\-Sprite@{get\-Sprite}}
+\index{get\-Sprite@{get\-Sprite}!Game::GameBuildingBase@{Game\-::\-Game\-Building\-Base}}
+\subsubsection[{get\-Sprite}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Pixmap Game\-::\-Game\-Building\-Base\-::get\-Sprite (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_game_1_1_game_building_base_a8eacd371cae363d396accefb637b04b6}
+
+
+get\-Sprite Q\-Pix\-Map graphics for buildings 
+
+\begin{DoxyReturn}{Returns}
+returns the sprite 
+\end{DoxyReturn}
+\hypertarget{class_game_1_1_game_building_base_a5d20b7f0aac3ccbc671c25911a7cd9a1}{\index{Game\-::\-Game\-Building\-Base@{Game\-::\-Game\-Building\-Base}!get\-Width@{get\-Width}}
+\index{get\-Width@{get\-Width}!Game::GameBuildingBase@{Game\-::\-Game\-Building\-Base}}
+\subsubsection[{get\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::\-Game\-Building\-Base\-::get\-Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_building_base_a5d20b7f0aac3ccbc671c25911a7cd9a1}
+
+
+get\-Width 
+
+\begin{DoxyReturn}{Returns}
+the width of the sprite image 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+gamebuildingbase.\-h\item 
+gamebuildingbase.\-cpp\end{DoxyCompactItemize}

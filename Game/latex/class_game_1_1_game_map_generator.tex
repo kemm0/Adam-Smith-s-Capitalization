@@ -1,0 +1,145 @@
+\hypertarget{class_game_1_1_game_map_generator}{\section{Game\-:\-:Game\-Map\-Generator Class Reference}
+\label{class_game_1_1_game_map_generator}\index{Game\-::\-Game\-Map\-Generator@{Game\-::\-Game\-Map\-Generator}}
+}
+
+
+The \hyperlink{class_game_1_1_game_map_generator}{Game\-Map\-Generator} class creates new game objects that make up the game world.  
+
+
+
+
+{\ttfamily \#include $<$gamemapgenerator.\-h$>$}
+
+Inheritance diagram for Game\-:\-:Game\-Map\-Generator\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_1_1_game_map_generator}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_1_1_game_map_generator_a6e6c320ad1d5678db94d4d2092d92dce}{void \hyperlink{class_game_1_1_game_map_generator_a6e6c320ad1d5678db94d4d2092d92dce}{game\-Message} (std\-::string)}\label{class_game_1_1_game_map_generator_a6e6c320ad1d5678db94d4d2092d92dce}
+
+\begin{DoxyCompactList}\small\item\em game\-Message sends a message (string) to connected slots \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_1_1_game_map_generator_aa8954c522853a78bc313de335c09a584}{Game\-Map\-Generator} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_object_manager}{Game\-Object\-Manager} $>$ obj\-Manager, std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_event_handler}{Game\-Event\-Handler} $>$ event\-Handler, Q\-Object $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_game_1_1_game_map_generator}{Game\-Map\-Generator}. \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_game_map_generator_a074eff0c7eccb9f9d0fc356d0f08ed3b}{void \hyperlink{class_game_1_1_game_map_generator_a074eff0c7eccb9f9d0fc356d0f08ed3b}{create\-Map\-Objects} ()}\label{class_game_1_1_game_map_generator_a074eff0c7eccb9f9d0fc356d0f08ed3b}
+
+\begin{DoxyCompactList}\small\item\em create\-Map\-Objects Creates tiles according to their corresponding integer values in map\-Template matrix. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_map_generator_afad5aeb1e5bcfba092f215875738151d}{create\-Building} (Course\-::\-Coordinate location)
+\begin{DoxyCompactList}\small\item\em create\-Building \end{DoxyCompactList}\item 
+Course\-::\-Coordinate \hyperlink{class_game_1_1_game_map_generator_ac8afc913679cc83e1e9fdb0fe2ddacbd}{get\-Random\-Map\-Coordinate} ()
+\begin{DoxyCompactList}\small\item\em get\-Random\-Map\-Coordinate \end{DoxyCompactList}\item 
+\hypertarget{class_game_1_1_game_map_generator_ab39d179c38d46d2289822aff823f0ad9}{void {\bfseries set\-Treasure} (int amount)}\label{class_game_1_1_game_map_generator_ab39d179c38d46d2289822aff823f0ad9}
+
+\item 
+\hypertarget{class_game_1_1_game_map_generator_aa3794987e119dd0a7042c96d71df5e7f}{void {\bfseries set\-Robber} (int amount)}\label{class_game_1_1_game_map_generator_aa3794987e119dd0a7042c96d71df5e7f}
+
+\item 
+void \hyperlink{class_game_1_1_game_map_generator_a1b301db62c61705ea32830a1db98a716}{create\-Player} (Course\-::\-Coordinate location)
+\begin{DoxyCompactList}\small\item\em create\-Player \end{DoxyCompactList}\item 
+void \hyperlink{class_game_1_1_game_map_generator_aa5c293a4b89a06f0ae21525e01beffad}{create\-Worker} (std\-::shared\-\_\-ptr$<$ \hyperlink{class_game_1_1_game_tile_base}{Game\-Tile\-Base} $>$ target\-Tile)
+\begin{DoxyCompactList}\small\item\em create\-Worker \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_game_1_1_game_map_generator}{Game\-Map\-Generator} class creates new game objects that make up the game world. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_game_1_1_game_map_generator_aa8954c522853a78bc313de335c09a584}{\index{Game\-::\-Game\-Map\-Generator@{Game\-::\-Game\-Map\-Generator}!Game\-Map\-Generator@{Game\-Map\-Generator}}
+\index{Game\-Map\-Generator@{Game\-Map\-Generator}!Game::GameMapGenerator@{Game\-::\-Game\-Map\-Generator}}
+\subsubsection[{Game\-Map\-Generator}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game\-Map\-Generator\-::\-Game\-Map\-Generator (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Object\-Manager} $>$}]{obj\-Manager, }
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Event\-Handler} $>$}]{event\-Handler, }
+\item[{Q\-Object $\ast$}]{parent = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_map_generator_aa8954c522853a78bc313de335c09a584}
+
+
+\hyperlink{class_game_1_1_game_map_generator}{Game\-Map\-Generator}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\-Manager} & \\
+\hline
+{\em event\-Handler} & \\
+\hline
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_1_1_game_map_generator_afad5aeb1e5bcfba092f215875738151d}{\index{Game\-::\-Game\-Map\-Generator@{Game\-::\-Game\-Map\-Generator}!create\-Building@{create\-Building}}
+\index{create\-Building@{create\-Building}!Game::GameMapGenerator@{Game\-::\-Game\-Map\-Generator}}
+\subsubsection[{create\-Building}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Map\-Generator\-::create\-Building (
+\begin{DoxyParamCaption}
+\item[{Course\-::\-Coordinate}]{location}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_map_generator_afad5aeb1e5bcfba092f215875738151d}
+
+
+create\-Building 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & Creates a building to the tile in the given location. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_map_generator_a1b301db62c61705ea32830a1db98a716}{\index{Game\-::\-Game\-Map\-Generator@{Game\-::\-Game\-Map\-Generator}!create\-Player@{create\-Player}}
+\index{create\-Player@{create\-Player}!Game::GameMapGenerator@{Game\-::\-Game\-Map\-Generator}}
+\subsubsection[{create\-Player}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Map\-Generator\-::create\-Player (
+\begin{DoxyParamCaption}
+\item[{Course\-::\-Coordinate}]{location}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_map_generator_a1b301db62c61705ea32830a1db98a716}
+
+
+create\-Player 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & Creates a new \hyperlink{class_game_1_1_player}{Player} character and adds it to object manager \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_map_generator_aa5c293a4b89a06f0ae21525e01beffad}{\index{Game\-::\-Game\-Map\-Generator@{Game\-::\-Game\-Map\-Generator}!create\-Worker@{create\-Worker}}
+\index{create\-Worker@{create\-Worker}!Game::GameMapGenerator@{Game\-::\-Game\-Map\-Generator}}
+\subsubsection[{create\-Worker}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Game\-Map\-Generator\-::create\-Worker (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Game\-Tile\-Base} $>$}]{target\-Tile}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_map_generator_aa5c293a4b89a06f0ae21525e01beffad}
+
+
+create\-Worker 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\-Tile} & Creates a new worker according to the selected worker type in event\-Handler and adds it to the given Tile's list of workers. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_1_1_game_map_generator_ac8afc913679cc83e1e9fdb0fe2ddacbd}{\index{Game\-::\-Game\-Map\-Generator@{Game\-::\-Game\-Map\-Generator}!get\-Random\-Map\-Coordinate@{get\-Random\-Map\-Coordinate}}
+\index{get\-Random\-Map\-Coordinate@{get\-Random\-Map\-Coordinate}!Game::GameMapGenerator@{Game\-::\-Game\-Map\-Generator}}
+\subsubsection[{get\-Random\-Map\-Coordinate}]{\setlength{\rightskip}{0pt plus 5cm}Course\-::\-Coordinate Game\-::\-Game\-Map\-Generator\-::get\-Random\-Map\-Coordinate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_1_1_game_map_generator_ac8afc913679cc83e1e9fdb0fe2ddacbd}
+
+
+get\-Random\-Map\-Coordinate 
+
+\begin{DoxyReturn}{Returns}
+Course\-::\-Coordinate, which is random coordinate inside the map Used to generate a random coordinate 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+gamemapgenerator.\-h\item 
+gamemapgenerator.\-cpp\end{DoxyCompactItemize}
