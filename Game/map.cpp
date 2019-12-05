@@ -90,7 +90,7 @@ void Map::hire(std::shared_ptr<GameTileBase> gameTile)
     try {
         mapGenerator_->createWorker(gameTile);
         eventHandler_->setPlayerHired(true);
-    } catch (Course::IllegalAction) {
+    } catch (const Course::IllegalAction&) {
     }
 }
 
@@ -108,7 +108,7 @@ void Map::build(std::shared_ptr<GameTileBase> gameTile)
         eventHandler_->setPlayerBuilt(true);
         emit built();
         update();
-    } catch (Course::IllegalAction) {
+    } catch (const Course::IllegalAction&) {
     }
 
 }
@@ -165,7 +165,7 @@ void Map::inspect(std::shared_ptr<GameTileBase> gameTile)
                                     gameTile->getWorkerCount()) +
                                 " workers in this area.\n\n");
 
-        } catch (Course::KeyError()) {
+        } catch (const Course::KeyError()&) {
             emit inspectTile("I dont know anything about this area.");
         }
     }

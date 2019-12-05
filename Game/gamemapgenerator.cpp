@@ -87,7 +87,7 @@ void GameMapGenerator::createBuilding(Course::Coordinate location)
             targetTile->addBuilding(newBuilding);
             targetTile->updateSprite(newBuilding->getSprite());
             emit gameMessage("You built a " + newBuilding->getType() + ".");
-        } catch (Course::IllegalAction) {
+        } catch (const Course::IllegalAction&) {
             emit gameMessage("You cannot build more buildings on this tile.");
             throw Course::IllegalAction();
         }
@@ -174,7 +174,7 @@ void GameMapGenerator::createWorker(std::shared_ptr<GameTileBase> targetTile)
                         objManager_->getPlayer(),
                         worker->RECRUITMENT_COST);
             emit gameMessage("You hired a " + worker->getType() + ".");
-        } catch (Course::IllegalAction) {
+        } catch (const Course::IllegalAction&) {
             emit gameMessage("Cannot place worker."
                              " Tile's worker capacity is full.");
             throw Course::IllegalAction();
