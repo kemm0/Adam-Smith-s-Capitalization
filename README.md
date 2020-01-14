@@ -1,3 +1,5 @@
+Game was made with Qt. You will need Qt library to run this game. All the code in the "Course"-folder is made by Tampere university's Programming 3 course staff. Everything else was made by me and Leo Peltomaa.
+
 Game Story:
 
 Unknown to most, Adam Smith, the forefather of capitalism and an absolute mad lad, made a secret detour on his way from Glasgow to Toulouse. What could be the reason for this detour? Where did Smith go? What did he find?!?
